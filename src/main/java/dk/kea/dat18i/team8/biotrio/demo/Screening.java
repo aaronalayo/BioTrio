@@ -7,10 +7,10 @@ import java.time.LocalTime;
 
 public class Screening {
 
-    int screening_id;
-    LocalDate screening_date;
-    LocalTime screening_starts;
-    int movied_id;
+    private int screening_id;
+    private LocalDate screening_date;
+    private LocalTime screening_starts;
+    private int movie_id;
 
     public Screening (){
     }
@@ -19,7 +19,7 @@ public class Screening {
         this.screening_id = screening_id;
         this.screening_date = screening_date;
         this.screening_starts = screening_starts;
-        this.movied_id = movied_id;
+        this.movie_id = movie_id;
     }
 
     public int getScreening_id() {
@@ -30,7 +30,7 @@ public class Screening {
         this.screening_id = screening_id;
     }
 
-    public LocalDate getScreening_date() {
+    public LocalDate getScreening_date(){
         return screening_date;
     }
 
@@ -46,11 +46,11 @@ public class Screening {
         this.screening_starts = screening_starts;
     }
 
-    public int getMovied_id() {
-        return movied_id;
+    public int getMovie_id() {
+        return movie_id;
     }
 
-    public void setMovied_id(int movied_id) {
-        this.movied_id = movied_id;
+    public void setMovie_id(int movied_id) {
+        this.movie_id = movie_id;
     }
 }

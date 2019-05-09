@@ -19,5 +19,6 @@ public class BookingRepository {
 
     public void deleteBooking(int booking_id) {
 
-        jdbc.update("DELETE FROM biotrio WHERE booking_id = "+booking_id);
+        jdbc.update("DELETE FROM biotrio WHERE booking_id = " + booking_id);
+    }
 }
