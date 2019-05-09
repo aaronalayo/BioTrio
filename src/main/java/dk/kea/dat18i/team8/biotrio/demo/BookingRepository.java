@@ -50,4 +50,9 @@ public class BookingRepository {
 
     }
 
+<<<<<<< HEAD
+=======
+        jdbc.update("DELETE FROM biotrio WHERE booking_id = " + booking_id);
+    }
+>>>>>>> screenoingcrudfinish
 }
