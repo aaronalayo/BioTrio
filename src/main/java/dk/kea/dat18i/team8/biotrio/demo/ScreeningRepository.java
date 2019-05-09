@@ -10,13 +10,10 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.time.LocalDate;
-import java.sql.Date;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
 
 @Repository
 public class ScreeningRepository {
@@ -26,6 +23,19 @@ public class ScreeningRepository {
 
 
 
+    public Screening findScreening (int screening_id) {
+
+        SqlRowSet rs = jdbc.queryForRowSet( "SELECT * FROM screening WHERE screening_id = " + screening_id );
+        Screening screening = new Screening();
+        while (rs.next()) {
+
+            screening.setScreening_id( rs.getInt( "screening_id" ) );
+            screening.setScreening_date( rs.getDate( "screening_date" ).toLocalDate() );
+            screening.setScreening_starts( rs.getTime( "screening_starts" ).toLocalTime() );
+
+        }
+        return screening;
+    }
 
 
     public List<Screening> findAllScreenings(){
@@ -50,4 +60,61 @@ public class ScreeningRepository {
 
     }
 
+
+
+    public Screening insertScreening(Screening screening){
+
+        PreparedStatementCreator psc = new PreparedStatementCreator() {
+
+            @Override
+            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
+
+                PreparedStatement ps = connection.prepareStatement("INSERT INTO biotrio.screening  (screening_date, screening_starts, movie_id)  VALUES  (?,?,1)", new String[]{"screening_id"});
+
+
+
+                ps.setDate(1,java.sql.Date.valueOf(screening.getScreening_date()));
+                ps.setTime(2,java.sql.Time.valueOf(screening.getScreening_starts()));
+
+                return ps;
+            }
+        };
+
+
+        KeyHolder id = new GeneratedKeyHolder();
+        jdbc.update(psc, id);
+        screening.setScreening_id(id.getKey().intValue());
+        return screening;
+    }
+
+    public void deleteScreening(int screening_id) {
+
+        jdbc.execute( "DELETE FROM screening WHERE screening_id = " + screening_id );
+    }
+
+
+    public Screening update(Screening screening) {
+
+        PreparedStatementCreator psc = new PreparedStatementCreator() {
+
+            @Override
+            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
+
+
+                PreparedStatement ps = connection.prepareStatement("UPDATE biotrio.screening SET screening_date= ?, screening_starts = ? WHERE screening_id=  " + screening.getScreening_id(), new String[]{"screening_id"});
+
+
+                ps.setDate(1,java.sql.Date.valueOf(screening.getScreening_date()));
+                ps.setTime(2,java.sql.Time.valueOf(screening.getScreening_starts()));
+
+                return ps;
+            }
+
+    };
+
+        jdbc.update(psc);
+
+
+        return screening;
+    }
 }
