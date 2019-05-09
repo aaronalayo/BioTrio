@@ -7,6 +7,8 @@ public class Booking {
     private int seat_id; // we can consider to implement Seat object and List class/library here
     private Screening screening;
 
+    public Booking (){
+    }
 
     public Booking(int booking_id, String phoneNo, int seat_id, Screening screening){
         this.booking_id = booking_id;
