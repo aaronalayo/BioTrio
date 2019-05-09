@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class BiotrioApplication {
 
     public static void main(String[] args) {
+
         SpringApplication.run(BiotrioApplication.class, args);
     }
 
