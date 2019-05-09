@@ -10,6 +10,7 @@ public class Booking {
     public Booking (){
     }
 
+
     public Booking(int booking_id, String phoneNo, int seat_id, Screening screening){
         this.booking_id = booking_id;
         this.phoneNo = phoneNo;
@@ -64,3 +65,4 @@ public class Booking {
                 '}';
     }
 }
+

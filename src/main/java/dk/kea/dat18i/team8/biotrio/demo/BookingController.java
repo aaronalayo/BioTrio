@@ -29,5 +29,4 @@ public class BookingController {
         return "show-booking";
 
     }
-
 }
