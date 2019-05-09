@@ -5,7 +5,10 @@ public class Booking {
     private int booking_id;
     private String phoneNo; // shall be String according to StackOverflow
     private int seat_id; // we can consider to implement Seat object and List class/library here
-    private Screening screening; // Screening object
+    private Screening screening;
+
+    public Booking (){
+    }
 
 
     public Booking(int booking_id, String phoneNo, int seat_id, Screening screening){
@@ -62,3 +65,4 @@ public class Booking {
                 '}';
     }
 }
+
