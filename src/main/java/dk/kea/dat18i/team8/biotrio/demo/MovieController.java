@@ -13,12 +13,20 @@ public class MovieController {
     @Autowired
     private MovieRepository movieRepo;
 
+    @GetMapping("/moviesview")
+    @ResponseBody
+    public Movie showMovie(){
+        Movie movie = movieRepo.showMovie(1);
+        return movie;
+    }
+
     @GetMapping("/movies")
     public String movie(Model model){
       List<Movie> movieList= movieRepo.showallMovies();
-      model.addAttribute("movie",movieList);
+      model.addAttribute("movies",movieList);
       return "show-movies";
     }
+
 
     @PostMapping("/savemovie")
     @ResponseBody
