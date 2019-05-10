@@ -1,6 +1,7 @@
 package dk.kea.dat18i.team8.biotrio.demo;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+//import java.time.LocalDateTime;
 
 public class Movie {
     private int id;
@@ -9,8 +10,8 @@ public class Movie {
     private int duration;
     private String director;
     private String format;
-    private LocalDateTime startDate;
-    private LocalDateTime endDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
 
     public int getId() {
         return id;
@@ -43,10 +44,10 @@ public class Movie {
     public String getFormat(){return format;}
     public void setFormat(String format){this.format=format;}
 
-    public void setStartDate(LocalDateTime startDate){this.startDate=startDate;}
-    public LocalDateTime getStartDate(){return startDate;}
-    public void setEndDate(LocalDateTime endDate){this.endDate=endDate;}
-    public LocalDateTime getEndDate(){return endDate;}
+    public void setStartDate(LocalDate startDate){this.startDate=startDate;}
+    public LocalDate getStartDate(){return startDate;}
+    public void setEndDate(LocalDate endDate){this.endDate=endDate;}
+    public LocalDate getEndDate(){return endDate;}
 
 
 

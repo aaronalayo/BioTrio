@@ -26,7 +26,11 @@ public class MovieController {
       model.addAttribute("movies",movieList);
       return "show-movies";
     }
-
+    @GetMapping("/addmovie")
+    public String addMovie(Model model){
+        model.addAttribute("movieform", new Movie());
+        return "add-movie";
+    }
 
     @PostMapping("/savemovie")
     @ResponseBody

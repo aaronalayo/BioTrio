@@ -30,7 +30,8 @@ public class MovieRepository {
             movie.setDuration(rs.getInt("duration"));
             movie.setGenre(rs.getString("genre"));
             movie.setFormat(rs.getString("movie_format"));
-            //movie.setStartDate(rs.getString("start_date"));
+            movie.setStartDate(rs.getDate("start_date").toLocalDate());
+            movie.setEndDate(rs.getDate("end_date").toLocalDate());
 
         }
         return movie;
@@ -47,6 +48,8 @@ public class MovieRepository {
             movie.setDuration(rs.getInt("duration"));
             movie.setGenre(rs.getString("genre"));
             movie.setFormat(rs.getString("movie_format"));
+            movie.setStartDate(rs.getDate("start_date").toLocalDate());
+            movie.setEndDate(rs.getDate("end_date").toLocalDate());
 
             movieList.add(movie);
         }
@@ -57,12 +60,14 @@ public class MovieRepository {
         PreparedStatementCreator psc =new PreparedStatementCreator() {
             @Override
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-                PreparedStatement ps = connection.prepareStatement("INSERT INTO movie VALUES(null,?,?,?,?,?)", new String[]{"movie_id"});
+                PreparedStatement ps = connection.prepareStatement("INSERT INTO movie VALUES(null,?,?,?,?,?,?,?)", new String[]{"movie_id"});
                 ps.setString(1,movie.getTitle());
-                ps.setString(2,movie.getDirector());
                 ps.setString(3,movie.getGenre());
+                ps.setString(2,movie.getDirector());
                 ps.setInt(4,movie.getDuration());
                 ps.setString(5,movie.getFormat());
+                ps.setDate(6,java.sql.Date.valueOf(movie.getStartDate()));
+                ps.setDate(7,java.sql.Date.valueOf(movie.getEndDate()));
                 return ps;
             }
         };
