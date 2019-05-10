@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/" xmlns:a="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Movies view</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+</head>
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 50%;
+    }
+
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+</style>
+
+<body>
+
+<h1>Movies</h1>
+
+
+<table>
+    <thead>
+
+
+    <th scope="col">Id</th>
+    <th scope="col">Title</th>
+    <th scope="col">Genre</th>
+    <th scope="col">Director</th>
+    <th scope="col">Duration</th>
+    <th scope="col">Format</th>
+    <th scope="col">Start date</th>
+    <th scope="col">End date</th>
+
+
+
+
+    </thead>
+    <tr th:each="movie: ${movie}">
+
+        <th scope="row" th:text="${movie.id}">1</th>
+        <td th:text="${movie.title}">{{Movie Title}}</td>
+        <td th:text="${movie.genre}">{{Movie Genre}}</td>
+        <td th:text="${movie.director}">{{Movie Director}}</td>
+        <td th:text="${movie.duration}">{{Movie Duration}}</td>
+        <td th:text="${movie.format}">{{Movie Format}}</td>
+        <td th:text="${movie.startDate}">{{Movie Start Date}}</td>
+        <td th:text="${movie.endDate}">{{Movie End Date}}</td>
+
+
+
+
+    </tr>
+</table>
+
+
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+</body>
+</html>
