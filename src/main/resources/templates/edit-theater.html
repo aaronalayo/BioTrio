@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Theater</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+</head>
+<body>
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4">Add new theater</h1>
+        <p class="lead">
+
+        <form action="/savetheater" method="post" th:object="${theaterform}">
+            <div class="form-group">
+                <label for="theater_name">TheaterName</label>
+                <input type="text" class="form-control" th:field="${theaterform.theater_name}" id="theater_name" placeholder="TheaterName" maxlength="20">
+            </div>
+            <div class="form-group">
+                <label for="number_of_seats">NumberOfSeats</label>
+                <input type="number" class="form-control" th:field="${theaterform.number_of_seats}" id="number_of_seats" placeholder="NumberOfSeats">
+            </div>
+            <div class="form-group">
+                <label for="theater_format">TheaterFormat</label>
+                <input type="text" class="form-control" th:field="${theaterform.theater_format}" id="theater_format" placeholder="TheaterFormat">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Edit Theater</button>
+            <button type="reset" class="btn btn-primary">Cancel</button>
+        </form>
+
+
+        </p>
+    </div>
+</div>
+
+
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+</body>
+</html>

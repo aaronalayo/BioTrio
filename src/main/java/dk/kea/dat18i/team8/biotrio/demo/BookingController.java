@@ -24,9 +24,10 @@ public class BookingController {
     public String booking(Model model) {
 
         List<Booking> bookingList = bookingRepo.findAllBookings();
-        model.addAttribute( "bookings", bookingList );
+        model.addAttribute("bookings", bookingList);
 
         return "show-booking";
 
     }
 }
+
