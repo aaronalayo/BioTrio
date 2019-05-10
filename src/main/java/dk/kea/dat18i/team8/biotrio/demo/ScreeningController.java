@@ -65,11 +65,13 @@ public class ScreeningController {
         //DateTimeFormatter dtf2 = DateTimeFormatter.ofPattern("HH:mm");
 
         newScreening.setScreening_date(LocalDate.parse(screeningDate));
+
+        System.out.println(screeningDate);
         newScreening.setScreening_starts(LocalTime.parse(screeningStart));
 
 
         screeningRepo.insertScreening(newScreening);
-
+        System.out.println(newScreening);
         return "redirect:/screenings";
     }
 
