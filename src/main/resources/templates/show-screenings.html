@@ -27,8 +27,28 @@
 </style>
 
 <body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="/">Bio Trio</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item ">
 
-<h1>Screenings</h1>
+                <a href="/screenings"  class="nav-link">Screenings</a>
+            </li>
+            <li class="nav-item active">
+                <a href="/addscreening"  class="nav-link">Add Screening</a>
+            </li>
+        </ul>
+        <span class="navbar-text">
+      Here you can create screenings
+    </span>
+    </div>
+</nav>
+
+
 
 
 <table>
@@ -40,8 +60,6 @@
     <th scope="col">Screening Time</th>
 
 
-
-
     </thead>
     <tr th:each="screening: ${screenings}">
 
@@ -49,9 +67,22 @@
         <td th:text="${screening.screening_date}">{{Screening Date}}</td>
         <td th:text="${screening.screening_starts}">{{Screening Time}}</td>
 
+        <td>
+            <a th:href="@{'/screenings/edit/' + ${screening.screening_id}}"  class="btn btn-warning">Edit</a>
+        </td>
+
+
+        <td>
+            <a th:href="@{'/screenings/delete/' + ${screening.screening_id}}"  class="btn btn-danger">Delete</a>
+        </td>
+
 
     </tr>
 </table>
+
+
+
+
 
 
 
