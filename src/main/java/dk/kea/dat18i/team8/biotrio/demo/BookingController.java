@@ -29,4 +29,9 @@ public class BookingController {
         return "show-booking";
 
     }
+<<<<<<< Updated upstream
 }
+=======
+}
+
+>>>>>>> Stashed changes
