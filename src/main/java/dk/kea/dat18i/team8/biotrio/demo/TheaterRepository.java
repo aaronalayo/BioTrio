@@ -79,8 +79,8 @@ public class TheaterRepository {
                 "WHERE theater_id=" + theater.getTheater_id());
 
     }
-    public Theater findTheater(int id) {
-        SqlRowSet rs = jdbc.queryForRowSet("SELECT * FROM theater WHERE theater_id = " + id);
+    public Theater findTheater(int theater_id) {
+        SqlRowSet rs = jdbc.queryForRowSet("SELECT * FROM theater WHERE theater_id = " + theater_id);
         Theater theater = new Theater();
         while (rs.next()) {
             theater.setTheater_id(rs.getInt("theater_id"));

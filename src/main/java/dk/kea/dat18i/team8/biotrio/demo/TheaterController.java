@@ -46,15 +46,15 @@ public class TheaterController {
         return "redirect:/theaters";
     }
 
-    @GetMapping("/deletetheater/{id}")
-    public String deleteTheater(@PathVariable(name = "id") int id){
-        theaterRepo.delete(id);
+    @GetMapping("/deletetheater/{theater_id}")
+    public String deleteTheater(@PathVariable(name = "theater_id") int theater_id){
+        theaterRepo.delete(theater_id);
         return "redirect:/theaters";
     }
 
-    @GetMapping("/edittheater/{id}")
-    public String editTheater(Model m, @PathVariable(name = "id") int id){
-        Theater theaterToEdit = theaterRepo.findTheater(id);
+    @GetMapping("/edittheater/{theater_id}")
+    public String editTheater(Model m, @PathVariable(name = "theater_id") int theater_id){
+        Theater theaterToEdit = theaterRepo.findTheater(theater_id);
         m.addAttribute("theaterform", theaterToEdit);
         return "edit-theater";
     }
