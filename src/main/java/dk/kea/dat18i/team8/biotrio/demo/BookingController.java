@@ -20,7 +20,16 @@ public class BookingController {
         return "show-bookings";
     }
 
-    @PostMapping("/savebookinge")
+    @GetMapping("/addbooking")
+    public String addBooking(Model model) {
+
+        Booking newBooking = new Booking();
+        model.addAttribute("booking", newBooking);
+
+        return "add-booking";
+    }
+
+    @PostMapping("/savebooking")
     @ResponseBody
     public String saveBooking(@ModelAttribute Booking booking){
         Booking bookingAdded = bookingRepo.insertBooking(booking);

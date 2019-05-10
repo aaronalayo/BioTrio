@@ -25,7 +25,9 @@ public class BookingRepository {
     public Booking findBooking(int booking_id) {
 
         SqlRowSet rs = jdbc.queryForRowSet("SELECT * FROM booking WHERE booking_id = " + booking_id);
+
         Booking booking = new Booking();
+
         while (rs.next()) {
 
             booking.setBooking_id(rs.getInt("booking_id"));
@@ -48,7 +50,7 @@ public class BookingRepository {
             booking.setBooking_id(rs.getInt("booking_id"));
             booking.setPhoneNo(rs.getString("phoneNo"));
             booking.setSeat_id(rs.getInt("seat_id"));
-            bookingList.add(booking);
+            //booking.setScreeningBooked(rs.getScreening("screeningBooked"));
 
 
         }
