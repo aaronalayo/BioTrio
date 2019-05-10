@@ -46,8 +46,8 @@
     <tr th:each="booking: ${bookings}">
 
         <th scope="row" th:text="${booking.booking_id}">1</th>
-        <td th:text="${booking.screening}">{{Screening booked}}</td>
-        <td th:text="${booking.screening_starts}">{{Screening Time}}</td>
+        <td th:text="${booking.phoneNo}">{{Screening booked}}</td>
+        <td th:text="${booking.seat_id}">{{Seat Booked}}</td>
 
 
     </tr>

@@ -16,7 +16,7 @@ public class BookingController {
     @GetMapping("/bookings")
     public String booking(Model model){
         List<Booking> bookingList= bookingRepo.findAllBookings();
-        model.addAttribute("booking",bookingList);
+        model.addAttribute("bookings",bookingList);
         return "show-bookings";
     }
 
