@@ -34,14 +34,14 @@ public class MovieController {
     }
 
     @GetMapping("/edit/{id}")
-    public String editCar (Model m, @PathVariable(name="id") int id){
+    public String editMovie (Model m, @PathVariable(name="id") int id){
         Movie movieToEdit= movieRepo.showMovie(id);
         m.addAttribute("moviefrom",movieToEdit);
         return "edit-car";
     }
 
-    @PostMapping("/updatecar")
-    public String saveEditCar(@ModelAttribute Movie movie){
+    @PostMapping("/updateMovie")
+    public String saveEditMovie(@ModelAttribute Movie movie){
         movieRepo.edit(movie);
         return "redirect:/movies";
     }

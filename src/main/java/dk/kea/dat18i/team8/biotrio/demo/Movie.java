@@ -12,20 +12,22 @@ public class Movie {
     private LocalDateTime startDate;
     private LocalDateTime endDate;
 
-    public int getId(){
+    public int getId() {
         return id;
     }
-    public void setId(int id){
-        this.id=id;
+
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getTitle(){
+    public String getTitle() {
         return this.title;
-    public void setTitle(String title){
     }
+
+    public void setTitle(String title) {
+
         this.title=title;
     }
-
     public String getGenre(){
         return genre;
     }
