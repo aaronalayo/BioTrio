@@ -50,7 +50,7 @@ public class BookingRepository {
             booking.setBooking_id(rs.getInt("booking_id"));
             booking.setPhoneNo(rs.getString("phoneNo"));
             booking.setSeat_id(rs.getInt("seat_id"));
-            //booking.setScreeningBooked(rs.getScreening("screeningBooked"));
+
 
 
         }
