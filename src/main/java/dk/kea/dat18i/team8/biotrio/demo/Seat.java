@@ -8,7 +8,6 @@ public class Seat {
     private boolean isBooked;
 
 
-
     public  Seat() {}
 
 

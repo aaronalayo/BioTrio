@@ -4,17 +4,17 @@ public class Booking {
 
     private int booking_id;
     private String phoneNo; // shall be String according to StackOverflow
-    private int seat_id; // we can consider to implement Seat object and List class/library here
+    private Seat seat;
     private Screening screeningBooked;
 
     public Booking (){
     }
 
 
-    public Booking(int booking_id, String phoneNo, int seat_id, Screening screeningBooked){
+    public Booking(int booking_id, String phoneNo, Seat seat, Screening screeningBooked){
         this.booking_id = booking_id;
         this.phoneNo = phoneNo;
-        this.seat_id = seat_id;
+        this.seat = seat;
         this.screeningBooked = screeningBooked;
     }
 
@@ -34,12 +34,12 @@ public class Booking {
         this.phoneNo = phoneNo;
     }
 
-    public int getSeat_id() {
-        return seat_id;
+    public Seat getSeat() {
+        return seat;
     }
 
-    public void setSeat_id(int seat_id) {
-        this.seat_id = seat_id;
+    public void setSeat(Seat seat) {
+        this.seat = seat;
     }
 
     public Screening getScreeningBooked() {
@@ -60,7 +60,7 @@ public class Booking {
 
                 "booking_id=" + booking_id +
                 ", phone number=" + phoneNo + '|' +
-                ", seat_id=" + seat_id + '|' +
+                ", seat=" + seat + '|' +
                 ", Screening details=" + screeningBooked +
                 '}';
     }
