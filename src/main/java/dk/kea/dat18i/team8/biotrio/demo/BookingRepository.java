@@ -82,7 +82,12 @@ public class BookingRepository {
 
     public void deleteBooking(int booking_id) {
 
-        jdbc.execute("DELETE FROM booking WHERE booking_id = " + booking_id);
+        jdbc.update("DELETE FROM booking WHERE booking_id = " + booking_id);
+    }
+
+    public void updateBooking(Booking booking) {
+        String sql = "UPDATE booking SET phoneNo=?, WHERE booking_id=" + booking.getBooking_id();
+        jdbc.update(sql, booking.getBooking_id());
     }
 
 }

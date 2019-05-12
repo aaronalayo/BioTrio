@@ -20,7 +20,7 @@
                 <a class="nav-link" href="/">Home </a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="/screenings">Booking <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/bookings">Booking <span class="sr-only">(current)</span></a>
             </li>
         </ul>
         <span class="navbar-text">
@@ -39,7 +39,7 @@
         <h1 class="display-4">Edit Booking</h1>
         <p class="lead">
 
-        <form action="/updatescreening" method="post" th:object="${booking}">
+        <form action="/updatebooking" method="post" th:object="${booking}">
 
 
             <input type="hidden" th:field="${booking.booking_id}">

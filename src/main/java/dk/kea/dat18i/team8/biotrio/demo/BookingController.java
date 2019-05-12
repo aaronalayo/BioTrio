@@ -49,4 +49,13 @@ public class BookingController {
         return "edit-booking";
     }
 
+    @PostMapping("/updatebooking")
+    public String saveEditBooking(@ModelAttribute Booking booking){
+
+
+        bookingRepo.updateBooking(booking);
+
+        return "redirect:/bookings";
+    }
+
 }
