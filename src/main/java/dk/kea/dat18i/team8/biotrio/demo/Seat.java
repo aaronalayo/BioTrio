@@ -5,7 +5,7 @@ public class Seat {
     private int seat_id;
     private Theater theater;
     private int row;
-    private boolean isBooked;
+    private boolean seat_reserved;
 
 
     public  Seat() {}
@@ -35,12 +35,12 @@ public class Seat {
         this.row = row;
     }
 
-    public boolean isBooked() {
-        return isBooked;
+    public boolean seat_reserved() {
+        return seat_reserved;
     }
 
-    public void setBooked(boolean isBooked) {
-        this.isBooked = isBooked;
+    public void setSeat_reserved(boolean seat_reserved) {
+        this.seat_reserved = seat_reserved;
     }
 
 
@@ -51,7 +51,7 @@ public class Seat {
                     "theater" + theater +
                     "row=" + row +
                     ", seat_id=" + seat_id +
-                    ", isBooked=" + isBooked +
+                    ", seat_reserved=" + seat_reserved +
                     '}';
     }
 }
