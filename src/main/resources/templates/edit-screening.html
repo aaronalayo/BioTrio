@@ -43,14 +43,26 @@
 
 
             <input type="hidden" th:field="${screening.screening_id}">
-            <div class="form-group">
+        <!--
+        <div class="form-group">
                 <label for="screening date"></label>
-                <input type="text" class="form-control" th:field="${screening.screening_date}" id="screening date" placeholder="Screening Date" maxlength="10">
+                <input type="date" class="form-control" th:field="${screening.screening_date}" id="screening date" placeholder="Screening Date" maxlength="10">
             </div>
             <div class="form-group">
                 <label for="screening starts">Screening Starts</label>
-                <input type="text" class="form-control" th:field="${screening.screening_starts}" id="screening starts" placeholder="Screening Starts">
+                <input type="time" class="form-control" th:field="${screening.screening_starts}" id="screening starts" placeholder="Screening Starts">
             </div>
+
+            -->
+        <div class="form-group">
+            <label for="screeningdate">Screening Date</label>
+
+            <input type= "date" class="form-control" id= "screeningdate" name = "screening-date" placeholder="Screening Date" >
+        </div>
+        <div class="form-group">
+            <label for="screeningstarts">Screening Starts</label>
+            <input type="time" class="form-control" id="screeningstarts" name = "screening-start"placeholder="Screening Starts" >
+        </div>
 
             <button type="submit" class="btn btn-primary">Save</button>
             <button type="reset" class="btn btn-primary">Cancel</button>

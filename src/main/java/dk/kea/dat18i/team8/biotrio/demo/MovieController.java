@@ -33,10 +33,10 @@ public class MovieController {
     }
 
     @PostMapping("/savemovie")
-    @ResponseBody
+    //@ResponseBody
     public String saveMovie(@ModelAttribute Movie movie){
-        Movie movieAdded = movieRepo.insert(movie);
-        return "Data is saved."+ movieAdded;
+        movieRepo.insert(movie);
+        return "redirect:/movies";
     }
 
     @GetMapping("/deletemovie/{id}")
