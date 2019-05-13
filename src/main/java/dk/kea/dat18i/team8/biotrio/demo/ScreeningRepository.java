@@ -66,15 +66,20 @@ public class ScreeningRepository {
 
         PreparedStatementCreator psc = new PreparedStatementCreator() {
 
+            Movie movie = new Movie();
             @Override
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
 
-                PreparedStatement ps = connection.prepareStatement("INSERT INTO biotrio.screening  (screening_date, screening_starts, movie_id)  VALUES  (?,?,1)", new String[]{"screening_id"});
+                PreparedStatement ps = connection.prepareStatement("INSERT INTO biotrio.screening (screening_date, screening_starts, movie_id)VALUES (?,?,1) ", new String[]{"screening_id"});
 
 
 
                 ps.setDate(1,java.sql.Date.valueOf(screening.getScreening_date()));
                 ps.setTime(2,java.sql.Time.valueOf(screening.getScreening_starts()));
+
+
+
+
 
                 return ps;
             }
