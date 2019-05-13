@@ -32,7 +32,7 @@ public class MovieRepository {
             movie.setFormat(rs.getString("movie_format"));
             movie.setStartDate(rs.getDate("start_date").toLocalDate());
             movie.setEndDate(rs.getDate("end_date").toLocalDate());
-
+            movie.setTheater_id(rs.getInt("theater_id"));
         }
         return movie;
     }
@@ -50,7 +50,7 @@ public class MovieRepository {
             movie.setFormat(rs.getString("movie_format"));
             movie.setStartDate(rs.getDate("start_date").toLocalDate());
             movie.setEndDate(rs.getDate("end_date").toLocalDate());
-
+            movie.setTheater_id(rs.getInt("theater_id"));
             movieList.add(movie);
         }
         return movieList;
@@ -60,14 +60,15 @@ public class MovieRepository {
         PreparedStatementCreator psc =new PreparedStatementCreator() {
             @Override
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-                PreparedStatement ps = connection.prepareStatement("INSERT INTO movie VALUES(null,?,?,?,?,?,?,?)", new String[]{"movie_id"});
+                PreparedStatement ps = connection.prepareStatement("INSERT INTO movie VALUES(null,?,?,?,?,?,?,?,?)", new String[]{"movie_id"});
                 ps.setString(1,movie.getTitle());
-                ps.setString(3,movie.getGenre());
                 ps.setString(2,movie.getDirector());
+                ps.setString(3,movie.getGenre());
                 ps.setInt(4,movie.getDuration());
                 ps.setString(5,movie.getFormat());
                 ps.setDate(6,java.sql.Date.valueOf(movie.getStartDate()));
                 ps.setDate(7,java.sql.Date.valueOf(movie.getEndDate()));
+                ps.setInt(8,movie.getTheater_id());
                 return ps;
             }
         };
@@ -83,7 +84,9 @@ public class MovieRepository {
                 "director='"+movie.getDirector() +"',"+
                 "genre='"+movie.getGenre()+"',"+
                 "duration='"+movie.getDuration()+"',"+
-                "movie_format="+movie.getFormat());
+                "movie_format='"+movie.getFormat()+"',"+
+                "theater_id='"+movie.getTheater_id()+"',"+
+                "WHERE movie_id="+movie.getId());
     }
     public void delete(int id) {
         jdbc.update("DELETE FROM movie WHERE id = "+id);

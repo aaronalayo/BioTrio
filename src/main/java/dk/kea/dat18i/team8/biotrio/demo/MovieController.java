@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -33,10 +34,10 @@ public class MovieController {
     }
 
     @PostMapping("/savemovie")
-    @ResponseBody
+    //@ResponseBody
     public String saveMovie(@ModelAttribute Movie movie){
-        Movie movieAdded = movieRepo.insert(movie);
-        return "Data is saved."+ movieAdded;
+        movieRepo.insert(movie);
+        return "redirect:/movies";
     }
 
     @GetMapping("/deletemovie/{id}")
