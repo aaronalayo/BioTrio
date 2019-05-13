@@ -50,6 +50,14 @@
         <td th:text="${booking.seat_id}">{{Seat Booked}}</td>
 
 
+        <td>
+            <a th:href="@{'/booking/edit/' + ${booking.booking_id}}"  class="btn btn-warning">Edit</a>
+        </td>
+
+        <td>
+            <a th:href="@{'/booking/delete/' + ${booking.booking_id}}"  class="btn btn-danger">Delete</a>
+        </td>
+
     </tr>
 </table>
 
