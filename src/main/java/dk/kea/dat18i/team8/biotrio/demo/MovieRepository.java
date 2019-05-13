@@ -27,11 +27,10 @@ public class MovieRepository {
             movie.setId(rs.getInt("movie_id"));
             movie.setTitle(rs.getString("title"));
             movie.setDirector(rs.getString("director"));
+            movie.setPlot(rs.getString("plot"));
             movie.setDuration(rs.getInt("duration"));
             movie.setGenre(rs.getString("genre"));
             movie.setFormat(rs.getString("movie_format"));
-            movie.setStartDate(rs.getDate("start_date").toLocalDate());
-            movie.setEndDate(rs.getDate("end_date").toLocalDate());
             movie.setTheater_id(rs.getInt("theater_id"));
         }
         return movie;
@@ -45,11 +44,10 @@ public class MovieRepository {
             movie.setId(rs.getInt("movie_id"));
             movie.setTitle(rs.getString("title"));
             movie.setDirector(rs.getString("director"));
+            movie.setPlot(rs.getString("plot"));
             movie.setDuration(rs.getInt("duration"));
             movie.setGenre(rs.getString("genre"));
             movie.setFormat(rs.getString("movie_format"));
-            movie.setStartDate(rs.getDate("start_date").toLocalDate());
-            movie.setEndDate(rs.getDate("end_date").toLocalDate());
             movie.setTheater_id(rs.getInt("theater_id"));
             movieList.add(movie);
         }
@@ -60,15 +58,14 @@ public class MovieRepository {
         PreparedStatementCreator psc =new PreparedStatementCreator() {
             @Override
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-                PreparedStatement ps = connection.prepareStatement("INSERT INTO movie VALUES(null,?,?,?,?,?,?,?,?)", new String[]{"movie_id"});
+                PreparedStatement ps = connection.prepareStatement("INSERT INTO movie VALUES(null,?,?,?,?,?,?,?)", new String[]{"movie_id"});
                 ps.setString(1,movie.getTitle());
                 ps.setString(2,movie.getDirector());
-                ps.setString(3,movie.getGenre());
-                ps.setInt(4,movie.getDuration());
-                ps.setString(5,movie.getFormat());
-                ps.setDate(6,java.sql.Date.valueOf(movie.getStartDate()));
-                ps.setDate(7,java.sql.Date.valueOf(movie.getEndDate()));
-                ps.setInt(8,movie.getTheater_id());
+                ps.setString(3,movie.getPlot());
+                ps.setString(4,movie.getGenre());
+                ps.setInt(5,movie.getDuration());
+                ps.setString(6,movie.getFormat());
+                ps.setInt(7,movie.getTheater_id());
                 return ps;
             }
         };
@@ -82,6 +79,7 @@ public class MovieRepository {
         jdbc.update("update movie set" +
                 "title='"+movie.getTitle()+"',"+
                 "director='"+movie.getDirector() +"',"+
+                "plot='"+movie.getPlot() +"',"+
                 "genre='"+movie.getGenre()+"',"+
                 "duration='"+movie.getDuration()+"',"+
                 "movie_format='"+movie.getFormat()+"',"+

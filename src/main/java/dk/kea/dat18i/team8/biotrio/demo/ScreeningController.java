@@ -83,7 +83,8 @@ public class ScreeningController {
 
 
     @GetMapping("/screenings/edit/{screening_id}")
-    public String editCar(Model m, @PathVariable(name = "screening_id") int screening_id){
+    public String editScreening(Model m, @PathVariable(name = "screening_id") int screening_id){
+
         Screening screeningToEdit = screeningRepo.findScreening(screening_id);
         m.addAttribute("screening", screeningToEdit);
 
@@ -93,10 +94,13 @@ public class ScreeningController {
 
 
     @PostMapping("/updatescreening")
-    public String saveEditScreening(@ModelAttribute Screening screening){
+    public String saveEditScreening( @RequestParam("screening-date") String screeningDate, @RequestParam("screening-start") String screeningStart){
 
+        Screening upScreening = new Screening();
+        upScreening.setScreening_date(LocalDate.parse(screeningDate));
+        upScreening.setScreening_starts(LocalTime.parse(screeningStart));
 
-        screeningRepo.update(screening);
+        screeningRepo.update(upScreening);
 
         return "redirect:/screenings";
     }

@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8">
-    <title>Add Screening</title>
+    <title>Booking Edit</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
@@ -10,18 +10,21 @@
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <a class="navbar-brand" href="/">Bio Trio</a>
+    <a class="navbar-brand" href="#">Booking</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav mr-auto">
-
+            <li class="nav-item ">
+                <a class="nav-link" href="/">Home </a>
+            </li>
             <li class="nav-item active">
+                <a class="nav-link" href="/bookings">Booking <span class="sr-only">(current)</span></a>
             </li>
         </ul>
         <span class="navbar-text">
-      Here you can create screenings
+      Manage Booking here
     </span>
     </div>
 </nav>
@@ -29,30 +32,34 @@
 
 
 
-<!-- here goes comments -->
+<!-- Here is the form to edit the selected booking -->
 
 <div class="jumbotron jumbotron-fluid">
     <div class="container">
-        <h1 class="display-4">Add new Screening</h1>
+        <h1 class="display-4">Edit Booking</h1>
         <p class="lead">
 
-        <form th:action="@{'/savescreening'}" method="post" th:object="${screening}">
-            <div class="form-group">
-                <label for="screeningdate">Screening Date</label>
+        <form action="/updatebooking" method="post" th:object="${booking}">
 
-                <input type= "date" class="form-control" id= "screeningdate" name = "screening-date" placeholder="Screening Date" >
+
+            <input type="hidden" th:field="${booking.booking_id}">
+            <div class="form-group">
+                <label for="phoneNo"></label>
+                <input type="text" class="form-control" th:field="${booking.phoneNo}" id="phoneNo" placeholder="PhoneNo" maxlength="10">
             </div>
             <div class="form-group">
-                <label for="screeningstarts">Screening Starts</label>
-                <input type="time" class="form-control" id="screeningstarts" name = "screening-start"placeholder="Screening Starts" >
-            </div>
-
-            <button type="submit" class="btn btn-primary">Add Screening</button>
+        <label for="seat_id">Seat Booked</label>
+        <input type="text" class="form-control" th:field="${booking.seat_id}" id="seat_id" placeholder="Seat Booked">
+    </div>
+        <div class="form-group">
+            <label for="seat_id">Screening Booked</label>
+            <input type="text" class="form-control" th:field="${booking.screeningBooked}" id="screeningBooked" placeholder="Screening Booked">
+        </div>
+            <button type="submit" class="btn btn-primary">Save</button>
             <button type="reset" class="btn btn-primary">Cancel</button>
         </form>
 
-        <br>
-        <span><a href = "/screenings" class="fas fa-undo"> Go back to screenings view </a> </span>
+
 
         </p>
     </div>
