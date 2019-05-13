@@ -53,16 +53,16 @@ public class TheaterController {
     }
 
     @GetMapping("/edittheater/{theater_id}")
-    public String editTheater(Model m, @PathVariable(name = "theater_id") int theater_id){
-        Theater theaterToEdit = theaterRepo.findTheater(theater_id);
+    public String editCar(Model m, @PathVariable(name = "theater_id") int id){
+        Theater theaterToEdit = theaterRepo.findTheater(id);
         m.addAttribute("theaterform", theaterToEdit);
         return "edit-theater";
     }
 
+
     @PostMapping("/updatetheater")
-    public String s(@ModelAttribute Theater theater){
-        theaterRepo.edit(theater);
+    public String saveEditTheater(@ModelAttribute Theater theater){
+        theaterRepo.update(theater);
         return "redirect:/theaters";
     }
-
 }
