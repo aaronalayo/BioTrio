@@ -9,6 +9,7 @@ public class Movie {
     private String genre;
     private int duration;
     private String director;
+    private String plot;
     private String format;
     private LocalDate startDate;
     private LocalDate endDate;
@@ -44,14 +45,9 @@ public class Movie {
     public String getFormat(){return format;}
     public void setFormat(String format){this.format=format;}
 
-    public void setStartDate(LocalDate startDate){this.startDate=startDate;}
-    public LocalDate getStartDate(){return startDate;}
-
-    public void setEndDate(LocalDate endDate){this.endDate=endDate;}
-    public LocalDate getEndDate(){return endDate;}
-
     public int getTheater_id(){return theater_id;}
     public void setTheater_id(int theater_id){this.theater_id=theater_id;}
 
-
+    public String getPlot(){return plot;}
+    public void setPlot(String plot){this.plot=plot;}
 }
