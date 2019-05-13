@@ -32,7 +32,7 @@ public class BookingRepository {
 
             booking.setBooking_id(rs.getInt("booking_id"));
             booking.setPhoneNo(rs.getString("phoneNo"));
-            booking.setSeat_id(rs.getInt("seat_id"));
+            //booking.setSeat(rs.getSeat("seat"));
 
         }
         return booking;
@@ -49,8 +49,8 @@ public class BookingRepository {
             Booking booking = new Booking();
             booking.setBooking_id(rs.getInt("booking_id"));
             booking.setPhoneNo(rs.getString("phoneNo"));
-            booking.setSeat_id(rs.getInt("seat_id"));
-            //booking.setScreeningBooked(rs.getScreening("screeningBooked"));
+            //booking.setSeat(rs.("seat"));
+
 
 
         }
@@ -66,7 +66,7 @@ public class BookingRepository {
             @Override
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
 
-                PreparedStatement ps = connection.prepareStatement("INSERT INTO biotrio.booking  (booking_id, phoneNo, seat_id)  VALUES  (?,?,1)", new String[]{"booking_id"});
+                PreparedStatement ps = connection.prepareStatement("INSERT INTO biotrio.booking  (booking_id, phoneNo, seat)  VALUES  (?,?,1)", new String[]{"booking_id"});
 
 
                 return ps;
@@ -82,7 +82,12 @@ public class BookingRepository {
 
     public void deleteBooking(int booking_id) {
 
-        jdbc.execute("DELETE FROM booking WHERE booking_id = " + booking_id);
+        jdbc.update("DELETE FROM booking WHERE booking_id = " + booking_id);
+    }
+
+    public void updateBooking(Booking booking) {
+        String sql = "UPDATE booking SET phoneNo=?, WHERE booking_id=" + booking.getBooking_id();
+        jdbc.update(sql, booking.getBooking_id());
     }
 
 }
