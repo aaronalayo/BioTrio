@@ -10,16 +10,16 @@ public class Screening {
     private int screening_id;
     private LocalDate screening_date;
     private LocalTime screening_starts;
-    private int movie_id; // change it into Movie object
+    private Movie movie;
 
     public Screening (){
     }
 
-    public Screening(int screening_id, LocalDate screening_date, LocalTime screening_starts, int movie_id) {
+    public Screening(int screening_id, LocalDate screening_date, LocalTime screening_starts, Movie movie) {
         this.screening_id = screening_id;
         this.screening_date = screening_date;
         this.screening_starts = screening_starts;
-        this.movie_id = movie_id;
+        this.movie = movie;
     }
 
     public int getScreening_id() {
@@ -46,11 +46,10 @@ public class Screening {
         this.screening_starts = screening_starts;
     }
 
-    public int getMovie_id() {
-        return movie_id;
+    public Movie getMovie() { return movie;
     }
 
-    public void setMovie_id(int movied_id) {
-        this.movie_id = movie_id;
+    public void setMovie(Movie movie) {
+        this.movie = movie;
     }
 }
