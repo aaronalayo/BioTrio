@@ -1,8 +1,5 @@
 package dk.kea.dat18i.team8.biotrio.demo;
 
-import java.time.LocalDate;
-//import java.time.LocalDateTime;
-
 public class Movie {
     private int id;
     private String title;
@@ -11,8 +8,6 @@ public class Movie {
     private String director;
     private String plot;
     private String format;
-    private LocalDate startDate;
-    private LocalDate endDate;
     private int theater_id;
 
     public int getId() {
