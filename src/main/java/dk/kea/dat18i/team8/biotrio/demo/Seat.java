@@ -35,7 +35,7 @@ public class Seat {
         this.row = row;
     }
 
-    public boolean seat_reserved() {
+    public boolean getSeat_reserved() {
         return seat_reserved;
     }
 
