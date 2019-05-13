@@ -10,7 +10,7 @@ public class Screening {
     private int screening_id;
     private LocalDate screening_date;
     private LocalTime screening_starts;
-    private int movie_id;
+    private int movie_id; // change it into Movie object
 
     public Screening (){
     }
