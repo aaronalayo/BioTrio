@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org/" xmlns:a="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8">
     <title>Bookings view</title>
@@ -50,41 +50,37 @@
     </div>
 </nav>
 
-<table>
+<table class="table table-hover">
     <thead>
-
-    <th scope="col">Screening booked</th>
+    <tr>
     <th scope="col">Booking Id</th>
-    <th scope="col">Phone_No</th>
     <th scope="col">Seat booked</th>
-
-
-
+    <th scope="col">Phone_No</th>
+    <th scope="col">Screening_id booked</th>
+    <th scope="col">Delete</th>
+    <th scope="col">Edit</th>
+    <th scope="col"></th>
+    </tr>
 
     </thead>
+    <tbody>
     <tr th:each="booking: ${bookings}">
 
-        <td th:text="${booking.screening}">{{Screening Booked}}</td>
         <th scope="row" th:text="${booking.booking_id}">1</th>
+        <td th:number="${booking.seat_id}">{{Seat_id}}</td>
         <td th:text="${booking.phone_no}">{{Phone No}}</td>
-        <td th:text="${booking.seat}">{{Seat Booked}}</td>
-
-
+        <td th:number="${booking.screening_id}">{{Screening_id Booked}}</td>
+        <td><a class="btn btn-danger" th:href="@{'/deletecar/' + ${booking.booking_id}}">Delete</a></td>
+        <td><a class="btn btn-success" th:href="@{'/edit/' + ${booking.booking_id}}" >Edit</a></td>
         <td>
-            <a th:href="@{'/booking/edit/' + ${booking.booking_id}}"  class="btn btn-warning">Edit</a>
-        </td>
-
-        <td>
-            <a th:href="@{'/booking/delete/' + ${booking.booking_id}}"  class="btn btn-danger">Delete</a>
-        </td>
 
     </tr>
+    </tbody>
 </table>
 
 
 
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
 
 </body>
 </html>
