@@ -19,13 +19,12 @@ public class TheaterController {
 
     @Autowired
     private TheaterRepository theaterRepo;
-
+    
     @GetMapping("/theaters")
     public String theater(Model model) {
 
         List<Theater> theaterList = theaterRepo.findAllTheaters();
-        model.addAttribute( "theaters", theaterList
-        );
+        model.addAttribute( "theaters", theaterList);
 
         return "show-theaters";
 

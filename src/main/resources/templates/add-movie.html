@@ -55,11 +55,18 @@
         </div>
         <div class="form-group">
             <label for="movie_format">MovieFormat</label>
-            <input type="text" class="form-control"  id="movie_format" placeholder="MovieFormat">
+            <select type="dropdown" class="form-control" id="movie_format" name = "movies" placeholder="MovieFormat">
+                <option value="2D">2D</option>
+                <option value="3D">3D</option>
+            </select>
         </div>
         <div class="form-group">
-            <label for="theater_id">Theater</label>
-            <input type="text" class="form-control"  id="theater_id" placeholder="TheaterId">
+            <label >TheaterId</label>
+            <select type="dropdown" class="form-control" id="theater_id" name = "theaterId" placeholder="TheaterId" >
+                <option th:each="theater: ${theaters}" th:value="${theater.theater_id}">
+                    <span th:text="${theater.theater_name}"></span>
+                </option>
+            </select>
         </div>
 
             <button type="submit" class="btn btn-primary">Add Movie</button>

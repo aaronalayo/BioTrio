@@ -45,4 +45,5 @@ public class Movie {
 
     public String getPlot(){return plot;}
     public void setPlot(String plot){this.plot=plot;}
+
 }

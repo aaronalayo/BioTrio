@@ -8,9 +8,7 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,18 +56,24 @@ public class MovieRepository {
         PreparedStatementCreator psc =new PreparedStatementCreator() {
             @Override
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-                PreparedStatement ps = connection.prepareStatement("INSERT INTO movie VALUES(null,?,?,?,?,?,?,?)", new String[]{"movie_id"});
+                PreparedStatement ps = connection.prepareStatement
+                        ("INSERT INTO movie() VALUES(null,?,?,?,?,?,?,null)", Statement.RETURN_GENERATED_KEYS);
                 ps.setString(1,movie.getTitle());
                 ps.setString(2,movie.getDirector());
                 ps.setString(3,movie.getPlot());
                 ps.setString(4,movie.getGenre());
                 ps.setInt(5,movie.getDuration());
                 ps.setString(6,movie.getFormat());
-                ps.setInt(7,movie.getTheater_id());
+                //ps.setInt(7,movie.getTheater_id());
+
+                //ps.executeUpdate();
+                //ResultSet tableKeys = ps.getGeneratedKeys();
+                //tableKeys.next();
                 return ps;
             }
         };
         KeyHolder id = new GeneratedKeyHolder();
+
         jdbc.update(psc, id);
         movie.setId(id.getKey().intValue());
         return movie;

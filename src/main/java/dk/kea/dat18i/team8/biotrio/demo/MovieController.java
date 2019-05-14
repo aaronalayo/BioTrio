@@ -12,6 +12,8 @@ public class MovieController {
 
     @Autowired
     private MovieRepository movieRepo;
+    @Autowired
+    private TheaterRepository theaterRepo;
 
     @GetMapping("/moviesview")
     @ResponseBody
@@ -29,6 +31,8 @@ public class MovieController {
     @GetMapping("/addmovie")
     public String addMovie(Model model){
         model.addAttribute("movieform", new Movie());
+        List<Theater> theaterList= theaterRepo.findAllTheaters();
+        model.addAttribute( "theaters", theaterList);
         return "add-movie";
     }
 

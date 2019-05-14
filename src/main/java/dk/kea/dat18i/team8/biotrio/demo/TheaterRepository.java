@@ -26,7 +26,7 @@ public class TheaterRepository {
 
     @Autowired
     private JdbcTemplate jdbc;
-
+    @Autowired
     public List<Theater> findAllTheaters(){
         SqlRowSet rs = jdbc.queryForRowSet("SELECT * FROM theater");
         List<Theater> theaterList = new ArrayList<>();
