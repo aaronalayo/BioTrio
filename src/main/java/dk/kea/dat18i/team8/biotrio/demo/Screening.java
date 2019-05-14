@@ -1,6 +1,7 @@
 package dk.kea.dat18i.team8.biotrio.demo;
 
-import java.sql.Date;
+import dk.kea.dat18i.team8.biotrio.demo.Movie;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -11,6 +12,14 @@ public class Screening {
     private LocalDate screening_date;
     private LocalTime screening_starts;
     private Movie movie;
+
+    public Screening(int screening_id, LocalDate screening_date, Movie movie) {
+        this.screening_id = screening_id;
+        this.screening_date = screening_date;
+        this.movie = movie;
+    }
+
+
 
     public Screening (){
     }
@@ -34,6 +43,7 @@ public class Screening {
         return screening_date;
     }
 
+
     public void setScreening_date(LocalDate screening_date) {
         this.screening_date = screening_date;
     }
@@ -42,14 +52,16 @@ public class Screening {
         return screening_starts;
     }
 
+
     public void setScreening_starts(LocalTime screening_starts) {
         this.screening_starts = screening_starts;
     }
+
 
     public Movie getMovie() { return movie;
     }
 
     public void setMovie(Movie movie) {
-        this.movie = movie;
+
     }
 }
