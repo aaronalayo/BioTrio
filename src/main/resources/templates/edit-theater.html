@@ -11,10 +11,10 @@
 
 <div class="jumbotron jumbotron-fluid">
     <div class="container">
-        <h1 class="display-4">Add new theater</h1>
+        <h1 class="display-4">Edit Theater</h1>
         <p class="lead">
 
-        <form action="/savetheater" method="post" th:object="${theaterform}">
+        <form action="/updatetheater" method="post" th:object="${theaterform}">
             <div class="form-group">
                 <label for="theater_name">TheaterName</label>
                 <input type="text" class="form-control" th:field="${theaterform.theater_name}" id="theater_name" placeholder="TheaterName" maxlength="20">

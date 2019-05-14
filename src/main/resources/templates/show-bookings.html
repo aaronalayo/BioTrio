@@ -36,7 +36,7 @@
 
     <th scope="col">Screening booked</th>
     <th scope="col">Booking Id</th>
-    <th scope="col">Booking Phone No</th>
+    <th scope="col">Phone_No</th>
     <th scope="col">Seat booked</th>
 
 
@@ -45,9 +45,10 @@
     </thead>
     <tr th:each="booking: ${bookings}">
 
+        <td th:text="${booking.screening}">{{Screening Booked}}</td>
         <th scope="row" th:text="${booking.booking_id}">1</th>
-        <td th:text="${booking.phoneNo}">{{Screening booked}}</td>
-        <td th:text="${booking.seat_id}">{{Seat Booked}}</td>
+        <td th:text="${booking.phone_no}">{{Phone No}}</td>
+        <td th:text="${booking.seat}">{{Seat Booked}}</td>
 
 
         <td>

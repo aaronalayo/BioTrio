@@ -44,16 +44,16 @@
 
             <input type="hidden" th:field="${booking.booking_id}">
             <div class="form-group">
-                <label for="phoneNo"></label>
-                <input type="text" class="form-control" th:field="${booking.phoneNo}" id="phoneNo" placeholder="PhoneNo" maxlength="10">
+                <label for="phone_no"></label>
+                <input type="text" class="form-control" th:field="${booking.phone_no}" id="phone_no" placeholder="phone_no" maxlength="10">
             </div>
             <div class="form-group">
-        <label for="seat_id">Seat Booked</label>
-        <input type="text" class="form-control" th:field="${booking.seat_id}" id="seat_id" placeholder="Seat Booked">
+        <label for="seat">Seat Booked</label>
+        <input type="text" class="form-control" th:field="${booking.seat}" id="seat" placeholder="Seat Booked">
     </div>
         <div class="form-group">
-            <label for="seat_id">Screening Booked</label>
-            <input type="text" class="form-control" th:field="${booking.screeningBooked}" id="screeningBooked" placeholder="Screening Booked">
+            <label for="seat">Screening Booked</label>
+            <input type="text" class="form-control" th:field="${booking.screening}" id="screening" placeholder="Screening Booked">
         </div>
             <button type="submit" class="btn btn-primary">Save</button>
             <button type="reset" class="btn btn-primary">Cancel</button>

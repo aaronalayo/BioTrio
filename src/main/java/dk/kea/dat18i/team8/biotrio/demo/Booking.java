@@ -3,19 +3,19 @@ package dk.kea.dat18i.team8.biotrio.demo;
 public class Booking {
 
     private int booking_id;
-    private String phoneNo; // shall be String according to StackOverflow
+    private String phone_no; // shall be String according to StackOverflow
     private Seat seat;
-    private Screening screeningBooked;
+    private Screening screening;
 
     public Booking (){
     }
 
 
-    public Booking(int booking_id, String phoneNo, Seat seat, Screening screeningBooked){
+    public Booking(int booking_id, String phone_no, Seat seat, Screening screening){
         this.booking_id = booking_id;
-        this.phoneNo = phoneNo;
+        this.phone_no = phone_no;
         this.seat = seat;
-        this.screeningBooked = screeningBooked;
+        this.screening = screening;
     }
 
     public int getBooking_id() {
@@ -26,12 +26,12 @@ public class Booking {
         this.booking_id = id;
     }
 
-    public String getPhoneNo() {
-        return phoneNo;
+    public String getPhone_no() {
+        return phone_no;
     }
 
-    public void setPhoneNo(String phoneNo) {
-        this.phoneNo = phoneNo;
+    public void setPhone_no(String phone_no) {
+        this.phone_no = phone_no;
     }
 
     public Seat getSeat() {
@@ -42,12 +42,12 @@ public class Booking {
         this.seat = seat;
     }
 
-    public Screening getScreeningBooked() {
-        return screeningBooked;
+    public Screening getScreening() {
+        return screening;
     }
 
-    public void setScreeningBooked(Screening screeningBooked) {
-        this.screeningBooked = screeningBooked;
+    public void setScreening(Screening screening) {
+        this.screening = screening;
     }
 
 
@@ -59,9 +59,9 @@ public class Booking {
         return "Booking{" +
 
                 "booking_id=" + booking_id +
-                ", phone number=" + phoneNo + '|' +
+                ", phone number=" + phone_no + '|' +
                 ", seat=" + seat + '|' +
-                ", Screening details=" + screeningBooked +
+                ", Screening details=" + screening +
                 '}';
     }
 }
