@@ -43,7 +43,7 @@
             </li>
         </ul>
         <span class="navbar-text">
-      Here you can create screenings
+      Here you can see the screenings
     </span>
     </div>
 </nav>
@@ -66,6 +66,7 @@
         <th scope="row" th:text="${screening.screening_id}">1</th>
         <td th:text="${screening.screening_date}">{{Screening Date}}</td>
         <td th:text="${screening.screening_starts}">{{Screening Time}}</td>
+
 
         <td>
             <a th:href="@{'/screenings/edit/' + ${screening.screening_id}}"  class="btn btn-warning">Edit</a>

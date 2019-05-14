@@ -70,14 +70,30 @@ public class TheaterRepository {
         jdbc.update("DELETE FROM theater WHERE theater_id = " + id);
     }
 
-    public void edit(Theater theater){
+    public Theater update(Theater theater) {
 
-        jdbc.update("UPDATE theater SET" +
-                "theater_name= '" + theater.getTheater_name() + "', " +
-                "number_of_seats= '" + theater.getNumber_of_seats() + "', " +
-                "theater_format= '"  + theater.getTheater_format()  + "', " +
-                "WHERE theater_id=" + theater.getTheater_id());
+        PreparedStatementCreator psc = new PreparedStatementCreator() {
 
+            @Override
+            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
+
+
+                PreparedStatement ps = connection.prepareStatement("UPDATE biotrio.theater SET theater_name=?, number_of_seats=?, theater_format=? WHERE theater_id=  " + theater.getTheater_name(), new String[]{"theater_id"});
+
+
+                ps.setString(1, theater.getTheater_name());
+                ps.setInt(2, theater.getNumber_of_seats());
+                ps.setString(3, theater.getTheater_format());
+
+                return ps;
+            }
+
+        };
+
+        jdbc.update(psc);
+
+
+        return theater;
     }
     public Theater findTheater(int id) {
         SqlRowSet rs = jdbc.queryForRowSet("SELECT * FROM theater WHERE theater_id = " + id);

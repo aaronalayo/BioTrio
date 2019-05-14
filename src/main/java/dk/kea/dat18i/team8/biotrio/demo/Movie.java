@@ -10,6 +10,21 @@ public class Movie {
     private String format;
     private int theater_id;
 
+    public Movie(){
+
+    }
+
+    public Movie(int id, String title, String genre, int duration, String director, String plot, String format, int theater_id) {
+        this.id = id;
+        this.title = title;
+        this.genre = genre;
+        this.duration = duration;
+        this.director = director;
+        this.plot = plot;
+        this.format = format;
+        this.theater_id = theater_id;
+    }
+
     public int getId() {
         return id;
     }

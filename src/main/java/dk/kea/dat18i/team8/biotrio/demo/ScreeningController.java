@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.*;
 
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+
 
 import java.util.List;
 
@@ -24,6 +26,8 @@ public class ScreeningController {
 
     @Autowired
     private ScreeningRepository screeningRepo;
+    @Autowired
+    private MovieRepository movieRepo;
 
     @GetMapping("/screeningview")
     @ResponseBody
@@ -50,23 +54,36 @@ public class ScreeningController {
     @GetMapping("/addscreening")
     public String addScreening(Model model) {
 
-        ScreeningForm newScreening = new ScreeningForm();
-        model.addAttribute("screening", newScreening);
+       ScreeningForm screeningForm = new ScreeningForm();
+       List<Movie> movieList = movieRepo.showallMovies();
+        model.addAttribute(  "movielist", movieList );
 
-
+        model.addAttribute( "screeningForm", screeningForm);
         return "add-screening";
     }
 
     @PostMapping("/savescreening")
-    public String saveScreening( @RequestParam("screening-date") String screeningDate, @RequestParam("screening-start") String screeningStart){
+    public String saveScreening(@RequestParam("screening-date") String screeningDate, @ModelAttribute ScreeningForm screeningData,
+                                @RequestParam("movie-id") int movieId){
+
+
         Screening newScreening = new Screening();
 
-        //DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("YYYY-mm-dd");
-        //DateTimeFormatter dtf2 = DateTimeFormatter.ofPattern("HH:mm");
-
         newScreening.setScreening_date(LocalDate.parse(screeningDate));
-        newScreening.setScreening_starts(LocalTime.parse(screeningStart));
 
+        System.out.println(screeningDate);
+
+        DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("yyyy MM dd");
+
+        DateTimeFormatter dtf2 = DateTimeFormatter.ofPattern("HH:mm");
+
+        //newScreening.setScreening_date( LocalDate.parse(screeningData.getScreening_date_form(),dtf1));
+
+        newScreening.setScreening_starts( LocalTime.parse(screeningData.getScreening_starts_form(),dtf2));
+
+
+        System.out.println(movieId);
+        newScreening.setMovie(movieRepo.showMovie( movieId ));
 
         screeningRepo.insertScreening(newScreening);
 
