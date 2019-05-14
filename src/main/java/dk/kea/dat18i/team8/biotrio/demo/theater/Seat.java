@@ -1,4 +1,6 @@
-package dk.kea.dat18i.team8.biotrio.demo;
+package dk.kea.dat18i.team8.biotrio.demo.theater;
+
+import dk.kea.dat18i.team8.biotrio.demo.theater.Theater;
 
 public class Seat {
 

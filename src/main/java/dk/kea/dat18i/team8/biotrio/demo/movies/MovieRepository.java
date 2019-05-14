@@ -1,4 +1,4 @@
-package dk.kea.dat18i.team8.biotrio.demo;
+package dk.kea.dat18i.team8.biotrio.demo.movies;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -21,7 +21,7 @@ public class MovieRepository {
     private JdbcTemplate jdbc;
 
     public Movie showMovie(int id){
-        SqlRowSet rs = jdbc.queryForRowSet("SELECT * FROM movie WHERE id = "+id);
+        SqlRowSet rs = jdbc.queryForRowSet("SELECT * FROM movie WHERE movie_id = "+id);
         Movie movie = new Movie();
         while (rs.next()){
             movie.setId(rs.getInt("movie_id"));
