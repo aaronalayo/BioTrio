@@ -73,6 +73,18 @@ public class MovieRepository {
         return movie;
     }
 
+    //public void edit(Movie movie){
+      //jdbc.update("update movie set " +
+        //      "title='"+movie.getTitle()+"',"+
+         //     "director='"+movie.getDirector() +"',"+
+          //    "plot='"+movie.getPlot() +"',"+
+           //   "genre='"+movie.getGenre()+"',"+
+           //   "duration='"+movie.getDuration()+"',"+
+           //   "movie_format='"+movie.getFormat()+"',"+
+           //   "theater_id='"+movie.getTheater_id()+"',"+
+           //   "WHERE movie_id="+movie.getId());
+    //}
+
     public Movie update(Movie movie) {
 
         PreparedStatementCreator psc = new PreparedStatementCreator() {
