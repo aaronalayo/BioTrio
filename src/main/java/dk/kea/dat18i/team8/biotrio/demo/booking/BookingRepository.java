@@ -33,7 +33,7 @@ public class BookingRepository {
             booking.setBooking_id(rs.getInt("booking_id"));
             booking.setSeat_id(rs.getInt("seat"));
             booking.setPhone_no(rs.getString("phone_no"));
-            booking.setScreening_id(rs.getInt("screening_id"));
+           // screening.getScreening.getScreening_id(rs.getInt("screening_id"));
 
         }
         return booking;
@@ -51,7 +51,7 @@ public class BookingRepository {
             booking.setBooking_id(rs.getInt("booking_id"));
             booking.setSeat_id(rs.getInt("seat"));
             booking.setPhone_no(rs.getString("phone_no"));
-            booking.setScreening_id(rs.getInt("screening_id"));
+            //booking.setScreening().setScreening_id();
 
             bookingList.add(booking);
 
@@ -68,12 +68,12 @@ public class BookingRepository {
             @Override
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
 
-                PreparedStatement ps = connection.prepareStatement("INSERT INTO booking VALUES (null, ?, ?, ?)  VALUES  (null,?,?,?,?)", new String[]{"booking_id"});
+                PreparedStatement ps = connection.prepareStatement("INSERT INTO booking VALUES (null, ?, ?, ?)  VALUES  (null,?,?,?)", new String[]{"booking_id"});
 
                 ps.setInt(1, booking.getBooking_id());
                 ps.setInt(2, booking.getSeat_id());
                 ps.setString(3, booking.getPhone_no());
-                ps.setInt(4, booking.getScreening_id());
+                ps.setInt(4, booking.getScreening().getScreening_id());
 
                 return ps;
             }
@@ -97,7 +97,7 @@ public class BookingRepository {
                 "booking_id='" + booking.getBooking_id() + "', " +
                 "seat_id='" + booking.getSeat_id() + "', " +
                 "phone_no'" + booking.getPhone_no() + "', " +
-                "screening_id='" + booking.getScreening_id() + "' " +
+                "screening_id='" + booking.getScreening() + "' " +
                 "WHERE booking_id=" + booking.getBooking_id());
     }
 

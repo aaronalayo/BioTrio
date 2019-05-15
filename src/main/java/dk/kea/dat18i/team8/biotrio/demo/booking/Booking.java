@@ -9,17 +9,17 @@ public class Booking {
     private int booking_id;
     private String phone_no; // shall be String according to StackOverflow
     private int seat_id;
-    private int screening_id;
+    private Screening screening;
 
     public Booking (){
     }
 
 
-    public Booking(int booking_id, String phone_no, int seat_id, int screening_id){
+    public Booking(int booking_id, String phone_no, int seat_id, Screening screening){
         this.booking_id = booking_id;
         this.phone_no = phone_no;
         this.seat_id = seat_id;
-        this.screening_id = screening_id;
+        this.screening = screening;
     }
 
     public int getBooking_id() {
@@ -46,14 +46,13 @@ public class Booking {
         this.seat_id = seat_id;
     }
 
-    public int getScreening_id() {
-        return screening_id;
+    public Screening getScreening() {
+        return screening;
     }
 
-    public void setScreening_id(int screening_id) {
-        this.screening_id = screening_id;
+    public void setScreening(Screening screening) {
+        this.screening = screening;
     }
-
 
     @Override
 
@@ -65,7 +64,7 @@ public class Booking {
                 "booking_id=" + booking_id +
                 ", phone number=" + phone_no + '|' +
                 ", seat_id=" + seat_id + '|' +
-                ", Screening details=" + screening_id +
+                ", Screening details=" + screening +
                 '}';
     }
 }
