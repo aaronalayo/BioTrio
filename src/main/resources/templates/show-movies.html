@@ -59,8 +59,12 @@
         <td th:text="${movie.format}">{{Movie Format}}</td>
         <td th:text="${movie.theater_id}">{{Theater Id}}</td>
 
-
-
+        <td>
+            <a th:href="@{'/editmovie/' + ${movie.id}}"  class="btn btn-warning">Edit</a>
+        </td>
+        <td>
+            <a th:href="@{'/deletemovie/' + ${movie.id}}"  class="btn btn-danger">Delete</a>
+        </td>
 
     </tr>
 </table>

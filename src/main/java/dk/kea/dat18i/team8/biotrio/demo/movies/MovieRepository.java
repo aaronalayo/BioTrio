@@ -8,9 +8,7 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,7 +56,34 @@ public class MovieRepository {
         PreparedStatementCreator psc =new PreparedStatementCreator() {
             @Override
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-                PreparedStatement ps = connection.prepareStatement("INSERT INTO movie VALUES(null,?,?,?,?,?,?,?)", new String[]{"movie_id"});
+                PreparedStatement ps = connection.prepareStatement
+                        ("INSERT INTO movie(title,director,plot,genre,duration,movie_format,theater_id) VALUES(?,?,?,?,?,?,?)");
+                ps.setString(1,movie.getTitle());
+                ps.setString(2,movie.getDirector());
+                ps.setString(3,movie.getPlot());
+                ps.setString(4,movie.getGenre());
+                ps.setInt(5,movie.getDuration());
+                ps.setString(6,movie.getFormat());
+                ps.setInt(7,movie.getTheater_id());
+
+                return ps;
+            }
+        };
+        jdbc.update(psc);
+        return movie;
+    }
+
+    public Movie update(Movie movie) {
+
+        PreparedStatementCreator psc = new PreparedStatementCreator() {
+
+            @Override
+            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
+
+
+                PreparedStatement ps = connection.prepareStatement("UPDATE biotrio.movie " +
+                        "SET title= ?, director = ?,plot=?,genre=?,duration=?,movie_format=?, theater_id=? " +
+                        "WHERE movie_id=  " + movie.getId());
                 ps.setString(1,movie.getTitle());
                 ps.setString(2,movie.getDirector());
                 ps.setString(3,movie.getPlot());
@@ -69,24 +94,13 @@ public class MovieRepository {
                 return ps;
             }
         };
-        KeyHolder id = new GeneratedKeyHolder();
-        jdbc.update(psc, id);
-        movie.setId(id.getKey().intValue());
+
+        jdbc.update(psc);
         return movie;
     }
 
-    public void edit(Movie movie){
-        jdbc.update("update movie set" +
-                "title='"+movie.getTitle()+"',"+
-                "director='"+movie.getDirector() +"',"+
-                "plot='"+movie.getPlot() +"',"+
-                "genre='"+movie.getGenre()+"',"+
-                "duration='"+movie.getDuration()+"',"+
-                "movie_format='"+movie.getFormat()+"',"+
-                "theater_id='"+movie.getTheater_id()+"',"+
-                "WHERE movie_id="+movie.getId());
-    }
+
     public void delete(int id) {
-        jdbc.update("DELETE FROM movie WHERE id = "+id);
+        jdbc.update("DELETE FROM movie WHERE movie_id = "+id);
     }
 }

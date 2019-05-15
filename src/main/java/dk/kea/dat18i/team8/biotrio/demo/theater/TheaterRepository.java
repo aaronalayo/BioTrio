@@ -24,7 +24,7 @@ public class TheaterRepository {
 
     @Autowired
     private JdbcTemplate jdbc;
-
+    @Autowired
     public List<Theater> findAllTheaters(){
         SqlRowSet rs = jdbc.queryForRowSet("SELECT * FROM theater");
         List<Theater> theaterList = new ArrayList<>();
@@ -75,9 +75,9 @@ public class TheaterRepository {
             @Override
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
 
-
-                PreparedStatement ps = connection.prepareStatement("UPDATE biotrio.theater SET theater_name=?, number_of_seats=?, theater_format=? WHERE theater_id=  " + theater.getTheater_name(), new String[]{"theater_id"});
-
+                PreparedStatement ps = connection.prepareStatement("UPDATE biotrio.theater " +
+                        "SET theater_name=?, number_of_seats=?, theater_format=? " +
+                        "WHERE theater_id=  " + theater.getTheater_id(), new String[]{"theater_id"});
 
                 ps.setString(1, theater.getTheater_name());
                 ps.setInt(2, theater.getNumber_of_seats());

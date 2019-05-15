@@ -20,8 +20,6 @@ public class Screening {
         this.movie = movie;
     }
 
-
-
     public Screening (){
     }
 
