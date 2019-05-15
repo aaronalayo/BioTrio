@@ -1,4 +1,4 @@
-package dk.kea.dat18i.team8.biotrio.demo;
+package dk.kea.dat18i.team8.biotrio.demo.movies;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

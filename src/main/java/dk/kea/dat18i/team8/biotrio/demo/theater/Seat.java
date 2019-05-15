@@ -1,4 +1,6 @@
-package dk.kea.dat18i.team8.biotrio.demo;
+package dk.kea.dat18i.team8.biotrio.demo.theater;
+
+import dk.kea.dat18i.team8.biotrio.demo.theater.Theater;
 
 public class Seat {
 
@@ -35,7 +37,7 @@ public class Seat {
         this.row = row;
     }
 
-    public boolean seat_reserved() {
+    public boolean getSeat_reserved() {
         return seat_reserved;
     }
 

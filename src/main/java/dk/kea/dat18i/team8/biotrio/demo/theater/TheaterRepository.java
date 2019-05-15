@@ -1,4 +1,4 @@
-package dk.kea.dat18i.team8.biotrio.demo;
+package dk.kea.dat18i.team8.biotrio.demo.theater;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +14,6 @@ import org.springframework.jdbc.support.KeyHolder;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 

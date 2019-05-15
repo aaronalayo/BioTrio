@@ -1,9 +1,10 @@
-package dk.kea.dat18i.team8.biotrio.demo;
+package dk.kea.dat18i.team8.biotrio.demo.screenings;
 
-import dk.kea.dat18i.team8.biotrio.demo.Movie;
+
+
+import dk.kea.dat18i.team8.biotrio.demo.movies.Movie;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class Screening {
@@ -32,10 +33,12 @@ public class Screening {
     }
 
     public int getScreening_id() {
+
         return screening_id;
     }
 
     public void setScreening_id(int screening_id) {
+
         this.screening_id = screening_id;
     }
 
@@ -62,6 +65,8 @@ public class Screening {
     }
 
     public void setMovie(Movie movie) {
+
+        this.movie= movie;
 
     }
 }

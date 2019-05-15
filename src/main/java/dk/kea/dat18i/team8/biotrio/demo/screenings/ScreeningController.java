@@ -1,4 +1,8 @@
-package dk.kea.dat18i.team8.biotrio.demo;
+package dk.kea.dat18i.team8.biotrio.demo.screenings;
+
+import dk.kea.dat18i.team8.biotrio.demo.movies.Movie;
+import dk.kea.dat18i.team8.biotrio.demo.movies.MovieRepository;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
@@ -28,6 +31,7 @@ public class ScreeningController {
     private ScreeningRepository screeningRepo;
     @Autowired
     private MovieRepository movieRepo;
+    private int movieId;
 
     @GetMapping("/screeningview")
     @ResponseBody
@@ -63,28 +67,31 @@ public class ScreeningController {
     }
 
     @PostMapping("/savescreening")
-    public String saveScreening(@RequestParam("screening-date") String screeningDate, @ModelAttribute ScreeningForm screeningData,
-                                @RequestParam("movie-id") int movieId){
+    public String saveScreening(@ModelAttribute ScreeningForm screeningData){
+        //@RequestParam("screening-date") String screeningDate
+        //@RequestParam("movie-id") int movieId){
 
 
         Screening newScreening = new Screening();
 
-        newScreening.setScreening_date(LocalDate.parse(screeningDate));
+        //newScreening.setScreening_date(LocalDate.parse(screeningDate));
 
-        System.out.println(screeningDate);
+
 
         DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("yyyy MM dd");
 
         DateTimeFormatter dtf2 = DateTimeFormatter.ofPattern("HH:mm");
 
-        //newScreening.setScreening_date( LocalDate.parse(screeningData.getScreening_date_form(),dtf1));
+        newScreening.setScreening_date( LocalDate.parse(screeningData.getScreening_date_form(),dtf1));
 
         newScreening.setScreening_starts( LocalTime.parse(screeningData.getScreening_starts_form(),dtf2));
 
 
-        System.out.println(movieId);
-        newScreening.setMovie(movieRepo.showMovie( movieId ));
 
+
+
+        //newScreening.setMovie(movieRepo.showMovie( movieId));
+        newScreening.setMovie( movieRepo.showMovie( screeningData.getMovie_id() ) );
         screeningRepo.insertScreening(newScreening);
 
         return "redirect:/screenings";
@@ -100,10 +107,12 @@ public class ScreeningController {
 
 
     @GetMapping("/screenings/edit/{screening_id}")
-    public String editScreening(Model m, @PathVariable(name = "screening_id") int screening_id){
+    public String editScreening(Model model, @PathVariable(name = "screening_id") int screening_id){
+
+
 
         Screening screeningToEdit = screeningRepo.findScreening(screening_id);
-        m.addAttribute("screening", screeningToEdit);
+        model.addAttribute("screening", screeningToEdit);
 
         return "edit-screening";
     }
@@ -111,11 +120,25 @@ public class ScreeningController {
 
 
     @PostMapping("/updatescreening")
-    public String saveEditScreening( @RequestParam("screening-date") String screeningDate, @RequestParam("screening-start") String screeningStart){
+    public String saveEditScreening(@ModelAttribute Screening upScreening){
+            //@RequestParam("screening-date") String screeningDate, @RequestParam("screening-start") String screeningStart){
 
-        Screening upScreening = new Screening();
-        upScreening.setScreening_date(LocalDate.parse(screeningDate));
-        upScreening.setScreening_starts(LocalTime.parse(screeningStart));
+
+        DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("yyyy MM dd");
+
+        DateTimeFormatter dtf2 = DateTimeFormatter.ofPattern("HH:mm");
+
+        upScreening.setScreening_date(upScreening.getScreening_date());
+
+        upScreening.setScreening_starts(upScreening.getScreening_starts());
+
+//        DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("yyyy MM dd");
+//
+//        DateTimeFormatter dtf2 = DateTimeFormatter.ofPattern("HH:mm");
+//
+//        upScreening.setScreening_date( LocalDate.parse(screeningData.getScreening_date_form(),dtf1));
+//
+//        upScreening.setScreening_starts( LocalTime.parse(screeningData.getScreening_starts_form(),dtf2));
 
         screeningRepo.update(upScreening);
 
