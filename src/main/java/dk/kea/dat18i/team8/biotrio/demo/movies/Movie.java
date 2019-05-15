@@ -1,4 +1,6 @@
-package dk.kea.dat18i.team8.biotrio.demo;
+package dk.kea.dat18i.team8.biotrio.demo.movies;
+
+import dk.kea.dat18i.team8.biotrio.demo.theater.Theater;
 
 public class Movie {
     private int id;
@@ -8,7 +10,22 @@ public class Movie {
     private String director;
     private String plot;
     private String format;
+    //private Theater theater;
     private int theater_id;
+
+    public Movie(){ }
+
+    public Movie(int id, String title, String genre, int duration, String director, String plot, String format, int theater_id) {
+        this.id = id;
+        this.title = title;
+        this.genre = genre;
+        this.duration = duration;
+        this.director = director;
+        this.plot = plot;
+        this.format = format;
+        this.theater_id=theater_id;
+        //this.theater_id = theater_id;
+    }
 
     public int getId() {
         return id;
@@ -45,4 +62,5 @@ public class Movie {
 
     public String getPlot(){return plot;}
     public void setPlot(String plot){this.plot=plot;}
+
 }

@@ -1,21 +1,25 @@
-package dk.kea.dat18i.team8.biotrio.demo;
+package dk.kea.dat18i.team8.biotrio.demo.booking;
+
+
+import dk.kea.dat18i.team8.biotrio.demo.theater.Seat;
+import dk.kea.dat18i.team8.biotrio.demo.screenings.Screening;
 
 public class Booking {
 
     private int booking_id;
     private String phone_no; // shall be String according to StackOverflow
-    private Seat seat;
-    private Screening screening;
+    private int seat_id;
+    private int screening_id;
 
     public Booking (){
     }
 
 
-    public Booking(int booking_id, String phone_no, Seat seat, Screening screening){
+    public Booking(int booking_id, String phone_no, int seat_id, int screening_id){
         this.booking_id = booking_id;
         this.phone_no = phone_no;
-        this.seat = seat;
-        this.screening = screening;
+        this.seat_id = seat_id;
+        this.screening_id = screening_id;
     }
 
     public int getBooking_id() {
@@ -34,20 +38,20 @@ public class Booking {
         this.phone_no = phone_no;
     }
 
-    public Seat getSeat() {
-        return seat;
+    public int getSeat_id() {
+        return seat_id;
     }
 
-    public void setSeat(Seat seat) {
-        this.seat = seat;
+    public void setSeat_id(int seat_id) {
+        this.seat_id = seat_id;
     }
 
-    public Screening getScreening() {
-        return screening;
+    public int getScreening_id() {
+        return screening_id;
     }
 
-    public void setScreening(Screening screening) {
-        this.screening = screening;
+    public void setScreening_id(int screening_id) {
+        this.screening_id = screening_id;
     }
 
 
@@ -60,8 +64,8 @@ public class Booking {
 
                 "booking_id=" + booking_id +
                 ", phone number=" + phone_no + '|' +
-                ", seat=" + seat + '|' +
-                ", Screening details=" + screening +
+                ", seat_id=" + seat_id + '|' +
+                ", Screening details=" + screening_id +
                 '}';
     }
 }

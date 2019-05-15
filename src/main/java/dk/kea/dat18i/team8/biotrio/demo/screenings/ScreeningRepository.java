@@ -1,4 +1,4 @@
-package dk.kea.dat18i.team8.biotrio.demo;
+package dk.kea.dat18i.team8.biotrio.demo.screenings;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -6,13 +6,14 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
 
 import org.springframework.jdbc.core.PreparedStatementCreator;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
 
 
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.TimeZone;
 
 
 @Repository
@@ -22,8 +23,7 @@ public class ScreeningRepository {
     private JdbcTemplate jdbc;
 
 
-
-    public Screening findScreening (int screening_id) {
+    public Screening findScreening(int screening_id) {
 
         SqlRowSet rs = jdbc.queryForRowSet( "SELECT * FROM screening WHERE screening_id = " + screening_id );
         Screening screening = new Screening();
@@ -38,7 +38,7 @@ public class ScreeningRepository {
     }
 
 
-    public List<Screening> findAllScreenings(){
+    public List<Screening> findAllScreenings() {
 
         SqlRowSet rs = jdbc.queryForRowSet( "SELECT * FROM screening" );
 
@@ -46,13 +46,11 @@ public class ScreeningRepository {
 
         while (rs.next()) {
             Screening screening = new Screening();
-            screening.setScreening_id(rs.getInt(  "screening_id"));
-            screening.setScreening_date( rs.getDate("screening_date").toLocalDate());
+            screening.setScreening_id( rs.getInt( "screening_id" ) );
+            screening.setScreening_date( rs.getDate( "screening_date" ).toLocalDate());
             screening.setScreening_starts( rs.getTime( "screening_starts" ).toLocalTime() );
 
             screeningList.add( screening );
-
-
 
 
         }
@@ -61,23 +59,23 @@ public class ScreeningRepository {
     }
 
 
+    public Screening insertScreening(Screening screening) {
 
-    public Screening insertScreening(Screening screening){
 
         PreparedStatementCreator psc = new PreparedStatementCreator() {
 
-            Movie movie = new Movie();
+
             @Override
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
 
-                PreparedStatement ps = connection.prepareStatement("INSERT INTO biotrio.screening (screening_date, screening_starts, movie_id)VALUES (?,?,1) ", new String[]{"screening_id"});
 
 
+                PreparedStatement ps = connection.prepareStatement( "INSERT INTO biotrio.screening (screening_date, screening_starts, movie_id)VALUES (?,?,?)");
 
-                ps.setDate(1,java.sql.Date.valueOf(screening.getScreening_date()));
-                ps.setTime(2,java.sql.Time.valueOf(screening.getScreening_starts()));
-
-
+                //Calendar gmt = Calendar.getInstance( TimeZone.getTimeZone("GMT"));
+                ps.setDate( 1, java.sql.Date.valueOf( screening.getScreening_date()));
+                ps.setTime( 2, java.sql.Time.valueOf( screening.getScreening_starts()));
+                ps.setInt( 3, screening.getMovie().getId());
 
 
 
@@ -86,11 +84,13 @@ public class ScreeningRepository {
         };
 
 
-        KeyHolder id = new GeneratedKeyHolder();
-        jdbc.update(psc, id);
-        screening.setScreening_id(id.getKey().intValue());
+        jdbc.update( psc );
+
+
         return screening;
     }
+
+
 
     public void deleteScreening(int screening_id) {
 
@@ -108,7 +108,7 @@ public class ScreeningRepository {
 
                 PreparedStatement ps = connection.prepareStatement("UPDATE biotrio.screening SET screening_date= ?, screening_starts = ? WHERE screening_id=  " + screening.getScreening_id(), new String[]{"screening_id"});
 
-
+                //Calendar gmt = Calendar.getInstance(TimeZone.getTimeZone("GMT"));
                 ps.setDate(1,java.sql.Date.valueOf(screening.getScreening_date()));
                 ps.setTime(2,java.sql.Time.valueOf(screening.getScreening_starts()));
 

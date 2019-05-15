@@ -4,14 +4,16 @@
     <meta charset="UTF-8">
     <title>Add Screening</title>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
 </head>
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <a class="navbar-brand" href="/">Bio Trio</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+            aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
@@ -27,8 +29,6 @@
 </nav>
 
 
-
-
 <!-- here goes comments -->
 
 <div class="jumbotron jumbotron-fluid">
@@ -36,31 +36,59 @@
         <h1 class="display-4">Add new Screening</h1>
         <p class="lead">
 
-        <form th:action="@{'/savescreening'}" method="post" th:object="${screening}">
-            <div class="form-group">
-                <label for="screeningdate">Screening Date</label>
+        <form th:action="@{'/savescreening'}" th:object="${screeningForm}" method="post">
 
-                <input type= "date" class="form-control" id= "screeningdate" name = "screening-date" placeholder="Screening Date" >
-            </div>
-            <div class="form-group">
-                <label for="screeningstarts">Screening Starts</label>
-                <input type="time" class="form-control" id="screeningstarts" name = "screening-start"placeholder="Screening Starts" >
-            </div>
+        <!-- <label for="screeningdate">Screening Date</label>
 
-            <button type="submit" class="btn btn-primary">Add Screening</button>
-            <button type="reset" class="btn btn-primary">Cancel</button>
-        </form>
+         <input type= "date" class="form-control" id= "screeningdate" name = "screening-date" placeholder="Screening Date" >
+     </div>-->
 
-        <br>
-        <span><a href = "/screenings" class="fas fa-undo"> Go back to screenings view </a> </span>
+     <div class="form-group">
 
-        </p>
+         <label for="screeningStarts">Screening Date</label>
+         <input th:field="${screeningForm.screening_date_form}" class="form-control" id="screeningDate" placeholder="Screening Date">
+
+     </div>
+
+    <div class="form-group">
+
+        <label for="screeningStarts">Screening Starts</label>
+
+        <input th:field="${screeningForm.screening_starts_form}"  class="form-control" id="screeningStarts" placeholder="Screening Starts">
+
     </div>
+
+
+
+
+     <div class="form-group">
+
+         <label for="movie">Movies</label>
+         <select th:field="${screeningForm.movie_id}" class="form-control" id="movie" placeholder="Movies">     <!--id="movieid" name = "movie-id"-->
+             <option th:each="movie: ${movielist}"
+                     th:value="${movie.id}"
+                     th:text="${movie.title}"></option>
+         </select>
+     </div>
+
+
+     <button type="submit" class="btn btn-primary">Add Screening</button>
+     <button type="reset" class="btn btn-primary">Cancel</button>
+ </form>
+
+ <br>
+ <span><a href="/screenings" class="fas fa-undo"> Go back to screenings view </a> </span>
+
+ </p>
+</div>
 </div>
 
 
-
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+ integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+ crossorigin="anonymous"></script>
 
 </body>
 </html>
+
+<!--th:field="${screeningForm.movie_id}"-->
