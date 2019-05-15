@@ -38,23 +38,23 @@
 
         <form th:action="@{'/savescreening'}" th:object="${screeningForm}" method="post">
 
-        <label for="screeningdate">Screening Date</label>
+        <!-- <label for="screeningdate">Screening Date</label>
 
-        <input type= "date" class="form-control" id= "screeningdate" name = "screening-date" placeholder="Screening Date" >
-    </div>
+         <input type= "date" class="form-control" id= "screeningdate" name = "screening-date" placeholder="Screening Date" >
+     </div>-->
 
-    <!--<div class="form-group">
+     <div class="form-group">
 
-        <label for="screeningStarts">Screening Date</label>
-        <input th:field="${screeningForm.screening_date_form}" id="screeningDate">
+         <label for="screeningStarts">Screening Date</label>
+         <input th:field="${screeningForm.screening_date_form}" class="form-control" id="screeningDate" placeholder="Screening Date">
 
-    </div> -->
+     </div>
 
     <div class="form-group">
 
         <label for="screeningStarts">Screening Starts</label>
 
-        <input th:field="${screeningForm.screening_starts_form}" id="screeningStarts">
+        <input th:field="${screeningForm.screening_starts_form}"  class="form-control" id="screeningStarts" placeholder="Screening Starts">
 
     </div>
 
@@ -63,8 +63,8 @@
 
      <div class="form-group">
 
-
-         <select  id="movieid" name = "movie-id">
+         <label for="movie">Movies</label>
+         <select th:field="${screeningForm.movie_id}" class="form-control" id="movie" placeholder="Movies">     <!--id="movieid" name = "movie-id"-->
              <option th:each="movie: ${movielist}"
                      th:value="${movie.id}"
                      th:text="${movie.title}"></option>

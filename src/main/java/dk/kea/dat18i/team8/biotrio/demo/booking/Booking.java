@@ -1,6 +1,8 @@
-package dk.kea.dat18i.team8.biotrio.demo;
+package dk.kea.dat18i.team8.biotrio.demo.booking;
 
 
+import dk.kea.dat18i.team8.biotrio.demo.theater.Seat;
+import dk.kea.dat18i.team8.biotrio.demo.screenings.Screening;
 
 public class Booking {
 

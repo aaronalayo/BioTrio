@@ -1,4 +1,4 @@
-package dk.kea.dat18i.team8.biotrio.demo;
+package dk.kea.dat18i.team8.biotrio.demo.screenings;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -11,7 +11,9 @@ import org.springframework.jdbc.core.PreparedStatementCreator;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.TimeZone;
 
 
 @Repository
@@ -68,11 +70,11 @@ public class ScreeningRepository {
 
 
 
-                PreparedStatement ps = connection.prepareStatement( "INSERT INTO biotrio.screening (screening_date, screening_starts, movie_id)VALUES (?,?,?)",new String[]{"movie_id"});
+                PreparedStatement ps = connection.prepareStatement( "INSERT INTO biotrio.screening (screening_date, screening_starts, movie_id)VALUES (?,?,?)");
 
-
-                ps.setDate( 1, java.sql.Date.valueOf( screening.getScreening_date() ) );
-                ps.setTime( 2, java.sql.Time.valueOf( screening.getScreening_starts() ) );
+                //Calendar gmt = Calendar.getInstance( TimeZone.getTimeZone("GMT"));
+                ps.setDate( 1, java.sql.Date.valueOf( screening.getScreening_date()));
+                ps.setTime( 2, java.sql.Time.valueOf( screening.getScreening_starts()));
                 ps.setInt( 3, screening.getMovie().getId());
 
 
@@ -106,7 +108,7 @@ public class ScreeningRepository {
 
                 PreparedStatement ps = connection.prepareStatement("UPDATE biotrio.screening SET screening_date= ?, screening_starts = ? WHERE screening_id=  " + screening.getScreening_id(), new String[]{"screening_id"});
 
-
+                //Calendar gmt = Calendar.getInstance(TimeZone.getTimeZone("GMT"));
                 ps.setDate(1,java.sql.Date.valueOf(screening.getScreening_date()));
                 ps.setTime(2,java.sql.Time.valueOf(screening.getScreening_starts()));
 
