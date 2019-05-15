@@ -1,5 +1,8 @@
 package dk.kea.dat18i.team8.biotrio.demo.booking;
 
+import dk.kea.dat18i.team8.biotrio.demo.movies.MovieRepository;
+import dk.kea.dat18i.team8.biotrio.demo.screenings.ScreeningRepository;
+import dk.kea.dat18i.team8.biotrio.demo.theater.TheaterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
