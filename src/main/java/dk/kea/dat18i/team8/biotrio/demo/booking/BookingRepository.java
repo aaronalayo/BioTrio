@@ -31,8 +31,9 @@ public class BookingRepository {
         while (rs.next()) {
 
             booking.setBooking_id(rs.getInt("booking_id"));
+            booking.setSeat_id(rs.getInt("seat"));
             booking.setPhone_no(rs.getString("phone_no"));
-           // booking.setSeat(rs.getSeat("seat"));
+            booking.setScreening_id(rs.getInt("screening_id"));
 
         }
         return booking;
@@ -48,10 +49,11 @@ public class BookingRepository {
         while (rs.next()) {
             Booking booking = new Booking();
             booking.setBooking_id(rs.getInt("booking_id"));
+            booking.setSeat_id(rs.getInt("seat"));
             booking.setPhone_no(rs.getString("phone_no"));
-            //booking.setSeat(rs.("seat"));
+            booking.setScreening_id(rs.getInt("screening_id"));
 
-
+            bookingList.add(booking);
 
         }
         return bookingList;
@@ -66,17 +68,21 @@ public class BookingRepository {
             @Override
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
 
-                PreparedStatement ps = connection.prepareStatement("INSERT INTO biotrio.booking  (booking_id, phone_no, seat)  VALUES  (?,?,1)", new String[]{"booking_id"});
+                PreparedStatement ps = connection.prepareStatement("INSERT INTO booking VALUES (null, ?, ?, ?)  VALUES  (null,?,?,?,?)", new String[]{"booking_id"});
 
+                ps.setInt(1, booking.getBooking_id());
+                ps.setInt(2, booking.getSeat_id());
+                ps.setString(3, booking.getPhone_no());
+                ps.setInt(4, booking.getScreening_id());
 
                 return ps;
             }
         };
 
 
-        KeyHolder id = new GeneratedKeyHolder();
-        jdbc.update(psc, id);
-        booking.setBooking_id(id.getKey().intValue());
+        KeyHolder booking_id = new GeneratedKeyHolder();
+        jdbc.update(psc, booking_id);
+        booking.setBooking_id(booking_id.getKey().intValue());
         return booking;
     }
 
@@ -86,8 +92,13 @@ public class BookingRepository {
     }
 
     public void updateBooking(Booking booking) {
-        String sql = "UPDATE booking SET phone_no=?, WHERE booking_id=" + booking.getBooking_id();
-        jdbc.update(sql, booking.getBooking_id());
+
+        jdbc.update("UPDATE bookings SET " +
+                "booking_id='" + booking.getBooking_id() + "', " +
+                "seat_id='" + booking.getSeat_id() + "', " +
+                "phone_no'" + booking.getPhone_no() + "', " +
+                "screening_id='" + booking.getScreening_id() + "' " +
+                "WHERE booking_id=" + booking.getBooking_id());
     }
 
 }

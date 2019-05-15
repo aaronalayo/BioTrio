@@ -32,30 +32,28 @@
 
 
 
-<!-- Here is the form to edit the selected booking -->
-
 <div class="jumbotron jumbotron-fluid">
     <div class="container">
         <h1 class="display-4">Edit Booking</h1>
         <p class="lead">
 
-        <form action="/updatebooking" method="post" th:object="${booking}">
+        <form action="/updatebooking" method="post" th:object="${bookingform}">
 
 
-            <input type="hidden" th:field="${booking.booking_id}">
+            <input type="hidden" th:field="${bookingform.booking_id}">
             <div class="form-group">
-                <label for="phone_no"></label>
-                <input type="text" class="form-control" th:field="${booking.phone_no}" id="phone_no" placeholder="phone_no" maxlength="10">
+                <label for="seat_id">Seat Booked</label>
+                <input type="number" class="form-control" th:field="${bookingform.seat_id}" id="seat_id" placeholder="Seat Booked">
             </div>
             <div class="form-group">
-        <label for="seat">Seat Booked</label>
-        <input type="text" class="form-control" th:field="${booking.seat}" id="seat" placeholder="Seat Booked">
-    </div>
+                <label for="phone_no">Phone No</label>
+                <input type="text" class="form-control" th:field="${bookingform.phone_no}" id="phone_no" placeholder="Phone No">
+            </div>
         <div class="form-group">
-            <label for="seat">Screening Booked</label>
-            <input type="text" class="form-control" th:field="${booking.screening}" id="screening" placeholder="Screening Booked">
+            <label for="screening_id">Screening Booked</label>
+            <input type="number" class="form-control" th:field="${bookingform.screening_id}" id="screening_id" placeholder="Screening Booked">
         </div>
-            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="submit" class="btn btn-primary">Save Booking</button>
             <button type="reset" class="btn btn-primary">Cancel</button>
         </form>
 
@@ -64,7 +62,6 @@
         </p>
     </div>
 </div>
-
 
 
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
