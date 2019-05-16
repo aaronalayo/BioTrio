@@ -8,27 +8,28 @@ public class ScreeningForm {
     private int movie_id;
 
 
-    public ScreeningForm(){
+    public ScreeningForm() {}
 
 
-    public String getShowing() {
-        return showing;
+        public String getShowing () {
+            return showing;
+        }
+
+        public void setShowing (String showing){
+            this.showing = showing;
+        }
+
+        public int getMovie_id () {
+            return movie_id;
+        }
+
+        public void setMovie_id ( int movie_id){
+            this.movie_id = movie_id;
+        }
+
+    public ScreeningForm( String showing, int movie_id){
+            this.showing = showing;
+            this.movie_id = movie_id;
+        }
     }
 
-    public void setShowing(String showing) {
-        this.showing = showing;
-    }
-
-    public int getMovie_id() {
-        return movie_id;
-    }
-
-    public void setMovie_id(int movie_id) {
-        this.movie_id = movie_id;
-    }
-
-    public ScreeningForm(String showing, int movie_id) {
-        this.showing = showing;
-        this.movie_id = movie_id;
-    }
-}
