@@ -27,10 +27,10 @@ public class TheaterRepository {
     @Autowired
     private JdbcTemplate jdbc;
 
-    public List<Theater> findAllTheaters(){
+    public List<Theater> findAllTheaters() {
         SqlRowSet rs = jdbc.queryForRowSet("SELECT * FROM theater");
         List<Theater> theaterList = new ArrayList<>();
-        while(rs.next()) {
+        while (rs.next()) {
             Theater theater = new Theater();
             theater.setTheater_id(rs.getInt("theater_id"));
             theater.setTheater_name(rs.getString("theater_name"));
@@ -39,8 +39,7 @@ public class TheaterRepository {
 
             theaterList.add(theater);
         }
-            return theaterList;
-
+        return theaterList;
 
 
     }
@@ -81,40 +80,26 @@ public class TheaterRepository {
         }
         return theater;
     }
-/*
-    public void update(Theater theater) {
-        jdbc.update("UPDATE theater SET " +
-                "theater_name='" + theater.getTheater_name() + "', " +
-                "number_of_seats='" + theater.getNumber_of_seats() + "', " +
-                "theater_format='" + theater.getTheater_format() + "', " +
-                "WHERE theater_id= '" + theater.getTheater_id());
+
+    public Theater update(Theater theater) {
+
+        PreparedStatementCreator psc = new PreparedStatementCreator() {
+
+            @Override
+            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
+
+
+                PreparedStatement ps = connection.prepareStatement("UPDATE biotrio.theater " +
+                        "SET theater_name=?, number_of_seats=?,theater_format=?" +
+                        "WHERE theater_id=  " + theater.getTheater_id());
+                ps.setString(1, theater.getTheater_name());
+                ps.setInt(2, theater.getNumber_of_seats());
+                ps.setString(3, theater.getTheater_format());
+                return ps;
+            }
+        };
+
+        jdbc.update(psc);
+        return theater;
     }
-*/
-public Theater update(Theater theater) {
-
-    PreparedStatementCreator psc = new PreparedStatementCreator() {
-
-        @Override
-        public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-
-
-            PreparedStatement ps = connection.prepareStatement("UPDATE biotrio.theater SET theater_name=?, number_of_seats=?, theater_format=? WHERE theater_id=?  " + theater.getTheater_id(), new String[]{"theater_id"});
-
-
-            ps.setString(1,theater.getTheater_name());
-            ps.setInt(2,theater.getNumber_of_seats());
-            ps.setString(3,theater.getTheater_format());
-
-            return ps;
-        }
-
-    };
-
-    jdbc.update(psc);
-
-
-    return theater;
 }
-
-    }
-
