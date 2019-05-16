@@ -55,8 +55,6 @@ public class ScreeningRepository {
 
             screening.setScreening_id( rs.getInt( "screening_id" ) );
             screening.setShowing( rs.getTimestamp( "showing" ).toLocalDateTime() );
-//            screening.setScreening_date( rs.getDate( "screening_date" ).toLocalDate());
-//            screening.setScreening_starts( rs.getTime( "screening_starts" ).toLocalTime() );
             screening.setMovie(movieRepo.showMovie(rs.getInt("movie_id")));
 
 
@@ -80,13 +78,13 @@ public class ScreeningRepository {
 
 
 
-                PreparedStatement ps = connection.prepareStatement( "INSERT INTO biotrio.screening (screening_date, screening_starts, movie_id)VALUES (?,?,?)");
+                PreparedStatement ps = connection.prepareStatement( "INSERT INTO biotrio.screening (showing, movie_id)VALUES (?,?)");
 
                 //Calendar gmt = Calendar.getInstance( TimeZone.getTimeZone("GMT"));
                 ps.setTimestamp( 1,Timestamp.valueOf(screening.getShowing()));
 //                ps.setDate( 1, java.sql.Date.valueOf( screening.getScreening_date()));
 //                ps.setTime( 2, java.sql.Time.valueOf( screening.getScreening_starts()));
-                ps.setInt( 3, screening.getMovie().getId());
+                ps.setInt( 2, screening.getMovie().getId());
 
 
 
@@ -117,7 +115,7 @@ public class ScreeningRepository {
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
 
 
-                PreparedStatement ps = connection.prepareStatement("UPDATE biotrio.screening SET screening_date= ?, screening_starts = ? WHERE screening_id=  " + screening.getScreening_id(), new String[]{"screening_id"});
+                PreparedStatement ps = connection.prepareStatement("UPDATE biotrio.screening SET showing = ? WHERE screening_id=  " + screening.getScreening_id(), new String[]{"screening_id"});
 
                 //Calendar gmt = Calendar.getInstance(TimeZone.getTimeZone("GMT"));
                 ps.setTimestamp( 1, Timestamp.valueOf( screening.getShowing() ) );

@@ -46,21 +46,17 @@
      <div class="form-group">
 
          <label for="showing">Screening Date</label>
-         <input th:field="${screeningForm.getShowing()}" class="form-control" id="showing" placeholder="Showing">
+         <input th:field="${screeningForm.showing}" class="form-control" id="showing" placeholder="Showing">
 
      </div>
-
-
-
-
 
      <div class="form-group">
 
          <label for="movie">Movies</label>
-         <select th:field="${screeningForm.movie_id}" class="form-control" id="movie" placeholder="Movies">     <!--id="movieid" name = "movie-id"-->
+         <select th:field="${screeningForm.movie_id}" class="form-control" id="movie" placeholder="Movies">
              <option th:each="movie: ${movielist}"
-                     th:value="${movie.id}"
-                     th:text="${movie.title}"></option>
+                     th:value="${movie.getId()}"
+                     th:text="${movie.getTitle()}"></option>
          </select>
      </div>
 
