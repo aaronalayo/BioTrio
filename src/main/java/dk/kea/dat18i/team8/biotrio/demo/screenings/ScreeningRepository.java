@@ -1,5 +1,7 @@
 package dk.kea.dat18i.team8.biotrio.demo.screenings;
 
+import dk.kea.dat18i.team8.biotrio.demo.movies.Movie;
+import dk.kea.dat18i.team8.biotrio.demo.movies.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -21,6 +23,8 @@ public class ScreeningRepository {
 
     @Autowired
     private JdbcTemplate jdbc;
+    @Autowired
+    private MovieRepository movieRepo;
 
 
     public Screening findScreening(int screening_id) {
@@ -30,8 +34,9 @@ public class ScreeningRepository {
         while (rs.next()) {
 
             screening.setScreening_id( rs.getInt( "screening_id" ) );
-            screening.setScreening_date( rs.getDate( "screening_date" ).toLocalDate() );
-            screening.setScreening_starts( rs.getTime( "screening_starts" ).toLocalTime() );
+            screening.setShowing( rs.getTimestamp( "showing" ).toLocalDateTime() );
+//            screening.setScreening_date( rs.getDate( "screening_date" ).toLocalDate() );
+//            screening.setScreening_starts( rs.getTime( "screening_starts" ).toLocalTime() );
 
         }
         return screening;
@@ -46,9 +51,14 @@ public class ScreeningRepository {
 
         while (rs.next()) {
             Screening screening = new Screening();
+
+
             screening.setScreening_id( rs.getInt( "screening_id" ) );
-            screening.setScreening_date( rs.getDate( "screening_date" ).toLocalDate());
-            screening.setScreening_starts( rs.getTime( "screening_starts" ).toLocalTime() );
+            screening.setShowing( rs.getTimestamp( "showing" ).toLocalDateTime() );
+//            screening.setScreening_date( rs.getDate( "screening_date" ).toLocalDate());
+//            screening.setScreening_starts( rs.getTime( "screening_starts" ).toLocalTime() );
+            screening.setMovie(movieRepo.showMovie(rs.getInt("movie_id")));
+
 
             screeningList.add( screening );
 
@@ -73,8 +83,9 @@ public class ScreeningRepository {
                 PreparedStatement ps = connection.prepareStatement( "INSERT INTO biotrio.screening (screening_date, screening_starts, movie_id)VALUES (?,?,?)");
 
                 //Calendar gmt = Calendar.getInstance( TimeZone.getTimeZone("GMT"));
-                ps.setDate( 1, java.sql.Date.valueOf( screening.getScreening_date()));
-                ps.setTime( 2, java.sql.Time.valueOf( screening.getScreening_starts()));
+                ps.setTimestamp( 1,Timestamp.valueOf(screening.getShowing()));
+//                ps.setDate( 1, java.sql.Date.valueOf( screening.getScreening_date()));
+//                ps.setTime( 2, java.sql.Time.valueOf( screening.getScreening_starts()));
                 ps.setInt( 3, screening.getMovie().getId());
 
 
@@ -109,8 +120,9 @@ public class ScreeningRepository {
                 PreparedStatement ps = connection.prepareStatement("UPDATE biotrio.screening SET screening_date= ?, screening_starts = ? WHERE screening_id=  " + screening.getScreening_id(), new String[]{"screening_id"});
 
                 //Calendar gmt = Calendar.getInstance(TimeZone.getTimeZone("GMT"));
-                ps.setDate(1,java.sql.Date.valueOf(screening.getScreening_date()));
-                ps.setTime(2,java.sql.Time.valueOf(screening.getScreening_starts()));
+                ps.setTimestamp( 1, Timestamp.valueOf( screening.getShowing() ) );
+//                ps.setDate(1,java.sql.Date.valueOf(screening.getScreening_date()));
+//                ps.setTime(2,java.sql.Time.valueOf(screening.getScreening_starts()));
 
                 return ps;
             }
@@ -122,4 +134,24 @@ public class ScreeningRepository {
 
         return screening;
     }
+
+//    public List<Movie> findScreeningMovie() {
+//
+//        List<Movie> movieList = new ArrayList<>();
+//        SqlRowSet rs = jdbc.queryForRowSet( "SELECT screening.screening_id, movie.title FROM screening JOIN movie ON screening.movie_id = movie.movie_id");
+//
+//               Movie movie = new Movie();
+//
+//
+//                while (rs.next()) {
+//
+//
+//                    movie.setTitle(rs.getString( "title" ));
+//        }
+//
+//        movieList.add( movie);
+//
+//        return movieList;
+//    }
+
 }

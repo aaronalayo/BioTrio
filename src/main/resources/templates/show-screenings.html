@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org/" xmlns:a="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org/" xmlns:a="http://www.w3.org/1999/xhtml"
+      xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Screenings view</title>
@@ -51,22 +52,28 @@
 
 
 
-<table>
+<tr>
+    <table>
     <thead>
 
 
     <th scope="col">Screening Id</th>
     <th scope="col">Screening Date</th>
     <th scope="col">Screening Time</th>
+    <th scope="col">Movies</th>
 
 
     </thead>
+
+
+
+
     <tr th:each="screening: ${screenings}">
 
-        <th scope="row" th:text="${screening.screening_id}">1</th>
-        <td th:text="${screening.screening_date}">{{Screening Date}}</td>
-        <td th:text="${screening.screening_starts}">{{Screening Time}}</td>
 
+        <th scope="row" th:text="${screening.getScreening_id()}">1</th>
+        <td th:text="${screening.getShowing()}">{{Showing}}</td>
+        <td th:text="${screening.getMovie().getTitle()}">{{Movie}}</td>
 
         <td>
             <a th:href="@{'/screenings/edit/' + ${screening.screening_id}}"  class="btn btn-warning">Edit</a>
@@ -78,10 +85,16 @@
         </td>
 
 
+
+
+
     </tr>
+
+
+
 </table>
 
-
+</body>
 
 
 
