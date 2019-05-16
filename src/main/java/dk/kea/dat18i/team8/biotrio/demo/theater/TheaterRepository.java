@@ -24,7 +24,19 @@ public class TheaterRepository {
 
     @Autowired
     private JdbcTemplate jdbc;
-    @Autowired
+
+
+    public Theater findTheater(int id) {
+        SqlRowSet rs = jdbc.queryForRowSet("SELECT * FROM theater WHERE theater_id = " + id);
+        Theater theater = new Theater();
+        while (rs.next()) {
+            theater.setTheater_id(rs.getInt("theater_id"));
+            theater.setTheater_name(rs.getString("theater_name"));
+            theater.setNumber_of_seats(rs.getInt("number_of_seats"));
+            theater.setTheater_format(rs.getString("theater_format"));
+        }
+        return theater;
+    }
     public List<Theater> findAllTheaters(){
         SqlRowSet rs = jdbc.queryForRowSet("SELECT * FROM theater");
         List<Theater> theaterList = new ArrayList<>();
@@ -93,16 +105,6 @@ public class TheaterRepository {
 
         return theater;
     }
-    public Theater findTheater(int id) {
-        SqlRowSet rs = jdbc.queryForRowSet("SELECT * FROM theater WHERE theater_id = " + id);
-        Theater theater = new Theater();
-        while (rs.next()) {
-            theater.setTheater_id(rs.getInt("theater_id"));
-            theater.setTheater_name(rs.getString("theater_name"));
-            theater.setNumber_of_seats(rs.getInt("number_of_seats"));
-            theater.setTheater_format(rs.getString("theater_format"));
-        }
-        return theater;
-    }
+
     }
 
