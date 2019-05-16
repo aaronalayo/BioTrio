@@ -44,23 +44,31 @@ public class TheaterController {
         return "redirect:/theaters";
     }
 
-    @GetMapping("/deletetheater/{id}")
-    public String deleteTheater(@PathVariable(name = "id") int id){
-        theaterRepo.delete(id);
+    @GetMapping("/deletetheater/{theater_id}")
+    public String deleteTheater(@PathVariable(name = "theater_id") int theater_id){
+        theaterRepo.delete(theater_id);
         return "redirect:/theaters";
     }
 
     @GetMapping("/edittheater/{theater_id}")
+<<<<<<< HEAD:src/main/java/dk/kea/dat18i/team8/biotrio/demo/theater/TheaterController.java
     public String editTheater(Model m, @PathVariable(name = "theater_id") int id){
+=======
+    public String editCar(Model m, @PathVariable(name = "theater_id") int id){
+>>>>>>> theater:src/main/java/dk/kea/dat18i/team8/biotrio/demo/TheaterController.java
         Theater theaterToEdit = theaterRepo.findTheater(id);
         m.addAttribute("theaterform", theaterToEdit);
         return "edit-theater";
     }
 
+
     @PostMapping("/updatetheater")
+<<<<<<< HEAD:src/main/java/dk/kea/dat18i/team8/biotrio/demo/theater/TheaterController.java
     public String s(@ModelAttribute Theater theater){
+=======
+    public String saveEditTheater(@ModelAttribute Theater theater){
+>>>>>>> theater:src/main/java/dk/kea/dat18i/team8/biotrio/demo/TheaterController.java
         theaterRepo.update(theater);
         return "redirect:/theaters";
     }
-
 }
