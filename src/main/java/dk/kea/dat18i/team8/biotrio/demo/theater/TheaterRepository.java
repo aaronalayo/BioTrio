@@ -25,7 +25,6 @@ public class TheaterRepository {
     @Autowired
     private JdbcTemplate jdbc;
 
-
     public Theater findTheater(int id) {
         SqlRowSet rs = jdbc.queryForRowSet("SELECT * FROM theater WHERE theater_id = " + id);
         Theater theater = new Theater();
