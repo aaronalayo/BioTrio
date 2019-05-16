@@ -39,18 +39,17 @@
         <h1 class="display-4">Edit Screening</h1>
         <p class="lead">
 
-        <form action="/updatescreening" method="post" th:object="${screening}">
+
+                 <form action="/updatescreening" method="post" th:object="${screening}">
 
 
-            <input type="hidden" th:field="${screening.screening_id}">
-            <div class="form-group">
-                <label for="screening date"></label>
-                <input type="text" class="form-control" th:field="${screening.screening_date}" id="screening date" placeholder="Screening Date" maxlength="10">
-            </div>
-            <div class="form-group">
-                <label for="screening starts">Screening Starts</label>
-                <input type="text" class="form-control" th:field="${screening.screening_starts}" id="screening starts" placeholder="Screening Starts">
-            </div>
+                    <input type="hidden" th:field="${screening.screening_id}">
+
+                <div class="form-group">
+                        <label for="screening date"></label>
+                        <input  class="form-control" th:field="${screening.showing}"  id="screening date" placeholder="Screening Date">
+                    </div>
+
 
             <button type="submit" class="btn btn-primary">Save</button>
             <button type="reset" class="btn btn-primary">Cancel</button>

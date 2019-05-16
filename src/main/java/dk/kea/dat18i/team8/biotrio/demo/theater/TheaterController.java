@@ -1,4 +1,4 @@
-package dk.kea.dat18i.team8.biotrio.demo;
+package dk.kea.dat18i.team8.biotrio.demo.theater;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -7,25 +7,22 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
-
 
 @Controller
 public class TheaterController {
 
     @Autowired
     private TheaterRepository theaterRepo;
-
+    
     @GetMapping("/theaters")
     public String theater(Model model) {
 
         List<Theater> theaterList = theaterRepo.findAllTheaters();
-        model.addAttribute( "theaters", theaterList
-        );
+        model.addAttribute( "theaters", theaterList);
 
         return "show-theaters";
 
@@ -52,8 +49,8 @@ public class TheaterController {
         return "redirect:/theaters";
     }
 
-    @GetMapping("/edittheater/{id}")
-    public String editTheater(Model m, @PathVariable(name = "id") int id){
+    @GetMapping("/edittheater/{theater_id}")
+    public String editTheater(Model m, @PathVariable(name = "theater_id") int id){
         Theater theaterToEdit = theaterRepo.findTheater(id);
         m.addAttribute("theaterform", theaterToEdit);
         return "edit-theater";
@@ -61,7 +58,7 @@ public class TheaterController {
 
     @PostMapping("/updatetheater")
     public String s(@ModelAttribute Theater theater){
-        theaterRepo.edit(theater);
+        theaterRepo.update(theater);
         return "redirect:/theaters";
     }
 
