@@ -1,4 +1,4 @@
-package dk.kea.dat18i.team8.biotrio.demo.screenings;
+
 
 import dk.kea.dat18i.team8.biotrio.demo.movies.Movie;
 import dk.kea.dat18i.team8.biotrio.demo.movies.MovieRepository;
@@ -72,14 +72,26 @@ public class ScreeningController {
     @PostMapping("/savescreening")
     public String saveScreening(@ModelAttribute ScreeningForm screeningData){
         Screening newScreening = new Screening();
+
+        //newScreening.setScreening_date(LocalDate.parse(screeningDate));
+
+
+
+        DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("yyyy MM dd");
+
+        DateTimeFormatter dtf2 = DateTimeFormatter.ofPattern("HH:mm");
+
+        newScreening.setScreening_date( LocalDate.parse(screeningData.getScreening_date_form(),dtf1));
+
+        newScreening.setScreening_starts( LocalTime.parse(screeningData.getScreening_starts_form(),dtf2));
+
+
+
+
+
+        //newScreening.setMovie(movieRepo.showMovie( movieId));
           DateTimeFormatter dtf = DateTimeFormatter.ofPattern( "yyyy MM dd HH:mm" );
-//        DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("yyyy MM dd");
-//
-//        DateTimeFormatter dtf2 = DateTimeFormatter.ofPattern("HH:mm");
-//
-//        newScreening.setScreening_date( LocalDate.parse(screeningData.getScreening_date_form(),dtf1));
-//
-//        newScreening.setScreening_starts( LocalTime.parse(screeningData.getScreening_starts_form(),dtf2));
+
         newScreening.setShowing( LocalDateTime.parse(screeningData.getShowing(),dtf ));
         newScreening.setMovie( movieRepo.showMovie( screeningData.getMovie_id() ) );
         screeningRepo.insertScreening(newScreening);
@@ -94,12 +106,8 @@ public class ScreeningController {
 
         return "redirect:/screenings";
     }
-
-
     @GetMapping("/screenings/edit/{screening_id}")
     public String editScreening(Model model, @PathVariable(name = "screening_id") int screening_id){
-
-
 
         Screening screeningToEdit = screeningRepo.findScreening(screening_id);
         model.addAttribute("screening", screeningToEdit);
@@ -107,20 +115,18 @@ public class ScreeningController {
         return "edit-screening";
     }
 
-
-
     @PostMapping("/updatescreening")
     public String saveEditScreening(@ModelAttribute Screening upScreening){
 
-        DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("yyyy MM dd");
 
-        DateTimeFormatter dtf2 = DateTimeFormatter.ofPattern("HH:mm");
+        DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("yyyy MM dd");
 
         upScreening.setShowing( upScreening.getShowing() );
 
-//        upScreening.setScreening_date(upScreening.getScreening_date());
-//
-//        upScreening.setScreening_starts(upScreening.getScreening_starts());
+
+        upScreening.setScreening_date(upScreening.getScreening_date());
+
+        upScreening.setScreening_starts(upScreening.getScreening_starts());
 
 //        DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("yyyy MM dd");
 //

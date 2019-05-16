@@ -39,23 +39,6 @@
         <h1 class="display-4">Edit Screening</h1>
         <p class="lead">
 
-            <!-- <form th:action="@{'/updatescreening'}" th:object="${screeningForm}" method="post">
-
-                 <div class="form-group">
-
-                     <label for="screeningStarts">Screening Date</label>
-                     <input th:field="${screeningForm.screening_date_form}" class="form-control" id="screeningDate" placeholder="Screening Date">
-
-                 </div>
-
-                 <div class="form-group">
-
-                     <label for="screeningStarts">Screening Starts</label>
-
-                     <input th:field="${screeningForm.screening_starts_form}"  class="form-control" id="screeningStarts" placeholder="Screening Starts">
-
-                 </div>-->
-
 
                  <form action="/updatescreening" method="post" th:object="${screening}">
 
@@ -64,24 +47,8 @@
 
                 <div class="form-group">
                         <label for="screening date"></label>
-                        <input  class="form-control" th:field="${screening.screening_date}"  id="screening date" placeholder="Screening Date" maxlength="10">
+                        <input  class="form-control" th:field="${screening.showing}"  id="screening date" placeholder="Screening Date">
                     </div>
-                    <div class="form-group">
-                        <label for="screening starts">Screening Starts</label>
-                        <input  class="form-control" th:field="${screening.screening_starts}" id="screening starts" placeholder="Screening Starts">
-                    </div>
-
-
-        <!-- <div class="form-group">
-             <label for="screeningdate">Screening Date</label>
-
-             <input type= "date" class="form-control" id= "screeningdate" name = "screening-date" placeholder="Screening Date" >
-         </div>
-         <div class="form-group">
-             <label for="screeningstarts">Screening Starts</label>
-             <input type="time" class="form-control" id="screeningstarts" name = "screening-start"placeholder="Screening Starts" >
-         </div>-->
-
 
 
             <button type="submit" class="btn btn-primary">Save</button>
