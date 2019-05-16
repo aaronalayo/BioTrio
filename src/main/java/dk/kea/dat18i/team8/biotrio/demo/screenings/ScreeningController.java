@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
@@ -32,7 +31,7 @@ public class ScreeningController {
     private ScreeningRepository screeningRepo;
     @Autowired
     private MovieRepository movieRepo;
-
+    private int movieId;
 
     @GetMapping("/screeningview")
     @ResponseBody
@@ -48,10 +47,8 @@ public class ScreeningController {
     @GetMapping("/screenings")
     public String screening(Model model) {
 
-
         List<Screening> screeningList = screeningRepo.findAllScreenings();
         model.addAttribute("screenings", screeningList);
-
 
         return "show-screenings";
 
@@ -62,7 +59,7 @@ public class ScreeningController {
     public String addScreening(Model model) {
 
        ScreeningForm screeningForm = new ScreeningForm();
-       List<Movie> movieList = movieRepo.showAllMovies();
+       List<Movie> movieList = movieRepo.showallMovies();
         model.addAttribute(  "movielist", movieList );
 
         model.addAttribute( "screeningForm", screeningForm);
@@ -71,16 +68,29 @@ public class ScreeningController {
 
     @PostMapping("/savescreening")
     public String saveScreening(@ModelAttribute ScreeningForm screeningData){
+        //@RequestParam("screening-date") String screeningDate
+        //@RequestParam("movie-id") int movieId){
+
+
         Screening newScreening = new Screening();
-          DateTimeFormatter dtf = DateTimeFormatter.ofPattern( "yyyy MM dd HH:mm" );
-//        DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("yyyy MM dd");
-//
-//        DateTimeFormatter dtf2 = DateTimeFormatter.ofPattern("HH:mm");
-//
-//        newScreening.setScreening_date( LocalDate.parse(screeningData.getScreening_date_form(),dtf1));
-//
-//        newScreening.setScreening_starts( LocalTime.parse(screeningData.getScreening_starts_form(),dtf2));
-        newScreening.setShowing( LocalDateTime.parse(screeningData.getShowing(),dtf ));
+
+        //newScreening.setScreening_date(LocalDate.parse(screeningDate));
+
+
+
+        DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("yyyy MM dd");
+
+        DateTimeFormatter dtf2 = DateTimeFormatter.ofPattern("HH:mm");
+
+        newScreening.setScreening_date( LocalDate.parse(screeningData.getScreening_date_form(),dtf1));
+
+        newScreening.setScreening_starts( LocalTime.parse(screeningData.getScreening_starts_form(),dtf2));
+
+
+
+
+
+        //newScreening.setMovie(movieRepo.showMovie( movieId));
         newScreening.setMovie( movieRepo.showMovie( screeningData.getMovie_id() ) );
         screeningRepo.insertScreening(newScreening);
 
@@ -111,16 +121,16 @@ public class ScreeningController {
 
     @PostMapping("/updatescreening")
     public String saveEditScreening(@ModelAttribute Screening upScreening){
+            //@RequestParam("screening-date") String screeningDate, @RequestParam("screening-start") String screeningStart){
+
 
         DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("yyyy MM dd");
 
         DateTimeFormatter dtf2 = DateTimeFormatter.ofPattern("HH:mm");
 
-        upScreening.setShowing( upScreening.getShowing() );
+        upScreening.setScreening_date(upScreening.getScreening_date());
 
-//        upScreening.setScreening_date(upScreening.getScreening_date());
-//
-//        upScreening.setScreening_starts(upScreening.getScreening_starts());
+        upScreening.setScreening_starts(upScreening.getScreening_starts());
 
 //        DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("yyyy MM dd");
 //

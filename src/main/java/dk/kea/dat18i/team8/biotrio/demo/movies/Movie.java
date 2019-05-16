@@ -1,5 +1,7 @@
 package dk.kea.dat18i.team8.biotrio.demo.movies;
 
+import dk.kea.dat18i.team8.biotrio.demo.theater.Theater;
+
 public class Movie {
     private int id;
     private String title;

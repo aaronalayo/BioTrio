@@ -26,7 +26,7 @@ public class MovieController {
 
     @GetMapping("/movies")
     public String movie(Model model){
-      List<Movie> movieList= movieRepo.showAllMovies();
+      List<Movie> movieList= movieRepo.showallMovies();
       model.addAttribute("movies",movieList);
       return "show-movies";
     }
