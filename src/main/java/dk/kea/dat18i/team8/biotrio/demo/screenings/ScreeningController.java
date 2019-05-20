@@ -4,6 +4,8 @@ import dk.kea.dat18i.team8.biotrio.demo.movies.Movie;
 import dk.kea.dat18i.team8.biotrio.demo.movies.MovieRepository;
 
 
+import dk.kea.dat18i.team8.biotrio.demo.theater.Theater;
+import dk.kea.dat18i.team8.biotrio.demo.theater.TheaterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,9 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.*;
 
 
-import java.time.LocalDate;
+
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 
@@ -32,6 +33,8 @@ public class ScreeningController {
     private ScreeningRepository screeningRepo;
     @Autowired
     private MovieRepository movieRepo;
+    @Autowired
+    private TheaterRepository theaterRepo;
 
 
     @GetMapping("/screeningview")
@@ -50,10 +53,10 @@ public class ScreeningController {
 
 
         List<Screening> screeningList = screeningRepo.findAllScreenings();
-        model.addAttribute("screenings", screeningList);
+        model.addAttribute("screeninglist", screeningList);
 
 
-        return "show-screenings";
+        return "screening/show-screenings";
 
     }
 
@@ -63,10 +66,13 @@ public class ScreeningController {
 
        ScreeningForm screeningForm = new ScreeningForm();
        List<Movie> movieList = movieRepo.showAllMovies();
+       List<Theater> theaterList= theaterRepo.findAllTheaters();
         model.addAttribute(  "movielist", movieList );
+        model.addAttribute( "theaterlist", theaterList );
 
         model.addAttribute( "screeningForm", screeningForm);
-        return "add-screening";
+
+        return "screening/add-screening";
     }
 
     @PostMapping("/savescreening")
@@ -76,33 +82,45 @@ public class ScreeningController {
 
         newScreening.setShowing( LocalDateTime.parse(screeningData.getShowing(),dtf ));
         newScreening.setMovie( movieRepo.showMovie( screeningData.getMovie_id() ) );
+        newScreening.setTheater( theaterRepo.findTheater( screeningData.getTheater_id() ) );
         screeningRepo.insertScreening(newScreening);
 
         return "redirect:/screenings";
     }
 
-    @RequestMapping(value = "/screenings/delete/{screening_id}")
+    @RequestMapping(value = "screenings/delete/{screening_id}")
     public String removeScreening(@PathVariable int screening_id) {
 
         screeningRepo.deleteScreening(screening_id);
 
         return "redirect:/screenings";
     }
+
+
     @GetMapping("/screenings/edit/{screening_id}")
     public String editScreening(Model model, @PathVariable(name = "screening_id") int screening_id){
 
         Screening screeningToEdit = screeningRepo.findScreening(screening_id);
         model.addAttribute("screening", screeningToEdit);
+        ScreeningForm screeningForm2 = new ScreeningForm(  );
 
-        return "edit-screening";
+        List<Movie> movieList2 = movieRepo.showAllMovies();
+        List<Theater> theaterList2 = theaterRepo.findAllTheaters();
+
+        model.addAttribute(  "movielist2", movieList2 );
+        model.addAttribute( "theaterlist2", theaterList2 );
+        model.addAttribute( "screeningForm2", screeningForm2);
+
+        return "screening/edit-screening";
     }
 
     @PostMapping("/updatescreening")
-    public String saveEditScreening(@ModelAttribute Screening upScreening){
+    public String saveEditScreening( @ModelAttribute Screening upScreening, @ModelAttribute ScreeningForm screeningData){
 
 
         upScreening.setShowing( upScreening.getShowing() );
-
+        upScreening.setMovie( movieRepo.showMovie( screeningData.getMovie_id() ));
+        upScreening.setTheater( theaterRepo.findTheater( screeningData.getTheater_id() ) );
 
         screeningRepo.update(upScreening);
 

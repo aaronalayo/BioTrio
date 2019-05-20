@@ -35,29 +35,39 @@ public class TheaterController {
     }
 
     @PostMapping("/savetheater")
-//    @ResponseBody
     public String saveTheater(@ModelAttribute Theater theater){
 
-        Theater theaterInserted = theaterRepo.insert(theater);
+
+        theater.setTheater_name( theater.getTheater_name() );
+        theater.setTheater_format( theater.getTheater_format() );
+        theater.setNumber_of_seats( theater.getNumber_of_seats() );
+
+        theaterRepo.insert(theater);
 
         return "redirect:/theaters";
     }
 
-    @GetMapping("/deletetheater/{id}")
-    public String deleteTheater(@PathVariable(name = "id") int id){
-        theaterRepo.delete(id);
+    @GetMapping("/deletetheater/{theater_id}")
+    public String deleteTheater(@PathVariable int theater_id){
+        theaterRepo.delete(theater_id);
         return "redirect:/theaters";
     }
 
     @GetMapping("/edittheater/{theater_id}")
-    public String editTheater(Model m, @PathVariable(name = "theater_id") int id){
-        Theater theaterToEdit = theaterRepo.findTheater(id);
+    public String editTheater(Model m, @PathVariable int theater_id){
+
+        Theater theaterToEdit = theaterRepo.findTheater(theater_id);
         m.addAttribute("theaterform", theaterToEdit);
         return "edit-theater";
     }
 
     @PostMapping("/updatetheater")
-    public String s(@ModelAttribute Theater theater){
+    public String updateTheater(@ModelAttribute Theater theater){
+
+        theater.setTheater_name( theater.getTheater_name() );
+        theater.setNumber_of_seats( theater.getNumber_of_seats() );
+        theater.setTheater_format( theater.getTheater_format() );
+
         theaterRepo.update(theater);
         return "redirect:/theaters";
     }

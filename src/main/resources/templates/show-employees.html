@@ -3,7 +3,7 @@
       xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
-    <title>Screenings view</title>
+    <title>Employees</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -22,81 +22,61 @@
         padding: 8px;
     }
 
-    tr:nth-child(even) {
-        background-color: #dddddd;
-    }
 </style>
 
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="/">Bio Trio</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item ">
 
-                <a href="/screenings"  class="nav-link">Screenings</a>
-            </li>
             <li class="nav-item active">
-                <a href="/addscreening"  class="nav-link">Add Screening</a>
+                <a href="/addemployee"  class="nav-link">Add Employee</a>
             </li>
         </ul>
         <span class="navbar-text">
-      Here you can see the screenings
+      Employees working at Bio trio
     </span>
     </div>
 </nav>
 
-
-
-
-<tr>
-    <table>
+<table>
     <thead>
 
 
-    <th scope="col">Showing ID</th>
-    <th scope="col">Showing</th>
-    <th scope="col">Movies</th>
-
+    <th scope="col">Employee</th>
+    <th scope="col">Name</th>
+    <th scope="col">Lastname</th>
+    <th scope="col">Username</th>
+    <th scope="col">Password</th>
 
     </thead>
 
+    <tr th:each="employee: ${employeelist}" >
+        <th scope="row" th:text="${employee.getEmployee_id()}">1</th>
+        <td th:text="${employee.getName()}">{{Name}}</td>
+        <td th:text="${employee.getLastName()}">{{Lastname}}</td>
+        <td th:text="${employee.getUsername()}">{{Username}}</td>
+        <td th:text="${employee.getPassword()}">{{Password}}</td>
 
-
-
-    <tr th:each="screening: ${screenings}">
-
-
-        <th scope="row" th:text="${screening.getScreening_id()}">1</th>
-        <td th:text="${screening.getShowing()}">{{Showing}}</td>
-        <td th:text="${screening.getMovie().getTitle()}">{{Movie}}</td>
 
         <td>
-            <a th:href="@{'/screenings/edit/' + ${screening.screening_id}}"  class="btn btn-warning">Edit</a>
+            <a th:href="@{'/employees/edit/' + ${employee.employee_id}}"  class="btn btn-warning">Edit</a>
         </td>
 
 
         <td>
-            <a th:href="@{'/screenings/delete/' + ${screening.screening_id}}"  class="btn btn-danger">Delete</a>
+            <a th:href="@{'/employees/delete/' + ${employee.employee_id}}"  class="btn btn-danger">Delete</a>
         </td>
-
-
-
-
 
     </tr>
-
-
 
 </table>
 
 </body>
-
-
-
 
 
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
