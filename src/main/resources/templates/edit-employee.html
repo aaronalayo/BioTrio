@@ -10,7 +10,7 @@
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <a class="navbar-brand" href="#">Screening</a>
+
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -20,11 +20,11 @@
                 <a class="nav-link" href="/">Home </a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="/screenings">Screenings <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/screenings">Employees <span class="sr-only">(current)</span></a>
             </li>
         </ul>
         <span class="navbar-text">
-      Manage Screenings here
+      Manage employees here
     </span>
     </div>
 </nav>
@@ -32,27 +32,39 @@
 
 
 
-<!-- Here is the form to edit the selected screening -->
+<!-- Here is the form to edit the selected employee -->
 
 <div class="jumbotron jumbotron-fluid">
     <div class="container">
-        <h1 class="display-4">Edit Screening</h1>
+        <h1 class="display-4">Edit Employee</h1>
         <p class="lead">
 
 
-                 <form action="/updatescreening" method="post" th:object="${screening}">
+        <form action="/updateemployee" method="post" th:object="${employee}">
 
 
-                    <input type="hidden" th:field="${screening.screening_id}">
+            <input type="hidden" th:field="${employee.employee_id}">
 
-                <div class="form-group">
-                        <label for="screening date"></label>
-                        <input  class="form-control" th:field="${screening.showing}"  id="screening date" placeholder="Screening Date">
-                    </div>
+        <div class="form-group">
+            <label for="name"></label>
+            <input  class="form-control" th:field="${employee.name}"  id="name" placeholder="name">
+        </div>
+        <div class="form-group">
+            <label for="lastname"></label>
+            <input  class="form-control" th:field="${employee.lastName}"  id="lastname" placeholder="lastname">
+        </div>
 
+            <div class="form-group">
+                <label for="username"></label>
+                <input  class="form-control" th:field="${employee.username}"  id="username" placeholder="username">
+            </div>
+        <div class="form-group">
+            <label for="password"></label>
+            <input  class="form-control" th:field="${employee.password}"  id="password" placeholder="password">
+        </div>
 
             <button type="submit" class="btn btn-primary">Save</button>
-            <button type="reset" class="btn btn-primary">Cancel</button>
+            <a href="/employees" class="btn btn-danger">Cancel</a>
         </form>
 
 
