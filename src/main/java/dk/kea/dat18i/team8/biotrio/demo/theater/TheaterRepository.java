@@ -1,6 +1,5 @@
 package dk.kea.dat18i.team8.biotrio.demo.theater;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -14,8 +13,6 @@ import org.springframework.jdbc.support.KeyHolder;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,14 +31,13 @@ public class TheaterRepository {
             Theater theater = new Theater();
             theater.setTheater_id(rs.getInt("theater_id"));
             theater.setTheater_name(rs.getString("theater_name"));
-            theater.setNumber_of_seats(rs.getInt("number_of_seats"));
             theater.setTheater_format(rs.getString("theater_format"));
+            theater.setNumber_of_rows(rs.getInt("number_of_rows"));
+            theater.setSeats_per_row(rs.getInt("seats_per_row"));
 
             theaterList.add(theater);
         }
         return theaterList;
-
-
     }
 
     public Theater insert(Theater theater) {
@@ -49,14 +45,15 @@ public class TheaterRepository {
         PreparedStatementCreator psc = new PreparedStatementCreator() {
             @Override
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-                PreparedStatement ps = connection.prepareStatement("INSERT INTO theater VALUES(null , ?,?,?)", new String[]{"theater_id"});
+                PreparedStatement ps = connection.prepareStatement("INSERT INTO theater VALUES(null ,?,?,?,?)", new String[]{"theater_id"});
                 ps.setString(1, theater.getTheater_name());
-                ps.setInt(2, theater.getNumber_of_seats());
-                ps.setString(3, theater.getTheater_format());
+                ps.setString(2, theater.getTheater_format());
+                ps.setInt(3,theater.getNumber_of_rows());
+                ps.setInt(4,theater.getSeats_per_row());
+
                 return ps;
             }
         };
-
 
         KeyHolder id = new GeneratedKeyHolder();
         jdbc.update(psc, id);
@@ -75,8 +72,9 @@ public class TheaterRepository {
         while (rs.next()) {
             theater.setTheater_id(rs.getInt("theater_id"));
             theater.setTheater_name(rs.getString("theater_name"));
-            theater.setNumber_of_seats(rs.getInt("number_of_seats"));
             theater.setTheater_format(rs.getString("theater_format"));
+            theater.setNumber_of_rows(rs.getInt("number_of_rows"));
+            theater.setSeats_per_row(rs.getInt("seats_per_row"));
         }
         return theater;
     }
@@ -88,20 +86,13 @@ public class TheaterRepository {
             @Override
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
 
-<<<<<<< HEAD
-=======
-                PreparedStatement ps = connection.prepareStatement("UPDATE biotrio.theater SET theater_name=?, number_of_seats=?, theater_format=? WHERE theater_id=  " + theater.getTheater_id(), new String[]{"theater_id"});
->>>>>>> screening
-
                 PreparedStatement ps = connection.prepareStatement("UPDATE biotrio.theater " +
-                        "SET theater_name=?, number_of_seats=?,theater_format=?" +
-                        "WHERE theater_id=  " + theater.getTheater_id());
+                        "SET theater_name=?,theater_format=?, number_of_rows=?, seats_per_row=? " +
+                        "WHERE theater_id= " + theater.getTheater_id(), new String[]{"theater_id"});
                 ps.setString(1, theater.getTheater_name());
-                ps.setString(3, theater.getTheater_format());
-<<<<<<< HEAD
-=======
-                ps.setInt(2, theater.getNumber_of_seats());
->>>>>>> screening
+                ps.setString(2, theater.getTheater_format());
+                ps.setInt(3,theater.getNumber_of_rows());
+                ps.setInt(4,theater.getSeats_per_row());
                 return ps;
             }
         };
@@ -110,3 +101,5 @@ public class TheaterRepository {
         return theater;
     }
 }
+
+

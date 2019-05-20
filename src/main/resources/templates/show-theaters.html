@@ -42,32 +42,26 @@
     <thead>
 
 
-<<<<<<< HEAD
     <th scope="col">TheaterId</th>
     <th scope="col">TheaterName</th>
-    <th scope="col">NumberOfSeats</th>
+
     <th scope="col">TheaterFormat</th>
+    <th scope="col">NumberOfRows</th>
+    <th scope="col">SeatsPerRow</th>
     <th scope="col"></th>
     <th scope="col"></th>
-=======
-    <th scope="col">Theater</th>
-    <th scope="col">Theater Name</th>
-    <th scope="col">Number Of Seats</th>
-    <th scope="col">Theater Format</th>
-    <th scope="col">Delete Theater</th>
-    <th scope="col">Edit Theater</th>
->>>>>>> screening
 
 
     </thead>
     <tr th:each="theater: ${theaters}">
 
         <th scope="row" th:text="${theater.theater_id}">1</th>
-        <td th:text="${theater.theater_name}">{{Theater Name}}</td>
-        <td th:text="${theater.number_of_seats}">{{Number OF Seats}}</td>
-        <td th:text="${theater.theater_format}">{{Theater Format}}</td>
-        <td><a class="btn btn-primary" th:href="@{'/deletetheater/' + ${theater.theater_id}}">Delete</a></td>
-        <td><a class="btn btn-danger" th:href="@{'/edittheater/' + ${theater.theater_id}}">Edit</a></td>
+        <td th:text="${theater.theater_name}">{{TheaterName}}</td>
+        <td th:text="${theater.theater_format}">{{TheaterFormat}}</td>
+        <td th:text="${theater.number_of_rows}">{NumberOfRows}</td>
+        <td th:text="${theater.seats_per_row}">{SeatsPerRow}</td>
+        <td><a class="btn btn-light" th:href="@{'/deletetheater/' + ${theater.theater_id}}">Delete</a></td>
+        <td><a class="btn btn-light" th:href="@{'/edittheater/' + ${theater.theater_id}}">Edit</a></td>
 
     </tr>
 </table>

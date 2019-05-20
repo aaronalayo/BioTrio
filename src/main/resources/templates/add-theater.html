@@ -20,26 +20,35 @@
 
         <form action="/savetheater" method="post" th:object="${theaterform}">
             <div class="form-group">
-                <label for="theater_name">Theater Name</label>
-                <input type="text" class="form-control" th:field="${theaterform.theater_name}" id="theater_name" placeholder="Theater Name" >
+                <label for="theater_name">TheaterName</label>
+                <input type="text" class="form-control" th:field="${theaterform.theater_name}" id="theater_name" placeholder="TheaterName" maxlength="20">
             </div>
             <div class="form-group">
-                <label for="number_of_seats">Number Of Seats</label>
-                <input type="number" class="form-control" th:field="${theaterform.number_of_seats}" id="number_of_seats" placeholder="Number Of Seats">
+                <label for="theater_format">TheaterFormat</label>
+                <select th:field="${theaterform.theater_format}" class="form-control" id="theater_format">
+                    <option value="2D">2D</option>
+                    <option value="3D">3D</option>
+                </select>
             </div>
-            <div class="form-group">
-                <label for="theater_format">Theater Format</label>
-                <input type="text" class="form-control" th:field="${theaterform.theater_format}" id="theater_format" placeholder="Theater Format">
+            <div>
+                <label for="number_of_rows">NumberOfRows</label>
+                <input type="number" class="form-control" th:field="${theaterform.number_of_rows}" id="number_of_rows"
+                       placeholder="NumberOfRows">
             </div>
-
-            <button type="submit" class="btn btn-primary">Add Theater</button>
-            <button type="reset" class="btn btn-primary">Cancel</button>
-        </form>
-
-
-
-        </p>
+            <div>
+            <label for="seats_per_row">SeatsPerRow</label>
+            <input type="number" class="form-control" th:field="${theaterform.seats_per_row}" id="seats_per_row"
+                   placeholder="SeatsPerRow">
     </div>
+
+    <button type="submit" class="btn btn-primary">Add Theater</button>
+    <button type="reset" class="btn btn-primary">Cancel</button>
+    </form>
+
+
+
+    </p>
+</div>
 </div>
 
 
