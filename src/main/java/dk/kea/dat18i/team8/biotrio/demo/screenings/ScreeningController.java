@@ -142,18 +142,6 @@ public class ScreeningController {
         upScreening.setMovie( movieRepo.showMovie( screeningData.getMovie_id() ));
         upScreening.setTheater( theaterRepo.findTheater( screeningData.getTheater_id() ) );
 
-        upScreening.setScreening_date(upScreening.getScreening_date());
-
-        upScreening.setScreening_starts(upScreening.getScreening_starts());
-
-//        DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("yyyy MM dd");
-//
-//        DateTimeFormatter dtf2 = DateTimeFormatter.ofPattern("HH:mm");
-//
-//        upScreening.setScreening_date( LocalDate.parse(screeningData.getScreening_date_form(),dtf1));
-//
-//        upScreening.setScreening_starts( LocalTime.parse(screeningData.getScreening_starts_form(),dtf2));
-
         screeningRepo.update(upScreening);
 
         return "redirect:/screenings";
