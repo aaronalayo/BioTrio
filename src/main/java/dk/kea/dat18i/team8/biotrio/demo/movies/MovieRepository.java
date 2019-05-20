@@ -18,18 +18,22 @@ public class MovieRepository {
     @Autowired
     private JdbcTemplate jdbc;
 
+    public void setMovie(Movie movie,SqlRowSet rs){
+        movie.setId(rs.getInt("movie_id"));
+        movie.setTitle(rs.getString("title"));
+        movie.setDirector(rs.getString("director"));
+        movie.setPlot(rs.getString("plot"));
+        movie.setDuration(rs.getInt("duration"));
+        movie.setGenre(rs.getString("genre"));
+        movie.setFormat(rs.getString("movie_format"));
+        movie.setTheater_id(rs.getInt("theater_id"));
+    }
+
     public Movie showMovie(int id){
         SqlRowSet rs = jdbc.queryForRowSet("SELECT * FROM movie WHERE movie_id = "+id);
         Movie movie = new Movie();
         while (rs.next()){
-            movie.setId(rs.getInt("movie_id"));
-            movie.setTitle(rs.getString("title"));
-            movie.setDirector(rs.getString("director"));
-            movie.setPlot(rs.getString("plot"));
-            movie.setDuration(rs.getInt("duration"));
-            movie.setGenre(rs.getString("genre"));
-            movie.setFormat(rs.getString("movie_format"));
-            movie.setTheater_id(rs.getInt("theater_id"));
+            setMovie(movie,rs);
         }
         return movie;
     }
@@ -39,14 +43,7 @@ public class MovieRepository {
         List<Movie> movieList = new ArrayList<>();
         while (rs.next()){
             Movie movie = new Movie();
-            movie.setId(rs.getInt("movie_id"));
-            movie.setTitle(rs.getString("title"));
-            movie.setDirector(rs.getString("director"));
-            movie.setPlot(rs.getString("plot"));
-            movie.setDuration(rs.getInt("duration"));
-            movie.setGenre(rs.getString("genre"));
-            movie.setFormat(rs.getString("movie_format"));
-            movie.setTheater_id(rs.getInt("theater_id"));
+            setMovie(movie,rs);
             movieList.add(movie);
         }
         return movieList;
@@ -98,8 +95,7 @@ public class MovieRepository {
         jdbc.update(psc);
         return movie;
     }
-
-
+    
     public void delete(int id) {
         jdbc.update("DELETE FROM movie WHERE movie_id = "+id);
     }

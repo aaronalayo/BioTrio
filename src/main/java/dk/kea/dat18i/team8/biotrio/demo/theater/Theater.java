@@ -1,5 +1,4 @@
 package dk.kea.dat18i.team8.biotrio.demo.theater;
-
 public class Theater {
     private int theater_id;
     private String theater_name;
