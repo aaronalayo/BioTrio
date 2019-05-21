@@ -130,6 +130,17 @@ public class ScreeningRepository {
 
         return screening;
     }
+    public List<Screening> findScreeningsWithMovie(int movie_id){
+
+
+        // SqlRowSet rs = jdbc.queryForRowSet( "SELECT * FROM screening WHERE movie_id = ?" + movie_id);
+        String sql = "SELECT * FROM screening WHERE movie_id =" + movie_id;
+
+        List<Screening> screeningList = jdbc.query(sql, new BeanPropertyRowMapper<>(Screening.class));
+        return screeningList;
+
+
+    }
 
     public List<Screening> findScreeningsWithMovie(int movie_id){
 

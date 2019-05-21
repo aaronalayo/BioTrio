@@ -149,8 +149,6 @@ public class ScreeningController {
 
         return "redirect:/screenings";
     }
-
-
     @GetMapping("/screeningbymovie/{movie_id}")
     public String screeningByMovie(Model model, @PathVariable(name = "movie_id") int movie_id){
 
@@ -163,8 +161,4 @@ public class ScreeningController {
         return "movies-screenings";
 
     }
-
-
-
-
 }
