@@ -41,7 +41,7 @@ public class MovieRepository {
         return movie;
     }
 
-    public List<Movie> shoswAllMovies(){
+    public List<Movie> showAllMovies(){
         SqlRowSet rs =jdbc.queryForRowSet("SELECT * FROM movie");
         List<Movie> movieList = new ArrayList<>();
         while (rs.next()){

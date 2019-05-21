@@ -1,3 +1,4 @@
+package dk.kea.dat18i.team8.biotrio.demo.screenings;
 
 
 import dk.kea.dat18i.team8.biotrio.demo.movies.Movie;
@@ -9,7 +10,6 @@ import dk.kea.dat18i.team8.biotrio.demo.theater.TheaterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
@@ -82,23 +82,7 @@ public class ScreeningController {
     public String saveScreening(@ModelAttribute ScreeningForm screeningData){
         Screening newScreening = new Screening();
 
-        //newScreening.setScreening_date(LocalDate.parse(screeningDate));
 
-
-
-        DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("yyyy MM dd");
-
-        DateTimeFormatter dtf2 = DateTimeFormatter.ofPattern("HH:mm");
-
-        newScreening.setScreening_date( LocalDate.parse(screeningData.getScreening_date_form(),dtf1));
-
-        newScreening.setScreening_starts( LocalTime.parse(screeningData.getScreening_starts_form(),dtf2));
-
-
-
-
-
-        //newScreening.setMovie(movieRepo.showMovie( movieId));
           DateTimeFormatter dtf = DateTimeFormatter.ofPattern( "yyyy MM dd HH:mm" );
 
         newScreening.setShowing( LocalDateTime.parse(screeningData.getShowing(),dtf ));
