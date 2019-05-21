@@ -126,5 +126,16 @@ public class ScreeningController {
 
         return "redirect:/screenings";
     }
+    @GetMapping("/screeningbymovie/{movie_id}")
+    public String screeningByMovie(Model model, @PathVariable(name = "movie_id") int movie_id){
 
+
+        List<Screening> screeningsForMovies= screeningRepo.findScreeningsWithMovie( movie_id );
+
+
+        model.addAttribute( "screeningsForMovies", screeningsForMovies);
+
+        return "movies-screenings";
+
+    }
 }

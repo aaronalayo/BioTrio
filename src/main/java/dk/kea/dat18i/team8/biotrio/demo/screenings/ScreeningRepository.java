@@ -4,6 +4,7 @@ import dk.kea.dat18i.team8.biotrio.demo.movies.Movie;
 import dk.kea.dat18i.team8.biotrio.demo.movies.MovieRepository;
 import dk.kea.dat18i.team8.biotrio.demo.theater.TheaterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
@@ -127,6 +128,17 @@ public class ScreeningRepository {
 
 
         return screening;
+    }
+    public List<Screening> findScreeningsWithMovie(int movie_id){
+
+
+        // SqlRowSet rs = jdbc.queryForRowSet( "SELECT * FROM screening WHERE movie_id = ?" + movie_id);
+        String sql = "SELECT * FROM screening WHERE movie_id =" + movie_id;
+
+        List<Screening> screeningList = jdbc.query(sql, new BeanPropertyRowMapper<>(Screening.class));
+        return screeningList;
+
+
     }
 
 }
