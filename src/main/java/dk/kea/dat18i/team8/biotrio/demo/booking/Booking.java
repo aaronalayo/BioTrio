@@ -53,7 +53,6 @@ public class Booking {
         this.screening = screening;
     }
 
-
     @Override
     public String toString() {
 

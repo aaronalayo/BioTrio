@@ -18,9 +18,6 @@ public class MovieRepository {
     private JdbcTemplate jdbc;
     @Autowired
     private TheaterRepository theatherRepo;
-
-
-    // TODO: check and fix
     public void setMovie(Movie movie,SqlRowSet rs){
         movie.setId(rs.getInt("movie_id"));
         movie.setTitle(rs.getString("title"));
@@ -29,7 +26,9 @@ public class MovieRepository {
         movie.setDuration(rs.getInt("duration"));
         movie.setGenre(rs.getString("genre"));
         movie.setFormat(rs.getString("movie_format"));
-        movie.setTheater(theatherRepo.findTheater( rs.getInt( "theater_id" ) ));
+
+        movie.setTheater(theatherRepo.findTheater(rs.getInt("theater_id")));
+
     }
 
     public Movie showMovie(int id){

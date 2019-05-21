@@ -4,11 +4,17 @@ package dk.kea.dat18i.team8.biotrio.demo.Seat;
 public class Seat {
 
     private int rowNo;
-    private int seatPerRow;
-    private boolean seat_reserved;
+    private int seatNo;
+    private boolean isBooked;
+
+    public Seat(){};
+    public  Seat(int rowNo,int setNo) {
+        this.rowNo=rowNo;
+        this.seatNo=setNo;
+        this.isBooked=false;
+    }
 
 
-    public  Seat() {}
 
     public int getRowNo(){return this.rowNo;}
 
@@ -16,24 +22,26 @@ public class Seat {
         this.rowNo = rowNo;
     }
 
-    public void getSeatPerRow(int seatPerRow) {
-        this.seatPerRow = seatPerRow;
+    public void setSeatNo(int seatNo) {
+        this.seatNo = seatNo;
     }
 
-    public boolean getSeat_reserved() {
-       return seat_reserved;
+    public int getSeatNo() { return seatNo; }
+
+    public boolean getIsBooked() {
+       return isBooked;
     }
 
-    public void setSeat_reserved(boolean seat_reserved) {
-        this.seat_reserved = seat_reserved;
+    public void setIsBooked(boolean isBooked) {
+        this.isBooked = isBooked;
     }
 
         @Override
         public String toString() {
             return "Seat{" +
                     "row number=" + rowNo +
-                    ", seat per row=" + seatPerRow+
-                    ", seat_reserved=" + seat_reserved +
+                    ", seat number=" + seatNo+
+                    ", isBooked=" + isBooked +
                     '}';
     }
 }
