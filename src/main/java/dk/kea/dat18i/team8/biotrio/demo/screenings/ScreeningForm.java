@@ -26,26 +26,20 @@ public class ScreeningForm {
 
     }
 
-    public String getShowing() {
-        return showing;
+    public int getTheater_id() {
+        return theater_id;
     }
 
-    public void setShowing(String showing) {
-        this.showing = showing;
+    public void setTheater_id(int theater_id) {
+        this.theater_id = theater_id;
     }
 
-    public int getMovie_id() {
-        return movie_id;
-    }
-
-    public void setMovie_id(int movie_id) {
-        this.movie_id = movie_id;
-    }
+    public ScreeningForm(){
 
 
 
     @Override
     public String toString() {
-        return "ScreeningForm{" + "showing='" + showing + '\'' + ", movie_id=" + movie_id + '}';
+        return "ScreeningForm{" + "showing='" + showing + '\'' + ", movie_id=" + movie_id + ", theater_id=" + theater_id + '}';
     }
 }

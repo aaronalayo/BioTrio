@@ -10,6 +10,7 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
 
 import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 
 import java.sql.*;
@@ -140,5 +141,20 @@ public class ScreeningRepository {
 
 
     }
+
+    public List<Screening> findScreeningsWithMovie(int movie_id){
+
+
+       // SqlRowSet rs = jdbc.queryForRowSet( "SELECT * FROM screening WHERE movie_id = ?" + movie_id);
+        String sql = "SELECT * FROM screening WHERE movie_id =" + movie_id;
+
+        List<Screening> screeningList = jdbc.query(sql, new BeanPropertyRowMapper<>(Screening.class));
+            return screeningList;
+
+
+    }
+
+
+
 
 }
