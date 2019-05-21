@@ -62,7 +62,7 @@
         </div>
         <div class="form-group">
             <label >Theater</label>
-            <select th:field="${movieform.theater_id}" class="form-control" id="theater_id" name = "theaterId" placeholder="TheaterId" >
+            <select th:field="${movieform.theater.theater_id}" class="form-control" id="theater_id" name = "theaterId" placeholder="TheaterId" >
                 <option th:each="theater: ${theaters}"
                         th:value="${theater.theater_id}"
                         th:text="${theater.theater_name}">

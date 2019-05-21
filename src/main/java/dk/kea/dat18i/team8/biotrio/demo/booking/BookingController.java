@@ -1,6 +1,7 @@
 package dk.kea.dat18i.team8.biotrio.demo.booking;
 
 import dk.kea.dat18i.team8.biotrio.demo.movies.MovieRepository;
+import dk.kea.dat18i.team8.biotrio.demo.screenings.Screening;
 import dk.kea.dat18i.team8.biotrio.demo.screenings.ScreeningRepository;
 import dk.kea.dat18i.team8.biotrio.demo.theater.TheaterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,9 +36,9 @@ public class BookingController {
 
     @GetMapping("/addbooking")
     public String addBooking(Model model) {
-
+        //List<Screening> screeningList= screeningRepo.findAllScreenings();
+        //model.addAttribute( "screenings", screeningList);
         model.addAttribute("bookingform", new Booking());
-
         return "add-booking";
     }
 
