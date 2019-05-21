@@ -64,3 +64,4 @@ public class TheaterController {
         return "redirect:/theaters";
     }
 }
+

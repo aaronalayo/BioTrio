@@ -18,7 +18,6 @@ public class MovieRepository {
     private JdbcTemplate jdbc;
     @Autowired
     private TheaterRepository theatherRepo;
-
     public void setMovie(Movie movie,SqlRowSet rs){
         movie.setId(rs.getInt("movie_id"));
         movie.setTitle(rs.getString("title"));
@@ -27,7 +26,9 @@ public class MovieRepository {
         movie.setDuration(rs.getInt("duration"));
         movie.setGenre(rs.getString("genre"));
         movie.setFormat(rs.getString("movie_format"));
+
         movie.setTheater(theatherRepo.findTheater(rs.getInt("theater_id")));
+
     }
 
     public Movie showMovie(int id){
@@ -39,7 +40,7 @@ public class MovieRepository {
         return movie;
     }
 
-    public List<Movie> showAllMovies(){
+    public List<Movie> shoswAllMovies(){
         SqlRowSet rs =jdbc.queryForRowSet("SELECT * FROM movie");
         List<Movie> movieList = new ArrayList<>();
         while (rs.next()){
@@ -96,8 +97,9 @@ public class MovieRepository {
         jdbc.update(psc);
         return movie;
     }
-    
+
     public void delete(int id) {
         jdbc.update("DELETE FROM movie WHERE movie_id = "+id);
     }
 }
+
