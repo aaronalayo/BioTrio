@@ -20,16 +20,16 @@
 
         <form action="/savetheater" method="post" th:object="${theaterform}">
             <div class="form-group">
-                <label for="theater_name">TheaterName</label>
-                <input type="text" class="form-control" th:field="${theaterform.theater_name}" id="theater_name" placeholder="TheaterName" maxlength="20">
+                <label for="theater_name">Theater Name</label>
+                <input type="text" class="form-control" th:field="${theaterform.theater_name}" id="theater_name" placeholder="Theater Name" >
             </div>
             <div class="form-group">
-                <label for="number_of_seats">NumberOfSeats</label>
-                <input type="number" class="form-control" th:field="${theaterform.number_of_seats}" id="number_of_seats" placeholder="NumberOfSeats">
+                <label for="number_of_seats">Number Of Seats</label>
+                <input type="number" class="form-control" th:field="${theaterform.number_of_seats}" id="number_of_seats" placeholder="Number Of Seats">
             </div>
             <div class="form-group">
-                <label for="theater_format">TheaterFormat</label>
-                <input type="text" class="form-control" th:field="${theaterform.theater_format}" id="theater_format" placeholder="TheaterFormat">
+                <label for="theater_format">Theater Format</label>
+                <input type="text" class="form-control" th:field="${theaterform.theater_format}" id="theater_format" placeholder="Theater Format">
             </div>
 
             <button type="submit" class="btn btn-primary">Add Theater</button>

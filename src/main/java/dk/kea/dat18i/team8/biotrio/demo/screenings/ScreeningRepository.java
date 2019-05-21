@@ -2,6 +2,7 @@ package dk.kea.dat18i.team8.biotrio.demo.screenings;
 
 import dk.kea.dat18i.team8.biotrio.demo.movies.Movie;
 import dk.kea.dat18i.team8.biotrio.demo.movies.MovieRepository;
+import dk.kea.dat18i.team8.biotrio.demo.theater.TheaterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -11,11 +12,10 @@ import org.springframework.jdbc.core.PreparedStatementCreator;
 
 
 import java.sql.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Calendar;
+
 import java.util.List;
-import java.util.TimeZone;
+
 
 
 @Repository
@@ -25,7 +25,8 @@ public class ScreeningRepository {
     private JdbcTemplate jdbc;
     @Autowired
     private MovieRepository movieRepo;
-
+    @Autowired
+    private TheaterRepository theaterRepo;
 
     public Screening findScreening(int screening_id) {
 
@@ -35,6 +36,8 @@ public class ScreeningRepository {
 
             screening.setScreening_id( rs.getInt( "screening_id" ) );
             screening.setShowing( rs.getTimestamp( "showing" ).toLocalDateTime() );
+            screening.setMovie( movieRepo.showMovie( rs.getInt( "movie_id" ) ));
+            screening.setTheater( theaterRepo.findTheater( rs.getInt( "theater_id" ) ));
 
         }
         return screening;
@@ -54,6 +57,7 @@ public class ScreeningRepository {
             screening.setScreening_id( rs.getInt( "screening_id" ) );
             screening.setShowing( rs.getTimestamp( "showing" ).toLocalDateTime() );
             screening.setMovie(movieRepo.showMovie(rs.getInt("movie_id")));
+            screening.setTheater( theaterRepo.findTheater(rs.getInt( "theater_id" )) );
 
 
             screeningList.add( screening );
@@ -76,10 +80,11 @@ public class ScreeningRepository {
 
 
 
-                PreparedStatement ps = connection.prepareStatement( "INSERT INTO biotrio.screening (showing, movie_id)VALUES (?,?)");
+                PreparedStatement ps = connection.prepareStatement( "INSERT INTO biotrio.screening (showing, movie_id, theater_id)VALUES (?,?,?)");
 
                 ps.setTimestamp( 1,Timestamp.valueOf(screening.getShowing()));
                 ps.setInt( 2, screening.getMovie().getId());
+                ps.setInt( 3,screening.getTheater().getTheater_id() );
 
                 return ps;
             }
@@ -105,9 +110,12 @@ public class ScreeningRepository {
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
 
 
-                PreparedStatement ps = connection.prepareStatement("UPDATE biotrio.screening SET showing = ? WHERE screening_id=  " + screening.getScreening_id(), new String[]{"screening_id"});
+                PreparedStatement ps = connection.prepareStatement("UPDATE biotrio.screening SET showing = ?, movie_id = ?, theater_id = ? WHERE screening_id =  " + screening.getScreening_id(), new String[]{"screening_id"});
 
                 ps.setTimestamp( 1, Timestamp.valueOf( screening.getShowing() ) );
+                ps.setInt( 2,(screening.getMovie().getId()) );
+                ps.setInt( 3,(screening.getTheater().getTheater_id()) );
+
 
 
                 return ps;

@@ -15,21 +15,23 @@
         <p class="lead">
 
         <form action="/updatetheater" method="post" th:object="${theaterform}">
+
+        <input type="hidden" th:field="${theaterform.theater_id}">
             <div class="form-group">
-                <label for="theater_name">TheaterName</label>
-                <input type="text" class="form-control" th:field="${theaterform.theater_name}" id="theater_name" placeholder="TheaterName" maxlength="20">
+                <label for="theater_name">Theater Name</label>
+                <input class="form-control" th:field="${theaterform.theater_name}" id="theater_name" placeholder="Theater Name" >
             </div>
             <div class="form-group">
-                <label for="number_of_seats">NumberOfSeats</label>
-                <input type="number" class="form-control" th:field="${theaterform.number_of_seats}" id="number_of_seats" placeholder="NumberOfSeats">
+                <label for="number_of_seats">Number Of Seats</label>
+                <input class="form-control" th:field="${theaterform.number_of_seats}" id="number_of_seats" placeholder="Number Of Seats">
             </div>
             <div class="form-group">
-                <label for="theater_format">TheaterFormat</label>
-                <input type="text" class="form-control" th:field="${theaterform.theater_format}" id="theater_format" placeholder="TheaterFormat">
+                <label for="theater_format">Theater Format</label>
+                <input class="form-control" th:field="${theaterform.theater_format}" id="theater_format" placeholder="Theater Format">
             </div>
 
-            <button type="submit" class="btn btn-primary">Edit Theater</button>
-            <button type="reset" class="btn btn-primary">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a href="/theaters" class="btn btn-danger">Cancel</a>
         </form>
 
 
