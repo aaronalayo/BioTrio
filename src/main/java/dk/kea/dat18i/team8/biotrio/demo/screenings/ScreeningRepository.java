@@ -59,7 +59,7 @@ public class ScreeningRepository {
             screening.setScreening_id( rs.getInt( "screening_id" ) );
             screening.setShowing( rs.getTimestamp( "showing" ).toLocalDateTime() );
             screening.setMovie(movieRepo.showMovie(rs.getInt("movie_id")));
-            //screening.setTheater( theaterRepo.findTheater(rs.getInt( "theater_id" )) );
+            screening.setTheater( theaterRepo.findTheater(rs.getInt( "theater_id" )) );
 
 
             screeningList.add( screening );
@@ -130,17 +130,7 @@ public class ScreeningRepository {
 
         return screening;
     }
-    public List<Screening> findScreeningsWithMovie(int movie_id){
 
-
-        // SqlRowSet rs = jdbc.queryForRowSet( "SELECT * FROM screening WHERE movie_id = ?" + movie_id);
-        String sql = "SELECT * FROM screening WHERE movie_id =" + movie_id;
-
-        List<Screening> screeningList = jdbc.query(sql, new BeanPropertyRowMapper<>(Screening.class));
-        return screeningList;
-
-
-    }
 
     public List<Screening> findScreeningsWithMovie(int movie_id){
 
