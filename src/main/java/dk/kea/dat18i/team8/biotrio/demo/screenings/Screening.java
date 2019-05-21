@@ -22,22 +22,7 @@ public class Screening {
         this.theater = theater;
     }
 
-
-
-//    public Screening(int screening_id, LocalDate screening_date, Movie movie) {
-//        this.screening_id = screening_id;
-//        this.screening_date = screening_date;
-//        this.movie = movie;
-//    }
-
     public Screening (){
-    }
-
-    public Screening(int screening_id, LocalDate screening_date, LocalTime screening_starts, Movie movie) {
-        this.screening_id = screening_id;
-        this.screening_date = screening_date;
-        this.screening_starts = screening_starts;
-        this.movie = movie;
     }
 
     public int getScreening_id() {

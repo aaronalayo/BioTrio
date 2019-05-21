@@ -1,6 +1,5 @@
 package dk.kea.dat18i.team8.biotrio.demo.screenings;
 
-import dk.kea.dat18i.team8.biotrio.demo.movies.Movie;
 import dk.kea.dat18i.team8.biotrio.demo.movies.MovieRepository;
 import dk.kea.dat18i.team8.biotrio.demo.theater.TheaterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,6 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
 
 import org.springframework.jdbc.core.PreparedStatementCreator;
-import org.springframework.web.bind.annotation.ModelAttribute;
 
 
 import java.sql.*;
@@ -123,7 +121,7 @@ public class ScreeningRepository {
                 return ps;
             }
 
-    };
+        };
 
         jdbc.update(psc);
 
@@ -141,20 +139,5 @@ public class ScreeningRepository {
 
 
     }
-
-    public List<Screening> findScreeningsWithMovie(int movie_id){
-
-
-       // SqlRowSet rs = jdbc.queryForRowSet( "SELECT * FROM screening WHERE movie_id = ?" + movie_id);
-        String sql = "SELECT * FROM screening WHERE movie_id =" + movie_id;
-
-        List<Screening> screeningList = jdbc.query(sql, new BeanPropertyRowMapper<>(Screening.class));
-            return screeningList;
-
-
-    }
-
-
-
 
 }
