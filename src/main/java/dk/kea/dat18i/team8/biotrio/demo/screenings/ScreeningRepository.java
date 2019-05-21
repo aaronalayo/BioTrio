@@ -39,7 +39,7 @@ public class ScreeningRepository {
             screening.setScreening_id( rs.getInt( "screening_id" ) );
             screening.setShowing( rs.getTimestamp( "showing" ).toLocalDateTime() );
             screening.setMovie( movieRepo.showMovie( rs.getInt( "movie_id" ) ));
-            screening.setTheater( theaterRepo.findTheater( rs.getInt( "theater_id" ) ));
+            //screening.setTheater( theaterRepo.findTheater( rs.getInt( "theater_id" ) ));
 
         }
         return screening;
@@ -59,7 +59,7 @@ public class ScreeningRepository {
             screening.setScreening_id( rs.getInt( "screening_id" ) );
             screening.setShowing( rs.getTimestamp( "showing" ).toLocalDateTime() );
             screening.setMovie(movieRepo.showMovie(rs.getInt("movie_id")));
-            screening.setTheater( theaterRepo.findTheater(rs.getInt( "theater_id" )) );
+            //screening.setTheater( theaterRepo.findTheater(rs.getInt( "theater_id" )) );
 
 
             screeningList.add( screening );

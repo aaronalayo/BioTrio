@@ -45,30 +45,31 @@
                 <label for="director">MovieDirector</label>
                 <input th:field="${movieform.director}" class="form-control" id="director" placeholder="MovieDirector">
             </div>
-            <div class="form-group">
-                <label for="director">MoviePlot</label>
-                <input th:field="${movieform.plot}" class="form-control" id="plot" placeholder="MoviePlot">
-            </div>
-            <div class="form-group">
-                <label for="duration">MovieDuration</label>
-                <input th:field="${movieform.duration}" class="form-control"  id="duration" placeholder="MovieDuration">
-            </div>
-            <div class="form-group">
-                <label for="movie_format">MovieFormat</label>
-                <select th:field="${movieform.format}" class="form-control" id="movie_format" name = "movies" placeholder="MovieFormat">
-                    <option value="2D">2D</option>
-                    <option value="3D">3D</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label >Theater</label>
-                <select th:field="${movieform.theater.theater_id}" class="form-control" id="theater_id" name = "theaterId" placeholder="TheaterId" >
-                    <option th:each="theater: ${theaters}"
-                            th:value="${theater.theater_id}"
-                            th:text="${theater.theater_name}">
-                    </option>
-                </select>
-            </div>
+
+        <div class="form-group">
+            <label for="director">MoviePlot</label>
+            <input th:field="${movieform.plot}" class="form-control" id="plot" placeholder="MoviePlot">
+        </div>
+        <div class="form-group">
+            <label for="duration">MovieDuration</label>
+            <input th:field="${movieform.duration}" class="form-control"  id="duration" placeholder="MovieDuration">
+        </div>
+        <div class="form-group">
+            <label for="movie_format">MovieFormat</label>
+            <select th:field="${movieform.format}" class="form-control" id="movie_format" name = "movies" placeholder="MovieFormat">
+                <option value="2D">2D</option>
+                <option value="3D">3D</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label >Theater</label>
+            <select th:field="${movieform.theater.theater_id}" class="form-control" id="theater_id" name = "theaterId" placeholder="TheaterId" >
+                <option th:each="theater: ${theaters}"
+                        th:value="${theater.theater_id}"
+                        th:text="${theater.theater_name}">
+                </option>
+            </select>
+        </div>
 
             <button type="submit" class="btn btn-primary">Add Movie</button>
             <button type="reset" class="btn btn-primary">Cancel</button>
