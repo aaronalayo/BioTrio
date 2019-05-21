@@ -36,12 +36,9 @@ public class BookingController {
 
     @GetMapping("/addbooking")
     public String addBooking(Model model) {
-
-        List<Screening> screeningList=screeningRepo.findAllScreenings();
-        model.addAttribute("screeningList", screeningList);
-        Booking bookingForm = new Booking();
-        model.addAttribute("booking",bookingForm);
-
+        //List<Screening> screeningList= screeningRepo.findAllScreenings();
+        //model.addAttribute( "screenings", screeningList);
+        model.addAttribute("bookingform", new Booking());
         return "add-booking";
     }
 

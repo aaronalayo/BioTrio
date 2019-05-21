@@ -1,24 +1,23 @@
 package dk.kea.dat18i.team8.biotrio.demo.booking;
 
 
-import dk.kea.dat18i.team8.biotrio.demo.theater.Seat;
+import dk.kea.dat18i.team8.biotrio.demo.Seat.Seat;
 import dk.kea.dat18i.team8.biotrio.demo.screenings.Screening;
 
 public class Booking {
 
     private int booking_id;
     private String phone_no; // shall be String according to StackOverflow
-    private int seat_id;
+    private Seat seat;
     private Screening screening;
 
     public Booking (){
     }
 
-
-    public Booking(int booking_id, String phone_no, int seat_id, Screening screening){
+    public Booking(int booking_id, String phone_no, Seat seat, Screening screening){
         this.booking_id = booking_id;
         this.phone_no = phone_no;
-        this.seat_id = seat_id;
+        this.seat = seat;
         this.screening = screening;
     }
 
@@ -38,12 +37,12 @@ public class Booking {
         this.phone_no = phone_no;
     }
 
-    public int getSeat_id() {
-        return seat_id;
+    public Seat getSeat() {
+        return seat;
     }
 
-    public void setSeat_id(int seat_id) {
-        this.seat_id = seat_id;
+    public void setSeat(Seat seat) {
+        this.seat = seat;
     }
 
     public Screening getScreening() {
@@ -55,15 +54,13 @@ public class Booking {
     }
 
     @Override
-
     public String toString() {
-
 
         return "Booking{" +
 
                 "booking_id=" + booking_id +
                 ", phone number=" + phone_no + '|' +
-                ", seat_id=" + seat_id + '|' +
+                ", seat=" + seat + '|' +
                 ", Screening details=" + screening +
                 '}';
     }

@@ -140,7 +140,6 @@ public class TheaterRepository {
 =======
 package dk.kea.dat18i.team8.biotrio.demo.theater;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -165,33 +164,20 @@ public class TheaterRepository {
     @Autowired
     private JdbcTemplate jdbc;
 
-    public Theater findTheater(int id) {
-        SqlRowSet rs = jdbc.queryForRowSet("SELECT * FROM theater WHERE theater_id = " + id);
-        Theater theater = new Theater();
-        while (rs.next()) {
-            theater.setTheater_id(rs.getInt("theater_id"));
-            theater.setTheater_name(rs.getString("theater_name"));
-            theater.setNumber_of_seats(rs.getInt("number_of_seats"));
-            theater.setTheater_format(rs.getString("theater_format"));
-        }
-        return theater;
-    }
-    public List<Theater> findAllTheaters(){
+    public List<Theater> findAllTheaters() {
         SqlRowSet rs = jdbc.queryForRowSet("SELECT * FROM theater");
         List<Theater> theaterList = new ArrayList<>();
-        while(rs.next()) {
+        while (rs.next()) {
             Theater theater = new Theater();
             theater.setTheater_id(rs.getInt("theater_id"));
             theater.setTheater_name(rs.getString("theater_name"));
-            theater.setNumber_of_seats(rs.getInt("number_of_seats"));
             theater.setTheater_format(rs.getString("theater_format"));
+            theater.setNumber_of_rows(rs.getInt("number_of_rows"));
+            theater.setSeats_per_row(rs.getInt("seats_per_row"));
 
             theaterList.add(theater);
         }
-            return theaterList;
-
-
-
+        return theaterList;
     }
 
     public Theater insert(Theater theater) {
@@ -199,14 +185,15 @@ public class TheaterRepository {
         PreparedStatementCreator psc = new PreparedStatementCreator() {
             @Override
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-                PreparedStatement ps = connection.prepareStatement("INSERT INTO theater VALUES(null , ?,?,?)", new String[]{"theater_id"});
+                PreparedStatement ps = connection.prepareStatement("INSERT INTO theater VALUES(null ,?,?,?,?)", new String[]{"theater_id"});
                 ps.setString(1, theater.getTheater_name());
-                ps.setInt(2, theater.getNumber_of_seats());
-                ps.setString(3, theater.getTheater_format());
+                ps.setString(2, theater.getTheater_format());
+                ps.setInt(3,theater.getNumber_of_rows());
+                ps.setInt(4,theater.getSeats_per_row());
+
                 return ps;
             }
         };
-
 
         KeyHolder id = new GeneratedKeyHolder();
         jdbc.update(psc, id);
@@ -219,6 +206,19 @@ public class TheaterRepository {
         jdbc.update("DELETE FROM theater WHERE theater_id = " + id);
     }
 
+    public Theater findTheater(int theater_id) {
+        SqlRowSet rs = jdbc.queryForRowSet("SELECT * FROM theater WHERE theater_id = " + theater_id);
+        Theater theater = new Theater();
+        while (rs.next()) {
+            theater.setTheater_id(rs.getInt("theater_id"));
+            theater.setTheater_name(rs.getString("theater_name"));
+            theater.setTheater_format(rs.getString("theater_format"));
+            theater.setNumber_of_rows(rs.getInt("number_of_rows"));
+            theater.setSeats_per_row(rs.getInt("seats_per_row"));
+        }
+        return theater;
+    }
+
     public Theater update(Theater theater) {
 
         PreparedStatementCreator psc = new PreparedStatementCreator() {
@@ -227,24 +227,20 @@ public class TheaterRepository {
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
 
                 PreparedStatement ps = connection.prepareStatement("UPDATE biotrio.theater " +
-                        "SET theater_name=?, number_of_seats=?, theater_format=? " +
-                        "WHERE theater_id=  " + theater.getTheater_id(), new String[]{"theater_id"});
-
+                        "SET theater_name=?,theater_format=?, number_of_rows=?, seats_per_row=? " +
+                        "WHERE theater_id= " + theater.getTheater_id(), new String[]{"theater_id"});
                 ps.setString(1, theater.getTheater_name());
-                ps.setInt(2, theater.getNumber_of_seats());
-                ps.setString(3, theater.getTheater_format());
-
+                ps.setString(2, theater.getTheater_format());
+                ps.setInt(3,theater.getNumber_of_rows());
+                ps.setInt(4,theater.getSeats_per_row());
                 return ps;
             }
-
         };
 
         jdbc.update(psc);
-
-
         return theater;
     }
+}
 
-    }
 
 >>>>>>> screening
