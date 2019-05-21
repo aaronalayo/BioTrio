@@ -12,12 +12,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
 @Controller
 public class TheaterController {
 
     @Autowired
     private TheaterRepository theaterRepo;
-    
+
     @GetMapping("/theaters")
     public String theater(Model model) {
 
@@ -35,41 +36,32 @@ public class TheaterController {
     }
 
     @PostMapping("/savetheater")
+//    @ResponseBody
     public String saveTheater(@ModelAttribute Theater theater){
 
-
-        theater.setTheater_name( theater.getTheater_name() );
-        theater.setTheater_format( theater.getTheater_format() );
-        theater.setNumber_of_seats( theater.getNumber_of_seats() );
-
-        theaterRepo.insert(theater);
+        Theater theaterInserted = theaterRepo.insert(theater);
 
         return "redirect:/theaters";
     }
 
     @GetMapping("/deletetheater/{theater_id}")
-    public String deleteTheater(@PathVariable int theater_id){
+    public String deleteTheater(@PathVariable(name = "theater_id") int theater_id){
         theaterRepo.delete(theater_id);
         return "redirect:/theaters";
     }
 
     @GetMapping("/edittheater/{theater_id}")
-    public String editTheater(Model m, @PathVariable int theater_id){
-
-        Theater theaterToEdit = theaterRepo.findTheater(theater_id);
+    public String editCar(Model m, @PathVariable(name = "theater_id") int id){
+        Theater theaterToEdit = theaterRepo.findTheater(id);
         m.addAttribute("theaterform", theaterToEdit);
         return "edit-theater";
     }
 
+
     @PostMapping("/updatetheater")
-    public String updateTheater(@ModelAttribute Theater theater){
-
-        theater.setTheater_name( theater.getTheater_name() );
-        theater.setNumber_of_seats( theater.getNumber_of_seats() );
-        theater.setTheater_format( theater.getTheater_format() );
-
+    public String saveEditTheater(@ModelAttribute Theater theater){
         theaterRepo.update(theater);
         return "redirect:/theaters";
     }
-
 }
+

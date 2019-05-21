@@ -38,8 +38,8 @@ public class ScreeningForm {
 
 
 
-
     @Override
     public String toString() {
-        return "ScreeningForm{" + "showing='" + showing + '\'' + ", movie_id=" + movie_id + '}';
+        return "ScreeningForm{" + "showing='" + showing + '\'' + ", movie_id=" + movie_id + ", theater_id=" + theater_id + '}';
     }
+}
