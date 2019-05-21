@@ -3,7 +3,7 @@
       xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
-    <title>Screenings view</title>
+    <title>Bokking</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -33,50 +33,33 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
-        <ul class="navbar-nav mr-auto">
 
-            <li class="nav-item active">
-                <a href="/addscreening"  class="nav-link">Add Screening</a>
-            </li>
-        </ul>
         <span class="navbar-text">
-        Here you can see the screenings
+        Here you can see the screenings for this movie
         </span>
 
     </div>
 </nav>
 
-    <table>
+<table>
     <thead>
 
 
-    <th scope="col">Showing</th>
+
     <th scope="col">Show Date</th>
     <th scope="col">Show Time</th>
     <th scope="col">Movies</th>
     <th scope="col">Theater</th>
-    <th scope="col">Edit</th>
-    <th scope="col">Delete</th>
+
+
     </thead>
 
-    <tr th:each="screening: ${screeninglist}" >
-        <th scope="row" th:text="${screening.getScreening_id()}">1</th>
-        <td th:text="${screening.getShowing().toLocalDate()}">{{Showing}}</td>
-        <td th:text="${screening.getShowing().toLocalTime()}">{{Time}}</td>
-        <td th:text="${screening.getMovie().getTitle()}">{{Movie}}</td>
-        <td th:text="${screening.getTheater().getTheater_name()}">{{Theater}}</td>
+        <tr th:each="movie: ${screeningsForMovies}">
 
-        <td>
-            <a th:href="@{'/screenings/edit/' + ${screening.screening_id}}"  class="btn btn-warning">Edit</a>
-        </td>
+            <td th:text="${movie.showing.toLocalDate()}"/>
+            <td th:text="${movie.showing.toLocalTime()}"/>
 
-
-        <td>
-            <a th:href="@{'/screenings/delete/' + ${screening.screening_id}}"  class="btn btn-danger">Delete</a>
-        </td>
-
-    </tr>
-
+        </tr>
 
 
 </table>

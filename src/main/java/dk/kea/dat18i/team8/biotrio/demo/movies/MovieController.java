@@ -26,9 +26,9 @@ public class MovieController {
 
     @GetMapping("/movies")
     public String movie(Model model){
-      List<Movie> movieList= movieRepo.showAllMovies();
-      model.addAttribute("movies",movieList);
-      return "show-movies";
+        List<Movie> movieList= movieRepo.showAllMovies();
+        model.addAttribute("movies",movieList);
+        return "show-movies";
     }
     @GetMapping("/addmovie")
     public String addMovie(Model model){
@@ -69,3 +69,4 @@ public class MovieController {
     }
 
 }
+
