@@ -1,59 +1,47 @@
 package dk.kea.dat18i.team8.biotrio.demo.Seat;
 
-import dk.kea.dat18i.team8.biotrio.demo.theater.Theater;
 
 public class Seat {
 
-    private int seat_no;
-    private Theater theater;
-    private int row;
-    //private boolean seat_reserved;
+    private int rowNo;
+    private int seatNo;
+    private boolean isBooked;
 
-
-    public  Seat() {}
-
-
-    public int getSeat_id() {
-        return getSeat_id();
+    public Seat(){};
+    public  Seat(int rowNo,int setNo) {
+        this.rowNo=rowNo;
+        this.seatNo=setNo;
+        this.isBooked=false;
     }
 
-    public void setSeat_no(int seat_no) {
-        this.seat_no = seat_no;
+
+
+    public int getRowNo(){return this.rowNo;}
+
+    public void setRowNo(int rowNo) {
+        this.rowNo = rowNo;
     }
 
-    public Theater getTheater() {
-        return theater;
+    public void setSeatNo(int seatNo) {
+        this.seatNo = seatNo;
     }
 
-    public void setTheater(Theater theater) {
-        this.theater = theater;
+    public int getSeatNo() { return seatNo; }
+
+    public boolean getIsBooked() {
+       return isBooked;
     }
 
-    public int getRow() {
-        return row;
+    public void setIsBooked(boolean isBooked) {
+        this.isBooked = isBooked;
     }
-
-    public void setRow(int row) {
-        this.row = row;
-    }
-
-    //public boolean getSeat_reserved() {
-      //  return seat_reserved;
-    //}
-
-   // public void setSeat_reserved(boolean seat_reserved) {
-     //   this.seat_reserved = seat_reserved;
-    //}
-
-
 
         @Override
         public String toString() {
             return "Seat{" +
-                    "theater" + theater +
-                    "row=" + row +
-                    ", seat_id=" + seat_no+
-                    //", seat_reserved=" + seat_reserved +
+                    "row number=" + rowNo +
+                    ", seat number=" + seatNo+
+                    ", isBooked=" + isBooked +
                     '}';
     }
 }
