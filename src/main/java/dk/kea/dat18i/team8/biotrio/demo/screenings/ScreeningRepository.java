@@ -14,6 +14,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import java.util.List;
@@ -39,7 +44,7 @@ public class ScreeningRepository {
             screening.setScreening_id( rs.getInt( "screening_id" ) );
             screening.setShowing( rs.getTimestamp( "showing" ).toLocalDateTime() );
             screening.setMovie( movieRepo.showMovie( rs.getInt( "movie_id" ) ));
-            //screening.setTheater( theaterRepo.findTheater( rs.getInt( "theater_id" ) ));
+            screening.setTheater( theaterRepo.findTheater( rs.getInt( "theater_id" ) ));
 
         }
         return screening;
@@ -135,16 +140,70 @@ public class ScreeningRepository {
     public List<Screening> findScreeningsWithMovie(int movie_id){
 
 
-       // SqlRowSet rs = jdbc.queryForRowSet( "SELECT * FROM screening WHERE movie_id = ?" + movie_id);
-        String sql = "SELECT * FROM screening WHERE movie_id =" + movie_id;
+       SqlRowSet rs = jdbc.queryForRowSet( "SELECT * FROM screening WHERE movie_id = " + movie_id);
 
-        List<Screening> screeningList = jdbc.query(sql, new BeanPropertyRowMapper<>(Screening.class));
-            return screeningList;
+        List<Screening> screeningList = new ArrayList<>();
+
+        while (rs.next()) {
+            Screening screening = new Screening();
+
+
+            screening.setScreening_id( rs.getInt( "screening_id" ) );
+            screening.setShowing( rs.getTimestamp( "showing" ).toLocalDateTime() );
+            //screening.setMovie(movieRepo.showMovie(rs.getInt("movie_id")));
+            screening.setTheater( theaterRepo.findTheater( rs.getInt( "theater_id" ) ) );
+
+            screeningList.add( screening );
+
+            // String sql = "SELECT * FROM screening WHERE movie_id =" + movie_id;
+
+
+            //List<Screening> screeningList = jdbc.query(sql, new BeanPropertyRowMapper<>(Screening.class));
+
+        }
+
+        return screeningList;
 
 
     }
 
+    public List<Screening> findScreeningsByDate(String showing) {
 
+
+//       DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy MM dd HH:mm");
+//       LocalDateTime localDateTime = LocalDateTime.from(showing);
+//
+//        Timestamp date = Timestamp.valueOf(showing);
+
+        System.out.println(showing);
+        SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+        String date = DATE_FORMAT.format(showing);
+
+
+        System.out.println(date);
+
+
+        Screening screeningDate = new Screening();
+        SqlRowSet rs = jdbc.queryForRowSet( "SELECT * FROM screening where DATE(showing) = DATE ('"+date+"')");
+
+        List<Screening> screeningByDate = new ArrayList<>();
+
+        while (rs.next()) {
+
+
+
+            screeningDate.setScreening_id( rs.getInt( "screening_id" ) );
+            screeningDate.setShowing( rs.getTimestamp( "showing" ).toLocalDateTime() );
+            screeningDate.setMovie(movieRepo.showMovie(rs.getInt("movie_id")));
+            screeningDate.setTheater( theaterRepo.findTheater( rs.getInt( "theater_id" ) ) );
+
+            screeningByDate.add( screeningDate );
+
+            System.out.println(screeningDate);
+        }
+        return screeningByDate;
+
+    }
 
 
 }

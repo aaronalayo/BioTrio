@@ -25,13 +25,13 @@ public class SeatController {
     @ResponseBody
     public List<Seat> seat(){
         System.out.println(seatRepo.checkSeats(screeningRepository.findScreening(3)));
-        return seatRepo.checkSeats(screeningRepository.findScreening(3));
+        return seatRepo.checkSeats(screeningRepository.findScreening(12));
 
     }
     @GetMapping("/seats")
     public String movie(Model model){
-        List<Seat> seatsList= seatRepo.checkSeats(screeningRepository.findScreening(3));
-        Theater theater = screeningRepository.findScreening(3).getMovie().getTheater();
+        List<Seat> seatsList= seatRepo.checkSeats(screeningRepository.findScreening(12));
+        Theater theater = screeningRepository.findScreening(12).getMovie().getTheater();
         int[] rows= new int[theater.getNumber_of_rows()];
         int[] seatsInRow= new int[theater.getSeats_per_row()];
         for (int i=0;i<theater.getNumber_of_rows();i++){

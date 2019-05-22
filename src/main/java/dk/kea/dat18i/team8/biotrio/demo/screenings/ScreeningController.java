@@ -18,11 +18,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.*;
 
 
-
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -123,8 +124,6 @@ public class ScreeningController {
     public String saveEditScreening( @ModelAttribute Screening upScreening, @ModelAttribute ScreeningForm screeningData){
 
 
-        DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("yyyy MM dd");
-
         upScreening.setShowing( upScreening.getShowing() );
         upScreening.setMovie( movieRepo.showMovie( screeningData.getMovie_id() ));
         upScreening.setTheater( theaterRepo.findTheater( screeningData.getTheater_id() ) );
@@ -145,4 +144,35 @@ public class ScreeningController {
 
     }
 
+
+
+
+    @GetMapping("/screenings-date")
+    public String getScreeningsDate(){
+        return "/screenings-date";
+    }
+
+    @PostMapping("/screenings-search")
+    public String showScreeningsByDate(@RequestParam String search, @ModelAttribute ScreeningForm screeningForm) {
+
+
+
+
+
+
+        screeningRepo.findScreeningsByDate( search );
+
+
+
+
+
+
+
+
+
+
+        //model.addAttribute("search", screeningsBySearch);
+
+        return "/screenings-date";
+    }
 }

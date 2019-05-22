@@ -53,14 +53,19 @@
 
     </thead>
 
-        <tr th:each="movie: ${screeningsForMovies}">
+
+
+
+
+    <tr th:each="movie: ${screeningsForMovies}">
+
 
             <td th:text="${movie.showing.toLocalDate()}"/>
             <td th:text="${movie.showing.toLocalTime()}"/>
-            <td th:text="${movie.getTheater()}"/>
+            <td th:text="${movie.theater.theater_name}"/>
 
         </tr>
-
+    </form>
 
 </table>
 
