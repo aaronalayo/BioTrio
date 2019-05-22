@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 package dk.kea.dat18i.team8.biotrio.demo.theater;
 
 import org.springframework.beans.factory.annotation.Autowired;
