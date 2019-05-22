@@ -170,14 +170,17 @@ public class ScreeningRepository {
     public List<Screening> findScreeningsByDate(String showing) {
 
 
-//       DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy MM dd HH:mm");
+      // DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy MM dd HH:mm");
 //       LocalDateTime localDateTime = LocalDateTime.from(showing);
 //
 //        Timestamp date = Timestamp.valueOf(showing);
 
-        System.out.println(showing);
-        SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
-        String date = DATE_FORMAT.format(showing);
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String date = formatter.format(showing);
+
+
+
+
 
 
         System.out.println(date);
