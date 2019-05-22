@@ -3,7 +3,7 @@
       xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
-    <title>Bokking</title>
+    <title>Screenings </title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -12,14 +12,14 @@
 <div class="container">
 
 
-    <h2>Search for screenings form</h2>
-    <form th:action="@{/screenings-search}" method="post">
+    <h2>Search for screenings</h2>
+    <form th:action="@{/screenings-search}"  method="post">
         <input type="text" name="search" id="search"/>
         <input type="submit" value="Search"/>
     </form>
 
 
-      <div th:if="${not #lists.isEmpty(search)}">
+    <div th:if="${not #lists.isEmpty(search)}">
             <h2>Screening List</h2>
             <table class="table table-striped">
                 <tr>
@@ -28,10 +28,10 @@
                     <th>Theater</th>
                 </tr>
 
-                <tr th:each="search: ${screeningsBySearch}">
-                    <td th:text="${search.t}"><a href="/screenings-date/">screening</a></td>
-                    <td th:text="${search.name}">name</td>
-                    <td th:text="${student.surname}">surname</td>
+                    <tr th:each="screeningSearch: ${search}">
+                    <td th:text="${screeningSearch.screening_id}"></td>
+                    <td th:text="${screeningSearch.getShowing().toLocalDate()}"></td>
+                    <td th:text="${screeningSearch.getTheater().getTheater_name()}"></td>
                 </tr>
             </table>
         </div>

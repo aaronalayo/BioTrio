@@ -14,15 +14,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 
 import java.sql.*;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import java.util.List;
 
+import static java.time.OffsetDateTime.parse;
 
 
 @Repository
@@ -170,25 +169,12 @@ public class ScreeningRepository {
     public List<Screening> findScreeningsByDate(String showing) {
 
 
-      // DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy MM dd HH:mm");
-//       LocalDateTime localDateTime = LocalDateTime.from(showing);
-//
-//        Timestamp date = Timestamp.valueOf(showing);
 
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        String date = formatter.format(showing);
-
-
-
-
-
-
-        System.out.println(date);
+        LocalDateTime dateTime = LocalDate.parse(showing).atStartOfDay();
 
 
         Screening screeningDate = new Screening();
-        SqlRowSet rs = jdbc.queryForRowSet( "SELECT * FROM screening where DATE(showing) = DATE ('"+date+"')");
-
+        SqlRowSet rs = jdbc.queryForRowSet( "SELECT * FROM screening where DATE(showing) = DATE ('"+dateTime+"' )");
         List<Screening> screeningByDate = new ArrayList<>();
 
         while (rs.next()) {
@@ -202,7 +188,7 @@ public class ScreeningRepository {
 
             screeningByDate.add( screeningDate );
 
-            System.out.println(screeningDate);
+
         }
         return screeningByDate;
 
