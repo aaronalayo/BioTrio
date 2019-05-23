@@ -31,6 +31,23 @@ public class ScreeningForm {
         return showing;
     }
 
+<<<<<<< HEAD
+    public void setShowing(String showing) {
+        this.showing = showing;
+    }
+
+    public int getMovie_id() {
+        return movie_id;
+    }
+
+    public void setMovie_id(int movie_id) {
+        this.movie_id = movie_id;
+    }
+=======
+    public String getShowing() {
+        return showing;
+    }
+
     public void setShowing(String showing) {
         this.showing = showing;
     }
@@ -43,8 +60,11 @@ public class ScreeningForm {
         this.movie_id = movie_id;
     }
 
+
+>>>>>>> screening
+
     @Override
     public String toString() {
-        return "ScreeningForm{" + "showing='" + showing + '\'' + ", movie_id=" + movie_id + ", theater_id=" + theater_id + '}';
+        return "ScreeningForm{" + "showing='" + showing + '\'' + ", movie_id=" + movie_id + '}';
     }
 }

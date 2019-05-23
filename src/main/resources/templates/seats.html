@@ -24,6 +24,16 @@
     tr:nth-child(even) {
         background-color: #dddddd;
     }
+
+    input.largerCheckbox {
+        width: 30px;
+        height: 35px;
+    }
+    input{
+        float:left;
+    }
+
+
 </style>
 
 <body>
@@ -32,15 +42,18 @@
 <h1>Seats</h1>
 
 
-<table>
-
         <form th:object="${seats}" th:action="@{/checkbox-submit}" method="post">
+
             <div th:each="seat: ${seats}">
-                <input type="checkbox" th:text="${seat}" th:checked="${seat.getIsBooked()}">
+                    <input type="checkbox" class="largerCheckbox"
+                      th:text="${seat.getRowNo()}+'-'+${seat.getSeatNo()}" th:checked="${seat.getIsBooked()}"
+                           th:disabled="${seat.getIsBooked()}" >
+                    <div th:if="${seat.getSeatNo()==seats.get(seats.size()-1).getSeatNo()}"><br/></div>
+
             </div>
             <input type="submit" value="Submit">
         </form>
-</table>
+
 
 
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
