@@ -1,10 +1,7 @@
 package dk.kea.dat18i.team8.biotrio.demo.screenings;
 
-
 import dk.kea.dat18i.team8.biotrio.demo.movies.Movie;
 import dk.kea.dat18i.team8.biotrio.demo.movies.MovieRepository;
-
-
 import dk.kea.dat18i.team8.biotrio.demo.theater.Theater;
 import dk.kea.dat18i.team8.biotrio.demo.theater.TheaterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,8 +55,6 @@ public class ScreeningController {
         model.addAttribute("screeninglist", screeningList);
 
 
-
-
         return "screening/show-screenings";
 
     }
@@ -68,9 +63,9 @@ public class ScreeningController {
     @GetMapping("/addscreening")
     public String addScreening(Model model) {
 
-       ScreeningForm screeningForm = new ScreeningForm();
-       List<Movie> movieList = movieRepo.showAllMovies();
-       List<Theater> theaterList= theaterRepo.findAllTheaters();
+        ScreeningForm screeningForm = new ScreeningForm();
+        List<Movie> movieList = movieRepo.showAllMovies();
+        List<Theater> theaterList= theaterRepo.findAllTheaters();
         model.addAttribute(  "movielist", movieList );
         model.addAttribute( "theaterlist", theaterList );
 
@@ -82,11 +77,9 @@ public class ScreeningController {
     @PostMapping("/savescreening")
     public String saveScreening(@ModelAttribute ScreeningForm screeningData){
         Screening newScreening = new Screening();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern( "yyyy MM dd HH:mm" );
 
-
-          DateTimeFormatter dtf = DateTimeFormatter.ofPattern( "yyyy MM dd HH:mm" );
-          newScreening.setShowing( LocalDateTime.parse(screeningData.getShowing(),dtf ));
-
+        newScreening.setShowing( LocalDateTime.parse(screeningData.getShowing(),dtf ));
         newScreening.setMovie( movieRepo.showMovie( screeningData.getMovie_id() ) );
         newScreening.setTheater( theaterRepo.findTheater( screeningData.getTheater_id() ) );
         screeningRepo.insertScreening(newScreening);
@@ -135,6 +128,14 @@ public class ScreeningController {
     @GetMapping("/screeningbymovie/{movie_id}")
     public String screeningByMovie(Model model, @PathVariable(name = "movie_id") int movie_id){
 
+
+<<<<<<<<< Temporary merge branch 1
+=========
+    @GetMapping("/screeningbymovie/{movie_id}")
+    public String screeningByMovie(Model model, @PathVariable(name = "movie_id") int movie_id){
+
+
+>>>>>>>>> Temporary merge branch 2
         List<Screening> screeningsForMovies= screeningRepo.findScreeningsWithMovie( movie_id );
 
 
@@ -143,25 +144,11 @@ public class ScreeningController {
         return "movies-screenings";
 
     }
+<<<<<<<<< Temporary merge branch 1
+=========
 
 
 
 
-    @GetMapping("/screenings-date")
-    public String getScreeningsDate(){
-        return "/screenings-date";
-    }
-
-    @PostMapping("/screenings-search")
-    public String showScreeningsByDate(@RequestParam (value = "search", required = false) String search, Model model) {
-
-
-
-        List<Screening> screeningSearch = screeningRepo.findScreeningsByDate( search );
-
-        model.addAttribute( "search", screeningSearch );
-
-
-        return "/screenings-date";
-    }
+>>>>>>>>> Temporary merge branch 2
 }
