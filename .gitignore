@@ -27,3 +27,13 @@ HELP.md
 
 ### VS Code ###
 .vscode/
+
+src/main/resources/templates/screening/add-screening\.html
+
+src/main/java/dk/kea/dat18i/team8/biotrio/demo/Seat/SeatController\.java
+
+src/main/java/dk/kea/dat18i/team8/biotrio/demo/screenings/ScreeningRepository\.java
+
+src/main/java/dk/kea/dat18i/team8/biotrio/demo/screenings/Screening\.java
+
+src/main/java/dk/kea/dat18i/team8/biotrio/demo/screenings/ScreeningController\.java
