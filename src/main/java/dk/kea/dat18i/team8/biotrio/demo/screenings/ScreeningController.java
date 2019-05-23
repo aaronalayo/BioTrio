@@ -129,13 +129,6 @@ public class ScreeningController {
     public String screeningByMovie(Model model, @PathVariable(name = "movie_id") int movie_id){
 
 
-<<<<<<<<< Temporary merge branch 1
-=========
-    @GetMapping("/screeningbymovie/{movie_id}")
-    public String screeningByMovie(Model model, @PathVariable(name = "movie_id") int movie_id){
-
-
->>>>>>>>> Temporary merge branch 2
         List<Screening> screeningsForMovies= screeningRepo.findScreeningsWithMovie( movie_id );
 
 
@@ -144,11 +137,5 @@ public class ScreeningController {
         return "movies-screenings";
 
     }
-<<<<<<<<< Temporary merge branch 1
-=========
 
-
-
-
->>>>>>>>> Temporary merge branch 2
 }
