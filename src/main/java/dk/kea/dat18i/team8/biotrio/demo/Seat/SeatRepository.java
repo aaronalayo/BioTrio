@@ -20,8 +20,7 @@ public class SeatRepository {
     private JdbcTemplate jdbc;
     @Autowired
     private ScreeningRepository screeningRepo;
-    @Autowired
-    private BookingRepository bookingRepo;
+
 
     public List<Seat> checkSeats(Screening screening) {
         //checks the theater of the screening

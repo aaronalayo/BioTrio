@@ -138,4 +138,20 @@ public class ScreeningController {
 
     }
 
+    @GetMapping("/screenings-date")
+    public String getScreeningsDate(){
+        return "/screenings-date";
+    }
+    @PostMapping("/screenings-search")
+    public String showScreeningsByDate(@RequestParam (value = "search", required = false) String search, Model model) {
+
+
+        List<Screening> screeningSearch = screeningRepo.findScreeningsByDate( search );
+
+        model.addAttribute( "search", screeningSearch );
+
+
+        return "/screenings-date";
+    }
+
 }

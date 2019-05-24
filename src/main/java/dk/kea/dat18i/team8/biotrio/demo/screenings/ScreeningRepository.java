@@ -171,13 +171,13 @@ public class ScreeningRepository {
         LocalDateTime dateTime = LocalDate.parse(showing).atStartOfDay();
 
 
-        Screening screeningDate = new Screening();
+
         SqlRowSet rs = jdbc.queryForRowSet( "SELECT * FROM screening where DATE(showing) = DATE ('"+dateTime+"' )");
         List<Screening> screeningByDate = new ArrayList<>();
 
         while (rs.next()) {
 
-
+            Screening screeningDate = new Screening();
 
             screeningDate.setScreening_id( rs.getInt( "screening_id" ) );
             screeningDate.setShowing( rs.getTimestamp( "showing" ).toLocalDateTime() );

@@ -18,8 +18,7 @@
         <input type="submit" value="Search"/>
     </form>
 
-
-    <div th:if="${not #lists.isEmpty(search)}">
+    <tr th:if="${not #lists.isEmpty(search)}">
             <h2>Screening List</h2>
             <table class="table table-striped">
                 <tr>
@@ -34,7 +33,8 @@
                     <td th:text="${screeningSearch.getTheater().getTheater_name()}"></td>
                 </tr>
             </table>
-        </div>
+        </tr>
+
 </div>
 </body>
 </html></html>

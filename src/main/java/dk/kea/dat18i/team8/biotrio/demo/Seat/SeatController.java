@@ -28,12 +28,5 @@ public class SeatController {
         return seatRepo.checkSeats(screeningRepository.findScreening(3));
 
     }
-    @GetMapping("/seats")
-    public String movie(Model model){
-        List<Seat> seatsList= seatRepo.checkSeats(screeningRepository.findScreening(3));
-        Theater theater = screeningRepository.findScreening(3).getMovie().getTheater();
-        //for()
-        model.addAttribute("seats",seatsList);
-        return "seats";
-    }
+
 }
