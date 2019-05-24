@@ -20,12 +20,11 @@ public class SeatRepository {
     private JdbcTemplate jdbc;
     @Autowired
     private ScreeningRepository screeningRepo;
-    @Autowired
-    private BookingRepository bookingRepo;
+
 
     public List<Seat> checkSeats(Screening screening) {
         //checks the theater of the screening
-        Theater theater = screening.getMovie().getTheater();
+        Theater theater = screening.getTheater();
         List<Seat> theaterSeats = new ArrayList<>();
         for (int i=1;i<=theater.getNumber_of_rows();i++){
             for (int j=1;j<=theater.getSeats_per_row();j++){

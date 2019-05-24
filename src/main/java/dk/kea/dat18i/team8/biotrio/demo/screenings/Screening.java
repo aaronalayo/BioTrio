@@ -21,7 +21,7 @@ public class Screening {
         this.theater = theater;
     }
 
-<<<<<<< HEAD
+
 
 
 
@@ -29,11 +29,7 @@ public class Screening {
     }
 
 
-=======
-    public Screening (){
-    }
 
->>>>>>> screening
     public int getScreening_id() {
 
         return screening_id;

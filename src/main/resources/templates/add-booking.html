@@ -42,9 +42,10 @@
          <div class="form-group">
 
             <label for="screening">Screenings</label>
-            <select th:field="${bookingform.screening}" class="form-control" id="screening" placeholder="Screenings">
-                <option th:each="screening: ${screeningList}"
-                        th:text="${screening.getShowing()}"></option>
+            <select th:field="${bookingform.screening.screening_id}" class="form-control" id="screening" placeholder="Screenings">
+                <option th:each="screenings: ${screening}"
+                        th:value="${screenings.getScreening_id()}"
+                        th:text="${screenings.getShowing()}"></option>
             </select>
         </div>
 

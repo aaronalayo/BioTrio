@@ -1,6 +1,7 @@
 
 package dk.kea.dat18i.team8.biotrio.demo.booking;
 
+
 import dk.kea.dat18i.team8.biotrio.demo.Seat.SeatRepository;
 import dk.kea.dat18i.team8.biotrio.demo.screenings.ScreeningRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +10,7 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
 
 import org.springframework.jdbc.core.PreparedStatementCreator;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
+
 
 
 import java.sql.*;
@@ -27,6 +27,7 @@ public class BookingRepository {
     private SeatRepository seatRepo;
     @Autowired
     private ScreeningRepository screeningRepo;
+
 
 
     public Booking findBooking(int booking_id) {
@@ -126,6 +127,8 @@ public class BookingRepository {
         return bookingByPhone;
 
     }
+
+
 }
 
 
