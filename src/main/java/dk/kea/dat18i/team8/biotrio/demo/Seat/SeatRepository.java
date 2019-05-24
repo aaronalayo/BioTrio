@@ -42,7 +42,6 @@ public class SeatRepository {
         }
         return theaterSeats;
     }
-        //TODO make this a method - void
         public List<Seat> test (Screening screening) {
             SqlRowSet rs = jdbc.queryForRowSet("SELECT row_no,seat_no from booking where screening_id=" + screening.getScreening_id());
             List<Seat> bookedSeats=new ArrayList<>();

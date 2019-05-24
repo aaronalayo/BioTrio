@@ -64,14 +64,14 @@
 
     </thead>
 
-    <tr th:each="booking: ${bookings}">
+    <tr th:each="booking: ${bookinglist}">
 
-        <th scope="row" th:text="${booking.booking_id}">1</th>
-        <td th:number="${booking.seat_id}">{{Seat_id}}</td>
-        <td th:text="${booking.phone_no}">{{Phone No}}</td>
-        <td th:number="${booking.screening}">{{Screening_id Booked}}</td>
-        <td><a class="btn btn-danger" th:href="@{'/deletebooking/' + ${booking.booking_id}}">Delete</a></td>
-        <td><a class="btn btn-success" th:href="@{'/editbooking/' + ${booking.booking_id}}" >Edit</a></td>
+        <th scope="row" th:text="${booking.getBooking_id}">1</th>
+        <td th:number="${booking.getSeat()}">{{Seat}}</td>
+        <td th:text="${booking.getPhone_no}">{{Phone No}}</td>
+        <td th:number="${booking.getScreening}">{{Screening Booked}}</td>
+        <td><a class="btn btn-danger" th:href="@{'/deletebooking/' + ${booking.getBooking_id}}">Delete</a></td>
+        <td><a class="btn btn-success" th:href="@{'/editbooking/' + ${booking.getBooking_id}}" >Edit</a></td>
         <td>
 
     </tr>

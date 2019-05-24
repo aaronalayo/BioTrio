@@ -23,8 +23,8 @@ public class BookingRepository {
 
     @Autowired
     private JdbcTemplate jdbc;
-   // @Autowired
-    //private SeatRepository seatRepo;
+    @Autowired
+    private SeatRepository seatRepo;
     @Autowired
     private ScreeningRepository screeningRepo;
 
@@ -106,4 +106,26 @@ public class BookingRepository {
                 "WHERE booking_id=" + booking.getBooking_id());
     }
 
+    public List <Booking> findBookingsbyPhoneNo(String phone_no){
+
+        SqlRowSet rs = jdbc.queryForRowSet("SELECT * FROM booking WHERE phone_no = " + phone_no);
+
+        List<Booking> bookingByPhone = new ArrayList<>();
+
+        while (rs.next()) {
+            Booking booking = new Booking();
+            booking.setBooking_id(rs.getInt("booking_id"));
+            booking.getSeat().setRowNo(rs.getInt("seat_row"));
+            booking.getSeat().setSeatNo(rs.getInt("seat_no"));
+            booking.setPhone_no(rs.getString("phone_no"));
+            booking.setScreening(screeningRepo.findScreening(rs.getInt("screening_id")));
+
+            bookingByPhone.add(booking);
+        }
+
+        return bookingByPhone;
+
+    }
 }
+
+

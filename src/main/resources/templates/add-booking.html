@@ -31,25 +31,20 @@
         <h1 class="display-4">Add new Booking</h1>
         <p class="lead">
 
-        <form action="/savebooking" method="post" th:object="${booking}">
+        <form th:action="@{'/savebookings'}" th:object="${bookingform}" method="post">
 
-        <div class="form-group">
-            <label for="seat_id">Seat</label>
-            <input type="number" class="form-control" th:field="${booking.seat_id}" id="seat_id" placeholder="Seat_id">
-        </div>
+
             <div class="form-group">
                 <label for="phone_no">Telephone Number</label>
-                <input type="text" class="form-control" th:field="${booking.phone_no}" id="phone_no" placeholder="Telephone Number" maxlength="20">
+                <input type="text" class="form-control" th:field="${bookingform.phone_no}" id="phone_no" placeholder="Telephone Number" maxlength="20">
             </div>
 
          <div class="form-group">
 
             <label for="screening">Screenings</label>
-            <select th:field="${booking.screening}" class="form-control" id="screening" placeholder="Screenings">
+            <select th:field="${bookingform.screening}" class="form-control" id="screening" placeholder="Screenings">
                 <option th:each="screening: ${screeningList}"
-                        th:text="${screening.screening_date}"
-                        th:text="${screening.screening_starts}">
-                </option>
+                        th:text="${screening.getShowing()}"></option>
             </select>
         </div>
 
