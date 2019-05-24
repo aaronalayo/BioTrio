@@ -11,15 +11,15 @@ import org.springframework.stereotype.Repository;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 
 
+
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import java.util.List;
 
-import static java.time.OffsetDateTime.parse;
+
 
 
 @Repository
@@ -147,15 +147,9 @@ public class ScreeningRepository {
 
             screening.setScreening_id( rs.getInt( "screening_id" ) );
             screening.setShowing( rs.getTimestamp( "showing" ).toLocalDateTime() );
-            //screening.setMovie(movieRepo.showMovie(rs.getInt("movie_id")));
             screening.setTheater( theaterRepo.findTheater( rs.getInt( "theater_id" ) ) );
 
             screeningList.add( screening );
-
-            // String sql = "SELECT * FROM screening WHERE movie_id =" + movie_id;
-
-
-            //List<Screening> screeningList = jdbc.query(sql, new BeanPropertyRowMapper<>(Screening.class));
 
         }
 
@@ -175,9 +169,10 @@ public class ScreeningRepository {
         SqlRowSet rs = jdbc.queryForRowSet( "SELECT * FROM screening where DATE(showing) = DATE ('"+dateTime+"' )");
         List<Screening> screeningByDate = new ArrayList<>();
 
-        while (rs.next()) {
+        SqlRowSet rs = jdbc.queryForRowSet( "SELECT * FROM screening where DATE(showing) = DATE ('"+dateTime+"')");
 
             Screening screeningDate = new Screening();
+
 
             screeningDate.setScreening_id( rs.getInt( "screening_id" ) );
             screeningDate.setShowing( rs.getTimestamp( "showing" ).toLocalDateTime() );
@@ -188,6 +183,7 @@ public class ScreeningRepository {
 
 
         }
+
         return screeningByDate;
 
     }
