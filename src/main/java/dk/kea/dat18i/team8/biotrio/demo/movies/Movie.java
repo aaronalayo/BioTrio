@@ -10,12 +10,11 @@ public class Movie {
     private String director;
     private String plot;
     private String format;
-    private Theater theater;
-    //private int theater_id;
+
 
     public Movie(){ }
 
-    public Movie(int id, String title, String genre, int duration, String director, String plot, String format, Theater theater) {
+    public Movie(int id, String title, String genre, int duration, String director, String plot, String format) {
         this.id = id;
         this.title = title;
         this.genre = genre;
@@ -23,8 +22,7 @@ public class Movie {
         this.director = director;
         this.plot = plot;
         this.format = format;
-        //this.theater_id=theater_id;
-        this.theater = theater;
+
     }
 
     public int getId() {
@@ -56,9 +54,6 @@ public class Movie {
 
     public String getFormat(){return format;}
     public void setFormat(String format){this.format=format;}
-
-    public Theater getTheater(){return theater;}
-    public void setTheater(Theater theater){this.theater=theater;}
 
     public String getPlot(){return plot;}
     public void setPlot(String plot){this.plot=plot;}

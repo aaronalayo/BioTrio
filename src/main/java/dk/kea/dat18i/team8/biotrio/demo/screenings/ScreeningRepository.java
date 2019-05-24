@@ -160,16 +160,12 @@ public class ScreeningRepository {
 
     public List<Screening> findScreeningsByDate(String showing) {
 
-
-
         LocalDateTime dateTime = LocalDate.parse(showing).atStartOfDay();
-
-
 
         SqlRowSet rs = jdbc.queryForRowSet( "SELECT * FROM screening where DATE(showing) = DATE ('"+dateTime+"' )");
         List<Screening> screeningByDate = new ArrayList<>();
 
-            while (rs.next()){
+            while(rs.next()){
             Screening screeningDate = new Screening();
 
 

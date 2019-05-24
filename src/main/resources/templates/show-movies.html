@@ -58,7 +58,6 @@
     <th scope="col">Plot</th>
     <th scope="col">Duration</th>
     <th scope="col">Format</th>
-    <th scope="col">Theater</th>
     <th scope="col">Edit</th>
     <th scope="col">Delete</th>
 
@@ -73,7 +72,7 @@
         <td th:text="${movie.plot}">{{Movie Plot}}</td>
         <td th:text="${movie.duration}">{{Movie Duration}}</td>
         <td th:text="${movie.format}">{{Movie Format}}</td>
-        <td th:text="${movie.theater.theater_name}">{{Theater Name}}</td>
+
 
         <td>
             <a th:href="@{'/editmovie/' + ${movie.id}}"  class="btn btn-warning">Edit</a>

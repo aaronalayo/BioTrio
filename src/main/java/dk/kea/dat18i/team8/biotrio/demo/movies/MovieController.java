@@ -1,7 +1,6 @@
 package dk.kea.dat18i.team8.biotrio.demo.movies;
 
-import dk.kea.dat18i.team8.biotrio.demo.theater.Theater;
-import dk.kea.dat18i.team8.biotrio.demo.theater.TheaterRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,8 +13,6 @@ public class MovieController {
 
     @Autowired
     private MovieRepository movieRepo;
-    @Autowired
-    private TheaterRepository theaterRepo;
 
     @GetMapping("/moviesview")
     @ResponseBody
@@ -32,8 +29,6 @@ public class MovieController {
     }
     @GetMapping("/addmovie")
     public String addMovie(Model model){
-        List<Theater> theaterList= theaterRepo.findAllTheaters();
-        model.addAttribute( "theaters", theaterList);
         model.addAttribute("movieform", new Movie());
 
         return "add-movie";
@@ -55,8 +50,6 @@ public class MovieController {
 
     @GetMapping("/editmovie/{movie_id}")
     public String editMovie (Model m, @PathVariable(name="movie_id") int id){
-        List<Theater> theaterList= theaterRepo.findAllTheaters();
-        m.addAttribute( "theaters", theaterList);
         Movie movieToEdit= movieRepo.showMovie(id);
         m.addAttribute("movie",movieToEdit);
         return "edit-movie";
