@@ -90,7 +90,9 @@ public class BookingController {
 
     @GetMapping("/seatsforscreening/{screening_id}")
     public String seatsForScreening(Model model,@PathVariable(name="screening_id") int screening_id){
+
         List<Seat> seatsList= seatRepo.checkSeats(screeningRepo.findScreening(screening_id));
+
         model.addAttribute("seats",seatsList);
         return "seats";
     }
