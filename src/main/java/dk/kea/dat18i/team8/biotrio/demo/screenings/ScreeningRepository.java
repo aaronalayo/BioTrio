@@ -1,6 +1,5 @@
 package dk.kea.dat18i.team8.biotrio.demo.screenings;
 
-import dk.kea.dat18i.team8.biotrio.demo.movies.Movie;
 import dk.kea.dat18i.team8.biotrio.demo.movies.MovieRepository;
 import dk.kea.dat18i.team8.biotrio.demo.theater.TheaterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -126,7 +125,7 @@ public class ScreeningRepository {
                 return ps;
             }
 
-    };
+        };
 
         jdbc.update(psc);
 
@@ -159,6 +158,7 @@ public class ScreeningRepository {
 
     }
 
+<<<<<<< HEAD
     public List<Screening> findScreeningsByDate(String showing) {
 
 
@@ -188,4 +188,6 @@ public class ScreeningRepository {
     }
 
 
+=======
+>>>>>>> screening
 }
