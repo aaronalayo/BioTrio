@@ -30,7 +30,7 @@ public class SeatController {
     }
     @GetMapping("/seats")
     public String movie(Model model){
-<<<<<<< HEAD
+
         List<Seat> seatsList= seatRepo.checkSeats(screeningRepository.findScreening(12));
         Theater theater = screeningRepository.findScreening(12).getMovie().getTheater();
         int[] rows= new int[theater.getNumber_of_rows()];
@@ -43,11 +43,11 @@ public class SeatController {
         }
         model.addAttribute("rows",rows);
         model.addAttribute("seatsInRow",seatsInRow);
-=======
+
         List<Seat> seatsList= seatRepo.checkSeats(screeningRepository.findScreening(3));
         Theater theater = screeningRepository.findScreening(3).getMovie().getTheater();
         //for()
->>>>>>> screening
+
         model.addAttribute("seats",seatsList);
         return "seats";
     }
