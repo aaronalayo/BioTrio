@@ -155,11 +155,13 @@ public class ScreeningController {
     @PostMapping("/screenings-search")
     public String showScreeningsByDate(@RequestParam (value = "search", required = false) String search, Model model) {
 
+        if(!search.isEmpty()) {
 
+            List<Screening> screeningSearch = screeningRepo.findScreeningsByDate( search );
+            model.addAttribute( "search", screeningSearch );
+        }else
+            return "/screenings-date";
 
-        List<Screening> screeningSearch = screeningRepo.findScreeningsByDate( search );
-
-        model.addAttribute( "search", screeningSearch );
 
 
         return "/screenings-date";
