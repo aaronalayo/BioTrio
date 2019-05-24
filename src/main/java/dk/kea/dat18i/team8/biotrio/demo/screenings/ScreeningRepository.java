@@ -169,8 +169,7 @@ public class ScreeningRepository {
         SqlRowSet rs = jdbc.queryForRowSet( "SELECT * FROM screening where DATE(showing) = DATE ('"+dateTime+"' )");
         List<Screening> screeningByDate = new ArrayList<>();
 
-        SqlRowSet rs = jdbc.queryForRowSet( "SELECT * FROM screening where DATE(showing) = DATE ('"+dateTime+"')");
-
+            while (rs.next()){
             Screening screeningDate = new Screening();
 
 
