@@ -68,15 +68,7 @@
                 <option value="3D">3D</option>
             </select>
         </div>
-        <div class="form-group">
-            <label >Theater</label>
-            <select th:field="${movie.theater.theater_id}" class="form-control" id="theater_id" name = "theaterId" placeholder="TheaterId" >
-                <option th:each="theater: ${theaters}"
-                        th:value="${theater.theater_id}"
-                        th:text="${theater.theater_name}">
-                </option>
-            </select>
-        </div>
+
 
 
         <button type="submit" class="btn btn-primary">Save</button>

@@ -16,8 +16,7 @@ public class MovieRepository {
 
     @Autowired
     private JdbcTemplate jdbc;
-    @Autowired
-    private TheaterRepository theatherRepo;
+
     public void setMovie(Movie movie,SqlRowSet rs){
         movie.setId(rs.getInt("movie_id"));
         movie.setTitle(rs.getString("title"));
@@ -26,8 +25,6 @@ public class MovieRepository {
         movie.setDuration(rs.getInt("duration"));
         movie.setGenre(rs.getString("genre"));
         movie.setFormat(rs.getString("movie_format"));
-
-        movie.setTheater(theatherRepo.findTheater(rs.getInt("theater_id")));
 
     }
 
@@ -56,14 +53,13 @@ public class MovieRepository {
             @Override
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
                 PreparedStatement ps = connection.prepareStatement
-                        ("INSERT INTO movie(title,director,plot,genre,duration,movie_format,theater_id) VALUES(?,?,?,?,?,?,?)");
+                        ("INSERT INTO movie(title,director,plot,genre,duration,movie_format) VALUES(?,?,?,?,?,?)");
                 ps.setString(1,movie.getTitle());
                 ps.setString(2,movie.getDirector());
                 ps.setString(3,movie.getPlot());
                 ps.setString(4,movie.getGenre());
                 ps.setInt(5,movie.getDuration());
                 ps.setString(6,movie.getFormat());
-                ps.setInt(7,movie.getTheater().getTheater_id());
 
                 return ps;
             }
@@ -81,7 +77,7 @@ public class MovieRepository {
 
 
                 PreparedStatement ps = connection.prepareStatement("UPDATE biotrio.movie " +
-                        "SET title= ?, director = ?,plot=?,genre=?,duration=?,movie_format=?, theater_id=? " +
+                        "SET title= ?, director = ?,plot=?,genre=?,duration=?,movie_format=? " +
                         "WHERE movie_id=  " + movie.getId());
                 ps.setString(1,movie.getTitle());
                 ps.setString(2,movie.getDirector());
@@ -89,7 +85,7 @@ public class MovieRepository {
                 ps.setString(4,movie.getGenre());
                 ps.setInt(5,movie.getDuration());
                 ps.setString(6,movie.getFormat());
-                ps.setInt(7,movie.getTheater().getTheater_id());
+
                 return ps;
             }
         };

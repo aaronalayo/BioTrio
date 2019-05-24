@@ -27,8 +27,6 @@ public class BookingRepository {
     private SeatRepository seatRepo;
     @Autowired
     private ScreeningRepository screeningRepo;
-    @Autowired
-    private SeatRepository seatRepo;
 
 
     public Booking findBooking(int booking_id) {
