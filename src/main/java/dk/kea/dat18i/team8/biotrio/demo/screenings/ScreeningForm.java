@@ -44,14 +44,6 @@ public class ScreeningForm {
         this.movie_id = movie_id;
     }
 
-
-
-
-
-
-
-
-
     @Override
     public String toString() {
         return "ScreeningForm{" + "showing='" + showing + '\'' + ", movie_id=" + movie_id + '}';

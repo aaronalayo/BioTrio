@@ -166,12 +166,14 @@ public class ScreeningRepository {
 
 
 
-        SqlRowSet rs = jdbc.queryForRowSet( "SELECT * FROM screening where DATE(showing) = DATE ('"+dateTime+"')");
-
+        SqlRowSet rs = jdbc.queryForRowSet( "SELECT * FROM screening where DATE(showing) = DATE ('"+dateTime+"' )");
         List<Screening> screeningByDate = new ArrayList<>();
 
-        while (rs.next()) {
+        SqlRowSet rs = jdbc.queryForRowSet( "SELECT * FROM screening where DATE(showing) = DATE ('"+dateTime+"')");
+
             Screening screeningDate = new Screening();
+
+
             screeningDate.setScreening_id( rs.getInt( "screening_id" ) );
             screeningDate.setShowing( rs.getTimestamp( "showing" ).toLocalDateTime() );
             screeningDate.setMovie(movieRepo.showMovie(rs.getInt("movie_id")));

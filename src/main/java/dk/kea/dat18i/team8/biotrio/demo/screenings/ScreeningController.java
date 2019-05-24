@@ -84,9 +84,6 @@ public class ScreeningController {
           DateTimeFormatter dtf = DateTimeFormatter.ofPattern( "yyyy MM dd HH:mm" );
           newScreening.setShowing( LocalDateTime.parse(screeningData.getShowing(),dtf ));
 
-
-
-
         newScreening.setMovie( movieRepo.showMovie( screeningData.getMovie_id() ) );
         newScreening.setTheater( theaterRepo.findTheater( screeningData.getTheater_id() ) );
         screeningRepo.insertScreening(newScreening);
@@ -148,12 +145,10 @@ public class ScreeningController {
 
 
 
-
     @GetMapping("/screenings-date")
     public String getScreeningsDate(){
         return "/screenings-date";
     }
-
     @PostMapping("/screenings-search")
     public String showScreeningsByDate(@RequestParam (value = "search", required = false) String search, Model model) {
 
@@ -169,6 +164,3 @@ public class ScreeningController {
         return "/screenings-date";
     }
 }
-
-
-

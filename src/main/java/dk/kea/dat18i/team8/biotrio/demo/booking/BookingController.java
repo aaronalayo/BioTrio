@@ -1,10 +1,13 @@
 
 package dk.kea.dat18i.team8.biotrio.demo.booking;
 
+import dk.kea.dat18i.team8.biotrio.demo.Seat.Seat;
+import dk.kea.dat18i.team8.biotrio.demo.Seat.SeatRepository;
 import dk.kea.dat18i.team8.biotrio.demo.movies.MovieRepository;
 import dk.kea.dat18i.team8.biotrio.demo.screenings.Screening;
 import dk.kea.dat18i.team8.biotrio.demo.screenings.ScreeningForm;
 import dk.kea.dat18i.team8.biotrio.demo.screenings.ScreeningRepository;
+import dk.kea.dat18i.team8.biotrio.demo.theater.Theater;
 import dk.kea.dat18i.team8.biotrio.demo.theater.TheaterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,13 +23,10 @@ public class BookingController {
     private BookingRepository bookingRepo;
 
     @Autowired
-    private MovieRepository movieRepo;
-
-    @Autowired
     private ScreeningRepository screeningRepo;
 
     @Autowired
-    private TheaterRepository theaterRepo;
+    private SeatRepository seatRepo;
 
 
     @GetMapping("/bookings")
@@ -86,5 +86,12 @@ public class BookingController {
         bookingRepo.findBookingsbyPhoneNo(search);
 
         return "/bookings-phone";
+    }
+
+    @GetMapping("/seatsforscreening/{screening_id}")
+    public String seatsForScreening(Model model,@PathVariable(name="screening_id") int screening_id){
+        List<Seat> seatsList= seatRepo.checkSeats(screeningRepo.findScreening(screening_id));
+        model.addAttribute("seats",seatsList);
+        return "seats";
     }
 }
