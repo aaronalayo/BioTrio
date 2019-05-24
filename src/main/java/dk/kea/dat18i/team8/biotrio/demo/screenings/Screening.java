@@ -24,8 +24,10 @@ public class Screening {
 
 
 
+
     public Screening (){
     }
+
 
 
     public int getScreening_id() {

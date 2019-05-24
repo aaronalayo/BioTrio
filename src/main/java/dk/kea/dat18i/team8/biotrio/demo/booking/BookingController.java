@@ -32,14 +32,15 @@ public class BookingController {
     @GetMapping("/bookings")
     public String booking(Model model) {
         List<Booking> bookingList = bookingRepo.findAllBookings();
-        model.addAttribute("booking", bookingList);
+        model.addAttribute("bookinglist", bookingList);
         return "show-bookings";
     }
 
     @GetMapping("/addbooking")
     public String addBooking(Model model) {
-        //List<Screening> screeningList= screeningRepo.findAllScreenings();
-        //model.addAttribute( "screenings", screeningList);
+
+        List<Screening> screeningList= screeningRepo.findAllScreenings();
+        model.addAttribute( "screening", screeningList);
         model.addAttribute("bookingform", new Booking());
         return "add-booking";
     }

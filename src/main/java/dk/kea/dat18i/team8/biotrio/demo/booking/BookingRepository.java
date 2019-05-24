@@ -23,8 +23,8 @@ public class BookingRepository {
 
     @Autowired
     private JdbcTemplate jdbc;
-   // @Autowired
-    //private SeatRepository seatRepo;
+    @Autowired
+    private SeatRepository seatRepo;
     @Autowired
     private ScreeningRepository screeningRepo;
     @Autowired

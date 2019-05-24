@@ -1,5 +1,6 @@
 package dk.kea.dat18i.team8.biotrio.demo.screenings;
 
+
 import dk.kea.dat18i.team8.biotrio.demo.movies.Movie;
 import dk.kea.dat18i.team8.biotrio.demo.movies.MovieRepository;
 import dk.kea.dat18i.team8.biotrio.demo.theater.Theater;
@@ -77,9 +78,12 @@ public class ScreeningController {
     @PostMapping("/savescreening")
     public String saveScreening(@ModelAttribute ScreeningForm screeningData){
         Screening newScreening = new Screening();
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern( "yyyy MM dd HH:mm" );
 
-        newScreening.setShowing( LocalDateTime.parse(screeningData.getShowing(),dtf ));
+
+
+          DateTimeFormatter dtf = DateTimeFormatter.ofPattern( "yyyy MM dd HH:mm" );
+          newScreening.setShowing( LocalDateTime.parse(screeningData.getShowing(),dtf ));
+
         newScreening.setMovie( movieRepo.showMovie( screeningData.getMovie_id() ) );
         newScreening.setTheater( theaterRepo.findTheater( screeningData.getTheater_id() ) );
         screeningRepo.insertScreening(newScreening);
@@ -138,6 +142,9 @@ public class ScreeningController {
 
     }
 
+
+
+
     @GetMapping("/screenings-date")
     public String getScreeningsDate(){
         return "/screenings-date";
@@ -156,5 +163,4 @@ public class ScreeningController {
 
         return "/screenings-date";
     }
-
 }
