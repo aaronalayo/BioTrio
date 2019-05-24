@@ -1,8 +1,5 @@
 package dk.kea.dat18i.team8.biotrio.demo.screenings;
-<<<<<<< HEAD
 
-=======
->>>>>>> screening
 
 import dk.kea.dat18i.team8.biotrio.demo.movies.Movie;
 import dk.kea.dat18i.team8.biotrio.demo.movies.MovieRepository;
@@ -81,14 +78,14 @@ public class ScreeningController {
     @PostMapping("/savescreening")
     public String saveScreening(@ModelAttribute ScreeningForm screeningData){
         Screening newScreening = new Screening();
-<<<<<<< HEAD
+
 
 
           DateTimeFormatter dtf = DateTimeFormatter.ofPattern( "yyyy MM dd HH:mm" );
           newScreening.setShowing( LocalDateTime.parse(screeningData.getShowing(),dtf ));
-=======
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern( "yyyy MM dd HH:mm" );
->>>>>>> screening
+
+
+
 
         newScreening.setMovie( movieRepo.showMovie( screeningData.getMovie_id() ) );
         newScreening.setTheater( theaterRepo.findTheater( screeningData.getTheater_id() ) );
@@ -138,10 +135,7 @@ public class ScreeningController {
     @GetMapping("/screeningbymovie/{movie_id}")
     public String screeningByMovie(Model model, @PathVariable(name = "movie_id") int movie_id){
 
-<<<<<<< HEAD
-=======
 
->>>>>>> screening
         List<Screening> screeningsForMovies= screeningRepo.findScreeningsWithMovie( movie_id );
 
 
@@ -150,7 +144,7 @@ public class ScreeningController {
         return "movies-screenings";
 
     }
-<<<<<<< HEAD
+
 
 
 
@@ -176,5 +170,5 @@ public class ScreeningController {
     }
 }
 
-}
+
 

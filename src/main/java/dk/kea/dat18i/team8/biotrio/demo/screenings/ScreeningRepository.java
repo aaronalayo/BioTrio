@@ -158,7 +158,6 @@ public class ScreeningRepository {
 
     }
 
-<<<<<<< HEAD
     public List<Screening> findScreeningsByDate(String showing) {
 
 
@@ -187,7 +186,4 @@ public class ScreeningRepository {
 
     }
 
-
-=======
->>>>>>> screening
 }
