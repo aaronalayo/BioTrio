@@ -34,29 +34,29 @@
 
         <form th:action="@{'/savemovie'}" method="post" th:object="${movieform}">
             <div class="form-group">
-                <label for="title">MovieTitle</label>
+                <label for="title">Movie Title</label>
                 <input th:field="${movieform.title}" class="form-control"  id="title" placeholder="Title">
             </div>
             <div class="form-group">
-                <label for="genre">MovieGenre</label>
+                <label for="genre">Movie Genre</label>
                 <input th:field="${movieform.genre}" class="form-control" id="genre" placeholder="Genre">
             </div>
             <div class="form-group">
-                <label for="director">MovieDirector</label>
-                <input th:field="${movieform.director}" class="form-control" id="director" placeholder="MovieDirector">
+                <label for="director">Movie Director</label>
+                <input th:field="${movieform.director}" class="form-control" id="director" placeholder="Movie Director">
             </div>
 
         <div class="form-group">
-            <label for="director">MoviePlot</label>
-            <input th:field="${movieform.plot}" class="form-control" id="plot" placeholder="MoviePlot">
+            <label for="director">Movie Plot</label>
+            <input th:field="${movieform.plot}" class="form-control" id="plot" placeholder="Movie Plot">
         </div>
         <div class="form-group">
-            <label for="duration">MovieDuration</label>
-            <input th:field="${movieform.duration}" class="form-control"  id="duration" placeholder="MovieDuration">
+            <label for="duration">Movie Duration</label>
+            <input th:field="${movieform.duration}" class="form-control"  id="duration" placeholder="Movie Duration">
         </div>
         <div class="form-group">
-            <label for="movie_format">MovieFormat</label>
-            <select th:field="${movieform.format}" class="form-control" id="movie_format" name = "movies" placeholder="MovieFormat">
+            <label for="format">Movie Format</label>
+            <select th:field="${movieform.format}" class="form-control" id="format" name = "movies" placeholder="Movie Format">
                 <option value="2D">2D</option>
                 <option value="3D">3D</option>
             </select>

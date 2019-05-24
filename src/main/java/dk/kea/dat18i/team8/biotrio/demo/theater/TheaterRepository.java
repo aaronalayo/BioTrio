@@ -86,7 +86,7 @@ public class TheaterRepository {
             @Override
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
 
-                PreparedStatement ps = connection.prepareStatement("UPDATE biotrio.theater " +
+                PreparedStatement ps = connection.prepareStatement("UPDATE theater " +
                         "SET theater_name=?,theater_format=?, number_of_rows=?, seats_per_row=? " +
                         "WHERE theater_id= " + theater.getTheater_id(), new String[]{"theater_id"});
                 ps.setString(1, theater.getTheater_name());
