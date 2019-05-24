@@ -1,40 +1,82 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/" xmlns:a="http://www.w3.org/1999/xhtml"
+
       xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Screenings </title>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 </head>
 <body>
-<div class="container">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="/">Bio Trio</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+            aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
 
+        <span class="navbar-text">
+        Here you can see the screenings for this date
+        </span>
 
-    <h2>Search for screenings</h2>
-    <form th:action="@{/screenings-search}"  method="post">
-        <input type="text" name="search" id="search"/>
-        <input type="submit" value="Search"/>
-    </form>
+    </div>
 
+    <form th:action="@{/screenings-search}" method="post">
+        <div class="container">
 
-    <div th:if="${not #lists.isEmpty(search)}">
-            <h2>Screening List</h2>
-            <table class="table table-striped">
-                <tr>
-                    <th>Screening</th>
-                    <th>Showing</th>
-                    <th>Theater</th>
-                </tr>
+            <h2>Search for screenings</h2>
 
-                    <tr th:each="screeningSearch: ${search}">
-                    <td th:text="${screeningSearch.screening_id}"></td>
-                    <td th:text="${screeningSearch.getShowing().toLocalDate()}"></td>
-                    <td th:text="${screeningSearch.getTheater().getTheater_name()}"></td>
-                </tr>
-            </table>
+            <input type="date" name="search" id="search"/>
+
+            <input type="submit" value="Search" class="btn btn-primary">
+
         </div>
+    </form>
+</nav>
+
+
+<div th:action="@{/screenings-date.html}" method="post"></div>
+<div th:if="${not #lists.isEmpty(search)}">
+    <table class="table table-dark">
+
+        <h2>Screening List</h2>
+        <tr>
+            <th>Screening</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Movie</th>
+            <th>Theater</th>
+        </tr>
+
+        <tr th:each="screening: ${search}">
+
+            <th scope="row" th:text="${screening.getScreening_id()}">1</th>
+            <td th:text="${screening.getShowing().toLocalDate()}">{{Showing}}</td>
+            <td th:text="${screening.getShowing().toLocalTime()}">{{Time}}</td>
+            <td th:text="${screening.getMovie().getTitle()}">{{Movie}}</td>
+            <td th:text="${screening.getTheater().getTheater_name()}">{{Theater}}</td>
+
+        </tr>
+
+    </table>
+
+
+
 </div>
+
+<div th:if="${#lists.isEmpty(search)}">
+    NO SCREENINGS AVAILABLE
+</div>
+
+
+
+
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
 </body>
-</html></html>
+</html>
