@@ -53,7 +53,7 @@ public class MovieRepository {
             @Override
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
                 PreparedStatement ps = connection.prepareStatement
-                        ("INSERT INTO movie(title,director,plot,genre,duration,movie_format) VALUES(?,?,?,?,?,?)");
+                        ("INSERT INTO movie(title,director,plot,genre,duration,format) VALUES(?,?,?,?,?,?)");
                 ps.setString(1,movie.getTitle());
                 ps.setString(2,movie.getDirector());
                 ps.setString(3,movie.getPlot());
