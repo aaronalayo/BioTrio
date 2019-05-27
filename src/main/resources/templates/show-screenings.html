@@ -3,61 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <title>Screenings view</title>
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-
+    <link th:href="@{/css/nav.css}" href="/static/css/nav.css" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/table.css}" href="/static/css/table.css" rel="stylesheet" type="text/css"/>
 </head>
-<style>
-    table {
-        font-family: arial, sans-serif;
-        border-collapse: collapse;
-        width: 50%;
-    }
-
-    td, th {
-        border: 1px solid #dddddd;
-        text-align: left;
-        padding: 8px;
-    }
-
-    tr:nth-child(even) {
-        background-color: #dddddd;
-    }
-</style>
-
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <a class="navbar-brand" href="/">Bio Trio</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarText">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item ">
+<header>
+    <div class="container">
+        <h1>BIO<span>TRIO</span></h1>
+        <nav>
+            <ul>
 
-                <a href="/screenings"  class="nav-link">Screenings</a>
-            </li>
-            <li class="nav-item active">
-                <a href="/addscreening"  class="nav-link">Add Screening</a>
-            </li>
-        </ul>
-        <span class="navbar-text">
-      Here you can create screenings
-    </span>
+                <li><a href="/screenings" class="active">Screenings</a></li>
+                <li><a href="/addscreening">Add screening</a></li>
+                <li><a href="/">Exit</a></li>
+            </ul>
+        </nav>
     </div>
-</nav>
-
-
-
-
-<table>
+</header>
+<div class="mainContent">
+<h2>List of screenings</h2>
+<table id="table">
     <thead>
 
 
     <th scope="col">Screening Id</th>
     <th scope="col">Screening Date</th>
     <th scope="col">Screening Time</th>
+    <th scope="col">Edit</th>
+    <th scope="col">Delete</th>
+
 
 
     </thead>
@@ -68,26 +42,15 @@
         <td th:text="${screening.screening_starts}">{{Screening Time}}</td>
 
         <td>
-            <a th:href="@{'/screenings/edit/' + ${screening.screening_id}}"  class="btn btn-warning">Edit</a>
+            <a th:href="@{'/screenings/edit/' + ${screening.screening_id}}"  class="button1">Edit</a>
         </td>
 
 
         <td>
-            <a th:href="@{'/screenings/delete/' + ${screening.screening_id}}"  class="btn btn-danger">Delete</a>
+            <a th:href="@{'/screenings/delete/' + ${screening.screening_id}}"  class="buttton2">Delete</a>
         </td>
-
-
     </tr>
 </table>
-
-
-
-
-
-
-
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
-
+</div>
 </body>
 </html>

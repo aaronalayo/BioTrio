@@ -3,6 +3,7 @@ package dk.kea.dat18i.team8.biotrio.demo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
@@ -11,9 +12,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.*;
 
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
 
 import java.util.List;
 
@@ -24,6 +26,11 @@ public class ScreeningController {
 
     @Autowired
     private ScreeningRepository screeningRepo;
+    @Autowired
+    private MovieRepository movieRepo;
+    @Autowired
+    private TheaterRepository theaterRepo;
+
 
     @GetMapping("/screeningview")
     @ResponseBody
@@ -39,8 +46,10 @@ public class ScreeningController {
     @GetMapping("/screenings")
     public String screening(Model model) {
 
+
         List<Screening> screeningList = screeningRepo.findAllScreenings();
-        model.addAttribute("screenings", screeningList);
+        model.addAttribute("screeninglist", screeningList);
+
 
         return "show-screenings";
 
@@ -50,30 +59,31 @@ public class ScreeningController {
     @GetMapping("/addscreening")
     public String addScreening(Model model) {
 
-        ScreeningForm newScreening = new ScreeningForm();
-        model.addAttribute("screening", newScreening);
+        ScreeningForm screeningForm = new ScreeningForm();
+        List<Movie> movieList = movieRepo.showAllMovies();
+        List<Theater> theaterList= theaterRepo.findAllTheaters();
+        model.addAttribute(  "movielist", movieList );
+        model.addAttribute( "theaterlist", theaterList );
 
+        model.addAttribute( "screeningForm", screeningForm);
 
         return "add-screening";
     }
 
     @PostMapping("/savescreening")
-    public String saveScreening( @RequestParam("screening-date") String screeningDate, @RequestParam("screening-start") String screeningStart){
+    public String saveScreening(@ModelAttribute ScreeningForm screeningData){
         Screening newScreening = new Screening();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern( "yyyy MM dd HH:mm" );
 
-        //DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("YYYY-mm-dd");
-        //DateTimeFormatter dtf2 = DateTimeFormatter.ofPattern("HH:mm");
-
-        newScreening.setScreening_date(LocalDate.parse(screeningDate));
-        newScreening.setScreening_starts(LocalTime.parse(screeningStart));
-
-
+        newScreening.setShowing( LocalDateTime.parse(screeningData.getShowing(),dtf ));
+        newScreening.setMovie( movieRepo.showMovie( screeningData.getMovie_id() ) );
+        newScreening.setTheater( theaterRepo.findTheater( screeningData.getTheater_id() ) );
         screeningRepo.insertScreening(newScreening);
 
         return "redirect:/screenings";
     }
 
-    @RequestMapping(value = "/screenings/delete/{screening_id}")
+    @RequestMapping(value = "screenings/delete/{screening_id}")
     public String removeScreening(@PathVariable int screening_id) {
 
         screeningRepo.deleteScreening(screening_id);
@@ -83,22 +93,64 @@ public class ScreeningController {
 
 
     @GetMapping("/screenings/edit/{screening_id}")
-    public String editCar(Model m, @PathVariable(name = "screening_id") int screening_id){
-        Screening screeningToEdit = screeningRepo.findScreening(screening_id);
-        m.addAttribute("screening", screeningToEdit);
+    public String editScreening(Model model, @PathVariable(name = "screening_id") int screening_id){
 
-        return "edit-screening";
+        Screening screeningToEdit = screeningRepo.findScreening(screening_id);
+        model.addAttribute("screening", screeningToEdit);
+        ScreeningForm screeningForm2 = new ScreeningForm(  );
+
+        List<Movie> movieList2 = movieRepo.showAllMovies();
+        List<Theater> theaterList2 = theaterRepo.findAllTheaters();
+
+        model.addAttribute(  "movielist2", movieList2 );
+        model.addAttribute( "theaterlist2", theaterList2 );
+        model.addAttribute( "screeningForm2", screeningForm2);
+
+        return "screening/edit-screening";
     }
 
-
-
     @PostMapping("/updatescreening")
-    public String saveEditScreening(@ModelAttribute Screening screening){
+    public String saveEditScreening( @ModelAttribute Screening upScreening, @ModelAttribute ScreeningForm screeningData){
 
 
-        screeningRepo.update(screening);
+        upScreening.setShowing( upScreening.getShowing() );
+        upScreening.setMovie( movieRepo.showMovie( screeningData.getMovie_id() ));
+        upScreening.setTheater( theaterRepo.findTheater( screeningData.getTheater_id() ) );
+
+        screeningRepo.update(upScreening);
 
         return "redirect:/screenings";
     }
 
+    @GetMapping("/screeningbymovie/{movie_id}")
+    public String screeningByMovie(Model model, @PathVariable(name = "movie_id") int movie_id){
+
+
+        List<Screening> screeningsForMovies= screeningRepo.findScreeningsWithMovie( movie_id );
+
+
+        model.addAttribute( "screeningsForMovies", screeningsForMovies);
+
+        return "movies-screenings";
+
+    }
+    @GetMapping("/screenings-date")
+    public String getScreeningsDate(){
+        return "screenings-date";
+    }
+
+    @PostMapping("/screenings-search")
+    public String showScreeningsByDate(@RequestParam (value = "search", required = false) String search, Model model) {
+
+
+
+        List<Screening> screeningSearch = screeningRepo.findScreeningsByDate( search );
+
+        model.addAttribute( "search", screeningSearch );
+
+
+        return "screenings-date";
+    }
 }
+
+

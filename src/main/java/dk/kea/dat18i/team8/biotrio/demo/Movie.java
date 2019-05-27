@@ -1,6 +1,6 @@
 package dk.kea.dat18i.team8.biotrio.demo;
 
-import java.time.LocalDateTime;
+import dk.kea.dat18i.team8.biotrio.demo.Theater;
 
 public class Movie {
     private int id;
@@ -8,14 +8,30 @@ public class Movie {
     private String genre;
     private int duration;
     private String director;
+    private String plot;
     private String format;
-    private LocalDateTime startDate;
-    private LocalDateTime endDate;
+    private Theater theater;
+    private String image;
+    //private int theater_id;
+
+    public Movie(){ }
+
+    public Movie(int id, String title, String genre, int duration, String director, String plot, String format, Theater theater, String image) {
+        this.id = id;
+        this.title = title;
+        this.genre = genre;
+        this.duration = duration;
+        this.director = director;
+        this.plot = plot;
+        this.format = format;
+        //this.theater_id=theater_id;
+        this.theater = theater;
+        this.image = image;
+    }
 
     public int getId() {
         return id;
     }
-
     public void setId(int id) {
         this.id = id;
     }
@@ -23,10 +39,10 @@ public class Movie {
     public String getTitle() {
         return this.title;
     }
-
     public void setTitle(String title) {
         this.title=title;
     }
+
     public String getGenre(){
         return genre;
     }
@@ -35,20 +51,21 @@ public class Movie {
     }
 
     public int getDuration(){return duration;}
-
     public void setDuration(int duration) {this.duration=duration;}
+
     public String getDirector(){return director;}
     public void setDirector(String director){this.director=director;}
 
     public String getFormat(){return format;}
     public void setFormat(String format){this.format=format;}
 
-    public void setStartDate(LocalDateTime startDate){this.startDate=startDate;}
-    public LocalDateTime getStartDate(){return startDate;}
-    public void setEndDate(LocalDateTime endDate){this.endDate=endDate;}
-    public LocalDateTime getEndDate(){return endDate;}
+    public Theater getTheater(){return theater;}
+    public void setTheater(Theater theater){this.theater=theater;}
 
+    public String getPlot(){return plot;}
+    public void setPlot(String plot){this.plot=plot;}
 
+    public String getImage() { return image;}
 
-
+    public void setImage(String image) { this.image = image; }
 }

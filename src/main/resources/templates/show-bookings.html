@@ -2,44 +2,39 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/" xmlns:a="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Bookings view</title>
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+    <title>Movies view</title>
+    <link th:href="@{/css/nav.css}" href="/static/css/nav.css" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/table.css}" href="/static/css/table.css" rel="stylesheet" type="text/css"/>
 
 </head>
-<style>
-    table {
-        font-family: arial, sans-serif;
-        border-collapse: collapse;
-        width: 50%;
-    }
-
-    td, th {
-        border: 1px solid #dddddd;
-        text-align: left;
-        padding: 8px;
-    }
-
-    tr:nth-child(even) {
-        background-color: #dddddd;
-    }
-</style>
 
 <body>
+<header>
+    <div class="container">
+        <h1>BIO<span>TRIO</span></h1>
+        <nav>
+            <ul>
 
-<h1>Bookings</h1>
+                <li>
+                    <input type="text" name="searchbox" class="search" placeholder="Search">
+                    <button>Search</button>
+                </li>
+                <li><a href="/">Exit</a></li>
+            </ul>
 
+        </nav>
+    </div>
+</header>
+<div class="mainContent">
+<h2>Bookings</h2>
 
-<table>
+<table id="table">
     <thead>
 
     <th scope="col">Screening booked</th>
     <th scope="col">Booking Id</th>
     <th scope="col">Booking Phone No</th>
     <th scope="col">Seat booked</th>
-
-
 
 
     </thead>
@@ -52,11 +47,6 @@
 
     </tr>
 </table>
-
-
-
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
-
+</div>
 </body>
 </html>

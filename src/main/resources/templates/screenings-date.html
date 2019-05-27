@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/" xmlns:a="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Movies view</title>
+    <link th:href="@{/nav.css}" href="/static/css/nav.css" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/table.css}" href="/static/css/table.css" rel="stylesheet" type="text/css"/>
+
+</head>
+<title>Screenings </title>
+</head>
+<link th:href="@{/css/nav.css}" href="/static/css/nav.css" rel="stylesheet" type="text/css"/>
+<link th:href="@{/css/table.css}" href="/static/css/table.css" rel="stylesheet" type="text/css"/>
+
+</head>
+<header>
+    <div class="container">
+        <h1>BIO<span>TRIO</span></h1>
+        <nav>
+            <ul>
+                <li><a href="/movies">Exit</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<body>
+
+<h2>Screening List</h2>
+    <div th:if="${not #lists.isEmpty(search)}">
+
+        <table class="table table-striped">
+            <tr>
+                <th>Screening</th>
+                <th>Showing</th>
+                <th>Theater</th>
+            </tr>
+
+            <tr th:each="screeningSearch: ${search}">
+                <td th:text="${screeningSearch.screening_id}"></td>
+                <td th:text="${screeningSearch.getShowing().toLocalDate()}"></td>
+                <td th:text="${screeningSearch.getTheater().getTheater_name()}"></td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

@@ -1,33 +1,45 @@
 package dk.kea.dat18i.team8.biotrio.demo;
-
 public class ScreeningForm {
 
-    private String screening_date_form;
-    private String screening_starts_form;
 
-    public ScreeningForm(){
+    private String showing;
+    private int movie_id;
+    private int theater_id;
 
+    public ScreeningForm(String showing, int movie_id, int theater_id) {
+        this.showing = showing;
+        this.movie_id = movie_id;
+        this.theater_id = theater_id;
     }
 
-    public ScreeningForm(String screening_date_form, String screening_starts_form) {
-        this.screening_date_form = screening_date_form;
-        this.screening_starts_form= screening_starts_form;
+    public int getTheater_id() {
+        return theater_id;
     }
 
-    public String getScreening_date_form() {
-
-        return screening_date_form;
+    public void setTheater_id(int theater_id) {
+        this.theater_id = theater_id;
     }
 
-    public void setScreening_date_form(String screening_date) {
-        this.screening_date_form =  screening_date_form;
+    public ScreeningForm(){}
+
+    public String getShowing() {
+        return showing;
     }
 
-    public String getScreening_starts_form() {
-        return screening_starts_form;
+    public void setShowing(String showing) {
+        this.showing = showing;
     }
 
-    public void setScreening_starts_form(String screening_starts_form) {
-        this.screening_starts_form = screening_starts_form;
+    public int getMovie_id() {
+        return movie_id;
+    }
+
+    public void setMovie_id(int movie_id) {
+        this.movie_id = movie_id;
+    }
+
+    @Override
+    public String toString() {
+        return "ScreeningForm{" + "showing='" + showing + '\'' + ", movie_id=" + movie_id + ", theater_id=" + theater_id + '}';
     }
 }

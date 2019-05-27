@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/" xmlns:a="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Movies view</title>
+    <link th:href="@{/css/nav.css}" href="/static/css/nav.css" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/table.css}" href="/static/css/table.css" rel="stylesheet" type="text/css"/>
+
+
+</head>
+
+<body>
+<header>
+    <div class="container">
+        <h1>BIO<span>TRIO</span></h1>
+        <nav>
+            <ul>
+                <li><a href="/moviesuser">Exit</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<div class="mainContent">
+<h2>Screenings</h2>
+
+<table id="table">
+    <thead>
+
+    <th scope="col">Show Date</th>
+    <th scope="col">Show Time</th>
+    <th scope="col">Theater</th>
+
+
+    </thead>
+
+    <tr th:each="movie: ${screeningsForMovies}">
+
+        <td th:text="${movie.showing.toLocalDate()}"/>
+        <td th:text="${movie.showing.toLocalTime()}"/>
+        <td th:text="${movie.theater.theater_name}"/>
+
+    </tr>
+
+</table>
+</div>
+</body>
+</html>

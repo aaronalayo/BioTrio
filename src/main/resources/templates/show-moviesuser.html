@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/" xmlns:a="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{/css/user.css}" href="/static/css/user.css" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/nav.css}" href="/static/css/nav.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<header>
+    <div class="container">
+        <h1>BIO<span>TRIO</span></h1>
+        <nav>
+            <ul>
+                <li><a href="/">Exit</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<div class="mainContent">
+    <div class="movieList">
+        <div class="movie" th:each="movie:${movies}">
+            <img th:if="${movie.getImage()}" th:src="${movie.getImage()}" class="image">
+            <div class="rightContent">
+                <p th:text="${'Title: '+ movie.title}"></p>
+                <p th:text="${'Genre: '+ movie.genre}"></p>
+                <p th:text="${'Director: '+ movie.director}"></p>
+                <p th:text="${'Plot: '+ movie.plot}"></p>
+                <p th:text="${'Duration: '+ movie.duration}"></p>
+                <a id='seeScreenings' th:href="${'/screeningbymovie/'+ movie.id}">See screenings</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
