@@ -12,7 +12,8 @@
     <tr>
         <th scope="col">Movie</th>
         <th scope="col">Theater</th>
-        <th scope="col">Date and time</th>
+        <th scope="col">Date</th>
+        <th scope="col">Time</th>
         <th scope="col">Row number</th>
         <th scope="col">Seat number</th>
         <th scope="col">Phone number</th>
@@ -25,7 +26,8 @@
     <tr th:each="booking: ${bookingList}">
         <td th:text="${booking.getScreening().getMovie().getTitle()}">{{Movie}}</td>
         <td th:text="${booking.getScreening().getTheater().getTheater_name()}">{{Theater}}</td>
-        <td th:text="${booking.getScreening().getShowing()}">{{Date and time}}</td>
+        <td th:text="${booking.getScreening().getShowing().toLocalDate()}">{{Date}}</td>
+        <td th:text="${booking.getScreening().getShowing().toLocalTime()}">{{Time}}</td>
         <td th:text="${booking.getSeat().getRowNo()}">{{Row no}}</td>
         <td th:text="${booking.getSeat().getSeatNo()}">{{Seat No}}</td>
         <td th:text="${booking.getPhone_no()}">{{PhoneNumber}}</td>

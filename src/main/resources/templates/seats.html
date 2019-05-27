@@ -67,15 +67,16 @@
                     for (var i=0; i<inputElems.length; i++) {
                         if (inputElems[i].type == "checkbox" && inputElems[i].checked == true){
                             count++;
-                            if(count==4){
-                            alert(count);}
+                            if(count==5){
+                                alert("You can choose maximum 4 seats!");
+                                inputElems[i].checked=false;}
                         }
                     }
                 }
                 function required(element)
                 {
                     if(element.value.trim()== ""){
-                        alert("Enter phonenumber!");
+                        alert("Enter phone number!");
                         element.focus();
                         return false;
                     }
