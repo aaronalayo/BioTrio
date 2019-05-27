@@ -1,5 +1,10 @@
-package dk.kea.dat18i.team8.biotrio.demo;
+package dk.kea.dat18i.team8.biotrio.demo.screenings;
 
+
+import dk.kea.dat18i.team8.biotrio.demo.movies.Movie;
+import dk.kea.dat18i.team8.biotrio.demo.movies.MovieRepository;
+import dk.kea.dat18i.team8.biotrio.demo.theater.Theater;
+import dk.kea.dat18i.team8.biotrio.demo.theater.TheaterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,11 +17,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.*;
 
 
+<<<<<<< HEAD:src/main/java/dk/kea/dat18i/team8/biotrio/demo/ScreeningController.java
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 
+=======
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+>>>>>>> master:src/main/java/dk/kea/dat18i/team8/biotrio/demo/screenings/ScreeningController.java
 import java.util.List;
 
 
@@ -51,7 +61,7 @@ public class ScreeningController {
         model.addAttribute("screeninglist", screeningList);
 
 
-        return "show-screenings";
+        return "screening/show-screenings";
 
     }
 
@@ -67,7 +77,7 @@ public class ScreeningController {
 
         model.addAttribute( "screeningForm", screeningForm);
 
-        return "add-screening";
+        return "screening/add-screening";
     }
 
     @PostMapping("/savescreening")
@@ -75,7 +85,15 @@ public class ScreeningController {
         Screening newScreening = new Screening();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern( "yyyy MM dd HH:mm" );
 
+<<<<<<< HEAD:src/main/java/dk/kea/dat18i/team8/biotrio/demo/ScreeningController.java
         newScreening.setShowing( LocalDateTime.parse(screeningData.getShowing(),dtf ));
+=======
+
+
+          DateTimeFormatter dtf = DateTimeFormatter.ofPattern( "yyyy MM dd HH:mm" );
+          newScreening.setShowing( LocalDateTime.parse(screeningData.getShowing(),dtf ));
+
+>>>>>>> master:src/main/java/dk/kea/dat18i/team8/biotrio/demo/screenings/ScreeningController.java
         newScreening.setMovie( movieRepo.showMovie( screeningData.getMovie_id() ) );
         newScreening.setTheater( theaterRepo.findTheater( screeningData.getTheater_id() ) );
         screeningRepo.insertScreening(newScreening);
@@ -121,7 +139,37 @@ public class ScreeningController {
 
         return "redirect:/screenings";
     }
+    @GetMapping("/screeningbymovie/{movie_id}")
+    public String screeningByMovie(Model model, @PathVariable(name = "movie_id") int movie_id){
 
+
+        List<Screening> screeningsForMovies= screeningRepo.findScreeningsWithMovie( movie_id );
+
+
+        model.addAttribute( "screeningsForMovies", screeningsForMovies);
+
+        return "movies-screenings";
+
+    }
+
+
+
+
+    @GetMapping("/screenings-date")
+    public String getScreeningsDate(){
+        return "/screenings-date";
+    }
+    @PostMapping("/screenings-search")
+    public String showScreeningsByDate(@RequestParam (value = "search", required = false) String search, Model model) {
+
+        if(!search.isEmpty()) {
+
+            List<Screening> screeningSearch = screeningRepo.findScreeningsByDate( search );
+            model.addAttribute( "search", screeningSearch );
+        }else
+            return "/screenings-date";
+
+<<<<<<< HEAD:src/main/java/dk/kea/dat18i/team8/biotrio/demo/ScreeningController.java
     @GetMapping("/screeningbymovie/{movie_id}")
     public String screeningByMovie(Model model, @PathVariable(name = "movie_id") int movie_id){
 
@@ -150,6 +198,11 @@ public class ScreeningController {
 
 
         return "screenings-date";
+=======
+
+
+        return "/screenings-date";
+>>>>>>> master:src/main/java/dk/kea/dat18i/team8/biotrio/demo/screenings/ScreeningController.java
     }
 }
 

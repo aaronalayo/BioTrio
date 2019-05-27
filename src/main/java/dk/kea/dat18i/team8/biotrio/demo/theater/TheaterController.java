@@ -1,4 +1,5 @@
-package dk.kea.dat18i.team8.biotrio.demo;
+
+package dk.kea.dat18i.team8.biotrio.demo.theater;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -63,4 +64,9 @@ public class TheaterController {
         theaterRepo.update(theater);
         return "redirect:/theaters";
     }
+<<<<<<< HEAD:src/main/java/dk/kea/dat18i/team8/biotrio/demo/TheaterController.java
 }
+=======
+}
+
+>>>>>>> master:src/main/java/dk/kea/dat18i/team8/biotrio/demo/theater/TheaterController.java

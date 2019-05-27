@@ -28,6 +28,7 @@
 <table id="table">
     <thead>
 
+<<<<<<< HEAD
     <th scope="col">Id</th>
     <th scope="col">Name</th>
     <th scope="col">Format</th>
@@ -35,11 +36,23 @@
     <th scope="col">Seats Per Row</th>
     <th scope="col">Edit</th>
     <th scope="col">Delete</th>
+=======
+    <th scope="col">Theater Id</th>
+    <th scope="col">Theater Name</th>
+
+    <th scope="col">Theater Format</th>
+    <th scope="col">Number Of Rows</th>
+    <th scope="col">Seats Per Row</th>
+    <th scope="col"></th>
+    <th scope="col"></th>
+
+>>>>>>> master
 
     </thead>
     <tr th:each="theater: ${theaters}">
 
         <th scope="row" th:text="${theater.theater_id}">1</th>
+<<<<<<< HEAD
         <td th:text="${theater.theater_name}">{{Name}}</td>
         <td th:text="${theater.theater_format}">{Format}}</td>
         <td th:text="${theater.number_of_rows}">{Number OfR ows}</td>
@@ -50,6 +63,15 @@
         <td>
             <a  role="button" class="button2" th:href="@{'/deletetheater/' + ${theater.theater_id}}">Delete</a>
         </td>
+=======
+        <td th:text="${theater.theater_name}">{{TheaterName}}</td>
+        <td th:text="${theater.theater_format}">{{TheaterFormat}}</td>
+        <td th:text="${theater.number_of_rows}">{NumberOfRows}</td>
+        <td th:text="${theater.seats_per_row}">{SeatsPerRow}</td>
+        <td><a class="btn btn-light" th:href="@{'/deletetheater/' + ${theater.theater_id}}">Delete</a></td>
+        <td><a class="btn btn-light" th:href="@{'/edittheater/' + ${theater.theater_id}}">Edit</a></td>
+
+>>>>>>> master
     </tr>
 </table>
 </div>

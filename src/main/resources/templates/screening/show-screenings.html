@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/" xmlns:a="http://www.w3.org/1999/xhtml"
+      xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Screenings view</title>
+    <link th:href="@{/css/nav.css}" href="/static/css/nav.css" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/table.css}" href="/static/css/table.css" rel="stylesheet" type="text/css"/>
+</head>
+<<<<<<< HEAD:src/main/resources/templates/show-screenings.html
+<body>
+<header>
+    <div class="container">
+        <h1>BIO<span>TRIO</span></h1>
+        <nav>
+            <ul>
+
+                <li><a href="/screenings" class="active">Screenings</a></li>
+                <li><a href="/addscreening">Add screening</a></li>
+                <li><a href="/">Exit</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<div class="mainContent">
+<h2>List of screenings</h2>
+<table id="table">
+    <thead>
+
+
+    <th scope="col">Screening Id</th>
+    <th scope="col">Screening Date</th>
+    <th scope="col">Screening Time</th>
+    <th scope="col">Edit</th>
+    <th scope="col">Delete</th>
+
+
+
+=======
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 50%;
+    }
+
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+
+</style>
+
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="/">Bio Trio</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto">
+
+            <li class="nav-item active">
+                <a href="/addscreening"  class="nav-link">Add Screening</a>
+            </li>
+        </ul>
+        <span class="navbar-text">
+        Here you can see the screenings
+        </span>
+
+    </div>
+</nav>
+
+    <table>
+    <thead>
+
+
+    <th scope="col">Showing</th>
+    <th scope="col">Show Date</th>
+    <th scope="col">Show Time</th>
+    <th scope="col">Movies</th>
+    <th scope="col">Theater</th>
+    <th scope="col">Edit</th>
+    <th scope="col">Delete</th>
+>>>>>>> master:src/main/resources/templates/screening/show-screenings.html
+    </thead>
+
+    <tr th:each="screening: ${screeninglist}" >
+        <th scope="row" th:text="${screening.getScreening_id()}">1</th>
+        <td th:text="${screening.getShowing().toLocalDate()}">{{Showing}}</td>
+        <td th:text="${screening.getShowing().toLocalTime()}">{{Time}}</td>
+        <td th:text="${screening.getMovie().getTitle()}">{{Movie}}</td>
+        <td th:text="${screening.getTheater().getTheater_name()}">{{Theater}}</td>
+
+        <td>
+            <a th:href="@{'/screenings/edit/' + ${screening.screening_id}}"  class="button1">Edit</a>
+        </td>
+
+
+        <td>
+            <a th:href="@{'/screenings/delete/' + ${screening.screening_id}}"  class="buttton2">Delete</a>
+        </td>
+    </tr>
+<<<<<<< HEAD:src/main/resources/templates/show-screenings.html
+</table>
+</div>
+=======
+
+
+
+</table>
+
+</body>
+
+
+
+
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+>>>>>>> master:src/main/resources/templates/screening/show-screenings.html
+</body>
+</html>

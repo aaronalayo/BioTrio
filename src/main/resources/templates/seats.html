@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/" xmlns:a="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Seats</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+
+</head>
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 50%;
+    }
+
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+
+    input.largerCheckbox {
+        width: 30px;
+        height: 35px;
+    }
+    input {
+        float: left;
+    }
+
+
+</style>
+
+<body>
+
+
+<h1>Seats</h1>
+
+
+<form th:object="${seats}" th:action="@{/checkbox-submit}" method="post">
+    <table>
+        <th:block th:each="seat: ${seats}">
+            <th:block th:if="${seat.getSeatNo()==1}">
+                <tr>
+                    <td th:text="'Row ' + ${seat.getRowNo()}">
+            </th:block>
+            <td><input type="checkbox" class="largerCheckbox"
+                       th:checked="${seat.getIsBooked()}"
+                       th:disabled="${seat.getIsBooked()}">
+            </td>
+
+            <th:block th:if="${seat.getSeatNo()==seats.get(seats.size()-1).getSeatNo()}">
+                </tr>
+            </th:block>
+        </th:block>
+    </table>
+    <input type="submit" value="Submit">
+</form>
+
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+
+</body>
+</html>
