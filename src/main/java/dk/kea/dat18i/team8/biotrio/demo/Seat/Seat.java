@@ -8,9 +8,9 @@ public class Seat {
     private boolean isBooked;
 
     public Seat(){};
-    public  Seat(int rowNo,int setNo) {
+    public  Seat(int rowNo,int seatNo) {
         this.rowNo=rowNo;
-        this.seatNo=setNo;
+        this.seatNo=seatNo;
         this.isBooked=false;
     }
 

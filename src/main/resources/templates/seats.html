@@ -44,19 +44,24 @@
 <h1>Seats</h1>
 
 
-<form th:object="${seats}" th:action="@{/checkbox-submit}" method="post">
+<form th:object="${seatsCheck}" th:action="@{/saveseat}" method="post">
     <table>
-        <th:block th:each="seat: ${seats}">
+        <th:block th:each="seat: ${seatsCheck.getSeats()}">
             <th:block th:if="${seat.getSeatNo()==1}">
-                <tr>
-                    <td th:text="'Row ' + ${seat.getRowNo()}">
+                <tr><td th:text="'Row ' + ${seat.getRowNo()}">
+
             </th:block>
-            <td><input type="checkbox" class="largerCheckbox"
+            <td>
+                <input type="checkbox" id="check "name="check" class="largerCheckbox"
                        th:checked="${seat.getIsBooked()}"
-                       th:disabled="${seat.getIsBooked()}">
+                       th:disabled="${seat.getIsBooked()}"
+                       th:value="${seat.getRowNo()+'-'+seat.getSeatNo()}"
+                       th:field="*{checkedSeats}">
+
+
             </td>
 
-            <th:block th:if="${seat.getSeatNo()==seats.get(seats.size()-1).getSeatNo()}">
+            <th:block th:if="${seat.getSeatNo()==seatsCheck.getSeats().get(seatsCheck.getSeats().size()-1).getSeatNo()}">
                 </tr>
             </th:block>
         </th:block>

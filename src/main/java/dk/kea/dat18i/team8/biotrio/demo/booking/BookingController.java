@@ -2,22 +2,23 @@
 package dk.kea.dat18i.team8.biotrio.demo.booking;
 
 import dk.kea.dat18i.team8.biotrio.demo.Seat.Seat;
+import dk.kea.dat18i.team8.biotrio.demo.Seat.SeatCheck;
 import dk.kea.dat18i.team8.biotrio.demo.Seat.SeatRepository;
-import dk.kea.dat18i.team8.biotrio.demo.movies.MovieRepository;
 import dk.kea.dat18i.team8.biotrio.demo.screenings.Screening;
 import dk.kea.dat18i.team8.biotrio.demo.screenings.ScreeningForm;
 import dk.kea.dat18i.team8.biotrio.demo.screenings.ScreeningRepository;
-import dk.kea.dat18i.team8.biotrio.demo.theater.Theater;
-import dk.kea.dat18i.team8.biotrio.demo.theater.TheaterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-public class BookingController {
+public class BookingController{
 
     @Autowired
     private BookingRepository bookingRepo;
@@ -91,9 +92,43 @@ public class BookingController {
     @GetMapping("/seatsforscreening/{screening_id}")
     public String seatsForScreening(Model model,@PathVariable(name="screening_id") int screening_id){
 
-        List<Seat> seatsList= seatRepo.checkSeats(screeningRepo.findScreening(screening_id));
+        SeatCheck seatCheck=new SeatCheck(  );
+        seatCheck.setSeats( seatRepo.checkSeats(screeningRepo.findScreening(screening_id)));
+        seatCheck.setCheckedSeats( new ArrayList<>());
 
-        model.addAttribute("seats",seatsList);
+        model.addAttribute( "screening",screeningRepo.findScreening( screening_id ) );
+        model.addAttribute("seatsCheck",seatCheck);
         return "seats";
     }
+
+
+    @PostMapping("/saveseat")
+    public String addSeats(@ModelAttribute SeatCheck seatCheck){
+
+        List<Seat> seats=new ArrayList<>(  );
+
+        for(String checkedSeat:seatCheck.getCheckedSeats()){
+            Seat seat=new Seat(  );
+            String[] seatPlace=checkedSeat.split(  "-");
+            seat.setRowNo( Integer.valueOf( seatPlace[0] ) );
+            seat.setSeatNo( Integer.valueOf( seatPlace[1] ) );
+            seats.add(seat);
+        }
+        System.out.println(seats);
+
+
+        return "checked-seats";
+    }
+
+
+
+
+//    @RequestMapping(value = "/processSeatForm", method=RequestMethod.POST)
+//    public String processForm(@ModelAttribute(value="seats") SeatCheck seatCheck) {
+//        // Get value of checked item.
+//
+//        List<String> selectedSeats = seatCheck.getCheckedSeats();
+//
+//        return "checked-seats";
+//    }
 }
