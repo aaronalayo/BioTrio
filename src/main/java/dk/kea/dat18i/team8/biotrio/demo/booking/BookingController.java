@@ -102,8 +102,8 @@ public class BookingController{
             seat.setSeatNo( Integer.valueOf( seatPlace[1] ) );
             seats.add(seat);
         }
-        System.out.println(seats);
-        //model.addAttribute("seats",seats);
+        List<Booking> bookingList=new ArrayList<>();
+
         for (Seat seat:seats){
             Booking booking=new Booking();
             booking.setScreening(screeningRepo.findScreening(screening_id));
@@ -111,9 +111,11 @@ public class BookingController{
             booking.setSeat(seat);
             System.out.println(booking);
             bookingRepo.insertBooking(booking);
+            bookingList.add(booking);
             model.addAttribute("booking",booking);
         }
-        return "redirect:/checked-seats";
+        model.addAttribute("bookingList",bookingList);
+        return "booking-details";
     }
 
 }
