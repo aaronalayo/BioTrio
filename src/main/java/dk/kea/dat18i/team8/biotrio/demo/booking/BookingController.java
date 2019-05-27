@@ -62,6 +62,8 @@ public class BookingController{
 
     @GetMapping("/bookings-phone")
     public String getBookingsPhone() {
+
+
         return "/bookings-phone";
     }
 
