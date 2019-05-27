@@ -22,20 +22,23 @@
 
         </ul>
         <span class="navbar-text">
-      See bokked seats here
+      See booked seats here
     </span>
     </div>
 </nav>
 
-<form th:action="@{'/checked-seats'}" method="post" th:object="${seats}">
+<form th:action="@{'/savebooking'}" method="post" th:object="${seats}">
 
 <table>
 <tr th:each="seat: ${seats}" >
-    <th scope="row" th:value="${seat.getSeatNo()}" th:text="${seat.getSeatNo()}">1</th>
-    <td th:value="${seat.getRowNo()}" th:text="${seat.getRowNo()}">
-<!--    <td th:text="${seat.getIsBooked()}"></td>-->
-
+    <th scope="row" th:text="${seat.getSeatNo()}">1</th>
+    <td th:text="${seat.getRowNo()}">
     </tr>
+<tr>
+    Enter phone number:<br>
+    <input type="text" name="phonenumber" >
+    <input type="submit" value="Book">
+</tr>
 
 </table>
 </form>

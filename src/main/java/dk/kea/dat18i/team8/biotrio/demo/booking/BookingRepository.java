@@ -73,7 +73,6 @@ public class BookingRepository {
     public Booking insertBooking(Booking booking) {
 
         PreparedStatementCreator psc = new PreparedStatementCreator() {
-
             @Override
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
 
