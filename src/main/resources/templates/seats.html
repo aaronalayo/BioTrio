@@ -8,6 +8,7 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 
+
 </head>
 <style>
     table {
@@ -43,22 +44,45 @@
 <h1>Seats</h1>
 
 
-<form th:object="${seats}" th:action="@{/checkbox-submit}" method="post">
+<form th:object="${seatsCheck}" th:action="'/saveseats/'+${screening_id}" method="post">
     <table>
-        <th:block th:each="seat: ${seats}">
+        <th:block th:each="seat: ${seatsCheck.getSeats()}">
             <th:block th:if="${seat.getSeatNo()==1}">
-                <tr>
-                    <td th:text="'Row ' + ${seat.getRowNo()}">
-            </th:block>
-            <td><input type="checkbox" class="largerCheckbox"
-                       th:checked="${seat.getIsBooked()}"
-                       th:disabled="${seat.getIsBooked()}">
-            </td>
+                <tr><td th:text="'Row ' + ${seat.getRowNo()}">
 
-            <th:block th:if="${seat.getSeatNo()==seats.get(seats.size()-1).getSeatNo()}">
+            </th:block>
+            <td>
+                <input type="checkbox" id="check "name="check" class="largerCheckbox"
+                       th:checked="${seat.getIsBooked()}"
+                       th:disabled="${seat.getIsBooked()}"
+                       th:value="${seat.getRowNo()+'-'+seat.getSeatNo()}"
+                       th:field="*{checkedSeats}" onClick="checkboxes();">
+            </td>
+            <script>
+                function checkboxes()
+                {
+                    var inputElems = document.getElementsByTagName("input"),
+                        count = 0;
+
+                    for (var i=0; i<inputElems.length; i++) {
+                        if (inputElems[i].type == "checkbox" && inputElems[i].checked == true){
+                            count++;
+                            if(count==4){
+                            alert(count);}
+                        }
+
+                    }
+                }
+
+            </script>
+            <th:block th:if="${seat.getSeatNo()==seatsCheck.getSeats().get(seatsCheck.getSeats().size()-1).getSeatNo()}">
                 </tr>
             </th:block>
         </th:block>
+        <tr>
+            Enter phone number:<br>
+            <input type="text" name="phonenumber" >
+            </tr>
     </table>
     <input type="submit" value="Submit">
 </form>

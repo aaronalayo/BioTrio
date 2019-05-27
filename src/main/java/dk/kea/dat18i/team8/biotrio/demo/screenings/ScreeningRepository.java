@@ -84,7 +84,7 @@ public class ScreeningRepository {
 
 
 
-                PreparedStatement ps = connection.prepareStatement( "INSERT INTO biotrio.screening (showing, movie_id, theater_id)VALUES (?,?,?)");
+                PreparedStatement ps = connection.prepareStatement( "INSERT INTO screening (showing, movie_id, theater_id)VALUES (?,?,?)");
 
                 ps.setTimestamp( 1,Timestamp.valueOf(screening.getShowing()));
                 ps.setInt( 2, screening.getMovie().getId());
@@ -114,7 +114,7 @@ public class ScreeningRepository {
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
 
 
-                PreparedStatement ps = connection.prepareStatement("UPDATE biotrio.screening SET showing = ?, movie_id = ?, theater_id = ? WHERE screening_id =  " + screening.getScreening_id(), new String[]{"screening_id"});
+                PreparedStatement ps = connection.prepareStatement("UPDATE screening SET showing = ?, movie_id = ?, theater_id = ? WHERE screening_id =  " + screening.getScreening_id(), new String[]{"screening_id"});
 
                 ps.setTimestamp( 1, Timestamp.valueOf( screening.getShowing() ) );
                 ps.setInt( 2,(screening.getMovie().getId()) );

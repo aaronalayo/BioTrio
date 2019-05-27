@@ -2,22 +2,23 @@
 package dk.kea.dat18i.team8.biotrio.demo.booking;
 
 import dk.kea.dat18i.team8.biotrio.demo.Seat.Seat;
+import dk.kea.dat18i.team8.biotrio.demo.Seat.SeatCheck;
 import dk.kea.dat18i.team8.biotrio.demo.Seat.SeatRepository;
-import dk.kea.dat18i.team8.biotrio.demo.movies.MovieRepository;
 import dk.kea.dat18i.team8.biotrio.demo.screenings.Screening;
 import dk.kea.dat18i.team8.biotrio.demo.screenings.ScreeningForm;
 import dk.kea.dat18i.team8.biotrio.demo.screenings.ScreeningRepository;
-import dk.kea.dat18i.team8.biotrio.demo.theater.Theater;
-import dk.kea.dat18i.team8.biotrio.demo.theater.TheaterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-public class BookingController {
+public class BookingController{
 
     @Autowired
     private BookingRepository bookingRepo;
@@ -36,22 +37,7 @@ public class BookingController {
         return "show-bookings";
     }
 
-    @GetMapping("/addbooking")
-    public String addBooking(Model model) {
 
-        List<Screening> screeningList= screeningRepo.findAllScreenings();
-        model.addAttribute( "screening", screeningList);
-        model.addAttribute("bookingform", new Booking());
-        return "add-booking";
-    }
-
-    @PostMapping("/savebooking")
-    //@ResponseBody
-    public String saveBooking(@ModelAttribute Booking booking) {
-        Booking bookingAdded = bookingRepo.insertBooking(booking);
-        //return "Data is saved."+ bookingAdded;
-        return "redirect:/bookings";
-    }
 
 
     @GetMapping("/deletebooking/{booking_id}")
@@ -90,8 +76,43 @@ public class BookingController {
 
     @GetMapping("/seatsforscreening/{screening_id}")
     public String seatsForScreening(Model model,@PathVariable(name="screening_id") int screening_id){
-        List<Seat> seatsList= seatRepo.checkSeats(screeningRepo.findScreening(screening_id));
-        model.addAttribute("seats",seatsList);
+
+        SeatCheck seatCheck=new SeatCheck(  );
+        seatCheck.setSeats( seatRepo.checkSeats(screeningRepo.findScreening(screening_id)));
+        seatCheck.setCheckedSeats( new ArrayList<>());
+
+        model.addAttribute( "screening_id",screeningRepo.findScreening( screening_id ).getScreening_id() );
+        model.addAttribute("seatsCheck",seatCheck);
         return "seats";
     }
+
+
+    @PostMapping("/saveseats/{screening_id}")
+    public String addSeats(@ModelAttribute SeatCheck seatCheck, Model model,
+                           @RequestParam String phonenumber,
+                           @PathVariable(name = "screening_id") int screening_id){
+
+        List<Seat> seats=new ArrayList<>();
+
+        for(String checkedSeat:seatCheck.getCheckedSeats()){
+            Seat seat=new Seat();
+            String[] seatPlace=checkedSeat.split(  "-");
+            seat.setRowNo( Integer.valueOf( seatPlace[0] ) );
+            seat.setSeatNo( Integer.valueOf( seatPlace[1] ) );
+            seats.add(seat);
+        }
+        System.out.println(seats);
+        //model.addAttribute("seats",seats);
+        for (Seat seat:seats){
+            Booking booking=new Booking();
+            booking.setScreening(screeningRepo.findScreening(screening_id));
+            booking.setPhone_no(phonenumber);
+            booking.setSeat(seat);
+            System.out.println(booking);
+            bookingRepo.insertBooking(booking);
+            model.addAttribute("booking",booking);
+        }
+        return "redirect:/checked-seats";
+    }
+    
 }

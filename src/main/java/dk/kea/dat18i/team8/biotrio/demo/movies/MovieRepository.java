@@ -24,7 +24,7 @@ public class MovieRepository {
         movie.setPlot(rs.getString("plot"));
         movie.setDuration(rs.getInt("duration"));
         movie.setGenre(rs.getString("genre"));
-        movie.setFormat(rs.getString("movie_format"));
+        movie.setFormat(rs.getString("format"));
 
     }
 
@@ -76,8 +76,8 @@ public class MovieRepository {
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
 
 
-                PreparedStatement ps = connection.prepareStatement("UPDATE biotrio.movie " +
-                        "SET title= ?, director = ?,plot=?,genre=?,duration=?,movie_format=? " +
+                PreparedStatement ps = connection.prepareStatement("UPDATE movie " +
+                        "SET title= ?, director = ?,plot=?,genre=?,duration=?,format=? " +
                         "WHERE movie_id=  " + movie.getId());
                 ps.setString(1,movie.getTitle());
                 ps.setString(2,movie.getDirector());
