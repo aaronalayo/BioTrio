@@ -18,9 +18,30 @@
         <input type="submit" value="Search"/>
     </form>
 
-    </tr>
+</div>
+
+<div th:action="@{/bookings-phone}" method="post"></div>
+
+    <table class="table table-dark">
+
+        <h2>Booking</h2>
+        <tr>
+            <th>Row number</th>
+            <th>Seat number</th>
+            <th>Screening</th>
+
+        </tr>
+
+        <tr th:each="booking: ${search}">
+
+            <th scope="row" th:text="${booking.getBookingId()}">1</th>
+            <td th:text="${booking.getSeat().getRowNo()}">{{Row no}}</td>
+            <td th:text="${booking.getSeat().getSeatNo()}">{{Seat No}}</td>
+            <td th:text="${booking.getScreening().getScreeningId()}">{{Screening}}</td>
+
+        </tr>
+
     </table>
-</div>
-</div>
+
 </body>
 </html>

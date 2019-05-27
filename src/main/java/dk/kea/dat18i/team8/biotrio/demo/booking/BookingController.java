@@ -64,12 +64,11 @@ public class BookingController{
     public String getBookingsPhone() {
         return "/bookings-phone";
     }
-
-
     @PostMapping("/find-booking")
-    public String findBookingsByPhone(@RequestParam String search, @ModelAttribute ScreeningForm screeningForm) {
+    public String findBookingsByPhone(@RequestParam String search, Model model) {
 
-        bookingRepo.findBookingsbyPhoneNo(search);
+        List<Booking> bookingsByPhone=bookingRepo.findBookingsbyPhoneNo(search);
+        model.addAttribute("search",bookingsByPhone);
 
         return "/bookings-phone";
     }
@@ -114,5 +113,5 @@ public class BookingController{
         }
         return "redirect:/checked-seats";
     }
-    
+
 }
