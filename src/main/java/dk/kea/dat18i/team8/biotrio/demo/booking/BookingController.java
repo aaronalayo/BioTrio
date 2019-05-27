@@ -5,7 +5,6 @@ import dk.kea.dat18i.team8.biotrio.demo.Seat.Seat;
 import dk.kea.dat18i.team8.biotrio.demo.Seat.SeatCheck;
 import dk.kea.dat18i.team8.biotrio.demo.Seat.SeatRepository;
 import dk.kea.dat18i.team8.biotrio.demo.screenings.Screening;
-import dk.kea.dat18i.team8.biotrio.demo.screenings.ScreeningForm;
 import dk.kea.dat18i.team8.biotrio.demo.screenings.ScreeningRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,12 +31,47 @@ public class BookingController{
 
     @GetMapping("/bookings")
     public String booking(Model model) {
+
+
         List<Booking> bookingList = bookingRepo.findAllBookings();
         model.addAttribute("bookinglist", bookingList);
         return "show-bookings";
     }
 
 
+    @GetMapping("/edit/{booking_id}")
+    public String editBooking(Model m, @PathVariable(name = "booking_id") int booking_id) {
+
+
+
+        Booking bookingToEdit = bookingRepo.findBooking(booking_id);
+        Seat seat = new Seat();
+        seat.setRowNo( seat.getRowNo() );
+        seat.setSeatNo( seat.getSeatNo() );
+        bookingToEdit.setSeat( seat );
+        bookingToEdit.setPhone_no( bookingToEdit.getPhone_no() );
+        Screening screening =new Screening(  );
+        bookingToEdit.setScreening(screeningRepo.findScreening( screening.getScreening_id()));
+
+        m.addAttribute("bookingform", bookingToEdit);
+
+        return "edit-booking";
+    }
+
+//    @PostMapping("/updatebooking")
+//    public String saveBooking(@ModelAttribute Booking booking,  @ModelAttribute Seat seat, @ModelAttribute Screening screening) {
+//
+//
+//
+//        booking.setPhone_no( booking.getPhone_no() );
+//        seat.setRowNo( seat.getRowNo() );
+//        seat.setSeatNo( seat.getSeatNo() );
+//        booking.setSeat( seat );
+//        booking.setScreening( screeningRepo.findScreening( screening.getScreening_id() ));
+//
+//        bookingRepo.updateBooking(booking);
+//        return "redirect:/bookings";
+//    }
 
 
     @GetMapping("/deletebooking/{booking_id}")
@@ -47,18 +81,6 @@ public class BookingController{
     }
 
 
-    @GetMapping("/edit/{booking_id}")
-    public String editBooking(Model m, @PathVariable(name = "booking_id") int booking_id) {
-        Booking bookingToEdit = bookingRepo.findBooking(booking_id);
-        m.addAttribute("bookingform", bookingToEdit);
-        return "edit-booking";
-    }
-
-    @PostMapping("/updatebooking")
-    public String saveEditBooking(@ModelAttribute Booking booking) {
-        bookingRepo.updateBooking(booking);
-        return "redirect:/bookings";
-    }
 
     @GetMapping("/bookings-phone")
     public String getBookingsPhone() {
@@ -67,10 +89,10 @@ public class BookingController{
         return "/bookings-phone";
     }
     @PostMapping("/find-booking")
-    public String findBookingsByPhone(@RequestParam String search, Model model) {
+    public String findBookingsByPhone(@RequestParam (value = "search", required = false) String search, Model model) {
 
-        List<Booking> bookingsByPhone=bookingRepo.findBookingsbyPhoneNo(search);
-        model.addAttribute("search",bookingsByPhone);
+        List<Booking> bookingsByPhone = bookingRepo.findBookingsbyPhoneNo(search);
+        model.addAttribute("search", bookingsByPhone);
 
         return "/bookings-phone";
     }
@@ -78,7 +100,7 @@ public class BookingController{
     @GetMapping("/seatsforscreening/{screening_id}")
     public String seatsForScreening(Model model,@PathVariable(name="screening_id") int screening_id){
 
-        SeatCheck seatCheck=new SeatCheck(  );
+        SeatCheck seatCheck = new SeatCheck(  );
         seatCheck.setSeats( seatRepo.checkSeats(screeningRepo.findScreening(screening_id)));
         seatCheck.setCheckedSeats( new ArrayList<>());
 

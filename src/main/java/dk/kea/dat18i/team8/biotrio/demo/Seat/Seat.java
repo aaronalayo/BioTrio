@@ -16,9 +16,13 @@ public class Seat {
 
 
 
-    public int getRowNo(){return this.rowNo;}
+    public int getRowNo() {
+
+        return this.rowNo;
+    }
 
     public void setRowNo(int rowNo) {
+
         this.rowNo = rowNo;
     }
 
@@ -26,7 +30,9 @@ public class Seat {
         this.seatNo = seatNo;
     }
 
-    public int getSeatNo() { return seatNo; }
+    public int getSeatNo() {
+        return seatNo;
+    }
 
     public boolean getIsBooked() {
        return isBooked;

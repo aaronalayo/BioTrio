@@ -7,7 +7,7 @@ import dk.kea.dat18i.team8.biotrio.demo.screenings.Screening;
 public class Booking {
 
     private int booking_id;
-    private String phone_no; // shall be String according to StackOverflow
+    private String phone_no;
     private Seat seat;
     private Screening screening;
 

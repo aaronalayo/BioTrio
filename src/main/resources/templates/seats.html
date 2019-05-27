@@ -58,20 +58,17 @@
                        th:field="*{checkedSeats}"
                        onclick="checkboxes()">
             </td>
-            <script type="text/javascript">
-                function checkboxes(){
-                    {
-                        var inputElems = document.getElementsByTagName("input"),
-                            count = 0;
+            <script>
+                function checkboxes()
+                {
+                    var inputElems = document.getElementsByTagName("input"),
+                        count = 0;
 
-                        for (var i=0; i<inputElems.length; i++) {
-                            if (inputElems[i].type == "checkbox" && inputElems[i].checked == true){
-                                count++;
-                                if(count==5){
-                                    alert("You can choose maximum 4 seats!");
-                                inputElems[i].checked=false;}
-                            }
-
+                    for (var i=0; i<inputElems.length; i++) {
+                        if (inputElems[i].type == "checkbox" && inputElems[i].checked == true){
+                            count++;
+                            if(count==4){
+                            alert(count);}
                         }
                     }
                 }
@@ -85,6 +82,8 @@
                     alert("Textbox Validation: Successful.")
                     return true;
                 }
+
+
 
             </script>
 
