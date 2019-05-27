@@ -52,27 +52,32 @@
 
             </th:block>
             <td>
-                <input type="checkbox" id="check "name="check" class="largerCheckbox"
+                <input type="checkbox" id="check "name="check" class="checkbox"
                        th:checked="${seat.getIsBooked()}"
                        th:disabled="${seat.getIsBooked()}"
                        th:value="${seat.getRowNo()+'-'+seat.getSeatNo()}"
                        th:field="*{checkedSeats}" onClick="checkboxes();">
             </td>
             <script>
-                function checkboxes()
-                {
-                    var inputElems = document.getElementsByTagName("input"),
-                        count = 0;
+                function checkboxes() {
+                    {
+                        var inputElems = document.getElementsByTagName("input"),
+                            count = 0;
 
-                    for (var i=0; i<inputElems.length; i++) {
-                        if (inputElems[i].type == "checkbox" && inputElems[i].checked == true){
-                            count++;
-                            if(count==4){
-                            alert(count);}
+                        for (var i = 0; i < inputElems.length; i++) {
+                            if (inputElems[i].type == "checkbox" && inputElems[i].checked == true) {
+                                count++;
+                                if (count == 5) {
+                                    alert("You can choose maximum 4 seats!");
+                                    inputElems[i].checked=false;}
+                                }
+                            }
+
                         }
 
                     }
-                }
+
+
 
             </script>
             <th:block th:if="${seat.getSeatNo()==seatsCheck.getSeats().get(seatsCheck.getSeats().size()-1).getSeatNo()}">

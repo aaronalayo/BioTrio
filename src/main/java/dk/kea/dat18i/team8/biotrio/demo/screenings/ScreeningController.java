@@ -143,6 +143,7 @@ public class ScreeningController {
 
     @GetMapping("/screenings-date")
     public String getScreeningsDate(){
+
         return "/screenings-date";
     }
     @PostMapping("/screenings-search")

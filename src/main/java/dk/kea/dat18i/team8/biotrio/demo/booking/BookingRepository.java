@@ -2,6 +2,7 @@
 package dk.kea.dat18i.team8.biotrio.demo.booking;
 
 
+import dk.kea.dat18i.team8.biotrio.demo.Seat.Seat;
 import dk.kea.dat18i.team8.biotrio.demo.Seat.SeatRepository;
 import dk.kea.dat18i.team8.biotrio.demo.screenings.ScreeningRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,8 +39,16 @@ public class BookingRepository {
 
         while (rs.next()) {
 
+            Seat seat=new Seat();
+
+            seat.setRowNo( seat.getRowNo() );
+            seat.setSeatNo( seat.getSeatNo() );
+
+            booking.setSeat( seat );
+
+
             booking.setBooking_id(rs.getInt("booking_id"));
-            booking.getSeat().setRowNo(rs.getInt("seat_row"));
+            booking.getSeat().setRowNo(rs.getInt("row_no"));
             booking.getSeat().setSeatNo(rs.getInt("seat_no"));
             booking.setPhone_no(rs.getString("phone_no"));
             booking.setScreening(screeningRepo.findScreening(rs.getInt("screening_id")));
@@ -57,8 +66,15 @@ public class BookingRepository {
 
         while (rs.next()) {
             Booking booking = new Booking();
+            Seat seat=new Seat();
+
+            seat.setRowNo( seat.getRowNo() );
+            seat.setSeatNo( seat.getSeatNo() );
+
+            booking.setSeat( seat );
+
             booking.setBooking_id(rs.getInt("booking_id"));
-            booking.getSeat().setRowNo(rs.getInt("seat_row"));
+            booking.getSeat().setRowNo(rs.getInt("row_no"));
             booking.getSeat().setSeatNo(rs.getInt("seat_no"));
             booking.setPhone_no(rs.getString("phone_no"));
             booking.setScreening(screeningRepo.findScreening(rs.getInt("screening_id")));
@@ -110,20 +126,35 @@ public class BookingRepository {
 
         SqlRowSet rs = jdbc.queryForRowSet("SELECT * FROM booking WHERE phone_no = " + phone_no);
 
-        List<Booking> bookingByPhone = new ArrayList<>();
+
+        List<Booking> findBookinByPhone = new ArrayList<>();
 
         while (rs.next()) {
             Booking booking = new Booking();
+
+            Seat seat=new Seat();
+
+            seat.setRowNo( seat.getRowNo() );
+            seat.setSeatNo( seat.getSeatNo() );
+
+            booking.setSeat( seat );
+
             booking.setBooking_id(rs.getInt("booking_id"));
-            booking.getSeat().setRowNo(rs.getInt("seat_row"));
-            booking.getSeat().setSeatNo(rs.getInt("seat_no"));
+
+           booking.getSeat().setRowNo(rs.getInt("row_no"));
+
+           booking.getSeat().setSeatNo(rs.getInt("seat_no"));
+
             booking.setPhone_no(rs.getString("phone_no"));
+
             booking.setScreening(screeningRepo.findScreening(rs.getInt("screening_id")));
 
-            bookingByPhone.add(booking);
+            findBookinByPhone.add(booking);
+
+
         }
 
-        return bookingByPhone;
+        return findBookinByPhone;
 
     }
 
