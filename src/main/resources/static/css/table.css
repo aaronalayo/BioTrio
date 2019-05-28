@@ -59,3 +59,9 @@ table a:hover{
     color:black;
     transition:0.5s;
 }
+
+#message{
+    text-align: center;
+    font-size: xx-large;
+    margin-top: 15%;
+}
