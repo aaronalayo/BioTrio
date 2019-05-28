@@ -25,6 +25,10 @@ th,td{
     border: 1px solid black;
 
 }
+input.largercheckbox {
+    width: 30px;
+    height: 35px;
+}
 
 tr:nth-child(odd),
 tr:nth-child(even){
