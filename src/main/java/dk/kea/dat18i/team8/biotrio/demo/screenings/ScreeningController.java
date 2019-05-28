@@ -154,8 +154,6 @@ public class ScreeningController {
         }else
             return "/screenings-date";
 
-
-
         return "/screenings-date";
     }
 }
