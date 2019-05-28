@@ -38,6 +38,8 @@
         <th scope="col">Row</th>
         <th scope="col">Seat booked</th>
         <th scope="col">Phone Number</th>
+        <th scope="col">Movie</th>
+        <th scope="col">Theater</th>
         <th scope="col">Screening Date</th>
         <th scope="col">Screening Time</th>
         <th scope="col">Delete</th>
@@ -53,6 +55,8 @@
         <td th:text="${booking.getSeat().getRowNo()}">{{Row}}</td>
         <td th:text="${booking.getSeat().getSeatNo()}">{{Seat Booked}}</td>
         <td th:text="${booking.getPhone_no()}">{{Phone No}}</td>
+        <td th:text="${booking.getScreening().getMovie().getTitle()}">{{Movie}}</td>
+        <td th:text="${booking.getScreening().getTheater().getTheater_name()}">{{Theater}}</td>
         <td th:text="${booking.getScreening().getShowing().toLocalDate()}">{{Screening Booked}}</td>
         <td th:text="${booking.getScreening().getShowing().toLocalTime()}">{{Screening Booked}}</td>
         <td><a th:href="@{'/deletebooking/' + ${booking.getBooking_id()}}" class="button3" >Delete</a></td>

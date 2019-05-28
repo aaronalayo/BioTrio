@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/" xmlns:a="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Movies view</title>
+    <title>Screenings</title>
     <link th:href="@{/css/nav.css}" href="/static/css/nav.css" rel="stylesheet" type="text/css"/>
     <link th:href="@{/css/table.css}" href="/static/css/table.css" rel="stylesheet" type="text/css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,13 +28,17 @@
         <table id="table">
             <tr>
                 <th>Screening</th>
-                <th>Showing</th>
+                <th>Movie</th>
+                <th>Date</th>
+                <th>Time</th>
                 <th>Theater</th>
             </tr>
 
             <tr th:each="screeningSearch: ${search}">
                 <td th:text="${screeningSearch.screening_id}"></td>
+                <td th:text="${screeningSearch.getMovie().getTitle()}"></td>
                 <td th:text="${screeningSearch.getShowing().toLocalDate()}"></td>
+                <td th:text="${screeningSearch.getShowing().toLocalTime()}"></td>
                 <td th:text="${screeningSearch.getTheater().getTheater_name()}"></td>
             </tr>
         </table>
