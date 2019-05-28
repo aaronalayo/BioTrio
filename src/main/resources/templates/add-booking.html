@@ -2,19 +2,12 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8">
-<<<<<<< HEAD:src/main/resources/templates/add-screening.html
     <title>Add Screening</title>
     <link th:href="@{/css/nav.css}" href="/static/css/nav.css" rel="stylesheet" type="text/css"/>
     <link th:href="@{/css/form.css}" href="/static/css/form.css" rel="stylesheet" type="text/css"/>
-=======
-    <title>Create new Booking</title>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
->>>>>>> master:src/main/resources/templates/add-booking.html
 </head>
 
-<<<<<<< HEAD:src/main/resources/templates/add-screening.html
 <header>
     <div class="container">
         <h1>BIO<span>TRIO</span></h1>
@@ -23,74 +16,25 @@
                 <li><a href="/">Exit</a></li>
             </ul>
         </nav>
-=======
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <a class="navbar-brand" href="/">Bio Trio</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarText">
-        <ul class="navbar-nav mr-auto">
-
-            <li class="nav-item active">
-            </li>
-        </ul>
-        <span class="navbar-text">
-      Here you can create bookings
-    </span>
->>>>>>> master:src/main/resources/templates/add-booking.html
     </div>
 </header>
 
-<<<<<<< HEAD:src/main/resources/templates/add-screening.html
 <body>
 
-<h3>Add screening</h3>
-<div class="container2">
-        <form th:action="@{'/savescreening'}" method="post" th:object="${screening}">
-                <label for="screeningdate">Screening Date</label>
-                <input type= "text" class="form-control" id= "screeningdate" name = "screening-date" placeholder="Screening Date" >
+    <div class="mainContent">
+        <h3 class="display-4">Add new Booking</h3>
+
+        <form id="form" th:action="@{'/savebookings'}" th:object="${bookingform}" method="post">
 
 
-                <label for="screeningstarts">Screening Starts</label>
-                <input type="text" class="form-control" id="screeningstarts" name = "screening-start"placeholder="Screening Starts" >
-
-=======
-<div class="jumbotron jumbotron-fluid">
-    <div class="container">
-        <h1 class="display-4">Add new Booking</h1>
-        <p class="lead">
-
-        <form th:action="@{'/savebookings'}" th:object="${bookingform}" method="post">
-
-
-            <div class="form-group">
                 <label for="phone_no">Telephone Number</label>
                 <input type="text" class="form-control" th:field="${bookingform.phone_no}" id="phone_no" placeholder="Telephone Number" maxlength="20">
-            </div>
 
-         <div class="form-group">
 
-            <label for="screening">Screenings</label>
-            <select th:field="${bookingform.screening.screening_id}" class="form-control" id="screening" placeholder="Screenings">
-                <option th:each="screenings: ${screening}"
-                        th:value="${screenings.getScreening_id()}"
-                        th:text="${screenings.getShowing()}"></option>
-            </select>
-        </div>
 
             <button type="submit" class="btn btn-primary">Submit</button>
             <button type="reset" class="btn btn-primary">Cancel</button>
-        </form>
 
-        <br>
-        <span><a href = "/bookings" class="fas fa-undo"> See all bookings </a> </span>
-        <span><a href = "/bookings" class="fas fa-undo"> Go back </a> </span>
->>>>>>> master:src/main/resources/templates/add-booking.html
-
-            <button type="submit">Add Screening"</button>
-            <button type="reset">Cancel</button>
-        </form>
     </div>
 
 </body>

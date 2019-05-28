@@ -18,64 +18,32 @@
     </div>
 </header>
 <div class="mainContent">
-<h3>Edit Theater</h3>
+    <h3>Edit Theater</h3>
 
-        <form id="form" action="/updatetheater" method="post" th:object="${theaterform}">
-            <input type="hidden" th:field="${theaterform.theater_id}">
+    <form id="form" action="/updatetheater" method="post" th:object="${theaterform}">
+        <input type="hidden" th:field="${theaterform.theater_id}">
 
-<<<<<<< HEAD
-                <label for="theater_name">Name</label>
-                <input type="text" th:field="${theaterform.theater_name}" class="form-control"  id="theater_name" placeholder="TheaterName">
+        <label for="theater_name">Name</label>
+        <input type="text" th:field="${theaterform.theater_name}" class="form-control"  id="theater_name" placeholder="TheaterName">
 
-                <label for="theater_format">Format</label>
-                <select th:field="${theaterform.theater_format}" class="form-control" id="theater_format"  placeholder="TheaterFormat">
-=======
-            <div class="form-group">
-                <label for="theater_name">Theater Name</label>
-                <input th:field="${theaterform.theater_name}" class="form-control"  id="theater_name" placeholder="Theater Name">
-            </div>
+        <label for="theater_format">Format</label>
+        <select th:field="${theaterform.theater_format}" class="form-control" id="theater_format"  placeholder="TheaterFormat">
+            <option value="2D">2D</option>
+            <option value="3D">3D</option>
+        </select>
 
-            <div class="form-group">
-                <label for="theater_format">Theater Format</label>
-                <select th:field="${theaterform.theater_format}" class="form-control" id="theater_format"  placeholder="Theater Format">
->>>>>>> master
-                    <option value="2D">2D</option>
-                    <option value="3D">3D</option>
-                </select>
+        <label for="number_of_rows">Number Of Rows</label>
+        <input type="text" th:field="${theaterform.number_of_rows}" class="form-control" id="number_of_rows" placeholder="NumberOfRows">
 
-<<<<<<< HEAD
-                <label for="number_of_rows">Number Of Rows</label>
-                <input type="text" th:field="${theaterform.number_of_rows}" class="form-control" id="number_of_rows" placeholder="NumberOfRows">
-
-                <label for="seats_per_row">Seats Per Row</label>
-                <input type="text" th:field="${theaterform.seats_per_row}" class="form-control" id="seats_per_row" placeholder="SeatsPerRow">
-=======
-            <div class ="form-group">
-                <label for="number_of_rows">Number Of Rows</label>
-                <input th:field="${theaterform.number_of_rows}" class="form-control" id="number_of_rows" placeholder="Number Of Rows">
-            </div>
-
-            <div class ="form-group">
-                <label for="seats_per_row">Seats Per Row</label>
-                <input th:field="${theaterform.seats_per_row}" class="form-control" id="seats_per_row" placeholder="Seats Per Row">
-            </div>
-
-            <button type="submit" class="btn btn-primary">Save</button>
-            <button type="reset" class="btn btn-primary">Cancel</button>
-        </form>
->>>>>>> master
+        <label for="seats_per_row">Seats Per Row</label>
+        <input type="text" th:field="${theaterform.seats_per_row}" class="form-control" id="seats_per_row" placeholder="SeatsPerRow">
 
 
-                <button type="submit">Submit</button>
+        <button type="submit">Submit</button>
 
-<<<<<<< HEAD
-                <button type="reset">Reset</button>
+        <button type="reset">Reset</button>
 
-        </form>
+    </form>
 </div>
-=======
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-
->>>>>>> master
 </body>
 </html>

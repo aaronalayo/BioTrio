@@ -2,85 +2,59 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8">
+    <link th:href="@{/css/nav.css}" href="/static/css/nav.css" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/form.css}" href="/static/css/form.css" rel="stylesheet" type="text/css"/>
     <title>Movie Edit</title>
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <a class="navbar-brand" href="#">Screening</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarText">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item ">
-                <a class="nav-link" href="/">Home </a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="/screenings">Screenings <span class="sr-only">(current)</span></a>
-            </li>
-        </ul>
-        <span class="navbar-text">
-      Manage Screenings here
-    </span>
-    </div>
-</nav>
-
-<div class="jumbotron jumbotron-fluid">
+<header>
     <div class="container">
-        <h1 class="display-4">Edit Movie</h1>
-        <p class="lead">
+        <h1>BIO<span>TRIO</span></h1>
+        <nav>
+            <ul>
+                <li><a href="/movies">Exit</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
 
+<div class="mainContent">
+    <h3>Edit Movie</h3>
 
-        <form action="/updateMovie" method="post" th:object="${movie}">
-
-
+        <form id="form" action="/updateMovie" method="post" th:object="${movie}">
             <input type="hidden" th:field="${movie.id}">
 
-
-        <div class="form-group">
             <label for="title">MovieTitle</label>
-            <input th:field="${movie.title}" class="form-control"  id="title" placeholder="Title">
-        </div>
-        <div class="form-group">
+            <input type="text" th:field="${movie.title}" class="form-control"  id="title" placeholder="Title">
+
             <label for="genre">MovieGenre</label>
-            <input th:field="${movie.genre}" class="form-control" id="genre" placeholder="Genre">
-        </div>
-        <div class="form-group">
+            <input type="text" th:field="${movie.genre}" class="form-control" id="genre" placeholder="Genre">
+
             <label for="director">MovieDirector</label>
-            <input th:field="${movie.director}" class="form-control" id="director" placeholder="MovieDirector">
-        </div>
-        <div class="form-group">
+            <input type="text" th:field="${movie.director}" class="form-control" id="director" placeholder="MovieDirector">
+
             <label for="director">MoviePlot</label>
-            <input th:field="${movie.plot}" class="form-control" id="plot" placeholder="MoviePlot">
-        </div>
-        <div class="form-group">
+            <input type="text" th:field="${movie.plot}" class="form-control" id="plot" placeholder="MoviePlot">
+
             <label for="duration">MovieDuration</label>
-            <input th:field="${movie.duration}" class="form-control"  id="duration" placeholder="MovieDuration">
-        </div>
-        <div class="form-group">
+            <input type="text" th:field="${movie.duration}" class="form-control"  id="duration" placeholder="MovieDuration">
+
             <label for="movie_format">MovieFormat</label>
             <select th:field="${movie.format}" class="form-control" id="movie_format" name = "movies" placeholder="MovieFormat">
                 <option value="2D">2D</option>
                 <option value="3D">3D</option>
             </select>
-        </div>
 
+            <label for="image">Movie Image</label>
+            <input type="text" th:field="${movie.image}" id="image" placeholder="MovieImage">
 
+            <button type="submit">Save</button>
 
-        <button type="submit" class="btn btn-primary">Save</button>
-
-            <button type="reset" class="btn btn-primary">Cancel</button>
+            <button type="reset">Cancel</button>
         </form>
 
-        </p>
     </div>
-</div>
-
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-
 </body>
 </html>

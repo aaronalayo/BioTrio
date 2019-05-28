@@ -1,8 +1,4 @@
-<<<<<<< HEAD:src/main/java/dk/kea/dat18i/team8/biotrio/demo/Theater.java
-package dk.kea.dat18i.team8.biotrio.demo;
-=======
 package dk.kea.dat18i.team8.biotrio.demo.theater;
->>>>>>> master:src/main/java/dk/kea/dat18i/team8/biotrio/demo/theater/Theater.java
 public class Theater {
     private int theater_id;
     private String theater_name;
@@ -51,8 +47,4 @@ public class Theater {
     public int getSeats_per_row() { return seats_per_row; }
 
     public void setSeats_per_row(int seats_per_row) { this.seats_per_row = seats_per_row; }
-<<<<<<< HEAD:src/main/java/dk/kea/dat18i/team8/biotrio/demo/Theater.java
 }
-=======
-}
->>>>>>> master:src/main/java/dk/kea/dat18i/team8/biotrio/demo/theater/Theater.java

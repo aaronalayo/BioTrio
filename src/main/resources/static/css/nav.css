@@ -59,7 +59,9 @@ nav a.active{
 nav li input[type="submit"]{
     background-color: red;
     color:white;
-    border: red
+    border: red;
+    height: 5vh;
+    width: 8vw;
 }
 nav li .search{
     width:300px;
