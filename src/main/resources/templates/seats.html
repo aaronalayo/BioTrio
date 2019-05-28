@@ -68,22 +68,28 @@
                         if (inputElems[i].type == "checkbox" && inputElems[i].checked == true){
                             count++;
                             if(count==4){
-                            alert(count);}
+                            alert(count);
+                            }
                         }
                     }
                 }
-                function required(element)
-                {
-                    if(element.value.trim()== ""){
-                        alert("Enter phonenumber!");
-                        element.focus();
+                //function required(element)
+                //{
+                  //  if(element.value.trim()== ""){
+                    //    alert("Enter phonenumber!");
+                      //  element.focus();
+                        //return false;
+                    //}
+                    //alert("Textbox Validation: Successful.")
+                    //return true;
+                //}
+                function validateForm() {
+                    var uname=document.getElementById("uname").value;
+                    if (uname==""){
+                        alert("Username is obligatory");
                         return false;
                     }
-                    alert("Textbox Validation: Successful.")
-                    return true;
                 }
-
-
 
             </script>
 
@@ -96,7 +102,9 @@
             <input type="text" id="phonenumber" name="phonenumber" >
             </tr>
     </table>
-    <input type="submit" value="Submit" onclick="required(document.getElementById('phonenumber'))">
+<form onSubmit="return validateForm()" >
+    <input type="submit" value="Submit">
+</form>
 
 </form>
 

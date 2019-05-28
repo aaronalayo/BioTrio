@@ -46,7 +46,6 @@ public class BookingRepository {
 
             booking.setSeat( seat );
 
-
             booking.setBooking_id(rs.getInt("booking_id"));
             booking.getSeat().setRowNo(rs.getInt("row_no"));
             booking.getSeat().setSeatNo(rs.getInt("seat_no"));
@@ -131,27 +130,16 @@ public class BookingRepository {
 
         while (rs.next()) {
             Booking booking = new Booking();
-
             Seat seat=new Seat();
-
             seat.setRowNo( seat.getRowNo() );
             seat.setSeatNo( seat.getSeatNo() );
-
             booking.setSeat( seat );
-
             booking.setBooking_id(rs.getInt("booking_id"));
-
-           booking.getSeat().setRowNo(rs.getInt("row_no"));
-
-           booking.getSeat().setSeatNo(rs.getInt("seat_no"));
-
+            booking.getSeat().setRowNo(rs.getInt("row_no"));
+            booking.getSeat().setSeatNo(rs.getInt("seat_no"));
             booking.setPhone_no(rs.getString("phone_no"));
-
             booking.setScreening(screeningRepo.findScreening(rs.getInt("screening_id")));
-
             findBookinByPhone.add(booking);
-
-
         }
 
         return findBookinByPhone;
