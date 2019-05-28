@@ -46,7 +46,7 @@ label{
 label input{
     margin-top:10px;
 }
-button{
+.button{
     display: inline;
     width: 100px;
     height:40px;
@@ -54,7 +54,7 @@ button{
     background-color: red;
     color: white;
 }
-button:hover{
+.button:hover{
     background-color: white;
     color:black;
     transition:0.5s;

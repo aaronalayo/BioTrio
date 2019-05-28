@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8">
-    <title>Movies view</title>
+    <title>Bookings view</title>
     <link th:href="@{/css/nav.css}" href="/static/css/nav.css" rel="stylesheet" type="text/css"/>
     <link th:href="@{/css/table.css}" href="/static/css/table.css" rel="stylesheet" type="text/css"/>
 
@@ -21,61 +21,38 @@
                 </li>
                 <li><a href="/">Exit</a></li>
             </ul>
-
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <a class="navbar-brand" href="/">Bio Trio</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarText">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item ">
-
-                <a href="/bookings"  class="nav-link">Bookings</a>
-            </li>
-            <li class="nav-item active">
-                <a href="/addbooking"  class="nav-link">Add Booking</a>
-            </li>
-        </ul>
-        <span class="navbar-text">
-      Here you can see all the bookings
-    </span>
-    </div>
+        </nav>
 </header>
 <div class="mainContent">
+    
 <h2>Bookings</h2>
 
 <table id="table">
 
     <thead>
     <tr>
-    <th scope="col">Booking Id</th>
-    <th scope="col">Row</th>
-    <th scope="col">Seat booked</th>
-
-    <th scope="col">Phone_No</th>
-    <th scope="col">Screening_id booked</th>
-    <th scope="col">Delete</th>
-    <th scope="col">Edit</th>
+        <th scope="col">Booking Id</th>
+        <th scope="col">Row</th>
+        <th scope="col">Seat booked</th>
+        <th scope="col">Phone Number</th>
+        <th scope="col">Screening Date</th>
+        <th scope="col">Screening Time</th>
+        <th scope="col">Delete</th>
     </tr>
 
     </thead>
 
     <tr th:each="booking: ${bookinglist}">
 
-        <th scope="row" th:text="${booking.getBooking_id}">1</th>
-        <td th:number="${booking.getSeat()}">{{Seat}}</td>
-        <td th:text="${booking.getPhone_no}">{{Phone No}}</td>
-        <td th:number="${booking.getScreening}">{{Screening Booked}}</td>
+    <tr th:each="booking: ${bookinglist}">
 
-
-
-        <td>
-            <a class="button1" role="button" th:href="@{'/deletebooking/' + ${booking.getBooking_id}}">Delete</a>
-        </td>
-        <td>
-            <a class="button2" role="button" th:href="@{'/editbooking/' + ${booking.getBooking_id}}" >Edit</a></td>
-        <td>
+        <th scope="row" th:text="${booking.getBooking_id()}">1</th>
+        <td th:text="${booking.getSeat().getRowNo()}">{{Row}}</td>
+        <td th:text="${booking.getSeat().getSeatNo()}">{{Seat Booked}}</td>
+        <td th:text="${booking.getPhone_no()}">{{Phone No}}</td>
+        <td th:text="${booking.getScreening().getShowing().toLocalDate()}">{{Screening Booked}}</td>
+        <td th:text="${booking.getScreening().getShowing().toLocalTime()}">{{Screening Booked}}</td>
+        <td><a th:href="@{'/deletebooking/' + ${booking.getBooking_id()}}" class="btn btn-danger" >Delete</a></td>
 
     </tr>
 

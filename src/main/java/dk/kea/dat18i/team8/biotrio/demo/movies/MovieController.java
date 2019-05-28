@@ -29,7 +29,7 @@ public class MovieController {
     }
 
 
-    @GetMapping("/moviesUser")
+    @GetMapping("/moviesuser")
     public String moviesUser(Model model){
         List<Movie> movieList= movieRepo.showAllMovies();
         model.addAttribute("movies",movieList);
@@ -37,7 +37,7 @@ public class MovieController {
 
     }
 
-    @GetMapping("/employeeScreen")
+    @GetMapping("/employeescreen")
     public String employeeScreen(){
         return "employee-screen";
     }
