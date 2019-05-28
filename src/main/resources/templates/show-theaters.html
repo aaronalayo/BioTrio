@@ -1,73 +1,56 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/" xmlns:a="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="UTF-8">
     <title>Theaters view</title>
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-
+    <link th:href="@{/css/nav.css}" href="/static/css/nav.css" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/table.css}" href="/static/css/table.css" rel="stylesheet" type="text/css"/>
 </head>
-<style>
-    table {
-        font-family: arial, sans-serif;
-        border-collapse: collapse;
-        width: 50%;
-    }
-
-    td, th {
-        border: 1px solid #dddddd;
-        text-align: left;
-        padding: 8px;
-    }
-
-    tr:nth-child(even) {
-        background-color: #dddddd;
-    }
-</style>
-
 <body>
+<header>
+    <div class="container">
+        <h1>BIO<span>TRIO</span></h1>
+        <nav>
+            <ul>
 
-<div class="topnav">
-    <a href="/">Go back</a> &nbsp
-    <a class="active" href="/theaters">List of theaters</a> &nbsp
-    <a href="/addtheater">Add theater</a>
+                <li><a href="/theaters" class="active">Theaters</a></li>
+                <li><a href="/addtheater">Add theater</a></li>
+                <li><a href="/">Exit</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<div class="mainContent">
+    <h2>List of theaters</h2>
 
+    <table id="table">
+        <thead>
+
+        <th scope="col">Id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Format</th>
+        <th scope="col">Number Of Rows</th>
+        <th scope="col">Seats Per Row</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+
+        </thead>
+        <tr th:each="theater: ${theaters}">
+
+            <th scope="row" th:text="${theater.theater_id}">1</th>
+            <td th:text="${theater.theater_name}">{{Name}}</td>
+            <td th:text="${theater.theater_format}">{Format}}</td>
+            <td th:text="${theater.number_of_rows}">{Number OfR ows}</td>
+            <td th:text="${theater.seats_per_row}">{Seats Per Row}</td>
+            <td>
+                <a  role="button" class="button1"  th:href="@{'/edittheater/' + ${theater.theater_id}}">Edit</a>
+            </td>
+            <td>
+                <a  role="button" class="button2" th:href="@{'/deletetheater/' + ${theater.theater_id}}">Delete</a>
+            </td>
+        </tr>
+    </table>
 </div>
-
-<br>
-<br>
-
-<table>
-    <thead>
-
-    <th scope="col">Theater Id</th>
-    <th scope="col">Theater Name</th>
-
-    <th scope="col">Theater Format</th>
-    <th scope="col">Number Of Rows</th>
-    <th scope="col">Seats Per Row</th>
-    <th scope="col"></th>
-    <th scope="col"></th>
-
-
-    </thead>
-    <tr th:each="theater: ${theaters}">
-
-        <th scope="row" th:text="${theater.theater_id}">1</th>
-        <td th:text="${theater.theater_name}">{{TheaterName}}</td>
-        <td th:text="${theater.theater_format}">{{TheaterFormat}}</td>
-        <td th:text="${theater.number_of_rows}">{NumberOfRows}</td>
-        <td th:text="${theater.seats_per_row}">{SeatsPerRow}</td>
-        <td><a class="btn btn-light" th:href="@{'/deletetheater/' + ${theater.theater_id}}">Delete</a></td>
-        <td><a class="btn btn-light" th:href="@{'/edittheater/' + ${theater.theater_id}}">Edit</a></td>
-
-    </tr>
-</table>
-
-
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
-
 </body>
 </html>

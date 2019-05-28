@@ -1,85 +1,50 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org/" xmlns:a="http://www.w3.org/1999/xhtml"
-      xmlns="http://www.w3.org/1999/html">
+<html lang="en" xmlns:th="http://www.thymeleaf.org/" xmlns:a="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Booking</title>
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Movies view</title>
+    <link th:href="@{/css/nav.css}" href="/static/css/nav.css" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/table.css}" href="/static/css/table.css" rel="stylesheet" type="text/css"/>
 
 
 </head>
-<style>
-    table {
-        font-family: arial, sans-serif;
-        border-collapse: collapse;
-        width: 50%;
-    }
-
-    td, th {
-        border: 1px solid #dddddd;
-        text-align: left;
-        padding: 8px;
-    }
-
-
-</style>
 
 <body>
-
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="/">Bio Trio</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarText">
-
-        <span class="navbar-text">
-        Here you can see the screenings for this movie
-        </span>
-
-        <li class="nav-item active">
-            <a class="nav-link" href="/addscreening">Add Screening <span class="sr-only">(current)</span></a>
-        </li>
-
+<header>
+    <div class="container">
+        <h1>BIO<span>TRIO</span></h1>
+        <nav>
+            <ul>
+                <li><a href="/moviesUser">Exit</a></li>
+            </ul>
+        </nav>
     </div>
-</nav>
+</header>
+<div class="mainContent">
+    <h2>Screenings</h2>
 
-<table>
-    <thead>
+    <table id="table">
+        <thead>
+
+        <th scope="col">Show Date</th>
+        <th scope="col">Show Time</th>
+        <th scope="col">Theater</th>
 
 
+        </thead>
 
-    <th scope="col">Show Date</th>
-    <th scope="col">Show Time</th>
-    <th scope="col">Theater</th>
-
-
-    </thead>
-
-    <tr th:each="screening: ${screeningsForMovies}">
-
+        <tr th:each="screening: ${screeningsForMovies}">
 
             <td th:text="${screening.showing.toLocalDate()}"/>
             <td th:text="${screening.showing.toLocalTime()}"/>
             <td th:text="${screening.theater.theater_name}"/>
-        <td>
-            <a th:href="@{'/seatsforscreening/' + ${screening.getScreening_id()}}"  class="btn btn-primary">Book</a>
-        </td>
+            <td>
+                <a th:href="@{'/seatsforscreening/' + ${screening.getScreening_id()}}"  class="btn btn-primary">Book</a>
+            </td>
 
         </tr>
-    </form>
 
-</table>
-
-</body>
-
-
-
-
-
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
-
+    </table>
+</div>
 </body>
 </html>
