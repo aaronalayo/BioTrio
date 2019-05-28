@@ -16,12 +16,15 @@
             <ul>
 
                 <li>
-                    <input type="text" name="searchbox" class="search" placeholder="Search">
-                    <button>Search</button>
+                    <form th:action="@{/find-booking}" method="post">
+                        <input class="search" type="text" name="search" id="search" placeholder="phone number"/>
+                        <input type="submit" value="Search"/>
+                    </form>
                 </li>
                 <li><a href="/">Exit</a></li>
             </ul>
         </nav>
+    </div>
 </header>
 <div class="mainContent">
     
@@ -52,7 +55,7 @@
         <td th:text="${booking.getPhone_no()}">{{Phone No}}</td>
         <td th:text="${booking.getScreening().getShowing().toLocalDate()}">{{Screening Booked}}</td>
         <td th:text="${booking.getScreening().getShowing().toLocalTime()}">{{Screening Booked}}</td>
-        <td><a th:href="@{'/deletebooking/' + ${booking.getBooking_id()}}" class="btn btn-danger" >Delete</a></td>
+        <td><a th:href="@{'/deletebooking/' + ${booking.getBooking_id()}}" class="button3" >Delete</a></td>
 
     </tr>
 

@@ -5,7 +5,7 @@
     <title>Movies view</title>
     <link th:href="@{/css/nav.css}" href="/static/css/nav.css" rel="stylesheet" type="text/css"/>
     <link th:href="@{/css/table.css}" href="/static/css/table.css" rel="stylesheet" type="text/css"/>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
@@ -14,7 +14,7 @@
         <h1>BIO<span>TRIO</span></h1>
         <nav>
             <ul>
-                <li><a href="/movies">Exit</a></li>
+                <li><a href="/screenings">Exit</a></li>
             </ul>
         </nav>
     </div>
@@ -22,6 +22,8 @@
 <div class="mainContent">
 <h2>Screening List</h2>
     <div th:if="${not #lists.isEmpty(search)}">
+
+
 
         <table id="table">
             <tr>
@@ -37,5 +39,8 @@
             </tr>
         </table>
     </div>
+    <div th:if="${#lists.isEmpty(search)}">
+           NO AVAILABLE SCREENINGS
+</div>
 </body>
 </html>

@@ -76,8 +76,13 @@ public class BookingController{
     @PostMapping("/find-booking")
     public String findBookingsByPhone(@RequestParam (value = "search", required = false) String search, Model model) {
 
+        if(!search.isEmpty()) {
+
         List<Booking> bookingsByPhone = bookingRepo.findBookingsbyPhoneNo(search);
         model.addAttribute("search", bookingsByPhone);
+
+        }else
+            return "/bookings-phone";
 
         return "/bookings-phone";
     }
