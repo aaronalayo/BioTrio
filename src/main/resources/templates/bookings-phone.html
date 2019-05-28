@@ -9,18 +9,62 @@
 
 </head>
 <body>
-<div class="container">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="/">Bio Trio</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+            aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
 
+        <span class="navbar-text">
+        Here you can see booking
+        </span>
 
-    <h2>Please provide a phone number </h2>
-    <form th:action="@{/bookings-phone}" method="post">
-        <input type="text" name="search" id="search"/>
-        <input type="submit" value="Search"/>
+    </div>
+
+</nav>
+
+    <form th:action="@{/find-booking}" method="post">
+
+        <div class="container">
+            <h2>Please provide a phone number </h2>
+            <input type="text" name="search" id="search"/>
+            <input type="submit" value="Search"/>
+        </div>
     </form>
 
-    </tr>
+</div>
+
+<div th:action="@{/booking-phone}" method="post"></div>
+<div th:if="${not #lists.isEmpty(search)}">
+
+    <table class="table table-dark">
+
+        <h2>Booking</h2>
+        <tr>
+            <th>Booking id</th>
+            <th>Row number</th>
+            <th>Seat number</th>
+            <th>Phone Number</th>
+            <th>Screening</th>
+
+        </tr>
+
+        <tr th:each="booking: ${search}">
+
+            <th scope="row" th:text="${booking.getBooking_id()}">1</th>
+            <td th:text="${booking.getSeat().getRowNo()}">{{Row no}}</td>
+            <td th:text="${booking.getSeat().getSeatNo()}">{{Seat No}}</td>
+            <td th:text="${booking.getPhone_no()}">{{Phone number}}</td>
+            <td th:text="${booking.getScreening().getScreening_id()}">{{Screening}}</td>
+
+        </tr>
+
     </table>
 </div>
-</div>
+    <div
+            th:if="${#lists.isEmpty(search)}">
+    </div>
 </body>
 </html>

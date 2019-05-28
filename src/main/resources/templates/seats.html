@@ -27,7 +27,7 @@
         background-color: #dddddd;
     }
 
-    input.largerCheckbox {
+    input.largercheckbox {
         width: 30px;
         height: 35px;
     }
@@ -44,7 +44,7 @@
 <h1>Seats</h1>
 
 
-<form th:object="${seatsCheck}" th:action="'/saveseats/'+${screening_id}" method="post">
+<form name="seat" th:object="${seatsCheck}" th:action="'/saveseats/'+${screening_id}" method="post">
     <table>
         <th:block th:each="seat: ${seatsCheck.getSeats()}">
             <th:block th:if="${seat.getSeatNo()==1}">
@@ -52,11 +52,11 @@
 
             </th:block>
             <td>
-                <input type="checkbox" id="check "name="check" class="largerCheckbox"
-                       th:checked="${seat.getIsBooked()}"
+                <input type="checkbox" id="check" name="check" class="largercheckbox"
                        th:disabled="${seat.getIsBooked()}"
                        th:value="${seat.getRowNo()+'-'+seat.getSeatNo()}"
-                       th:field="*{checkedSeats}" onClick="checkboxes();">
+                       th:field="*{checkedSeats}"
+                       onclick="checkboxes()">
             </td>
             <script>
                 function checkboxes()
@@ -67,24 +67,38 @@
                     for (var i=0; i<inputElems.length; i++) {
                         if (inputElems[i].type == "checkbox" && inputElems[i].checked == true){
                             count++;
-                            if(count==4){
-                            alert(count);}
+                            if(count==5){
+                                alert("You can choose maximum 4 seats!");
+                                inputElems[i].checked=false;}
                         }
-
                     }
                 }
+                function required(element)
+                {
+                    if(element.value.trim()== ""){
+                        alert("Enter phone number!");
+                        element.focus();
+                        return false;
+                    }
+                    alert("Textbox Validation: Successful.")
+                    return true;
+                }
+
+
 
             </script>
+
             <th:block th:if="${seat.getSeatNo()==seatsCheck.getSeats().get(seatsCheck.getSeats().size()-1).getSeatNo()}">
                 </tr>
             </th:block>
         </th:block>
         <tr>
             Enter phone number:<br>
-            <input type="text" name="phonenumber" >
+            <input type="text" id="phonenumber" name="phonenumber" >
             </tr>
     </table>
-    <input type="submit" value="Submit">
+    <input type="submit" value="Submit" onclick="required(document.getElementById('phonenumber'))">
+
 </form>
 
 
