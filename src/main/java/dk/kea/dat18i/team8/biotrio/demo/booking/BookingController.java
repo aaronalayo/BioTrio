@@ -58,20 +58,6 @@ public class BookingController{
         return "edit-booking";
     }
 
-//    @PostMapping("/updatebooking")
-//    public String saveBooking(@ModelAttribute Booking booking,  @ModelAttribute Seat seat, @ModelAttribute Screening screening) {
-//
-//
-//
-//        booking.setPhone_no( booking.getPhone_no() );
-//        seat.setRowNo( seat.getRowNo() );
-//        seat.setSeatNo( seat.getSeatNo() );
-//        booking.setSeat( seat );
-//        booking.setScreening( screeningRepo.findScreening( screening.getScreening_id() ));
-//
-//        bookingRepo.updateBooking(booking);
-//        return "redirect:/bookings";
-//    }
 
 
     @GetMapping("/deletebooking/{booking_id}")
