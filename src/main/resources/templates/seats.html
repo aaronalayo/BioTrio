@@ -28,7 +28,7 @@
 <h2>Choose from 1 to 4 seats</h2>
 
 
-<form name="seat" th:object="${seatsCheck}" th:action="'/saveseats/'+${screening_id}" onsubmit="return validateForm()" method="post">
+<form name="seat" th:object="${seatsCheck}" th:action="'/saveseats/'+${screening_id}" onsubmit="return !!(validateForm() & ifChecked())" method="post">
     <table id="mytable">
         <th:block th:each="seat: ${seatsCheck.getSeats()}">
             <th:block th:if="${seat.getSeatNo()==1}">
@@ -73,6 +73,17 @@
                     return false;
                 }
                 return true;
+            }
+            function ifChecked() {
+                var inputElems = document.getElementsByTagName("input");
+                for (var i=0; i<inputElems.length; i++) {
+                    if (inputElems[i].type == "checkbox" && inputElems[i].checked == true){
+
+                            return true;
+                    }
+                }
+                alert("You have to choose a seat!");
+                return false;
             }
 
 

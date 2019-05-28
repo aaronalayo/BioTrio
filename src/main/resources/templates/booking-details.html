@@ -3,10 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title>Booking details</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link th:href="@{/css/nav.css}" href="/static/css/nav.css" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/table.css}" href="/static/css/table.css" rel="stylesheet" type="text/css"/>
+
 </head>
 <body>
-<p1>Booking successful!</p1>
+<header>
+    <div class="container">
+        <h1>BIO<span>TRIO</span></h1>
+        <nav>
+            <ul>
+
+                <li><a href="/">Exit</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<div class="mainContent">
+<h1>Booking successful!</h1>
 <table class="table table-hover">
     <thead>
     <tr>
@@ -42,6 +56,6 @@
 
 </table>
 
-
+</div>
 </body>
 </html>
