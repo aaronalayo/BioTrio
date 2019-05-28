@@ -30,8 +30,6 @@ public class BookingController{
 
     @GetMapping("/bookings")
     public String booking(Model model) {
-
-
         List<Booking> bookingList = bookingRepo.findAllBookings();
         model.addAttribute("bookinglist", bookingList);
         return "show-bookings";
@@ -40,8 +38,6 @@ public class BookingController{
 
     @GetMapping("/edit/{booking_id}")
     public String editBooking(Model m, @PathVariable(name = "booking_id") int booking_id) {
-
-
 
         Booking bookingToEdit = bookingRepo.findBooking(booking_id);
         Seat seat = new Seat();
@@ -91,7 +87,10 @@ public class BookingController{
     public String seatsForScreening(Model model,@PathVariable(name="screening_id") int screening_id){
 
         SeatCheck seatCheck = new SeatCheck(  );
+
+        //sets a list with theater seats for the screening and their availability
         seatCheck.setSeats( seatRepo.checkSeats(screeningRepo.findScreening(screening_id)));
+        //sets an arrayList of seats as Strings
         seatCheck.setCheckedSeats( new ArrayList<>());
 
         model.addAttribute( "screening_id",screeningRepo.findScreening( screening_id ).getScreening_id() );
@@ -107,6 +106,8 @@ public class BookingController{
 
         List<Seat> seats=new ArrayList<>();
 
+        //goes through the list of checked seats, passed from the html form as list of Strings
+        // and adds them to a new list of seats as objects
         for(String checkedSeat:seatCheck.getCheckedSeats()){
             Seat seat=new Seat();
             String[] seatPlace=checkedSeat.split(  "-");
@@ -116,12 +117,12 @@ public class BookingController{
         }
         List<Booking> bookingList=new ArrayList<>();
 
+        //goes through the checked seats and create a new booking(ticket) for each of them
         for (Seat seat:seats){
             Booking booking=new Booking();
             booking.setScreening(screeningRepo.findScreening(screening_id));
             booking.setPhone_no(phonenumber);
             booking.setSeat(seat);
-            System.out.println(booking);
             bookingRepo.insertBooking(booking);
             bookingList.add(booking);
             model.addAttribute("booking",booking);
