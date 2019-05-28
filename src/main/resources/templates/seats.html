@@ -29,7 +29,7 @@
 
 
 <form name="seat" th:object="${seatsCheck}" th:action="'/saveseats/'+${screening_id}" onsubmit="return validateForm()" method="post">
-    <table>
+    <table id="mytable">
         <th:block th:each="seat: ${seatsCheck.getSeats()}">
             <th:block th:if="${seat.getSeatNo()==1}">
                 <tr><td th:text="'Row ' + ${seat.getRowNo()}">
@@ -74,6 +74,8 @@
                 }
                 return true;
             }
+
+
 
         </script>
 
