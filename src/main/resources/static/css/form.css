@@ -46,15 +46,25 @@ label{
 label input{
     margin-top:10px;
 }
-.button{
-    display: inline;
-    width: 100px;
-    height:40px;
-    border: 1px solid red;
-    background-color: red;
-    color: white;
+.button1{
+    width:67px;
+    height: 26px;
+    font-size: 21px;
+    border: 0px solid #FFFF66;
+    background-color: #FFFF66;
+    color:black;
 }
-.button:hover{
+.button1,.button2{
+    display: inline;
+}
+.button2{
+    font-size: 21px;
+    background-color: red;
+    border: 1px solid red;
+    color: white;
+    text-decoration: none;
+}
+form a:hover, button:hover{
     background-color: white;
     color:black;
     transition:0.5s;
