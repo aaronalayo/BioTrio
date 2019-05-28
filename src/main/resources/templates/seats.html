@@ -44,7 +44,7 @@
 <h1>Seats</h1>
 
 
-<form name="seat" th:object="${seatsCheck}" th:action="'/saveseats/'+${screening_id}" method="post">
+<form name="seat" th:object="${seatsCheck}" th:action="'/saveseats/'+${screening_id}" onsubmit="return validateForm()" method="post">
     <table>
         <th:block th:each="seat: ${seatsCheck.getSeats()}">
             <th:block th:if="${seat.getSeatNo()==1}">
@@ -63,7 +63,6 @@
                 {
                     var inputElems = document.getElementsByTagName("input"),
                         count = 0;
-
                     for (var i=0; i<inputElems.length; i++) {
                         if (inputElems[i].type == "checkbox" && inputElems[i].checked == true){
                             count++;
@@ -73,23 +72,6 @@
                         }
                     }
                 }
-                //function required(element)
-                //{
-                  //  if(element.value.trim()== ""){
-                    //    alert("Enter phonenumber!");
-                      //  element.focus();
-                        //return false;
-                    //}
-                    //alert("Textbox Validation: Successful.")
-                    //return true;
-                //}
-                function validateForm() {
-                    var uname=document.getElementById("uname").value;
-                    if (uname==""){
-                        alert("Username is obligatory");
-                        return false;
-                    }
-                }
 
             </script>
 
@@ -97,14 +79,31 @@
                 </tr>
             </th:block>
         </th:block>
+        <script>
+            //function validateForm() {
+              //  if (document.getElementById("phonen").value.trim()==""){
+                //    alert("Enter phone number!");
+                  //  return false;
+                //}
+                //return true;
+            //}
+            function validateForm() {
+                var x = document.forms["seat"]["phonenum"].value;
+                if (x == "") {
+                    alert("Phone number must be filled out");
+                    return false;
+                }
+                return true;
+            }
+
+        </script>
         <tr>
-            Enter phone number:<br>
-            <input type="text" id="phonenumber" name="phonenumber" >
-            </tr>
+           Enter phone number:<br>
+                <input type="text" id="phonen" name="phonenum">
+                <input type="submit" value="Book">
+        </tr>
+
     </table>
-<form onSubmit="return validateForm()" >
-    <input type="submit" value="Submit">
-</form>
 
 </form>
 
