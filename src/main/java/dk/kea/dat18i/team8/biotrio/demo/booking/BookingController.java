@@ -1,4 +1,3 @@
-
 package dk.kea.dat18i.team8.biotrio.demo.booking;
 
 import dk.kea.dat18i.team8.biotrio.demo.Seat.Seat;
@@ -58,20 +57,6 @@ public class BookingController{
         return "edit-booking";
     }
 
-//    @PostMapping("/updatebooking")
-//    public String saveBooking(@ModelAttribute Booking booking,  @ModelAttribute Seat seat, @ModelAttribute Screening screening) {
-//
-//
-//
-//        booking.setPhone_no( booking.getPhone_no() );
-//        seat.setRowNo( seat.getRowNo() );
-//        seat.setSeatNo( seat.getSeatNo() );
-//        booking.setSeat( seat );
-//        booking.setScreening( screeningRepo.findScreening( screening.getScreening_id() ));
-//
-//        bookingRepo.updateBooking(booking);
-//        return "redirect:/bookings";
-//    }
 
 
     @GetMapping("/deletebooking/{booking_id}")
@@ -91,8 +76,13 @@ public class BookingController{
     @PostMapping("/find-booking")
     public String findBookingsByPhone(@RequestParam (value = "search", required = false) String search, Model model) {
 
+        if(!search.isEmpty()) {
+
         List<Booking> bookingsByPhone = bookingRepo.findBookingsbyPhoneNo(search);
         model.addAttribute("search", bookingsByPhone);
+
+        }else
+            return "/bookings-phone";
 
         return "/bookings-phone";
     }

@@ -52,7 +52,7 @@ public class ScreeningController {
         model.addAttribute("screeninglist", screeningList);
 
 
-        return "screening/show-screenings";
+        return "show-screenings";
 
     }
 
@@ -68,17 +68,15 @@ public class ScreeningController {
 
         model.addAttribute( "screeningForm", screeningForm);
 
-        return "screening/add-screening";
+        return "add-screening";
     }
 
     @PostMapping("/savescreening")
     public String saveScreening(@ModelAttribute ScreeningForm screeningData){
         Screening newScreening = new Screening();
 
-
-
-          DateTimeFormatter dtf = DateTimeFormatter.ofPattern( "yyyy MM dd HH:mm" );
-          newScreening.setShowing( LocalDateTime.parse(screeningData.getShowing(),dtf ));
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern( "yyyy MM dd HH:mm" );
+        newScreening.setShowing( LocalDateTime.parse(screeningData.getShowing(),dtf ));
 
         newScreening.setMovie( movieRepo.showMovie( screeningData.getMovie_id() ) );
         newScreening.setTheater( theaterRepo.findTheater( screeningData.getTheater_id() ) );
@@ -110,7 +108,7 @@ public class ScreeningController {
         model.addAttribute( "theaterlist2", theaterList2 );
         model.addAttribute( "screeningForm2", screeningForm2);
 
-        return "screening/edit-screening";
+        return "edit-screening";
     }
 
     @PostMapping("/updatescreening")
@@ -155,8 +153,6 @@ public class ScreeningController {
             model.addAttribute( "search", screeningSearch );
         }else
             return "/screenings-date";
-
-
 
         return "/screenings-date";
     }

@@ -1,6 +1,5 @@
 package dk.kea.dat18i.team8.biotrio.demo.movies;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +9,7 @@ import java.util.List;
 
 @Controller
 public class MovieController {
+
 
     @Autowired
     private MovieRepository movieRepo;
@@ -27,17 +27,29 @@ public class MovieController {
         model.addAttribute("movies",movieList);
         return "show-movies";
     }
+
+
+    @GetMapping("/moviesuser")
+    public String moviesUser(Model model){
+        List<Movie> movieList= movieRepo.showAllMovies();
+        model.addAttribute("movies",movieList);
+        return "show-moviesuser";
+
+    }
+
+    @GetMapping("/employeescreen")
+    public String employeeScreen(){
+        return "employee-screen";
+    }
+
     @GetMapping("/addmovie")
     public String addMovie(Model model){
         model.addAttribute("movieform", new Movie());
-
         return "add-movie";
     }
 
     @PostMapping("/savemovie")
-    //@ResponseBody
     public String saveMovie(@ModelAttribute Movie movie){
-        //movie.setTheater_id(theaterRepo.findTheater(movie.getTheater_id()));
         movieRepo.insert(movie);
         return "redirect:/movies";
     }

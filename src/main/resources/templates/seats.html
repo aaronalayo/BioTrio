@@ -2,46 +2,30 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/" xmlns:a="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Seats</title>
+    <title>Complete booking</title>
+    <link th:href="@{/css/nav.css}" href="/static/css/nav.css" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/checkbox.css}" href="/static/css/checkbox.css" rel="stylesheet" type="text/css"/>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+    
 
 
 </head>
-<style>
-    table {
-        font-family: arial, sans-serif;
-        border-collapse: collapse;
-        width: 50%;
-    }
-
-    td, th {
-        border: 1px solid #dddddd;
-        text-align: left;
-        padding: 8px;
-    }
-
-    tr:nth-child(even) {
-        background-color: #dddddd;
-    }
-
-    input.largercheckbox {
-        width: 30px;
-        height: 35px;
-    }
-    input {
-        float: left;
-    }
-
-
-</style>
 
 <body>
+<header>
+    <div class="container">
+        <h1>BIO<span>TRIO</span></h1>
+        <nav>
+            <ul>
+                <li><a href="/moviesuser">Exit</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<div class="mainContent">
 
 
-<h1>Seats</h1>
+<h2>Choose from 1 to 4 seats</h2>
 
 
 <form name="seat" th:object="${seatsCheck}" th:action="'/saveseats/'+${screening_id}" onsubmit="return validateForm()" method="post">
@@ -52,11 +36,13 @@
 
             </th:block>
             <td>
-                <input type="checkbox" id="check" name="check" class="largercheckbox"
+                <label>
+                <input type="checkbox" id="check" name="check"
                        th:disabled="${seat.getIsBooked()}"
                        th:value="${seat.getRowNo()+'-'+seat.getSeatNo()}"
                        th:field="*{checkedSeats}"
                        onclick="checkboxes()">
+               </label>
             </td>
             <script>
                 function checkboxes()
@@ -80,15 +66,8 @@
             </th:block>
         </th:block>
         <script>
-            //function validateForm() {
-              //  if (document.getElementById("phonen").value.trim()==""){
-                //    alert("Enter phone number!");
-                  //  return false;
-                //}
-                //return true;
-            //}
             function validateForm() {
-                var x = document.forms["seat"]["phonenum"].value;
+                var x = document.forms["seat"]["phonenumber"].value;
                 if (x == "") {
                     alert("Phone number must be filled out");
                     return false;
@@ -97,13 +76,15 @@
             }
 
         </script>
-        <tr>
-           Enter phone number:<br>
-                <input type="text" id="phonen" name="phonenum">
-                <input type="submit" value="Book">
-        </tr>
+
 
     </table>
+    <tr>
+        Enter phone number:<br>
+        <input type="text" id="phonenumber" name="phonenumber">
+
+    </tr>
+    <input type="submit" value="Book">
 
 </form>
 
@@ -112,6 +93,7 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 
-
+</div>
 </body>
+
 </html>
