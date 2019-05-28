@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Screening</title>
+    <link th:href="@{/css/nav.css}" href="/static/css/nav.css" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/form.css}" href="/static/css/form.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<header>
+    <div class="container">
+        <h1>BIO<span>TRIO</span></h1>
+        <nav>
+            <ul>
+                <li><a href="/screenings">Exit</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+    <div class="mainContent">
+        <h3>Add new Screening</h3>
+
+        <form id="form" th:action="@{'/savescreening'}" th:object="${screeningForm}" method="post">
+
+         <label for="showing">Showing Date & Time </label>
+         <input type="text" th:field="${screeningForm.showing}"  id="showing" placeholder="yyyy MM dd HH:mm">
+
+         <label for="movie">Movies</label>
+         <select th:field="${screeningForm.movie_id}"  id="movie" placeholder="Movies">
+             <option th:each="movie: ${movielist}"
+                     th:value="${movie.getId()}"
+                     th:text="${movie.getTitle()}"></option>
+         </select>
+
+            <label for="theater">Theater</label>
+            <select th:field="${screeningForm.theater_id}"  id="theater" placeholder="Theater">
+                <option th:each="theater: ${theaterlist}"
+                        th:value="${theater.getTheater_id()}"
+                        th:text="${theater.getTheater_name()}"></option>
+            </select>
+
+        <button type="submit">Add Screening</button>
+        <button type="reset">Cancel</button>
+ </form>
+
+</div>
+
+</body>
+</html>

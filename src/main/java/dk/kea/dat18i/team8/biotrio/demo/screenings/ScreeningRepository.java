@@ -3,7 +3,6 @@ package dk.kea.dat18i.team8.biotrio.demo.screenings;
 import dk.kea.dat18i.team8.biotrio.demo.movies.MovieRepository;
 import dk.kea.dat18i.team8.biotrio.demo.theater.TheaterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
@@ -137,7 +136,7 @@ public class ScreeningRepository {
     public List<Screening> findScreeningsWithMovie(int movie_id){
 
 
-       SqlRowSet rs = jdbc.queryForRowSet( "SELECT * FROM screening WHERE movie_id = " + movie_id);
+        SqlRowSet rs = jdbc.queryForRowSet( "SELECT * FROM screening WHERE movie_id = " + movie_id);
 
         List<Screening> screeningList = new ArrayList<>();
 
@@ -165,7 +164,7 @@ public class ScreeningRepository {
         SqlRowSet rs = jdbc.queryForRowSet( "SELECT * FROM screening where DATE(showing) = DATE ('"+dateTime+"' )");
         List<Screening> screeningByDate = new ArrayList<>();
 
-            while(rs.next()){
+        while(rs.next()){
             Screening screeningDate = new Screening();
 
 
