@@ -9,7 +9,7 @@
 <body>
 <header>
     <div class="container">
-        <h1>BIO<span>TRIO</span></h1>
+        <a href="/"><h1>BIO<span>TRIO</span></h1></a>
         <nav>
             <ul>
                 <li><a href="/screenings">Exit</a></li>
@@ -24,7 +24,7 @@
         <form id="form" th:action="@{'/savescreening'}" th:object="${screeningForm}" method="post">
 
          <label for="showing">Showing Date & Time </label>
-         <input type="text" th:field="${screeningForm.showing}" id="showing" placeholder="yyyy MM dd HH:mm" onclick="restrict()">
+         <input type="text" th:field="${screeningForm.showing}" id="showing" placeholder="yyyy MM dd HH:mm">
 
 
 
