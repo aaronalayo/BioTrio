@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -65,7 +66,6 @@ public class ScreeningController {
         List<Theater> theaterList= theaterRepo.findAllTheaters();
         model.addAttribute(  "movielist", movieList );
         model.addAttribute( "theaterlist", theaterList );
-
         model.addAttribute( "screeningForm", screeningForm);
 
         return "add-screening";
@@ -126,9 +126,7 @@ public class ScreeningController {
     @GetMapping("/screeningbymovie/{movie_id}")
     public String screeningByMovie(Model model, @PathVariable(name = "movie_id") int movie_id){
 
-
         List<Screening> screeningsForMovies= screeningRepo.findScreeningsWithMovie( movie_id );
-
 
         model.addAttribute( "screeningsForMovies", screeningsForMovies);
 
@@ -136,14 +134,12 @@ public class ScreeningController {
 
     }
 
-
-
-
     @GetMapping("/screenings-date")
     public String getScreeningsDate(){
 
         return "/screenings-date";
     }
+
     @PostMapping("/screenings-search")
     public String showScreeningsByDate(@RequestParam (value = "search", required = false) String search, Model model) {
 

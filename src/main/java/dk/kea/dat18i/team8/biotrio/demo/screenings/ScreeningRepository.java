@@ -19,8 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
-
 @Repository
 public class ScreeningRepository {
 
@@ -74,14 +72,10 @@ public class ScreeningRepository {
 
     public Screening insertScreening(Screening screening) {
 
-
         PreparedStatementCreator psc = new PreparedStatementCreator() {
-
 
             @Override
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-
-
 
                 PreparedStatement ps = connection.prepareStatement( "INSERT INTO screening (showing, movie_id, theater_id)VALUES (?,?,?)");
 
@@ -119,16 +113,11 @@ public class ScreeningRepository {
                 ps.setInt( 2,(screening.getMovie().getId()) );
                 ps.setInt( 3,(screening.getTheater().getTheater_id()) );
 
-
-
                 return ps;
             }
-
         };
 
         jdbc.update(psc);
-
-
         return screening;
     }
 
@@ -151,10 +140,7 @@ public class ScreeningRepository {
             screeningList.add( screening );
 
         }
-
         return screeningList;
-
-
     }
 
     public List<Screening> findScreeningsByDate(String showing) {
@@ -167,19 +153,13 @@ public class ScreeningRepository {
         while(rs.next()){
             Screening screeningDate = new Screening();
 
-
             screeningDate.setScreening_id( rs.getInt( "screening_id" ) );
             screeningDate.setShowing( rs.getTimestamp( "showing" ).toLocalDateTime() );
             screeningDate.setMovie(movieRepo.showMovie(rs.getInt("movie_id")));
             screeningDate.setTheater( theaterRepo.findTheater( rs.getInt( "theater_id" ) ) );
 
             screeningByDate.add( screeningDate );
-
-
         }
-
         return screeningByDate;
-
     }
-
 }
