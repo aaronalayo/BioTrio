@@ -145,7 +145,10 @@ public class BookingRepository {
         return findBookinByPhone;
 
     }
+    public void cancelBooking(int screening_id) {
 
+        jdbc.update("DELETE FROM booking WHERE screening_id = " + screening_id);
+    }
 
 }
 
