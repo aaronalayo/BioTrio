@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<html lang="en" xmlns:th="http://www.thymeleaf.org/" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Add Screening</title>
@@ -24,7 +24,9 @@
         <form id="form" th:action="@{'/savescreening'}" th:object="${screeningForm}" method="post">
 
          <label for="showing">Showing Date & Time </label>
-         <input type="text" th:field="${screeningForm.showing}"  id="showing" placeholder="yyyy MM dd HH:mm">
+         <input type="text" th:field="${screeningForm.showing}" id="showing" placeholder="yyyy MM dd HH:mm" onclick="restrict()">
+
+
 
          <label for="movie">Movies</label>
          <select th:field="${screeningForm.movie_id}"  id="movie" placeholder="Movies">
@@ -40,7 +42,7 @@
                         th:text="${theater.getTheater_name()}"></option>
             </select>
 
-        <button class="button1" type="submit">Add Screening</button>
+        <button class="button1" type="submit">Save</button>
             <a  class="button2" href="/screenings " role="button" >Cancel</a>
  </form>
 
