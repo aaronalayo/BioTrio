@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/" xmlns:a="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Movies</title>
     <link th:href="@{/css/user.css}" href="/static/css/user.css" rel="stylesheet" type="text/css"/>
     <link th:href="@{/css/nav.css}" href="/static/css/nav.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -12,6 +12,12 @@
         <a href="/"><h1>BIO<span>TRIO</span></h1></a>
         <nav>
             <ul>
+                <li>
+                    <form th:action="@{/bookings-user}" method="post">
+                        <input class="search" type="text" name="search" id="search" placeholder="phone number"/>
+                        <input type="submit" value="Search"/>
+                    </form>
+                </li>
                 <li><a href="/">Exit</a></li>
             </ul>
         </nav>

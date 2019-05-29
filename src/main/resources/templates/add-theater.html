@@ -27,13 +27,13 @@
         <input type="text" class="form-control" th:field="${theaterform.theater_name}" id="theater_name" placeholder="TheaterName" maxlength="20">
 
         <label for="theater_format">Format</label>
-        <select th:field="${theaterform.theater_format}" class="form-control" id="theater_format">
+        <select th:field="${theaterform.theater_format}"  id="theater_format">
             <option value="2D">2D</option>
             <option value="3D">3D</option>
         </select>
 
         <label for="number_of_rows">Number Of Rows</label>
-        <input type="number" class="form-control" th:field="${theaterform.number_of_rows}" id="number_of_rows"
+        <input type="number"  th:field="${theaterform.number_of_rows}" id="number_of_rows"
                placeholder="NumberOfRows">
 
 

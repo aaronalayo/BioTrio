@@ -37,11 +37,6 @@ public class MovieController {
 
     }
 
-    @GetMapping("/employeescreen")
-    public String employeeScreen(){
-        return "employee-screen";
-    }
-
     @GetMapping("/addmovie")
     public String addMovie(Model model){
         model.addAttribute("movieform", new Movie());

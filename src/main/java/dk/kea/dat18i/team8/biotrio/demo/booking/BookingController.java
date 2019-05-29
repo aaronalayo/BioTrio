@@ -83,6 +83,25 @@ public class BookingController{
         return "/bookings-phone";
     }
 
+    @GetMapping("/find-bookinguser")
+    public String getBookingsPhoneUser() {
+
+
+        return "/find-bookinguser";
+    }
+    @PostMapping("/bookings-user")
+    public String findBookingsByPhoneUser(@RequestParam (value = "search", required = false) String search, Model model) {
+
+        if(!search.isEmpty()) {
+
+            List<Booking> bookingsByPhone = bookingRepo.findBookingsbyPhoneNo(search);
+            model.addAttribute("search", bookingsByPhone);
+
+        }else
+            return "find-bookinguser";
+
+        return "/find-bookinguser";
+    }
     @GetMapping("/seatsforscreening/{screening_id}")
     public String seatsForScreening(Model model,@PathVariable(name="screening_id") int screening_id){
 
