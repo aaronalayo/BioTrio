@@ -80,7 +80,13 @@ public class ScreeningController {
 
         newScreening.setMovie( movieRepo.showMovie( screeningData.getMovie_id() ) );
         newScreening.setTheater( theaterRepo.findTheater( screeningData.getTheater_id() ) );
+
+        //screeningRepo.check( newScreening );
+
+
         screeningRepo.insertScreening(newScreening);
+
+
 
         return "redirect:/screenings";
     }
