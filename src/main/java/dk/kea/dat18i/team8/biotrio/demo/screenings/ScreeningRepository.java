@@ -12,13 +12,15 @@ import org.springframework.jdbc.core.PreparedStatementCreator;
 
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 import java.util.List;
-
-
 
 
 @Repository
@@ -71,27 +73,64 @@ public class ScreeningRepository {
 
     }
 
-
+//
+//    public boolean screeningsDuplicates(LocalDateTime showing, int theater_id){
+//
+//        DateTimeFormatter dtf = DateTimeFormatter.ofPattern( "yyyy-mm-dd hh:mm:ss" );
+//
+//        Screening screening =new Screening(  );
+//        ScreeningForm screeningForm = new ScreeningForm(  );
+//
+//        screening.setShowing( LocalDateTime.parse(screeningForm.getShowing(),dtf ) );
+//
+//
+//
+//
+//
+//
+//        SqlRowSet rs = jdbc.queryForRowSet( "SELECT COUNT(*) FROM screening GROUP BY "+ showing + "," + theater_id);
+//
+//        System.out.println(rs.getInt( "COUNT" ));
+//
+//        if(rs.getInt( "COUNT" )>1){
+//
+//                  return true;
+//              } else
+//                  {
+//                  return false;
+//              }
+//
+//    }
+//
+//    public void check(Screening screening) {
+//
+//        if ( !screeningsDuplicates( screening.getShowing(), screening.getTheater().getTheater_id() ) )
+//        {
+//            insertScreening( screening );
+//        }
+//        else{
+//            System.out.println("error");
+//        }
+//    }
     public Screening insertScreening(Screening screening) {
 
-
         PreparedStatementCreator psc = new PreparedStatementCreator() {
-
 
             @Override
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
 
+                    PreparedStatement ps = connection.prepareStatement( "INSERT INTO screening (showing, movie_id, theater_id)VALUES (?,?,?)" );
+
+                    ps.setTimestamp( 1, Timestamp.valueOf( screening.getShowing() ) );
+                    ps.setInt( 2, screening.getMovie().getId() );
+                    ps.setInt( 3, screening.getTheater().getTheater_id() );
 
 
-                PreparedStatement ps = connection.prepareStatement( "INSERT INTO screening (showing, movie_id, theater_id)VALUES (?,?,?)");
+                    return ps;
 
-                ps.setTimestamp( 1,Timestamp.valueOf(screening.getShowing()));
-                ps.setInt( 2, screening.getMovie().getId());
-                ps.setInt( 3,screening.getTheater().getTheater_id() );
 
-                return ps;
             }
-        };
+    };
 
         jdbc.update( psc );
 
@@ -119,16 +158,11 @@ public class ScreeningRepository {
                 ps.setInt( 2,(screening.getMovie().getId()) );
                 ps.setInt( 3,(screening.getTheater().getTheater_id()) );
 
-
-
                 return ps;
             }
-
         };
 
         jdbc.update(psc);
-
-
         return screening;
     }
 
@@ -151,10 +185,7 @@ public class ScreeningRepository {
             screeningList.add( screening );
 
         }
-
         return screeningList;
-
-
     }
 
     public List<Screening> findScreeningsByDate(String showing) {
@@ -167,19 +198,13 @@ public class ScreeningRepository {
         while(rs.next()){
             Screening screeningDate = new Screening();
 
-
             screeningDate.setScreening_id( rs.getInt( "screening_id" ) );
             screeningDate.setShowing( rs.getTimestamp( "showing" ).toLocalDateTime() );
             screeningDate.setMovie(movieRepo.showMovie(rs.getInt("movie_id")));
             screeningDate.setTheater( theaterRepo.findTheater( rs.getInt( "theater_id" ) ) );
 
             screeningByDate.add( screeningDate );
-
-
         }
-
         return screeningByDate;
-
     }
-
 }

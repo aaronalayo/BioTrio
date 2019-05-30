@@ -36,3 +36,9 @@ body{
     background-color: #FFFF66;
     text-decoration: none;
 }
+@media screen and (max-width: 1295px ) {
+    .movieList {
+        width: 860px;
+        margin:0 auto;
+    }
+}

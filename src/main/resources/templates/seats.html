@@ -14,7 +14,7 @@
 <body>
 <header>
     <div class="container">
-        <h1>BIO<span>TRIO</span></h1>
+        <a href="/"><h1>BIO<span>TRIO</span></h1></a>
         <nav>
             <ul>
                 <li><a href="/moviesuser">Exit</a></li>
@@ -28,8 +28,8 @@
 <h2>Choose from 1 to 4 seats</h2>
 
 
-<form name="seat" th:object="${seatsCheck}" th:action="'/saveseats/'+${screening_id}" onsubmit="return validateForm()" method="post">
-    <table>
+<form name="seat" th:object="${seatsCheck}" th:action="'/saveseats/'+${screening_id}" onsubmit="return !!(validateForm() & ifChecked())" method="post">
+    <table id="mytable" class="center">
         <th:block th:each="seat: ${seatsCheck.getSeats()}">
             <th:block th:if="${seat.getSeatNo()==1}">
                 <tr><td th:text="'Row ' + ${seat.getRowNo()}">
@@ -74,13 +74,22 @@
                 }
                 return true;
             }
-
+            function ifChecked() {
+                var inputElems = document.getElementsByTagName("input");
+                for (var i=0; i<inputElems.length; i++) {
+                    if (inputElems[i].type == "checkbox" && inputElems[i].checked == true){
+                            return true;
+                    }
+                }
+                alert("You have to choose a seat!");
+                return false;
+            }
         </script>
 
 
     </table>
     <tr>
-        Enter phone number:<br>
+        <h2>Enter phone number:</h2>
         <input type="text" id="phonenumber" name="phonenumber">
 
     </tr>
