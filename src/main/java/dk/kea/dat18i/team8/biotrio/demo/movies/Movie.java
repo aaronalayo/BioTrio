@@ -1,7 +1,5 @@
 package dk.kea.dat18i.team8.biotrio.demo.movies;
 
-import dk.kea.dat18i.team8.biotrio.demo.theater.Theater;
-
 public class Movie {
     private int id;
     private String title;
@@ -10,11 +8,12 @@ public class Movie {
     private String director;
     private String plot;
     private String format;
+    private String image;
 
 
     public Movie(){ }
 
-    public Movie(int id, String title, String genre, int duration, String director, String plot, String format) {
+    public Movie(int id, String title, String genre, int duration, String director, String plot, String format, String image) {
         this.id = id;
         this.title = title;
         this.genre = genre;
@@ -22,6 +21,7 @@ public class Movie {
         this.director = director;
         this.plot = plot;
         this.format = format;
+        this.image = image;
 
     }
 
@@ -58,5 +58,8 @@ public class Movie {
     public String getPlot(){return plot;}
     public void setPlot(String plot){this.plot=plot;}
 
+     public String getImage() { return image;}
+
+    public void setImage(String image) { this.image = image; }
 }
 

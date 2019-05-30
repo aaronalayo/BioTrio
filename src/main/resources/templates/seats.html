@@ -2,68 +2,53 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/" xmlns:a="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Seats</title>
+    <title>Complete booking</title>
+    <link th:href="@{/css/nav.css}" href="/static/css/nav.css" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/checkbox.css}" href="/static/css/checkbox.css" rel="stylesheet" type="text/css"/>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+    
 
 
 </head>
-<style>
-    table {
-        font-family: arial, sans-serif;
-        border-collapse: collapse;
-        width: 50%;
-    }
-
-    td, th {
-        border: 1px solid #dddddd;
-        text-align: left;
-        padding: 8px;
-    }
-
-    tr:nth-child(even) {
-        background-color: #dddddd;
-    }
-
-    input.largercheckbox {
-        width: 30px;
-        height: 35px;
-    }
-    input {
-        float: left;
-    }
-
-
-</style>
 
 <body>
+<header>
+    <div class="container">
+        <a href="/"><h1>BIO<span>TRIO</span></h1></a>
+        <nav>
+            <ul>
+                <li><a href="/moviesuser">Exit</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<div class="mainContent">
 
 
-<h1>Seats</h1>
+<h2>Choose from 1 to 4 seats</h2>
 
 
-<form name="seat" th:object="${seatsCheck}" th:action="'/saveseats/'+${screening_id}" method="post">
-    <table>
+<form name="seat" th:object="${seatsCheck}" th:action="'/saveseats/'+${screening_id}" onsubmit="return !!(validateForm() & ifChecked())" method="post">
+    <table id="mytable" class="center">
         <th:block th:each="seat: ${seatsCheck.getSeats()}">
             <th:block th:if="${seat.getSeatNo()==1}">
                 <tr><td th:text="'Row ' + ${seat.getRowNo()}">
 
             </th:block>
             <td>
-                <input type="checkbox" id="check" name="check" class="largercheckbox"
+                <label>
+                <input type="checkbox" id="check" name="check"
                        th:disabled="${seat.getIsBooked()}"
                        th:value="${seat.getRowNo()+'-'+seat.getSeatNo()}"
                        th:field="*{checkedSeats}"
                        onclick="checkboxes()">
+               </label>
             </td>
             <script>
                 function checkboxes()
                 {
                     var inputElems = document.getElementsByTagName("input"),
                         count = 0;
-
                     for (var i=0; i<inputElems.length; i++) {
                         if (inputElems[i].type == "checkbox" && inputElems[i].checked == true){
                             count++;
@@ -73,18 +58,6 @@
                         }
                     }
                 }
-                function required(element)
-                {
-                    if(element.value.trim()== ""){
-                        alert("Enter phone number!");
-                        element.focus();
-                        return false;
-                    }
-                    alert("Textbox Validation: Successful.")
-                    return true;
-                }
-
-
 
             </script>
 
@@ -92,12 +65,35 @@
                 </tr>
             </th:block>
         </th:block>
-        <tr>
-            Enter phone number:<br>
-            <input type="text" id="phonenumber" name="phonenumber" >
-            </tr>
+        <script>
+            function validateForm() {
+                var x = document.forms["seat"]["phonenumber"].value;
+                if (x == "") {
+                    alert("Phone number must be filled out");
+                    return false;
+                }
+                return true;
+            }
+            function ifChecked() {
+                var inputElems = document.getElementsByTagName("input");
+                for (var i=0; i<inputElems.length; i++) {
+                    if (inputElems[i].type == "checkbox" && inputElems[i].checked == true){
+                            return true;
+                    }
+                }
+                alert("You have to choose a seat!");
+                return false;
+            }
+        </script>
+
+
     </table>
-    <input type="submit" value="Submit" onclick="required(document.getElementById('phonenumber'))">
+    <tr>
+        <h2>Enter phone number:</h2>
+        <input type="text" id="phonenumber" name="phonenumber">
+
+    </tr>
+    <input type="submit" value="Book">
 
 </form>
 
@@ -106,6 +102,7 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 
-
+</div>
 </body>
+
 </html>
