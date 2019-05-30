@@ -47,7 +47,7 @@
         <td th:text="${booking.getSeat().getSeatNo()}">{{Seat No}}</td>
         <td th:text="${booking.getPhone_no()}">{{PhoneNumber}}</td>
         <td>
-            <a th:href="@{'/deletebooking/' + ${booking.booking_id}}"  class="button1">Cancel</a>
+            <a th:href="@{'/cancelbooking/' + ${booking.getScreening().getScreening_id()}}"  class="button1">Cancel</a>
         </td>
 
         <td>
