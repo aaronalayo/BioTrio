@@ -150,4 +150,11 @@ public class BookingController{
         return "booking-details";
     }
 
+    @GetMapping("/cancelbooking/{screening_id}")
+    public String cancelBooking(@PathVariable(name = "screening_id") int screening_id) {
+        bookingRepo.cancelBooking(screening_id);
+
+        return "redirect:/moviesuser";
+    }
+
 }
