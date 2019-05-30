@@ -20,30 +20,44 @@
 </header>
 <div class="mainContent">
 <h3>Add new theater</h3>
+    <script>
+        function validateForm() {
+            var x = document.forms["formss"]["theater_name"].value;
+            //var y=document.forms["forms"]["theater_format"].value;
+            //var z=document.forms["forms"]["number_of_rows"].value;
+            //var a=document.forms["forms"]["seats_per_row"].value;
+            if (x == "") {
+                alert("Fill all fields");
+                return false;
+            }
+            return true;
+        }
+    </script>
 
-    <form id="form" action="/savetheater" method="post" th:object="${theaterform}">
+    <form id="form" name="formss" action="/savetheater" method="post" th:object="${theaterform}">
 
         <label for="theater_name">Name</label>
-        <input type="text" class="form-control" th:field="${theaterform.theater_name}" id="theater_name" placeholder="TheaterName" maxlength="20">
+        <input type="text" class="form-control" th:field="${theaterform.theater_name}" id="theater_name" name="theater_name" placeholder="TheaterName" maxlength="20">
 
         <label for="theater_format">Format</label>
-        <select th:field="${theaterform.theater_format}"  id="theater_format">
+        <select th:field="${theaterform.theater_format}"  id="theater_format" name="theater_format">
             <option value="2D">2D</option>
             <option value="3D">3D</option>
         </select>
 
         <label for="number_of_rows">Number Of Rows</label>
-        <input type="number"  th:field="${theaterform.number_of_rows}" id="number_of_rows"
+        <input type="number"  th:field="${theaterform.number_of_rows}" id="number_of_rows" name="number_of_rows"
                placeholder="NumberOfRows">
 
 
         <label for="seats_per_row">Seats Per Row</label>
-        <input type="number" class="form-control" th:field="${theaterform.seats_per_row}" id="seats_per_row"
+        <input type="number" class="form-control" th:field="${theaterform.seats_per_row}" id="seats_per_row" name="seats_per_row"
                placeholder="SeatsPerRow">
 
-        <button class="button1" type="submit">Save</button>
+        <button class="button1" type="submit" onsubmit="validateForm()">Save</button>
         <a  class="button2" href="/theaters" role="button" >Cancel</a>
     </form>
+
 
 </div>
 
