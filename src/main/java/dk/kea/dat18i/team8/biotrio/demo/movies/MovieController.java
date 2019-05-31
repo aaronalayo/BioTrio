@@ -14,6 +14,7 @@ public class MovieController {
     @Autowired
     private MovieRepository movieRepo;
 
+    //displays a specific movie
     @GetMapping("/moviesview")
     @ResponseBody
     public Movie showMovie(){
@@ -21,6 +22,7 @@ public class MovieController {
         return movie;
     }
 
+    //displays all movies, view for employees
     @GetMapping("/movies")
     public String movie(Model model){
         List<Movie> movieList= movieRepo.showAllMovies();
@@ -28,7 +30,7 @@ public class MovieController {
         return "show-movies";
     }
 
-
+    //displays all movies, view for customer
     @GetMapping("/moviesuser")
     public String moviesUser(Model model){
         List<Movie> movieList= movieRepo.showAllMovies();
@@ -37,6 +39,7 @@ public class MovieController {
 
     }
 
+    //displays a form for adding a movie
     @GetMapping("/addmovie")
     public String addMovie(Model model){
         model.addAttribute("movieform", new Movie());
@@ -55,6 +58,7 @@ public class MovieController {
         return "redirect:/movies";
     }
 
+    //displays a form for deleting a movie
     @GetMapping("/editmovie/{movie_id}")
     public String editMovie (Model m, @PathVariable(name="movie_id") int id){
         Movie movieToEdit= movieRepo.showMovie(id);

@@ -19,6 +19,7 @@ public class TheaterController {
     @Autowired
     private TheaterRepository theaterRepo;
 
+    //displays a specific theater
     @GetMapping("/theaters")
     public String theater(Model model) {
 
@@ -29,6 +30,7 @@ public class TheaterController {
 
     }
 
+    //displays a form for adding a theater
     @GetMapping("/addtheater")
     public String addTheater(Model model){
         model.addAttribute("theaterform", new Theater());
@@ -36,7 +38,6 @@ public class TheaterController {
     }
 
     @PostMapping("/savetheater")
-//    @ResponseBody
     public String saveTheater(@ModelAttribute Theater theater){
 
         Theater theaterInserted = theaterRepo.insert(theater);
@@ -50,6 +51,7 @@ public class TheaterController {
         return "redirect:/theaters";
     }
 
+    //displays a form for editing a theater
     @GetMapping("/edittheater/{theater_id}")
     public String editCar(Model m, @PathVariable(name = "theater_id") int id){
         Theater theaterToEdit = theaterRepo.findTheater(id);

@@ -10,9 +10,10 @@ public class Movie {
     private String format;
     private String image;
 
-
+    //empty constructor
     public Movie(){ }
 
+    //constructor
     public Movie(int id, String title, String genre, int duration, String director, String plot, String format, String image) {
         this.id = id;
         this.title = title;
@@ -25,6 +26,7 @@ public class Movie {
 
     }
 
+    //setters and getters
     public int getId() {
         return id;
     }

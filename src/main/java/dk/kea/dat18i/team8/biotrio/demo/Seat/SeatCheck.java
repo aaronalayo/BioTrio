@@ -3,6 +3,10 @@ package dk.kea.dat18i.team8.biotrio.demo.Seat;
 
 import java.util.List;
 
+/*class that has as attributes a list of Strings and a list of Seats
+it helps with handling the seats through the html(checkboxes), database
+and Spring
+ */
 public class SeatCheck {
 
     private List<Seat> seats;
@@ -24,7 +28,6 @@ public class SeatCheck {
     public void setSeats(List<Seat> seats) {
         this.seats = seats;
     }
-
 
 
     public List<String> getCheckedSeats() {

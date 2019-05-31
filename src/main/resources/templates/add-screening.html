@@ -21,7 +21,7 @@
     <div class="mainContent">
         <h3>Add new Screening</h3>
 
-        <form id="form" nave="screening" th:action="@{'/savescreening'}" th:object="${screeningForm}"  method="post">
+        <form id="form" name="screening" th:action="@{'/savescreening'}" th:object="${screeningForm}"  method="post" onsubmit="return isEmpty(this)">
 
          <label for="showing">Showing Date & Time </label>
          <input type="text" th:field="${screeningForm.showing}"  id="showing" name="showing" placeholder="yyyy MM dd HH:mm">
@@ -47,23 +47,18 @@
 
 
  </form>
-
-<!--        <SCRIPT>-->
-<!--            var myForm = document.getElementById('form');-->
-
-<!--            myForm.addEventListener('submit', function() {-->
-<!--                var allInputs = myForm.getElementsByTagName('input');-->
-
-<!--                for (var i = 0; i < allInputs.length; i++) {-->
-<!--                    var input = allInputs[i];-->
-
-<!--                    if (input.name && !input.value) {-->
-<!--                        input.name = '';-->
-<!--                    }-->
-<!--                }-->
-<!--            });-->
-
-<!--        </SCRIPT>-->
+        <script>
+            function isEmpty(form){
+                var x=form.getElementsByTagName("input");
+                for(var i=0;i<x.length;i++){
+                    if(x[i].value==0 || x[i].value==""){
+                        alert("Please insert " + x[i].id+ "!");
+                        return false;
+                    }
+                }
+                return true;
+            }
+        </script>
 
 </div>
 

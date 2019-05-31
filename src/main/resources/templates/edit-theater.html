@@ -20,7 +20,7 @@
 <div class="mainContent">
     <h3>Edit Theater</h3>
 
-    <form id="form" action="/updatetheater" method="post" th:object="${theaterform}">
+    <form id="form" action="/updatetheater" method="post" th:object="${theaterform}" onsubmit="return isEmpty(this)">
         <input type="hidden" th:field="${theaterform.theater_id}">
 
         <label for="theater_name">Name</label>
@@ -42,6 +42,19 @@
         <button class="button1" type="submit">Save</button>
 
         <a  class="button2" href="/theaters" role="button" >Cancel</a>
+
+        <script>
+            function isEmpty(form){
+                var x=form.getElementsByTagName("input");
+                for(var i=0;i<x.length;i++){
+                    if(x[i].value==0 || x[i].value==""){
+                        alert("Please insert " + x[i].id+ "!");
+                        return false;
+                    }
+                }
+                return true;
+            }
+        </script>
 
     </form>
 </div>

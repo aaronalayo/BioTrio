@@ -19,8 +19,13 @@ public class SeatRepository {
     @Autowired
     private ScreeningRepository screeningRepo;
 
-    //goes through database table:booking and makes a list with the seats that are booked for the specific screening
-    public List<Seat> findBookedSeats (Screening screening) {
+    /**finds booked seats for a specific screening
+     *
+     * @param screening parameter of type Screening that represents the screening
+     *                  for which booked seats are sought
+     * @return {@link List} of {@link Seat} that are booked for the screening
+     */
+     public List<Seat> findBookedSeats (Screening screening) {
         SqlRowSet rs = jdbc.queryForRowSet("SELECT row_no,seat_no from booking where screening_id=" + screening.getScreening_id());
         List<Seat> bookedSeats=new ArrayList<>();
         while (rs.next()) {
@@ -29,26 +34,35 @@ public class SeatRepository {
         return bookedSeats;
     }
 
+    /**
+     * checks the availability of the seats for a specific screening
+     *
+     * @param screening parameter of type Screening that represents the screening
+     *      *         for which seats availability is set
+     * @return
+     */
     public List<Seat> checkSeats(Screening screening) {
         //checks the theater of the screening
         Theater theater = screening.getTheater();
+
+        //adds all the seats that the theater has to a list of seats,by default all set to isbooked=false
         List<Seat> theaterSeats = new ArrayList<>();
-        //adds all the seats that the theater has to the declared list of seats,by default all set to isbooked=false
-        for (int i=1;i<=theater.getNumber_of_rows();i++){
+         for (int i=1;i<=theater.getNumber_of_rows();i++){
             for (int j=1;j<=theater.getSeats_per_row();j++){
                theaterSeats.add(new Seat(i,j));
             }
         }
-        //goes through all theater seats and checks if it matches to a booked seat, if yes sets isbooked to true
+        /*goes through all theater seats and checks if it matches to a booked seat,
+        if yes sets isbooked to true
+         */
         for (Seat theaterSeat : theaterSeats) {
             for (Seat bookedSeat:findBookedSeats(screening)) {
                 if (theaterSeat.getRowNo() == bookedSeat.getRowNo() && theaterSeat.getSeatNo() == bookedSeat.getSeatNo()) {
                     theaterSeat.setIsBooked(true);
                 }
             }
-
         }
-        //returns the updated list with with available and not available seats for screening
+        //returns the updated list with available and not available seats for the screening
         return theaterSeats;
     }
 

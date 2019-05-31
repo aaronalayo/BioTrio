@@ -27,7 +27,7 @@ public class BookingController{
     @Autowired
     private SeatRepository seatRepo;
 
-
+    //displays all bookings
     @GetMapping("/bookings")
     public String booking(Model model) {
         List<Booking> bookingList = bookingRepo.findAllBookings();
@@ -35,57 +35,38 @@ public class BookingController{
         return "show-bookings";
     }
 
-
-    @GetMapping("/edit/{booking_id}")
-    public String editBooking(Model m, @PathVariable(name = "booking_id") int booking_id) {
-
-        Booking bookingToEdit = bookingRepo.findBooking(booking_id);
-        Seat seat = new Seat();
-        seat.setRowNo( seat.getRowNo() );
-        seat.setSeatNo( seat.getSeatNo() );
-        bookingToEdit.setSeat( seat );
-        bookingToEdit.setPhone_no( bookingToEdit.getPhone_no() );
-        Screening screening =new Screening(  );
-        bookingToEdit.setScreening(screeningRepo.findScreening( screening.getScreening_id()));
-
-        m.addAttribute("bookingform", bookingToEdit);
-
-        return "edit-booking";
-    }
-
-
-
+    //deletes a booking by its id
     @GetMapping("/deletebooking/{booking_id}")
     public String deleteBooking(@PathVariable(name = "booking_id") int booking_id) {
         bookingRepo.deleteBooking(booking_id);
         return "redirect:/bookings";
     }
 
-
-
+    /**
+     * for employee
+     * displays a list of bookings for a specific phone number
+     * displays a message if there are no bookings for this number
+     */
     @GetMapping("/bookings-phone")
     public String getBookingsPhone() {
-
-
         return "/bookings-phone";
     }
     @PostMapping("/find-booking")
     public String findBookingsByPhone(@RequestParam (value = "search", required = false) String search, Model model) {
-
         if(!search.isEmpty()) {
-
-        List<Booking> bookingsByPhone = bookingRepo.findBookingsbyPhoneNo(search);
-        model.addAttribute("search", bookingsByPhone);
-
-        }else
-            return "/bookings-phone";
-
+            List<Booking> bookingsByPhone = bookingRepo.findBookingsbyPhoneNo(search);
+            model.addAttribute("search", bookingsByPhone);
+        }
         return "/bookings-phone";
     }
 
+    /**
+     * for customer
+     * displays a list of bookings for a specific phone number
+     * displays a message if there are no bookings for this number
+     */
     @GetMapping("/find-bookinguser")
     public String getBookingsPhoneUser() {
-
 
         return "/find-bookinguser";
     }
@@ -93,15 +74,13 @@ public class BookingController{
     public String findBookingsByPhoneUser(@RequestParam (value = "search", required = false) String search, Model model) {
 
         if(!search.isEmpty()) {
-
             List<Booking> bookingsByPhone = bookingRepo.findBookingsbyPhoneNo(search);
             model.addAttribute("search", bookingsByPhone);
-
-        }else
-            return "find-bookinguser";
-
+        }
         return "/find-bookinguser";
     }
+
+    //displays theater seats for a specific screening
     @GetMapping("/seatsforscreening/{screening_id}")
     public String seatsForScreening(Model model,@PathVariable(name="screening_id") int screening_id){
 
@@ -117,7 +96,7 @@ public class BookingController{
         return "seats";
     }
 
-
+    //save booking and displays its details
     @PostMapping("/saveseats/{screening_id}")
     public String addSeats(@ModelAttribute SeatCheck seatCheck, Model model,
                            @RequestParam String phonenumber,
@@ -125,8 +104,10 @@ public class BookingController{
 
         List<Seat> seats=new ArrayList<>();
 
-        //goes through the list of checked seats, passed from the html form as list of Strings
-        // and adds them to a new list of seats as objects
+        /*
+        * goes through the list of checked(selected from customer) seats, passed from the html form as list of Strings
+        * and adds them to a new list of seats as objects
+        * */
         for(String checkedSeat:seatCheck.getCheckedSeats()){
             Seat seat=new Seat();
             String[] seatPlace=checkedSeat.split(  "-");
@@ -150,6 +131,7 @@ public class BookingController{
         return "booking-details";
     }
 
+    //cancel a booking and redirects to the view with all movies
     @GetMapping("/cancelbooking/{screening_id}")
     public String cancelBooking(@PathVariable(name = "screening_id") int screening_id) {
         bookingRepo.cancelBooking(screening_id);

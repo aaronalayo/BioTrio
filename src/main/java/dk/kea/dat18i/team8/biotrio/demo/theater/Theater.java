@@ -6,6 +6,7 @@ public class Theater {
     private int number_of_rows;
     private int seats_per_row;
 
+    //constructors
     public Theater() { }
 
     public Theater(int theater_id, String theater_name, String theater_format, int number_of_rows, int seats_per_row) {
@@ -16,6 +17,7 @@ public class Theater {
         this.seats_per_row = seats_per_row;
     }
 
+    //setters and getters
     public int getTheater_id() {
         return theater_id;
     }

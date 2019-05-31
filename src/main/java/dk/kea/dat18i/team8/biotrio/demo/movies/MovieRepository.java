@@ -17,18 +17,26 @@ public class MovieRepository {
     private JdbcTemplate jdbc;
 
 
+    //method to avoid repetition, sets a movie
     public void setMovie(Movie movie, SqlRowSet rs) {
         movie.setId(rs.getInt("movie_id"));
         movie.setTitle(rs.getString("title"));
-        movie.setDirector(rs.getString("genre"));
+        movie.setDirector(rs.getString("director"));
         movie.setDuration(rs.getInt("duration"));
-        movie.setGenre(rs.getString("director"));
+        movie.setGenre(rs.getString("genre"));
         movie.setPlot(rs.getString("plot"));
         movie.setFormat(rs.getString("format"));
         movie.setImage(rs.getString("image"));
     }
 
 
+    /**
+     * finds a movie from the database
+     *
+     * @param id parameter with integer value that represents
+     *           the id of the movie to be found
+     * @return updated {@link Movie} object
+     */
     public Movie showMovie(int id) {
         SqlRowSet rs = jdbc.queryForRowSet("SELECT * FROM movie WHERE movie_id = " + id);
         Movie movie = new Movie();
@@ -38,6 +46,11 @@ public class MovieRepository {
         return movie;
     }
 
+    /**
+     * finds all movies from the database
+     *
+     * @return updated {@link List} of all {@link Movie} objects
+     */
     public List<Movie> showAllMovies() {
         SqlRowSet rs = jdbc.queryForRowSet("SELECT * FROM movie");
         List<Movie> movieList = new ArrayList<>();
@@ -49,7 +62,12 @@ public class MovieRepository {
         return movieList;
     }
 
-
+    /**
+     *inserts movie record into the database
+     *
+     * @param movie contains the movie details to be added
+     * @return updated movie that also has a generated id
+     */
     public Movie insert(Movie movie){
         PreparedStatementCreator psc =new PreparedStatementCreator() {
             @Override
@@ -78,9 +96,8 @@ public class MovieRepository {
             @Override
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
 
-
                 PreparedStatement ps = connection.prepareStatement("UPDATE movie " +
-                        "SET title= ?, genre = ?, duration=?,director=?,plot=?,format=?,image=? " +
+                        "SET title= ?,genre = ?, duration=?, director=?, plot=?,  format=?,image=? " +
                         "WHERE movie_id=  " + movie.getId());
                 ps.setString(1,movie.getTitle());
                 ps.setString(2,movie.getGenre());
@@ -98,6 +115,12 @@ public class MovieRepository {
         return movie;
     }
 
+    /**
+     * deletes a movie from the database
+     *
+     * @param id a parameter with integer value that represents the id
+     *           of the movie to be found and deleted
+     */
     public void delete(int id) {
         jdbc.update("DELETE FROM movie WHERE movie_id = " + id);
     }

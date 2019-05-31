@@ -14,23 +14,18 @@ public class Screening {
     private Theater theater;
 
 
-
+    //constructor
     public Screening(int screening_id, LocalDateTime showing, Movie movie, Theater theater) {
         this.screening_id = screening_id;
         this.showing = showing;
         this.movie = movie;
         this.theater = theater;
     }
-
-
-
-
-
+    //empty constructor
     public Screening (){
     }
 
-
-
+    //setters and getters
     public int getScreening_id() {
 
         return screening_id;
@@ -48,7 +43,6 @@ public class Screening {
     public void setMovie(Movie movie) {
 
         this.movie= movie;
-
     }
 
     public LocalDateTime getShowing() {

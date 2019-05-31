@@ -44,28 +44,27 @@
                        onclick="checkboxes()">
                </label>
             </td>
-            <script>
-                function checkboxes()
-                {
-                    var inputElems = document.getElementsByTagName("input"),
-                        count = 0;
-                    for (var i=0; i<inputElems.length; i++) {
-                        if (inputElems[i].type == "checkbox" && inputElems[i].checked == true){
-                            count++;
-                            if(count==5){
-                                alert("You can choose maximum 4 seats!");
-                                inputElems[i].checked=false;}
-                        }
-                    }
-                }
-
-            </script>
 
             <th:block th:if="${seat.getSeatNo()==seatsCheck.getSeats().get(seatsCheck.getSeats().size()-1).getSeatNo()}">
                 </tr>
             </th:block>
         </th:block>
         <script>
+            //function that doesn't allow the user to select more than 4 seats
+            function checkboxes()
+            {
+                var inputElems = document.getElementsByTagName("input"),
+                    count = 0;
+                for (var i=0; i<inputElems.length; i++) {
+                    if (inputElems[i].type == "checkbox" && inputElems[i].checked == true){
+                        count++;
+                        if(count==5){
+                            alert("You can choose maximum 4 seats!");
+                            inputElems[i].checked=false;}
+                    }
+                }
+            }
+            //function that checks if phonenumber is inserted
             function validateForm() {
                 var x = document.forms["seat"]["phonenumber"].value;
                 if (x == "") {
@@ -74,6 +73,7 @@
                 }
                 return true;
             }
+            //function that checks if at least one seat is selected
             function ifChecked() {
                 var inputElems = document.getElementsByTagName("input");
                 for (var i=0; i<inputElems.length; i++) {
