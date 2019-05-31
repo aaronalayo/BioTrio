@@ -37,13 +37,13 @@ public class ScreeningRepository {
      */
     public Screening findScreening(int screening_id) {
 
-        SqlRowSet rs = jdbc.queryForRowSet( "SELECT * FROM screening WHERE screening_id = " + screening_id );
+        SqlRowSet rs = jdbc.queryForRowSet("SELECT * FROM screening WHERE screening_id = " + screening_id);
         Screening screening = new Screening();
         while (rs.next()) {
-            screening.setScreening_id( rs.getInt( "screening_id" ) );
-            screening.setShowing( rs.getTimestamp( "showing" ).toLocalDateTime() );
-            screening.setMovie( movieRepo.showMovie( rs.getInt( "movie_id" ) ) );
-            screening.setTheater( theaterRepo.findTheater( rs.getInt( "theater_id" ) ) );
+            screening.setScreening_id(rs.getInt("screening_id"));
+            screening.setShowing(rs.getTimestamp("showing").toLocalDateTime());
+            screening.setMovie(movieRepo.showMovie(rs.getInt("movie_id")));
+            screening.setTheater(theaterRepo.findTheater(rs.getInt("theater_id")));
 
         }
         return screening;
@@ -56,26 +56,26 @@ public class ScreeningRepository {
      */
     public List<Screening> findAllScreenings() {
 
-        SqlRowSet rs = jdbc.queryForRowSet( "SELECT * FROM screening" );
+        SqlRowSet rs = jdbc.queryForRowSet("SELECT * FROM screening");
 
         List<Screening> screeningList = new ArrayList<>();
 
         while (rs.next()) {
             Screening screening = new Screening();
 
-            screening.setScreening_id( rs.getInt( "screening_id" ) );
-            screening.setShowing( rs.getTimestamp( "showing" ).toLocalDateTime() );
-            screening.setMovie( movieRepo.showMovie( rs.getInt( "movie_id" ) ) );
-            screening.setTheater( theaterRepo.findTheater( rs.getInt( "theater_id" ) ) );
+            screening.setScreening_id(rs.getInt("screening_id"));
+            screening.setShowing(rs.getTimestamp("showing").toLocalDateTime());
+            screening.setMovie(movieRepo.showMovie(rs.getInt("movie_id")));
+            screening.setTheater(theaterRepo.findTheater(rs.getInt("theater_id")));
 
-            screeningList.add( screening );
+            screeningList.add(screening);
         }
         return screeningList;
 
     }
 
     /**
-     *inserts screening record into the database
+     * inserts screening record into the database
      *
      * @param screening contains the screening details to be added
      * @return updated screening that also has a generated id
@@ -87,16 +87,16 @@ public class ScreeningRepository {
             @Override
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
 
-                PreparedStatement ps = connection.prepareStatement( "INSERT INTO screening (showing, movie_id, theater_id)VALUES (?,?,?)" );
+                PreparedStatement ps = connection.prepareStatement("INSERT INTO screening (showing, movie_id, theater_id)VALUES (?,?,?)");
 
-                ps.setTimestamp( 1, Timestamp.valueOf( screening.getShowing() ) );
-                ps.setInt( 2, screening.getMovie().getId() );
-                ps.setInt( 3, screening.getTheater().getTheater_id() );
+                ps.setTimestamp(1, Timestamp.valueOf(screening.getShowing()));
+                ps.setInt(2, screening.getMovie().getId());
+                ps.setInt(3, screening.getTheater().getTheater_id());
 
-                    return ps;
+                return ps;
             }
-    };
-        jdbc.update( psc );
+        };
+        jdbc.update(psc);
         return screening;
     }
 
@@ -108,7 +108,7 @@ public class ScreeningRepository {
      */
     public void deleteScreening(int screening_id) {
 
-        jdbc.execute( "DELETE FROM screening WHERE screening_id = " + screening_id );
+        jdbc.execute("DELETE FROM screening WHERE screening_id = " + screening_id);
     }
 
     //This method is used to update a selected screening in the database.
@@ -122,76 +122,71 @@ public class ScreeningRepository {
 
                 PreparedStatement ps = connection.prepareStatement("UPDATE screening SET showing = ?, movie_id = ?, theater_id = ? WHERE screening_id =  " + screening.getScreening_id(), new String[]{"screening_id"});
 
-                ps.setTimestamp( 1, Timestamp.valueOf( screening.getShowing() ) );
-                ps.setInt( 2, (screening.getMovie().getId()) );
-                ps.setInt( 3, (screening.getTheater().getTheater_id()) );
+                ps.setTimestamp(1, Timestamp.valueOf(screening.getShowing()));
+                ps.setInt(2, (screening.getMovie().getId()));
+                ps.setInt(3, (screening.getTheater().getTheater_id()));
 
                 return ps;
             }
         };
 
-        jdbc.update( psc );
+        jdbc.update(psc);
         return screening;
     }
 
-    //This method is used to find the screenings related to a selected movie.
-    //It returns a the list of screenings for that movie in all the theaters.
-    public List<Screening> findScreeningsWithMovie(int movie_id) {
+        /**
+         * finds screenings for a specific movie
+         *
+         * @param movie_id parameter with integer value that contains the id
+         *                 of the movie which screenings should be found
+         * @return {@link List} of {@link Screening} only for one selected movie
+         */
+        public List<Screening> findScreeningsWithMovie ( int movie_id){
 
-    /**
-     * finds screenings for a specific movie
-     *
-     * @param movie_id parameter with integer value that contains the id
-     *                 of the movie which screenings should be found
-     * @return {@link List} of {@link Screening} only for one selected movie
-     */
-    public List<Screening> findScreeningsWithMovie(int movie_id){
+            SqlRowSet rs = jdbc.queryForRowSet("SELECT * FROM screening WHERE movie_id = " + movie_id);
 
-        SqlRowSet rs = jdbc.queryForRowSet( "SELECT * FROM screening WHERE movie_id = " + movie_id);
+            List<Screening> screeningList = new ArrayList<>();
 
-        List<Screening> screeningList = new ArrayList<>();
+            while (rs.next()) {
+                Screening screening = new Screening();
 
-        while (rs.next()) {
-            Screening screening = new Screening();
+                screening.setScreening_id(rs.getInt("screening_id"));
+                screening.setShowing(rs.getTimestamp("showing").toLocalDateTime());
+                screening.setTheater(theaterRepo.findTheater(rs.getInt("theater_id")));
 
-            screening.setScreening_id( rs.getInt( "screening_id" ) );
-            screening.setShowing( rs.getTimestamp( "showing" ).toLocalDateTime() );
-            screening.setTheater( theaterRepo.findTheater( rs.getInt( "theater_id" ) ) );
+                screeningList.add(screening);
 
-            screeningList.add( screening );
-
+            }
+            return screeningList;
         }
-        return screeningList;
+
+        /**
+         * finds all screenings at a specific date
+         *
+         * @param showing parameter with String value that contains a date
+         * @return {@link List} of {@link Screening} that has that specific date
+         */
+        public List<Screening> findScreeningsByDate (String showing){
+
+            //new variable is created that takes the parsed into LocalDateTime showing's value
+            LocalDateTime dateTime = LocalDate.parse(showing).atStartOfDay();
+
+            SqlRowSet rs = jdbc.queryForRowSet("SELECT * FROM screening where DATE(showing) = DATE ('" + dateTime + "' )");
+            List<Screening> screeningByDate = new ArrayList<>();
+
+            while (rs.next()) {
+                Screening screeningDate = new Screening();
+
+                screeningDate.setScreening_id(rs.getInt("screening_id"));
+                screeningDate.setShowing(rs.getTimestamp("showing").toLocalDateTime());
+                screeningDate.setMovie(movieRepo.showMovie(rs.getInt("movie_id")));
+                screeningDate.setTheater(theaterRepo.findTheater(rs.getInt("theater_id")));
+
+                screeningByDate.add(screeningDate);
+            }
+            return screeningByDate;
+        }
+
+
     }
 
-    /**
-     * finds all screenings at a specific date
-     *
-     * @param showing parameter with String value that contains a date
-     * @return {@link List} of {@link Screening} that has that specific date
-     */
-    public List<Screening> findScreeningsByDate(String showing) {
-
-        //new variable is created that takes the parsed into LocalDateTime showing's value
-        LocalDateTime dateTime = LocalDate.parse(showing).atStartOfDay();
-
-        LocalDateTime dateTime = LocalDate.parse( showing ).atStartOfDay();
-
-        SqlRowSet rs = jdbc.queryForRowSet( "SELECT * FROM screening where DATE(showing) = DATE ('" + dateTime + "' )" );
-        List<Screening> screeningByDate = new ArrayList<>();
-
-        while (rs.next()) {
-            Screening screeningDate = new Screening();
-
-            screeningDate.setScreening_id( rs.getInt( "screening_id" ) );
-            screeningDate.setShowing( rs.getTimestamp( "showing" ).toLocalDateTime() );
-            screeningDate.setMovie( movieRepo.showMovie( rs.getInt( "movie_id" ) ) );
-            screeningDate.setTheater( theaterRepo.findTheater( rs.getInt( "theater_id" ) ) );
-
-            screeningByDate.add( screeningDate );
-        }
-        return screeningByDate;
-    }
-
-
-}
