@@ -1,6 +1,10 @@
 package dk.kea.dat18i.team8.biotrio.demo.screenings;
 
-//class like Screening but has attribute showing(date and time) as String
+/*This class allows to use the attribute LocalDateTime showing and
+use it as a String and then send it in the Timestamp format to the database.
+Also to use movie_id and theater_id */
+
+
 public class ScreeningForm {
 
     private String showing;
