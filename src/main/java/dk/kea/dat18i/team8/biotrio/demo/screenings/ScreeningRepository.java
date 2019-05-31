@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 
 
-
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -37,8 +36,8 @@ public class ScreeningRepository {
 
             screening.setScreening_id( rs.getInt( "screening_id" ) );
             screening.setShowing( rs.getTimestamp( "showing" ).toLocalDateTime() );
-            screening.setMovie( movieRepo.showMovie( rs.getInt( "movie_id" ) ));
-            screening.setTheater( theaterRepo.findTheater( rs.getInt( "theater_id" ) ));
+            screening.setMovie( movieRepo.showMovie( rs.getInt( "movie_id" ) ) );
+            screening.setTheater( theaterRepo.findTheater( rs.getInt( "theater_id" ) ) );
 
         }
         return screening;
@@ -57,8 +56,8 @@ public class ScreeningRepository {
 
             screening.setScreening_id( rs.getInt( "screening_id" ) );
             screening.setShowing( rs.getTimestamp( "showing" ).toLocalDateTime() );
-            screening.setMovie(movieRepo.showMovie(rs.getInt("movie_id")));
-            screening.setTheater( theaterRepo.findTheater(rs.getInt( "theater_id" )) );
+            screening.setMovie( movieRepo.showMovie( rs.getInt( "movie_id" ) ) );
+            screening.setTheater( theaterRepo.findTheater( rs.getInt( "theater_id" ) ) );
 
 
             screeningList.add( screening );
@@ -77,18 +76,18 @@ public class ScreeningRepository {
             @Override
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
 
-                    PreparedStatement ps = connection.prepareStatement( "INSERT INTO screening (showing, movie_id, theater_id)VALUES (?,?,?)" );
+                PreparedStatement ps = connection.prepareStatement( "INSERT INTO screening (showing, movie_id, theater_id)VALUES (?,?,?)" );
 
-                    ps.setTimestamp( 1, Timestamp.valueOf( screening.getShowing() ) );
-                    ps.setInt( 2, screening.getMovie().getId() );
-                    ps.setInt( 3, screening.getTheater().getTheater_id() );
+                ps.setTimestamp( 1, Timestamp.valueOf( screening.getShowing() ) );
+                ps.setInt( 2, screening.getMovie().getId() );
+                ps.setInt( 3, screening.getTheater().getTheater_id() );
 
 
-                    return ps;
+                return ps;
 
 
             }
-    };
+        };
 
         jdbc.update( psc );
 
@@ -101,7 +100,8 @@ public class ScreeningRepository {
         jdbc.execute( "DELETE FROM screening WHERE screening_id = " + screening_id );
     }
 
-
+    //This method is used to update a selected screening in the database.
+    //It returns the edited screening
     public Screening update(Screening screening) {
 
         PreparedStatementCreator psc = new PreparedStatementCreator() {
@@ -110,25 +110,26 @@ public class ScreeningRepository {
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
 
 
-                PreparedStatement ps = connection.prepareStatement("UPDATE screening SET showing = ?, movie_id = ?, theater_id = ? WHERE screening_id =  " + screening.getScreening_id(), new String[]{"screening_id"});
+                PreparedStatement ps = connection.prepareStatement( "UPDATE screening SET showing = ?, movie_id = ?, theater_id = ? WHERE screening_id =  " + screening.getScreening_id(), new String[]{"screening_id"} );
 
                 ps.setTimestamp( 1, Timestamp.valueOf( screening.getShowing() ) );
-                ps.setInt( 2,(screening.getMovie().getId()) );
-                ps.setInt( 3,(screening.getTheater().getTheater_id()) );
+                ps.setInt( 2, (screening.getMovie().getId()) );
+                ps.setInt( 3, (screening.getTheater().getTheater_id()) );
 
                 return ps;
             }
         };
 
-        jdbc.update(psc);
+        jdbc.update( psc );
         return screening;
     }
 
+    //This method is used to find the screenings related to a selected movie.
+    //It returns a the list of screenings for that movie in all the theaters.
+    public List<Screening> findScreeningsWithMovie(int movie_id) {
 
-    public List<Screening> findScreeningsWithMovie(int movie_id){
 
-
-        SqlRowSet rs = jdbc.queryForRowSet( "SELECT * FROM screening WHERE movie_id = " + movie_id);
+        SqlRowSet rs = jdbc.queryForRowSet( "SELECT * FROM screening WHERE movie_id = " + movie_id );
 
         List<Screening> screeningList = new ArrayList<>();
 
@@ -146,19 +147,22 @@ public class ScreeningRepository {
         return screeningList;
     }
 
+    //This method is used to find any screening by the date.
+    //It returns a list with all the screenings of the entered date.
     public List<Screening> findScreeningsByDate(String showing) {
 
-        LocalDateTime dateTime = LocalDate.parse(showing).atStartOfDay();
 
-        SqlRowSet rs = jdbc.queryForRowSet( "SELECT * FROM screening where DATE(showing) = DATE ('"+dateTime+"' )");
+        LocalDateTime dateTime = LocalDate.parse( showing ).atStartOfDay();
+
+        SqlRowSet rs = jdbc.queryForRowSet( "SELECT * FROM screening where DATE(showing) = DATE ('" + dateTime + "' )" );
         List<Screening> screeningByDate = new ArrayList<>();
 
-        while(rs.next()){
+        while (rs.next()) {
             Screening screeningDate = new Screening();
 
             screeningDate.setScreening_id( rs.getInt( "screening_id" ) );
             screeningDate.setShowing( rs.getTimestamp( "showing" ).toLocalDateTime() );
-            screeningDate.setMovie(movieRepo.showMovie(rs.getInt("movie_id")));
+            screeningDate.setMovie( movieRepo.showMovie( rs.getInt( "movie_id" ) ) );
             screeningDate.setTheater( theaterRepo.findTheater( rs.getInt( "theater_id" ) ) );
 
             screeningByDate.add( screeningDate );
@@ -166,5 +170,5 @@ public class ScreeningRepository {
         return screeningByDate;
     }
 
-    
+
 }
