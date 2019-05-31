@@ -1,6 +1,5 @@
 package dk.kea.dat18i.team8.biotrio.demo.booking;
 
-
 import dk.kea.dat18i.team8.biotrio.demo.Seat.Seat;
 import dk.kea.dat18i.team8.biotrio.demo.screenings.Screening;
 
@@ -11,9 +10,11 @@ public class Booking {
     private Seat seat;
     private Screening screening;
 
+    //empty constructor
     public Booking (){
     }
 
+    //constructor
     public Booking(int booking_id, String phone_no, Seat seat, Screening screening){
         this.booking_id = booking_id;
         this.phone_no = phone_no;
@@ -21,6 +22,7 @@ public class Booking {
         this.screening = screening;
     }
 
+    //getters and setters
     public int getBooking_id() {
         return booking_id;
     }
@@ -57,7 +59,6 @@ public class Booking {
     public String toString() {
 
         return "Booking{" +
-
                 "booking_id=" + booking_id +
                 ", phone number=" + phone_no + '|' +
                 ", seat=" + seat + '|' +

@@ -7,6 +7,7 @@ public class Seat {
     private int seatNo;
     private boolean isBooked;
 
+    //construvtors
     public Seat(){};
     public  Seat(int rowNo,int seatNo) {
         this.rowNo=rowNo;
@@ -14,8 +15,7 @@ public class Seat {
         this.isBooked=false;
     }
 
-
-
+    //setters and getters
     public int getRowNo() {
 
         return this.rowNo;

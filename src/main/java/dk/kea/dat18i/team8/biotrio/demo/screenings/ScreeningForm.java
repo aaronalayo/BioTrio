@@ -7,21 +7,21 @@ Also to use movie_id and theater_id */
 
 public class ScreeningForm {
 
-
     private String showing;
     private int movie_id;
     private int theater_id;
 
+    //constructors
     public ScreeningForm() {
 
     }
-
     public ScreeningForm(String showing, int movie_id, int theater_id) {
         this.showing = showing;
         this.movie_id = movie_id;
         this.theater_id = theater_id;
     }
 
+    //setters and getters
     public int getTheater_id() {
         return theater_id;
     }
