@@ -2,7 +2,6 @@ package dk.kea.dat18i.team8.biotrio.demo.screenings;
 
 import dk.kea.dat18i.team8.biotrio.demo.movies.Movie;
 import dk.kea.dat18i.team8.biotrio.demo.theater.Theater;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 
