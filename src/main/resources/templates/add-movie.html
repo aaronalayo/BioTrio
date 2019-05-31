@@ -22,24 +22,22 @@
     <div class="mainContent">
         <h3>Add new movie</h3>
 
-        <form id="form" th:action="@{'/savemovie'}" method="post" th:object="${movieform}">
+        <form id="form" th:action="@{'/savemovie'}" method="post" th:object="${movieform}" onsubmit="return isEmpty(this)">
 
-                <label for="title">Movie Title</label>
-                <input type="text" th:field="${movieform.title}"  id="title" placeholder="Title">
+            <label for="title">Movie Title</label>
+            <input type="text" th:field="${movieform.title}"  id="title" placeholder="Title">
 
+            <label for="director">Movie Director</label>
+            <input type="text" th:field="${movieform.director}"  id="director" placeholder="Movie Director">
 
-                <label for="genre">Movie Genre</label>
-                <input type="text" th:field="${movieform.genre}"  id="genre" placeholder="Genre">
+            <label for="genre">Movie Genre</label>
+            <input type="text" th:field="${movieform.genre}"  id="genre" placeholder="Genre">
 
-               <label for="duration">Movie Duration</label>
-               <input type="text" th:field="${movieform.duration}"   id="duration" placeholder="Movie Duration">
+            <label for="plot">Movie Plot</label>
+            <input type="text" th:field="${movieform.plot}"  id="plot" placeholder="Movie Plot">
 
-               <label for="director">Movie Director</label>
-               <input type="text" th:field="${movieform.director}"  id="director" placeholder="Movie Director">
-
-              <label for="director">Movie Plot</label>
-              <input type="text" th:field="${movieform.plot}"  id="plot" placeholder="Movie Plot">
-
+            <label for="duration">Movie Duration</label>
+            <input type="text" th:field="${movieform.duration}"   id="duration" placeholder="Movie Duration">
 
             <label for="format">Movie Format</label>
             <select th:field="${movieform.format}"  id="format" name = "movies" placeholder="Movie Format">
@@ -50,9 +48,24 @@
             <label for="image">Movie Image</label>
             <input type="text" th:field="${movieform.image}" id="image" placeholder="Movie Image">
 
-            <button class="button1" type="submit">Save</button>
-            <a  class="button2" href="/movies " role="button" >Cancel</a>
+            <button class="button1" type="submit" >Save</button>
+            <a  class="button2" href="/movies " role="button"  >Cancel</a>
+
+            <script>
+                //function that checks if there is an empty field in the form
+                function isEmpty(form){
+                    var x=form.getElementsByTagName("input");
+                    for(var i=0;i<x.length;i++){
+                        if(x[i].value==0 || x[i].value==""){
+                            alert("Please insert " + x[i].id+ "!");
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+            </script>
         </form>
+
 
     </div>
 </body>

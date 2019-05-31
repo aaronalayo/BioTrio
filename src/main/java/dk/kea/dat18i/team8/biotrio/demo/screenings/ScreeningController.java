@@ -34,10 +34,10 @@ public class ScreeningController {
     private TheaterRepository theaterRepo;
 
 
+    //displays a specific screening
     @GetMapping("/screeningview")
     @ResponseBody
     public Screening showScreening() {
-
 
         Screening screening = screeningRepo.findScreening(1);
 
@@ -45,19 +45,18 @@ public class ScreeningController {
 
     }
 
+    //displays all screenings
     @GetMapping("/screenings")
     public String screening(Model model) {
-
 
         List<Screening> screeningList = screeningRepo.findAllScreenings();
         model.addAttribute("screeninglist", screeningList);
 
-
         return "show-screenings";
-
     }
 
 
+    //displays a form for adding a new screening
     @GetMapping("/addscreening")
     public String addScreening(Model model) {
 
@@ -71,6 +70,7 @@ public class ScreeningController {
         return "add-screening";
     }
 
+
     @PostMapping("/savescreening")
     public String saveScreening(@ModelAttribute ScreeningForm screeningData){
         Screening newScreening = new Screening();
@@ -81,13 +81,7 @@ public class ScreeningController {
         newScreening.setMovie( movieRepo.showMovie( screeningData.getMovie_id() ) );
         newScreening.setTheater( theaterRepo.findTheater( screeningData.getTheater_id() ) );
 
-
-
-
         screeningRepo.insertScreening(newScreening);
-
-
-
         return "redirect:/screenings";
     }
 
@@ -100,6 +94,7 @@ public class ScreeningController {
     }
 
 
+    //displays a form to edit a specific screening
     @GetMapping("/screenings/edit/{screening_id}")
     public String editScreening(Model model, @PathVariable(name = "screening_id") int screening_id){
 
@@ -120,15 +115,15 @@ public class ScreeningController {
     @PostMapping("/updatescreening")
     public String saveEditScreening( @ModelAttribute Screening upScreening, @ModelAttribute ScreeningForm screeningData){
 
-
         upScreening.setShowing( upScreening.getShowing() );
         upScreening.setMovie( movieRepo.showMovie( screeningData.getMovie_id() ));
         upScreening.setTheater( theaterRepo.findTheater( screeningData.getTheater_id() ) );
 
         screeningRepo.update(upScreening);
-
         return "redirect:/screenings";
     }
+
+    //displays all screenings for a specific movie
     @GetMapping("/screeningbymovie/{movie_id}")
     public String screeningByMovie(Model model, @PathVariable(name = "movie_id") int movie_id){
 
@@ -140,22 +135,20 @@ public class ScreeningController {
 
     }
 
+    /*displays all screenings at a specific date
+    if there are no screenings at that date, displays a message
+     */
     @GetMapping("/screenings-date")
     public String getScreeningsDate(){
-
         return "/screenings-date";
     }
-
     @PostMapping("/screenings-search")
     public String showScreeningsByDate(@RequestParam (value = "search", required = false) String search, Model model) {
 
         if(!search.isEmpty()) {
-
-            List<Screening> screeningSearch = screeningRepo.findScreeningsByDate( search );
-            model.addAttribute( "search", screeningSearch );
-        }else
-            return "/screenings-date";
-
+            List<Screening> screeningSearch = screeningRepo.findScreeningsByDate(search);
+            model.addAttribute("search", screeningSearch);
+        }
         return "/screenings-date";
     }
 }

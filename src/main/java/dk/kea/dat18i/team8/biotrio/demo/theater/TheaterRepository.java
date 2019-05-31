@@ -24,6 +24,32 @@ public class TheaterRepository {
     @Autowired
     private JdbcTemplate jdbc;
 
+
+    /**
+     * finds a theater from the database
+     *
+     * @param theater_id parameter with integer value that represents
+     *           the id of the theater to be found
+     * @return updated {@link Theater} object
+     */
+    public Theater findTheater(int theater_id) {
+        SqlRowSet rs = jdbc.queryForRowSet("SELECT * FROM theater WHERE theater_id = " + theater_id);
+        Theater theater = new Theater();
+        while (rs.next()) {
+            theater.setTheater_id(rs.getInt("theater_id"));
+            theater.setTheater_name(rs.getString("theater_name"));
+            theater.setTheater_format(rs.getString("theater_format"));
+            theater.setNumber_of_rows(rs.getInt("number_of_rows"));
+            theater.setSeats_per_row(rs.getInt("seats_per_row"));
+        }
+        return theater;
+    }
+
+    /**
+     * finds all theaters from the database
+     *
+     * @return updated {@link List} of all {@link Theater} objects
+     */
     public List<Theater> findAllTheaters() {
         SqlRowSet rs = jdbc.queryForRowSet("SELECT * FROM theater");
         List<Theater> theaterList = new ArrayList<>();
@@ -40,6 +66,12 @@ public class TheaterRepository {
         return theaterList;
     }
 
+    /**
+     *inserts theater record into the database
+     *
+     * @param theater contains the theater details to be added
+     * @return updated theater that also has a generated id
+     */
     public Theater insert(Theater theater) {
 
         PreparedStatementCreator psc = new PreparedStatementCreator() {
@@ -61,23 +93,18 @@ public class TheaterRepository {
         return theater;
     }
 
+    /**
+     * deletes a theater from the database
+     *
+     * @param id a parameter with integer value that the id of the theater
+     *           to be found and deleted
+     */
     public void delete(int id) {
 
         jdbc.update("DELETE FROM theater WHERE theater_id = " + id);
     }
 
-    public Theater findTheater(int theater_id) {
-        SqlRowSet rs = jdbc.queryForRowSet("SELECT * FROM theater WHERE theater_id = " + theater_id);
-        Theater theater = new Theater();
-        while (rs.next()) {
-            theater.setTheater_id(rs.getInt("theater_id"));
-            theater.setTheater_name(rs.getString("theater_name"));
-            theater.setTheater_format(rs.getString("theater_format"));
-            theater.setNumber_of_rows(rs.getInt("number_of_rows"));
-            theater.setSeats_per_row(rs.getInt("seats_per_row"));
-        }
-        return theater;
-    }
+
 
     public Theater update(Theater theater) {
 
