@@ -3,11 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Booking details</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link th:href="@{/css/nav.css}" href="/static/css/nav.css" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/table.css}" href="/static/css/table.css" rel="stylesheet" type="text/css"/>
+
 </head>
 <body>
-<p1>Booking successful!</p1>
-<table class="table table-hover">
+<header>
+    <div class="container">
+        <a href="/"><h1>BIO<span>TRIO</span></h1></a>
+        <nav>
+            <ul>
+
+                <li><a href="/">Exit</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<div class="mainContent">
+<h2>Booking successful!</h2>
+
+<table id="table">
     <thead>
     <tr>
         <th scope="col">Movie</th>
@@ -17,7 +32,7 @@
         <th scope="col">Row number</th>
         <th scope="col">Seat number</th>
         <th scope="col">Phone number</th>
-        <th scope="col">Delete</th>
+        <th scope="col">Cancel</th>
 
     </tr>
 
@@ -31,9 +46,8 @@
         <td th:text="${booking.getSeat().getRowNo()}">{{Row no}}</td>
         <td th:text="${booking.getSeat().getSeatNo()}">{{Seat No}}</td>
         <td th:text="${booking.getPhone_no()}">{{PhoneNumber}}</td>
-
         <td>
-            <a th:href="@{'/deletebooking/' + ${booking.booking_id}}"  class="btn btn-danger">Delete</a>
+            <a th:href="@{'/cancelbooking/' + ${booking.getScreening().getScreening_id()}}"  class="button1">Cancel</a>
         </td>
 
         <td>
@@ -42,6 +56,6 @@
 
 </table>
 
-
+</div>
 </body>
 </html>

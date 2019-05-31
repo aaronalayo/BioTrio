@@ -11,7 +11,7 @@
 
 <header>
     <div class="container">
-        <h1>BIO<span>TRIO</span></h1>
+        <a href="/"><h1>BIO<span>TRIO</span></h1></a>
         <nav>
             <ul>
                 <li><a href="/movies">Exit</a></li>
@@ -27,22 +27,22 @@
             <input type="hidden" th:field="${movie.id}">
 
             <label for="title">MovieTitle</label>
-            <input type="text" th:field="${movie.title}" class="form-control"  id="title" placeholder="Title">
+            <input type="text" th:field="${movie.title}"  id="title" placeholder="Title">
 
             <label for="genre">MovieGenre</label>
-            <input type="text" th:field="${movie.genre}" class="form-control" id="genre" placeholder="Genre">
+            <input type="text" th:field="${movie.genre}"  id="genre" placeholder="Genre">
 
             <label for="director">MovieDirector</label>
-            <input type="text" th:field="${movie.director}" class="form-control" id="director" placeholder="MovieDirector">
+            <input type="text" th:field="${movie.director}"  id="director" placeholder="MovieDirector">
 
             <label for="director">MoviePlot</label>
-            <input type="text" th:field="${movie.plot}" class="form-control" id="plot" placeholder="MoviePlot">
+            <input type="text" th:field="${movie.plot}" id="plot" placeholder="MoviePlot">
 
             <label for="duration">MovieDuration</label>
-            <input type="text" th:field="${movie.duration}" class="form-control"  id="duration" placeholder="MovieDuration">
+            <input type="text" th:field="${movie.duration}"   id="duration" placeholder="MovieDuration">
 
             <label for="movie_format">MovieFormat</label>
-            <select th:field="${movie.format}" class="form-control" id="movie_format" name = "movies" placeholder="MovieFormat">
+            <select th:field="${movie.format}"  id="movie_format" name = "movies" placeholder="MovieFormat">
                 <option value="2D">2D</option>
                 <option value="3D">3D</option>
             </select>
@@ -51,8 +51,7 @@
             <input type="text" th:field="${movie.image}" id="image" placeholder="MovieImage">
 
             <button class="button1" type="submit">Save</button>
-
-            <a  class="button2" href="/movies " role="button" class="button" >Cancel</a>
+            <a  class="button2" href="/movies " role="button" >Cancel</a>
         </form>
 
     </div>
