@@ -12,12 +12,8 @@ import org.springframework.jdbc.core.PreparedStatementCreator;
 
 
 import java.sql.*;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.ZoneOffset;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 import java.util.List;
@@ -73,45 +69,7 @@ public class ScreeningRepository {
 
     }
 
-//
-//    public boolean screeningsDuplicates(LocalDateTime showing, int theater_id){
-//
-//        DateTimeFormatter dtf = DateTimeFormatter.ofPattern( "yyyy-mm-dd hh:mm:ss" );
-//
-//        Screening screening =new Screening(  );
-//        ScreeningForm screeningForm = new ScreeningForm(  );
-//
-//        screening.setShowing( LocalDateTime.parse(screeningForm.getShowing(),dtf ) );
-//
-//
-//
-//
-//
-//
-//        SqlRowSet rs = jdbc.queryForRowSet( "SELECT COUNT(*) FROM screening GROUP BY "+ showing + "," + theater_id);
-//
-//        System.out.println(rs.getInt( "COUNT" ));
-//
-//        if(rs.getInt( "COUNT" )>1){
-//
-//                  return true;
-//              } else
-//                  {
-//                  return false;
-//              }
-//
-//    }
-//
-//    public void check(Screening screening) {
-//
-//        if ( !screeningsDuplicates( screening.getShowing(), screening.getTheater().getTheater_id() ) )
-//        {
-//            insertScreening( screening );
-//        }
-//        else{
-//            System.out.println("error");
-//        }
-//    }
+
     public Screening insertScreening(Screening screening) {
 
         PreparedStatementCreator psc = new PreparedStatementCreator() {
@@ -207,4 +165,6 @@ public class ScreeningRepository {
         }
         return screeningByDate;
     }
+
+    
 }
