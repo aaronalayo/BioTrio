@@ -97,9 +97,9 @@ public class BookingController{
 
     //save booking and displays its details
     @PostMapping("/saveseats/{screening_id}")
-    public String addSeats(@ModelAttribute SeatCheck seatCheck, Model model,
-                           @RequestParam String phonenumber,
-                           @PathVariable(name = "screening_id") int screening_id){
+    public String addBooking(@ModelAttribute SeatCheck seatCheck, Model model,
+                             @RequestParam String phonenumber,
+                             @PathVariable(name = "screening_id") int screening_id){
 
         List<Seat> seats=new ArrayList<>();
 
