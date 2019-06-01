@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -135,7 +134,8 @@ public class ScreeningController {
 
     }
 
-    /*displays all screenings at a specific date
+    /*
+     *displays all screenings at a specific date
     if there are no screenings at that date, displays a message
      */
     @GetMapping("/screenings-date")
