@@ -52,7 +52,7 @@ public class SeatRepository {
                theaterSeats.add(new Seat(i,j));
             }
         }
-        /*goes through all theater seats and checks if it matches to a booked seat,
+        /*Goes through all theater seats and checks if it matches to a booked seat,
         if yes sets isbooked to true
          */
         for (Seat theaterSeat : theaterSeats) {

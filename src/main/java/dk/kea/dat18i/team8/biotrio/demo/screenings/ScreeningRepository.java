@@ -141,7 +141,7 @@ public class ScreeningRepository {
          *                 of the movie which screenings should be found
          * @return {@link List} of {@link Screening} only for one selected movie
          */
-        public List<Screening> findScreeningsWithMovie ( int movie_id){
+        public List<Screening> findScreeningsByMovie(int movie_id){
 
             SqlRowSet rs = jdbc.queryForRowSet("SELECT * FROM screening WHERE movie_id = " + movie_id);
 

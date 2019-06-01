@@ -126,7 +126,7 @@ public class ScreeningController {
     @GetMapping("/screeningbymovie/{movie_id}")
     public String screeningByMovie(Model model, @PathVariable(name = "movie_id") int movie_id){
 
-        List<Screening> screeningsForMovies= screeningRepo.findScreeningsWithMovie( movie_id );
+        List<Screening> screeningsForMovies= screeningRepo.findScreeningsByMovie( movie_id );
 
         model.addAttribute( "screeningsForMovies", screeningsForMovies);
 
