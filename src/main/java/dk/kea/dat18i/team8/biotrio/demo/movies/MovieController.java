@@ -58,7 +58,7 @@ public class MovieController {
         return "redirect:/movies";
     }
 
-    //displays a form for deleting a movie
+    //displays a form for editing a movie
     @GetMapping("/editmovie/{movie_id}")
     public String editMovie (Model m, @PathVariable(name="movie_id") int id){
         Movie movieToEdit= movieRepo.showMovie(id);
