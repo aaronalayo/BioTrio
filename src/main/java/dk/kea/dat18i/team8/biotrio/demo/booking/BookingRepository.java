@@ -1,7 +1,6 @@
 package dk.kea.dat18i.team8.biotrio.demo.booking;
 
 import dk.kea.dat18i.team8.biotrio.demo.Seat.Seat;
-import dk.kea.dat18i.team8.biotrio.demo.Seat.SeatRepository;
 import dk.kea.dat18i.team8.biotrio.demo.screenings.ScreeningRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -19,8 +18,6 @@ public class BookingRepository {
 
     @Autowired
     private JdbcTemplate jdbc;
-    @Autowired
-    private SeatRepository seatRepo;
     @Autowired
     private ScreeningRepository screeningRepo;
 

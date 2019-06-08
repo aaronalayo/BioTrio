@@ -1,13 +1,11 @@
 package dk.kea.dat18i.team8.biotrio.demo.Seat;
 
 import dk.kea.dat18i.team8.biotrio.demo.screenings.Screening;
-import dk.kea.dat18i.team8.biotrio.demo.screenings.ScreeningRepository;
 import dk.kea.dat18i.team8.biotrio.demo.theater.Theater;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,8 +14,7 @@ public class SeatRepository {
 
     @Autowired
     private JdbcTemplate jdbc;
-    @Autowired
-    private ScreeningRepository screeningRepo;
+
 
     /**finds booked seats for a specific screening
      *
@@ -45,7 +42,7 @@ public class SeatRepository {
         //checks the theater of the screening
         Theater theater = screening.getTheater();
 
-        //adds all the seats that the theater has to a list of seats,by default all set to isbooked=false
+        //adds all the seats that the theater has to a list of seats,by default all set to isBooked=false
         List<Seat> theaterSeats = new ArrayList<>();
          for (int i=1;i<=theater.getNumber_of_rows();i++){
             for (int j=1;j<=theater.getSeats_per_row();j++){
@@ -53,7 +50,7 @@ public class SeatRepository {
             }
         }
         /*Goes through all theater seats and checks if it matches to a booked seat,
-        if yes sets isbooked to true
+        if yes sets isBooked to true
          */
         for (Seat theaterSeat : theaterSeats) {
             for (Seat bookedSeat:findBookedSeats(screening)) {
