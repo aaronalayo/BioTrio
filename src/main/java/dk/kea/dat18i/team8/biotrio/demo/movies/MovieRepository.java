@@ -26,6 +26,7 @@ public class MovieRepository {
         movie.setGenre(rs.getString("genre"));
         movie.setPlot(rs.getString("plot"));
         movie.setFormat(rs.getString("format"));
+        movie.setSound(rs.getString("sound"));
         movie.setImage(rs.getString("image"));
     }
 
@@ -73,14 +74,15 @@ public class MovieRepository {
             @Override
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
                 PreparedStatement ps = connection.prepareStatement
-                        ("INSERT INTO movie(title,genre,duration,director,plot,format,image) VALUES(?,?,?,?,?,?,?)");
+                        ("INSERT INTO movie(title,genre,duration,director,plot,format, sound,image) VALUES(?,?,?,?,?,?,?,?)");
                 ps.setString(1,movie.getTitle());
                 ps.setString(2,movie.getGenre());
                 ps.setInt(3,movie.getDuration());
                 ps.setString(4,movie.getDirector());
                 ps.setString(5,movie.getPlot());
                 ps.setString(6,movie.getFormat());
-                ps.setString(7,movie.getImage());
+                ps.setString(7, movie.getSound());
+                ps.setString(8,movie.getImage());
 
                 return ps;
             }
@@ -97,7 +99,7 @@ public class MovieRepository {
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
 
                 PreparedStatement ps = connection.prepareStatement("UPDATE movie " +
-                        "SET title= ?,genre = ?, duration=?, director=?, plot=?,  format=?,image=? " +
+                        "SET title= ?,genre = ?, duration=?, director=?, plot=?, format=?, sound = ?, image=? " +
                         "WHERE movie_id=  " + movie.getId());
                 ps.setString(1,movie.getTitle());
                 ps.setString(2,movie.getGenre());
@@ -105,7 +107,8 @@ public class MovieRepository {
                 ps.setString(4,movie.getDirector());
                 ps.setString(5,movie.getPlot());
                 ps.setString(6,movie.getFormat());
-                ps.setString(7,movie.getImage());
+                ps.setString(7,movie.getSound());
+                ps.setString(8,movie.getImage());
 
                 return ps;
             }

@@ -184,5 +184,37 @@ public class ScreeningRepository {
         }
 
 
+
+
+    public boolean findScreeningInterference(Screening screening) {
+
+        Timestamp showing = Timestamp.valueOf(screening.getShowing());
+        int theater_id = screening.getTheater().getTheater_id();
+        int duration = screening.getMovie().getDuration();
+        int movie_id = screening.getMovie().getId();
+
+
+
+        SqlRowSet rs = jdbc.queryForRowSet( "SELECT theater_id, duration, showing, screening_id from screening inner join movie on movie.movie_id =  '"+movie_id+"'" +
+                "where theater_id = '"+theater_id+"'and(showing = '" +showing +"' or showing <= ' " +showing +"' and ' " +showing +"' <= DATE_ADD(showing, INTERVAL duration minute) " +
+                "or showing <= DATE_ADD(' " +showing +"', INTERVAL  '"+duration +"'  minute) and DATE_ADD('" +showing +"', INTERVAL  '"+duration +"'  minute) <= DATE_ADD(showing, INTERVAL  '"+duration +"' minute))");
+
+
+
+        return rs.first();
+
     }
+
+
+    public void deletePassedScreenings(){
+
+
+        jdbc.execute("DELETE FROM screening where showing <= current_timestamp() - INTERVAL 1 DAY");
+
+
+
+    }
+
+
+}
 

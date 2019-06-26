@@ -36,6 +36,7 @@ public class TheaterRepository {
             theater.setTheater_id(rs.getInt("theater_id"));
             theater.setTheater_name(rs.getString("theater_name"));
             theater.setTheater_format(rs.getString("theater_format"));
+            theater.setTheater_sound(rs.getString("theater_sound"));
             theater.setNumber_of_rows(rs.getInt("number_of_rows"));
             theater.setSeats_per_row(rs.getInt("seats_per_row"));
         }
@@ -55,6 +56,7 @@ public class TheaterRepository {
             theater.setTheater_id(rs.getInt("theater_id"));
             theater.setTheater_name(rs.getString("theater_name"));
             theater.setTheater_format(rs.getString("theater_format"));
+            theater.setTheater_sound(rs.getString("theater_sound"));
             theater.setNumber_of_rows(rs.getInt("number_of_rows"));
             theater.setSeats_per_row(rs.getInt("seats_per_row"));
 
@@ -74,11 +76,12 @@ public class TheaterRepository {
         PreparedStatementCreator psc = new PreparedStatementCreator() {
             @Override
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-                PreparedStatement ps = connection.prepareStatement("INSERT INTO theater VALUES(null ,?,?,?,?)", new String[]{"theater_id"});
+                PreparedStatement ps = connection.prepareStatement("INSERT INTO theater VALUES(null ,?,?,?,?,?)", new String[]{"theater_id"});
                 ps.setString(1, theater.getTheater_name());
                 ps.setString(2, theater.getTheater_format());
-                ps.setInt(3,theater.getNumber_of_rows());
-                ps.setInt(4,theater.getSeats_per_row());
+                ps.setString(3, theater.getTheater_sound());
+                ps.setInt(4,theater.getNumber_of_rows());
+                ps.setInt(5,theater.getSeats_per_row());
 
                 return ps;
             }
@@ -111,12 +114,13 @@ public class TheaterRepository {
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
 
                 PreparedStatement ps = connection.prepareStatement("UPDATE theater " +
-                        "SET theater_name=?,theater_format=?, number_of_rows=?, seats_per_row=? " +
+                        "SET theater_name=?,theater_format=?, theater_sound= ?, number_of_rows=?, seats_per_row=? " +
                         "WHERE theater_id= " + theater.getTheater_id(), new String[]{"theater_id"});
                 ps.setString(1, theater.getTheater_name());
                 ps.setString(2, theater.getTheater_format());
-                ps.setInt(3,theater.getNumber_of_rows());
-                ps.setInt(4,theater.getSeats_per_row());
+                ps.setString(3,theater.getTheater_sound());
+                ps.setInt(4,theater.getNumber_of_rows());
+                ps.setInt(5,theater.getSeats_per_row());
                 return ps;
             }
         };

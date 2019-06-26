@@ -24,12 +24,18 @@
     <form id="form" name="formss" action="/savetheater" method="post" th:object="${theaterform}" onsubmit="return isEmpty(this)">
 
         <label for="theater_name">Name</label>
-        <input type="text" class="form-control" th:field="${theaterform.theater_name}" id="theater_name" name="theater_name" placeholder="TheaterName" maxlength="20">
+        <input type="text" class="form-control" th:field="${theaterform.theater_name}" id="theater_name" name="theater_name" placeholder="Theater Name" maxlength="20">
 
         <label for="theater_format">Format</label>
         <select th:field="${theaterform.theater_format}"  id="theater_format" name="theater_format">
             <option value="2D">2D</option>
             <option value="3D">3D</option>
+        </select>
+
+        <label for="theater_sound">Sound</label>
+        <select th:field="${theaterform.theater_sound}" class="form-control" id="theater_sound"  placeholder="Theater Sound">
+            <option value="Dolby">Dolby</option>
+            <option value="Dolby ATMOS ">Dolby ATMOS</option>
         </select>
 
         <label for="number_of_rows">Number Of Rows</label>

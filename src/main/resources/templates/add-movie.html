@@ -45,6 +45,12 @@
                 <option value="3D">3D</option>
             </select>
 
+            <label for="movie_sound">Movie Sound</label>
+            <select th:field="${movieform.sound}"  id="movie_sound" name = "movies" placeholder="Movie Sound">
+                <option value="Dolby">Dolby</option>
+                <option value="Dolby ATMOS">Dolby ATMOS</option>
+            </select>
+
             <label for="image">Movie Image</label>
             <input type="text" th:field="${movieform.image}" id="image" placeholder="Movie Image">
 

@@ -22,6 +22,10 @@ h3{
     border: 1px solid black;
 }
 input,
+element.style {
+    width: 680px;
+    height: 30px;
+}
 select{
     padding: 10px;
 }

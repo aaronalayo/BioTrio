@@ -30,6 +30,7 @@
         <th scope="col">Id</th>
         <th scope="col">Name</th>
         <th scope="col">Format</th>
+        <th scope="col">Sound</th>
         <th scope="col">Number Of Rows</th>
         <th scope="col">Seats Per Row</th>
         <th scope="col">Edit</th>
@@ -41,6 +42,7 @@
             <th scope="row" th:text="${theater.theater_id}">1</th>
             <td th:text="${theater.theater_name}">{{Name}}</td>
             <td th:text="${theater.theater_format}">{{Format}}</td>
+            <td th:text="${theater.theater_sound}">{{Sound}}</td>
             <td th:text="${theater.number_of_rows}">{{Number Of Rows}}</td>
             <td th:text="${theater.seats_per_row}">{{Seats Per Row}}</td>
             <td>

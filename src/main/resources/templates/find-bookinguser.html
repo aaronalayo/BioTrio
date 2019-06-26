@@ -27,21 +27,27 @@
         <table id="table">
             <tr>
                 <th>Booking id</th>
-                <th>Row number</th>
-                <th>Seat number</th>
-                <th>Phone number</th>
-                <th>Screening</th>
-                <th>Cancel booking</th>
+                <th scope="col">Movie</th>
+                <th scope="col">Theater</th>
+                <th scope="col">Date</th>
+                <th scope="col">Time</th>
+                <th scope="col">Row number</th>
+                <th scope="col">Seat number</th>
+                <th scope="col">Phone number</th>
+                <th scope="col">Cancel booking</th>
 
             </tr>
 
             <tr th:each="booking: ${search}">
 
                 <th scope="row" th:text="${booking.getBooking_id()}">1</th>
+                <td th:text="${booking.getScreening().getMovie().getTitle()}">{{Movie}}</td>
+                <td th:text="${booking.getScreening().getTheater().getTheater_name()}">{{Theater}}</td>
+                <td th:text="${booking.getScreening().getShowing().toLocalDate()}">{{Date}}</td>
+                <td th:text="${booking.getScreening().getShowing().toLocalTime()}">{{Time}}</td>
                 <td th:text="${booking.getSeat().getRowNo()}">{{Row no}}</td>
                 <td th:text="${booking.getSeat().getSeatNo()}">{{Seat No}}</td>
-                <td th:text="${booking.getPhone_no()}">{{Phone number}}</td>
-                <td th:text="${booking.getScreening().getScreening_id()}">{{Screening}}</td>
+                <td th:text="${booking.getPhone_no()}">{{PhoneNumber}}</td>
                 <td>
                     <a  role="button" class="button1" th:href="@{'/cancelbooking/' + ${booking.getScreening().getScreening_id()}}" onclick="validateForm()">Cancel booking</a>
                 </td>

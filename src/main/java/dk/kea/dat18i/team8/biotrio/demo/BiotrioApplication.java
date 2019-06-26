@@ -1,5 +1,6 @@
 package dk.kea.dat18i.team8.biotrio.demo;
 
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -12,5 +13,9 @@ public class BiotrioApplication {
 
 
     }
+
+
+
+
 
 }

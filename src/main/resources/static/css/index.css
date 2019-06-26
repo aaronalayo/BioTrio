@@ -30,10 +30,10 @@ h1{
     margin-top: 25vh;
 }
 
-.btn1,.btn2{
+.btn1, .btn2{
     position: absolute;
-    width:200px;
-    height: 95px;
+    width:fit-content;
+    height: auto;
     background-color: black;
     border:solid;
     color: white;
@@ -41,10 +41,11 @@ h1{
     text-align: center;
     font-size: 40px;
     text-decoration:none;
-    display:inline-block;
+    display:inherit;
     margin-top:4%;
 
 }
+
 .btn1{
     left: 10vw;
     top: 14vh;

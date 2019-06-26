@@ -26,29 +26,36 @@
         <form id="form" action="/updateMovie" method="post" th:object="${movie}" onsubmit="return isEmpty(this)">
             <input type="hidden" th:field="${movie.id}">
 
-            <label for="title">MovieTitle</label>
+            <label for="title">Movie Title</label>
             <input type="text" th:field="${movie.title}"  id="title" placeholder="Title">
 
-            <label for="director">MovieDirector</label>
-            <input type="text" th:field="${movie.director}"  id="director" placeholder="MovieDirector">
+            <label for="director">Movie Director</label>
+            <input type="text" th:field="${movie.director}"  id="director" placeholder="Movie Director">
 
-            <label for="genre">MovieGenre</label>
+            <label for="genre">Movie Genre</label>
             <input type="text" th:field="${movie.genre}"  id="genre" placeholder="Genre">
 
-            <label for="plot">MoviePlot</label>
-            <input type="text" th:field="${movie.plot}" id="plot" placeholder="MoviePlot">
+            <label for="plot">Movie Plot</label>
+            <input type="text" th:field="${movie.plot}" id="plot" placeholder="Movie Plot">
 
-            <label for="duration">MovieDuration</label>
-            <input type="text" th:field="${movie.duration}"   id="duration" placeholder="MovieDuration">
+            <label for="duration">Movie Duration</label>
+            <input type="text" th:field="${movie.duration}"   id="duration" placeholder="Movie Duration">
 
-            <label for="movie_format">MovieFormat</label>
-            <select th:field="${movie.format}"  id="movie_format" name = "movies" placeholder="MovieFormat">
+            <label for="movie_format">Movie Format</label>
+            <select th:field="${movie.format}"  id="movie_format" name = "movies" placeholder="Movie Format">
                 <option value="2D">2D</option>
                 <option value="3D">3D</option>
             </select>
 
+            <label for="movie_sound">Movie Sound</label>
+            <select th:field="${movie.sound}"  id="movie_sound" name = "movies" placeholder="Movie Sound">
+                <option value="Dolby">Dolby</option>
+                <option value="Dolby ATMOS">Dolby ATMOS</option>
+            </select>
+
+
             <label for="image">Movie Image</label>
-            <input type="text" th:field="${movie.image}" id="image" placeholder="MovieImage">
+            <input type="text" th:field="${movie.image}" id="image" placeholder="Movie Image">
 
             <button class="button1" type="submit">Save</button>
             <a  class="button2" href="/movies " role="button" >Cancel</a>

@@ -31,10 +31,12 @@ public class ScreeningController {
 
 
     //displays a specific screening
+    //deletes all passed screenings
     @GetMapping("/screeningview")
     @ResponseBody
     public Screening showScreening() {
 
+        screeningRepo.deletePassedScreenings();
         Screening screening = screeningRepo.findScreening(1);
 
         return screening;
@@ -42,9 +44,11 @@ public class ScreeningController {
     }
 
     //displays all screenings
+    //deletes all passed screenings
     @GetMapping("/screenings")
     public String screening(Model model) {
 
+        screeningRepo.deletePassedScreenings();
         List<Screening> screeningList = screeningRepo.findAllScreenings();
         model.addAttribute("screeninglist", screeningList);
 
@@ -68,6 +72,7 @@ public class ScreeningController {
 
 
     @PostMapping("/savescreening")
+    @GetMapping("/screening-error")
     public String saveScreening(@ModelAttribute ScreeningForm screeningData){
         Screening newScreening = new Screening();
 
@@ -77,9 +82,20 @@ public class ScreeningController {
         newScreening.setMovie( movieRepo.showMovie( screeningData.getMovie_id() ) );
         newScreening.setTheater( theaterRepo.findTheater( screeningData.getTheater_id() ) );
 
-        screeningRepo.insertScreening(newScreening);
-        return "redirect:/screenings";
+
+
+
+        if(!screeningRepo.findScreeningInterference(newScreening) == true){
+
+            screeningRepo.insertScreening(newScreening);
+            return "redirect:/screenings";
+
+        }else
+
+            return "/screening-error";
+
     }
+
 
     @RequestMapping(value = "screenings/delete/{screening_id}")
     public String removeScreening(@PathVariable int screening_id) {

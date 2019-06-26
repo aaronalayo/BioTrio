@@ -23,7 +23,7 @@
 <h2>Booking successful!</h2>
 
 <table id="table">
-    <thead>
+
     <tr>
         <th scope="col">Movie</th>
         <th scope="col">Theater</th>
@@ -32,11 +32,11 @@
         <th scope="col">Row number</th>
         <th scope="col">Seat number</th>
         <th scope="col">Phone number</th>
-        <th scope="col">Cancel</th>
+        <th scope="col">Cancel booking</th>
 
     </tr>
 
-    </thead>
+
 
     <tr th:each="booking: ${bookingList}">
         <td th:text="${booking.getScreening().getMovie().getTitle()}">{{Movie}}</td>

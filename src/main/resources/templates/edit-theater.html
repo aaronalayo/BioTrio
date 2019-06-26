@@ -24,19 +24,25 @@
         <input type="hidden" th:field="${theaterform.theater_id}">
 
         <label for="theater_name">Name</label>
-        <input type="text" th:field="${theaterform.theater_name}" class="form-control"  id="theater_name" placeholder="TheaterName">
+        <input type="text" th:field="${theaterform.theater_name}" class="form-control"  id="theater_name" placeholder="Theater Name">
 
         <label for="theater_format">Format</label>
-        <select th:field="${theaterform.theater_format}" class="form-control" id="theater_format"  placeholder="TheaterFormat">
+        <select th:field="${theaterform.theater_format}" class="form-control" id="theater_format"  placeholder="Theater Format">
             <option value="2D">2D</option>
             <option value="3D">3D</option>
         </select>
 
+        <label for="theater_sound">Sound</label>
+        <select th:field="${theaterform.theater_sound}" class="form-control" id="theater_sound"  placeholder="Theater Sound">
+            <option value="Dolby">Dolby</option>
+            <option value="Dolby ATMOS ">Dolby ATMOS</option>
+        </select>
+
         <label for="number_of_rows">Number Of Rows</label>
-        <input type="text" th:field="${theaterform.number_of_rows}" class="form-control" id="number_of_rows" placeholder="NumberOfRows">
+        <input type="text" th:field="${theaterform.number_of_rows}" class="form-control" id="number_of_rows" placeholder="Number Of Rows">
 
         <label for="seats_per_row">Seats Per Row</label>
-        <input type="text" th:field="${theaterform.seats_per_row}" class="form-control" id="seats_per_row" placeholder="SeatsPerRow">
+        <input type="text" th:field="${theaterform.seats_per_row}" class="form-control" id="seats_per_row" placeholder="Seats Per Row">
 
 
         <button class="button1" type="submit">Save</button>
